@@ -583,7 +583,7 @@ a.article-title:hover {
 .article-entry h5,
 .article-entry h6 {
   line-height: 1.1em;
-  margin: 1.1em 0;
+  margin-top: 1.5em;
 }
 .article-entry a {
   color: #258fb8;
@@ -622,11 +622,13 @@ a.article-title:hover {
   border-bottom: 1px solid #ddd;
   padding: 10px 0;
 }
-.article-entry blockquote {
+.article-entry blockquote p {
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 1.4em;
+  font-size: 1.6em;
+  color: #000;
   margin: 1.6em 20px;
   text-align: center;
+  background-color: #d3d3d3;
 }
 .article-entry blockquote footer {
   font-size: 14px;
@@ -636,6 +638,13 @@ a.article-title:hover {
 .article-entry blockquote footer cite:before {
   content: "—";
   padding: 0 0.5em;
+}
+.article-entry p {
+  font-size: 17px;
+}
+.article-entry strong {
+  font-weight: 900;
+  color: #222;
 }
 .article-entry .pullquote {
   text-align: left;
