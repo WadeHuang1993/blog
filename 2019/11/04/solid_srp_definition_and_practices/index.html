@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
 <meta property="og:description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2019-11-04T04:46:43.295Z">
+<meta property="og:updated_time" content="2019-11-04T04:54:36.767Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="WadeHuang1993&#39;s Blog" type="application/atom+xml">
@@ -104,8 +104,8 @@
 <blockquote>
 <p><strong>每個程式碼片段都只關注一件事情</strong></p>
 </blockquote>
-<p>當每段程式碼只關注一件事情時，讓程式碼更容易被理解和處理，且相較<strong>低內聚</strong>的程式碼來說更容易編寫。因此類別和函式<strong>應該具有單一職責</strong>。</p>
-<h3 id="什麼情況會造成低內聚"><a href="#什麼情況會造成低內聚" class="headerlink" title="什麼情況會造成低內聚?"></a>什麼情況會造成低內聚?</h3><p><strong>當程式碼包含一個以上互相不相關的邏輯或意圖時，程式碼的內聚性就會降低。</strong><br>(低內聚的程式碼通常等於高耦合)</p>
+<p>當每段程式碼只關注一件事情時，程式碼會更容易被理解和處理，且相較<strong>低內聚</strong>的程式碼來說更容易編寫。因此類別和函式<strong>應該具有單一職責</strong>。</p>
+<h3 id="什麼情況會造成低內聚"><a href="#什麼情況會造成低內聚" class="headerlink" title="什麼情況會造成低內聚?"></a>什麼情況會造成低內聚?</h3><p><strong>當程式碼包含一個以上「互不相關」的邏輯或意圖時，程式碼的內聚性就會降低。</strong><br>(低內聚的程式碼通常等於高耦合)</p>
 <p><strong>程式碼的內聚性一但降低，閱讀與維護程式碼的難度就會提升</strong>。假設你必須從一個大函式裡面修改其中一小段邏輯，若不花先花時間讀懂整個大函式的上下文就直接修改程式碼，很容易破壞大函式原先可正常運作的程式碼。為了避免對程式碼造成破壞，工程師開發過程總是變成：<strong>花費 80% 時間閱讀程式碼，真正編寫程式碼的時間卻只有 20%</strong>。對於維護一個系統來說，這種情況除了相當浪費成本以外，也相當折磨工程師的心情。</p>
 <h2 id="實踐結果"><a href="#實踐結果" class="headerlink" title="實踐結果"></a>實踐結果</h2><p>單一職責做得很好時，每個類別都有一個唯一的目的，當需要進行功能修改的時候，可以更容易地專注在一個或幾個類別，讓對系統的修改可以局部化，降低維護系統的困難度。</p>
 <p>所以在一個高內聚性的系統中，程式碼可讀性及復用的可能性都會提高，儘管程式複雜，但容易被管理。</p>
@@ -114,7 +114,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2jy0fde00007wp134fg9fta" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2jyajme00009zp170gx5v7r" class="article-share-link">Share</a>
       
       
     </footer>
