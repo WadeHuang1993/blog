@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+
+  
+  <title>單一職責原則，定義、解析與實踐 | WadeHuang1993&#39;s Blog</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
+<meta name="keywords" content="PHP, OOP, JavaScript, Web development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="單一職責原則，定義、解析與實踐">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;04&#x2F;solid_srp_definition_and_practices&#x2F;index.html">
+<meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
+<meta property="og:description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:updated_time" content="2019-11-04T02:45:31.572Z">
+<meta name="twitter:card" content="summary">
+  
+    <link rel="alternate" href="/blog/atom.xml" title="WadeHuang1993&#39;s Blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/blog/css/style.css">
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/blog/" id="logo">WadeHuang1993&#39;s Blog</a>
+      </h1>
+      
+        <h2 id="subtitle-wrap">
+          <a href="/blog/" id="subtitle">WadeHuang1993 的學習迷航記</a>
+        </h2>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/blog/">首頁</a>
+        
+          <a class="main-nav-link" href="/blog/archives">文章列表</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wadehuang1993.github.io/blog"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-solid_srp_definition_and_practices" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2019/11/04/solid_srp_definition_and_practices/" class="article-date">
+  <time datetime="2019-11-04T02:31:07.000Z" itemprop="datePublished">2019-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      單一職責原則，定義、解析與實踐
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>單一職責原則(Single responsibility principle)</p>
+<h1 id="定義："><a href="#定義：" class="headerlink" title="定義："></a>定義：</h1><hr>
+<blockquote>
+<p>A class should have only one reason to change.<br>以一個類別來說，應該只有一個引起它變化的原因。</p>
+</blockquote>
+<p>”等等，這是在說人話嗎？還是我理解能力不夠好？“</p>
+<p>這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張，大家都經歷過這個過程。我將會在 <strong>解析</strong> 章節以我的經驗跟體悟來解釋這些定義。</p>
+<h4 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h4><blockquote>
+<p><strong>提高程式碼的內聚性，讓程式一次只做好一件事情。</strong></p>
+</blockquote>
+<h1 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h1><hr>
+<h2 id="內聚"><a href="#內聚" class="headerlink" title="內聚"></a>內聚</h2><p><strong>高質量程式碼通常是高內聚性的</strong>。在英文辭典中 <code>內聚(Cohesion)</code> 的同義詞為一致性、凝聚、結合等等，描述相關的事務如何聯繫在一起。在軟體開發中，<code>內聚</code>程式碼的特性為：</p>
+<blockquote>
+<p><strong>每個程式碼片段都只關注一件事情</strong></p>
+</blockquote>
+<p>當每段程式碼只關注一件事情時，讓程式碼更容易被理解和處理，且相較低內聚的程式碼來說更容易編寫。因此類別和函式<strong>應該具有單一職責</strong>。</p>
+<h2 id="實踐結果"><a href="#實踐結果" class="headerlink" title="實踐結果"></a>實踐結果</h2><p>單一職責做得很好時，每個類別都有一個唯一的目的，當需要進行功能修改的時候，可以更容易地專注在一個或幾個類別，讓對系統的修改可以局部化，降低維護系統的困難度。</p>
+<p>所以在一個高內聚性的系統中，程式碼可讀性及復用的可能性都會提高，儘管程式複雜，但容易被管理。</p>
+<p>單一職責原則的實踐結果是 <strong>程式碼模組化</strong>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2jtqjg300002gp1bb1bheb9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">再談 SOLID 原則，Why SOLID?</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">彙整</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">十月 2019</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">最新文章</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/blog/2019/11/04/solid_srp_definition_and_practices/">單一職責原則，定義、解析與實踐</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/11/01/why_we_need_SOLID_principles/">再談 SOLID 原則，Why SOLID?</a>
+          </li>
+        
+          <li>
+            <a href="/blog/2019/10/30/why_SOLID_principles_matter_to_you/">淺談物件導向 SOLID 原則對工程師的好處與如何影響能力</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2019 WadeHuangTW1993<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/blog/" class="mobile-nav-link">首頁</a>
+  
+    <a href="/blog/archives" class="mobile-nav-link">文章列表</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
+  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/blog/js/script.js"></script>
+
+
+
+  </div>
+</body>
+</html>

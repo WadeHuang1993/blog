@@ -66,6 +66,61 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-solid_srp_definition_and_practices" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/blog/2019/11/04/solid_srp_definition_and_practices/" class="article-date">
+  <time datetime="2019-11-04T02:31:07.000Z" itemprop="datePublished">2019-11-04</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/blog/2019/11/04/solid_srp_definition_and_practices/">單一職責原則，定義、解析與實踐</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>單一職責原則(Single responsibility principle)</p>
+<h1 id="定義："><a href="#定義：" class="headerlink" title="定義："></a>定義：</h1><hr>
+<blockquote>
+<p>A class should have only one reason to change.<br>以一個類別來說，應該只有一個引起它變化的原因。</p>
+</blockquote>
+<p>”等等，這是在說人話嗎？還是我理解能力不夠好？“</p>
+<p>這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張，大家都經歷過這個過程。我將會在 <strong>解析</strong> 章節以我的經驗跟體悟來解釋這些定義。</p>
+<h4 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h4><blockquote>
+<p><strong>提高程式碼的內聚性，讓程式一次只做好一件事情。</strong></p>
+</blockquote>
+<h1 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h1><hr>
+<h2 id="內聚"><a href="#內聚" class="headerlink" title="內聚"></a>內聚</h2><p><strong>高質量程式碼通常是高內聚性的</strong>。在英文辭典中 <code>內聚(Cohesion)</code> 的同義詞為一致性、凝聚、結合等等，描述相關的事務如何聯繫在一起。在軟體開發中，<code>內聚</code>程式碼的特性為：</p>
+<blockquote>
+<p><strong>每個程式碼片段都只關注一件事情</strong></p>
+</blockquote>
+<p>當每段程式碼只關注一件事情時，讓程式碼更容易被理解和處理，且相較低內聚的程式碼來說更容易編寫。因此類別和函式<strong>應該具有單一職責</strong>。</p>
+<h2 id="實踐結果"><a href="#實踐結果" class="headerlink" title="實踐結果"></a>實踐結果</h2><p>單一職責做得很好時，每個類別都有一個唯一的目的，當需要進行功能修改的時候，可以更容易地專注在一個或幾個類別，讓對系統的修改可以局部化，降低維護系統的困難度。</p>
+<p>所以在一個高內聚性的系統中，程式碼可讀性及復用的可能性都會提高，儘管程式複雜，但容易被管理。</p>
+<p>單一職責原則的實踐結果是 <strong>程式碼模組化</strong>。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2jtqjg300002gp1bb1bheb9" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-why_we_need_SOLID_principles" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" class="article-date">
@@ -143,7 +198,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck2fimwz80001cdp1b3n7g1j1" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck2jtqjgg00022gp14v5qa7q0" class="article-share-link">Share</a>
       
       
     </footer>
@@ -227,7 +282,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck2fimwz00000cdp1dwzh2lfd" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck2jtqjgd00012gp1furth3d8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -266,6 +321,10 @@
     <h3 class="widget-title">最新文章</h3>
     <div class="widget">
       <ul>
+        
+          <li>
+            <a href="/blog/2019/11/04/solid_srp_definition_and_practices/">單一職責原則，定義、解析與實踐</a>
+          </li>
         
           <li>
             <a href="/blog/2019/11/01/why_we_need_SOLID_principles/">再談 SOLID 原則，Why SOLID?</a>
