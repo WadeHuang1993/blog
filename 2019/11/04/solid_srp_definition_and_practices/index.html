@@ -16,7 +16,7 @@
 <meta property="og:description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-0.png">
-<meta property="og:updated_time" content="2019-11-09T07:12:52.244Z">
+<meta property="og:updated_time" content="2019-11-09T07:25:55.743Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-0.png">
   
@@ -115,7 +115,7 @@
 <p><strong>拆解互相耦合的程式碼，讓每段程式碼的意圖保持清晰，確保程式碼的意圖不會隨著需求或時間增長而流逝。</strong></p>
 </blockquote>
 <h3 id="為什麼意圖如此重要呢？"><a href="#為什麼意圖如此重要呢？" class="headerlink" title="為什麼意圖如此重要呢？"></a>為什麼意圖如此重要呢？</h3><p>維護專案時，最怕的就是需要修改程式碼時，<strong>卻不知道當初的開發者為什麼要這樣設計程式</strong>。要是冒然修改程式碼，就容易造成功能發生錯誤。<strong>這種不確定的感覺經常會變成工程師心中的恐懼</strong>，越是不懂的程式碼就越不敢去觸碰，更不用提修改了。這也是為什麼專案中經常會存在一大段醜陋的程式碼，卻沒人去整理，對無知的恐懼常在工程師的心中作祟：「如果程式碼能好好運作，就別碰了吧！」。意圖模糊的程式碼一但被留下來就會成為專案長久的痛處，只要遇到和這樣程式碼相關的新需求，開發時程就容易變得緩慢且難以估計。</p>
-<p>圖一：個函式包含多個意圖，並且難以辨認每段程式碼之間的意圖與界線。<br><img src="/blog/images/pasted-0.png" alt="圖一：一個函式包含多個意圖，並且難以辨認每段程式碼之間的意圖與界線。"></p>
+<p><img src="/blog/images/pasted-0.png" alt="圖一：一個函式包含多個意圖，並且難以辨認每段程式碼之間的意圖與界線。"></p>
 <p>若程式碼的意圖有被保留下來，這些程式碼就有機會被改善。<strong>保持程式碼意圖的方法就是盡量隔離意圖不同的程式碼</strong>，避免意圖不相同的程式碼互相耦合，造成程式碼的意圖與界線都變得模糊。</p>
 <h2 id="隔離意圖也是隔離耦合"><a href="#隔離意圖也是隔離耦合" class="headerlink" title="隔離意圖也是隔離耦合"></a>隔離意圖也是隔離耦合</h2><p>單一職責原則並不只有保持程式碼意圖這項優點而已，因為隔離意圖的過程中，也會隔離不經意耦合的程式碼。<br>開發的過程中常常<strong>為了共用某些變數或邏輯，將意圖不相同的程式碼安排在一起</strong>，雖然程式碼可以運作，卻也造成不同意圖的程式碼互相耦合。耦合的程式碼對維護專案來說是相當致命的。</p>
 <blockquote>
@@ -125,11 +125,10 @@
 <p>以<strong>圖一</strong>為例，不同意圖的程式碼共用一個 Foreach 迴圈，讓工程師很難判斷在整個大迴圈中修改任一變數，會不會造成其他程式碼片段發生錯誤。如果將每個意圖隔離開來，每段程式碼只需要維護自己的小迴圈，即可減少工程師閱讀程式碼的時間與發生錯誤的機率。</p>
 <p>未完成章節：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">   ### 怎樣才是耦合？</span><br><span class="line">       #### 正交性</span><br><span class="line">       #### 修改頻率不同</span><br><span class="line">   ### 解除耦合的方法</span><br><span class="line">       #### 拆散大泥團</span><br><span class="line">           ##### 就一個類別來說，應該只有一個引起它變化的原因</span><br><span class="line">       #### 歸納相同意圖的程式碼</span><br><span class="line">       #### 拆分已知與未知的需求</span><br><span class="line">       #### 拆分修改頻率不同的程式碼</span><br><span class="line">       #### 引入介面(Interface)</span><br><span class="line">### 最新的定義</span><br><span class="line">	一個類別只對一個角色負責    </span><br><span class="line">  ## 套用 SRP 原則對程式碼的影響</span><br><span class="line">       ### 容易重複使用</span><br><span class="line">       ### 加快 Debug 速度</span><br><span class="line">       ### 容易單元測試</span><br></pre></td></tr></table></figure>
-
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2r8ge7z0000sap15esu8os9" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2r8wdps0000t2p15reo4v3w" class="article-share-link">Share</a>
       
       
     </footer>
