@@ -16,7 +16,7 @@
 <meta property="og:description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
-<meta property="og:updated_time" content="2019-11-16T05:41:38.989Z">
+<meta property="og:updated_time" content="2019-11-16T06:50:00.363Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
   
@@ -130,14 +130,16 @@
 <p>接下來將用幾個較常見的耦合來當作範例，稍微認識一下常見的耦合長什麼樣子，以及如何解除耦合。</p>
 <h3 id="一、拆散大泥團"><a href="#一、拆散大泥團" class="headerlink" title="一、拆散大泥團"></a>一、拆散大泥團</h3><p>未完成章節：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   ### 怎樣才是耦合？</span><br><span class="line">       #### 正交性</span><br><span class="line">       #### 修改頻率不同</span><br><span class="line">   ### 解除耦合的方法</span><br><span class="line">       #### 拆散大泥團</span><br><span class="line">       #### 歸納相同意圖的程式碼</span><br><span class="line">       #### 拆分已知與未知的需求</span><br><span class="line">       #### 拆分修改頻率不同的程式碼</span><br><span class="line">       #### 引入介面(Interface)</span><br><span class="line">### 最新的定義</span><br><span class="line">	一個類別只對一個角色負責    </span><br><span class="line">  ## 套用 SRP 原則對程式碼的影響</span><br><span class="line">       ### 容易重複使用</span><br><span class="line">       ### 加快 Debug 速度</span><br><span class="line">       ### 容易單元測試</span><br></pre></td></tr></table></figure>
-
-<h2 id="實踐結果"><a href="#實踐結果" class="headerlink" title="實踐結果"></a>實踐結果</h2><p>這意味著我們的系統中會由許多小巧的類別，且每個類別的專著於實現單一的職責。</p>
-<h2 id="常見誤解"><a href="#常見誤解" class="headerlink" title="常見誤解"></a>常見誤解</h2><p>很多人被單一職責原則的名字給搞混了，以為一個類別只可以做一件事情。但事實上這是函式層級上的原則：一個函式指做好一件事。</p>
-<p>類別層級的單一職責原則是用來劃分介面、型別的邊界，將意圖、使用情境相同的</p>
-<p>單一職責做得很好時，每個類別都有一個唯一的目的，當需要進行功能修改的時候，可以更容易地專注在一個或特定幾個類別，讓對系統的修改可以局部化，降低維護系統的困難度。</p>
-<p>所以在一個高內聚性的系統中，程式碼可讀性及復用的可能性都會提高，儘管程式複雜，但容易被管理。</p>
-<p>單一職責原則的實踐結果是 <strong>程式碼模組化</strong>。</p>
-<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">耦合指的是，一段程式碼混合了不同目的、意圖的程式碼。</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div>
+<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>很多人被單一職責原則的名字給混淆了，以為一個類別只可以做一件事情。但事實上「一次只做一件事」是函式層級的原則。</p>
+<p><strong>單一職責原則在類別層級是用來劃分介面與型別的邊界<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，將不同意圖、使用情境、影響範圍的功能劃分為各自獨立的「職責」，最後由類別來實現這些被獨立的職責</strong>。因此當一個職責的需求異動時，也表示只有 <strong>負責實現該職責的類別</strong> 需要被異動。</p>
+<p>為了讓類別容易被維護，一個類別應該盡可能減少負責的職責，這就是單一職責原則想傳達的概念：</p>
+<blockquote>
+<p>「A class should have only one reason to change.」<br>以一個類別來說，應該只有一個引起它變化的原因。</p>
+</blockquote>
+<p>「應該只有一個引起它變化的原因」，其實就是在說一個類別應該只負責 <strong>一個意圖</strong> 或 <strong>一個使用情境</strong>，也就是上述的「<strong>職責</strong>」。</p>
+<p>這意味著<strong>系統功能會由許多小巧且高內聚的類別組成</strong>，且每個類別只專注於實現單一的職責。</p>
+<p>單一職責做得很好時，每個類別都只有一個唯一的目的。因此需要進行功能修改的時候可以更容易地專注在一個或特定幾個類別。不但加快找查程式碼的速度，也讓系統的修改可以局部化，降低維護系統的困難度。<br>因此在一個高內聚性的系統中，程式碼可讀性及復用的可能性都會提高，儘管程式複雜，但容易被管理。</p>
+<div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">耦合：將許多功能封裝在同一個類別、介面、方法，但這些功能彼此的意圖卻不相同。</span><a href="#fnref:1" rev="footnote"> ↩</a></li><li id="fn:2"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">2.</span><span style="display: inline-block; vertical-align: top;">邊界：明確定義一個類別、函式要實作的功能目標與涉及範圍。</span><a href="#fnref:2" rev="footnote"> ↩</a></li></ol></div></div>
       
     </div>
     <footer class="article-footer">
