@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
 <meta property="og:description" content="Why SOLID? 在前一篇文章中介紹 SOLID 對一個工程師的影響，這裡再稍微補充一下為什麼軟體開發會需要 SOLID 原則？ 軟體複雜的本質專案經常會歷經「商業邏輯調整」和「快速且多變的需求」，這都不是開發環節所能控制的，但是一個專案會「遇到困難」常常是因為 糟糕的程式設計 和其他技術層面導致。 其中 糟糕的程式設計 又可分成三大因素：  程式碼變更 Bug 修復 複雜度控制  在添加功能">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2019-11-05T00:59:10.378Z">
+<meta property="og:updated_time" content="2019-11-05T00:59:10.000Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="WadeHuang1993&#39;s Blog" type="application/atom+xml">
@@ -89,9 +89,10 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+
         <p>Why SOLID?</p>
 <p>在<a href="https://ithelp.ithome.com.tw/articles/10223329" target="_blank" rel="noopener">前一篇文章中介紹 SOLID 對一個工程師的影響</a>，這裡再稍微補充一下為什麼軟體開發會需要 SOLID 原則？</p>
-<h1 id="軟體複雜的本質"><a href="#軟體複雜的本質" class="headerlink" title="軟體複雜的本質"></a>軟體複雜的本質</h1><p>專案經常會歷經「商業邏輯調整」和「快速且多變的需求」，這都不是開發環節所能控制的，但是一個專案會「遇到困難」常常是因為 糟糕的程式設計 和其他技術層面導致。</p>
+<h1><span id="軟體複雜的本質">軟體複雜的本質</span></h1><p>專案經常會歷經「商業邏輯調整」和「快速且多變的需求」，這都不是開發環節所能控制的，但是一個專案會「遇到困難」常常是因為 糟糕的程式設計 和其他技術層面導致。</p>
 <p>其中 糟糕的程式設計 又可分成三大因素：</p>
 <ul>
 <li>程式碼變更</li>
@@ -100,7 +101,7 @@
 </ul>
 <p>在添加功能前應該 <strong>閱讀代碼並細心設計</strong>，但實際上更常發生的是，開發者選擇<strong>直接在程式碼上面堆疊新的程式碼</strong>。<strong>新舊版本</strong> 和 <strong>意圖不同</strong> 的程式碼錯綜複雜之下，會讓專案難以在不引發連鎖反應的情況下增加功能。最後新的功能引入 Bug，從而導致另一個 Bug，然後一個接著一個，這樣的事情不斷發生。</p>
 <p>在 <strong>沒有做過可擴展性設計的程式碼</strong> 上進行擴展功能，常常是火上加油！<br>那為什麼不把程式「設計」成可擴展就好了呢？</p>
-<h1 id="開發者知識普遍不足"><a href="#開發者知識普遍不足" class="headerlink" title="開發者知識普遍不足"></a>開發者知識普遍不足</h1><p>一個充滿外行人的產業</p>
+<h1><span id="開發者知識普遍不足">開發者知識普遍不足</span></h1><p>一個充滿外行人的產業</p>
 <p>開發者們來自不同的背景，且有大量不同的方式去解決問題，但是一個開發者應該具備什麼樣的知識體系，卻沒有一個廣泛的共識。</p>
 <p>更不幸的是，許多開發者在學校裡面學到的知識是過時的，學校提供的程式設計課程並未給學生做好準備。這些課程通常只關注程式語言的功能，但是 …</p>
 <blockquote>
@@ -112,7 +113,7 @@
 <p>工程師必須花費大量時間閱讀程式碼。</p>
 </blockquote>
 <p>不論是開發者還是管理者都需要對 <strong>軟體複雜的本質</strong> 做管理。為了編寫出更容易應對變化的程式碼，我們必須填補基礎認知方面的空白。</p>
-<h1 id="學習設計原則"><a href="#學習設計原則" class="headerlink" title="學習設計原則"></a>學習設計原則</h1><p>若有一些原則可以指導工程師在 <strong>一定的情況下理解每個選擇的所得所失</strong> 並做出最佳權衡，則可以統一工程師解決問題的方法，降低 <strong>系統設計思想溝通</strong> 的困難度。</p>
+<h1><span id="學習設計原則">學習設計原則</span></h1><p>若有一些原則可以指導工程師在 <strong>一定的情況下理解每個選擇的所得所失</strong> 並做出最佳權衡，則可以統一工程師解決問題的方法，降低 <strong>系統設計思想溝通</strong> 的困難度。</p>
 <p>Uncle Bob 花費多年整理了許多開發人員、研究人員的思想和著作結晶，提出了 5 個設計原則：</p>
 <ul>
 <li>單一職責原則（The Single Responsibility Principle, 簡稱 SRP)</li>
@@ -135,7 +136,7 @@
 <p>雖然 SOLID 原則是 <strong>物件導向</strong> 的設計原則，但事實上這些原則與思維一直存在軟體工程中。因此 SOLID 原則的思維可以延伸套用至非物件導向語言、系統架構等等領域。</p>
 <p>順帶一提，SOLID 原則並沒有順序關係，單純是 Michael Feathers<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 發了電子郵件告訴 Uncle Bob 可以用 SOLID 這個詞彙將 5 個原則串起來變成口訣方便記憶。<br>所以在學習 SOLID 原則的過程中，可以不用按照順序學習。</p>
 <p>此文章也會同步到：<a href="https://wadehuanglearning.blogspot.com/2019/10/solid-why-solid.html" target="_blank" rel="noopener">我的部落格</a></p>
-<h2 id="系列文章"><a href="#系列文章" class="headerlink" title="系列文章"></a>系列文章</h2><ol>
+<h2><span id="系列文章">系列文章</span></h2><ol>
 <li><a href="https://ithelp.ithome.com.tw/articles/10223329" target="_blank" rel="noopener">淺談物件導向 SOLID 原則對工程師的好處與如何影響能力</a></li>
 <li><a href="https://ithelp.ithome.com.tw/articles/10228740" target="_blank" rel="noopener">再談 SOLID 原則，Why SOLID?</a></li>
 </ol>
@@ -144,7 +145,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck2r8wdq10001t2p1etau2zlx" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck3gnl9hp0003p2p12yso86kw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -172,6 +173,7 @@
 
   
 </article>
+
 
 </section>
         

@@ -16,7 +16,7 @@
 <meta property="og:description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
-<meta property="og:updated_time" content="2019-11-16T06:50:00.363Z">
+<meta property="og:updated_time" content="2019-11-16T06:50:00.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
   
@@ -91,46 +91,47 @@
     
     <div class="article-entry" itemprop="articleBody">
       
+
         <p>單一職責原則(Single responsibility principle)</p>
-<h1 id="定義："><a href="#定義：" class="headerlink" title="定義："></a>定義：</h1><hr>
+<h1><span id="定義">定義：</span></h1><hr>
 <blockquote>
 <p>A class should have only one reason to change.<br>以一個類別來說，應該只有一個引起它變化的原因。</p>
 </blockquote>
 <p>”等等，這是在說人話嗎？還是我理解能力不夠好？“</p>
 <p>這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張，大家都經歷過這個過程。我將會在本文中以自己的體悟來講解觀念，實務經驗演示如何實踐 SOLID 原則。</p>
-<h4 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h4><blockquote>
+<h4><span id="目的">目的：</span></h4><blockquote>
 <p><strong>提高程式碼的內聚性，讓程式一次只做好一件事情。</strong></p>
 </blockquote>
-<h1 id="解析："><a href="#解析：" class="headerlink" title="解析："></a>解析：</h1><hr>
-<h2 id="什麼是內聚？"><a href="#什麼是內聚？" class="headerlink" title="什麼是內聚？"></a>什麼是內聚？</h2><p>在英文辭典中 <code>內聚(Cohesion)</code> 的同義詞為一致性、凝聚、結合等等，描述相關的事務如何聯繫在一起。在軟體開發中，<strong>高質量程式碼通常是高內聚性的</strong>，<code>內聚</code>程式碼的特性為：</p>
+<h1><span id="解析">解析：</span></h1><hr>
+<h2><span id="什麼是內聚">什麼是內聚？</span></h2><p>在英文辭典中 <code>內聚(Cohesion)</code> 的同義詞為一致性、凝聚、結合等等，描述相關的事務如何聯繫在一起。在軟體開發中，<strong>高質量程式碼通常是高內聚性的</strong>，<code>內聚</code>程式碼的特性為：</p>
 <blockquote>
 <p><strong>每個程式碼片段都只關注一件事情</strong></p>
 </blockquote>
 <p>當每段程式碼只關注一件事情時，程式碼會更容易被理解和處理，且相較<strong>低內聚</strong>的程式碼來說更容易編寫。因此類別和函式<strong>應該具有單一職責</strong>。    </p>
-<h3 id="什麼情況會造成低內聚"><a href="#什麼情況會造成低內聚" class="headerlink" title="什麼情況會造成低內聚?"></a>什麼情況會造成低內聚?</h3><p><strong>當程式碼包含一個以上「互不相關」的邏輯或意圖時，程式碼的內聚性就會降低。</strong><br>(一般而言，低內聚的程式碼代表高耦合<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>)</p>
+<h3><span id="什麼情況會造成低內聚">什麼情況會造成低內聚?</span></h3><p><strong>當程式碼包含一個以上「互不相關」的邏輯或意圖時，程式碼的內聚性就會降低。</strong><br>(一般而言，低內聚的程式碼代表高耦合<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>)</p>
 <p><strong>程式碼的內聚性一但降低，閱讀與維護程式碼的難度就會提升</strong>。假設你必須從一個大函式裡面修改其中一小段邏輯，若不先花時間讀懂函式中每段程式碼之間的關係就直接修改程式碼，很容易破壞函式原先可正常運作的程式碼。為了避免對程式碼造成破壞，工程師開發過程總是變成：<strong>花費 80% 時間閱讀程式碼，真正編寫程式碼的時間卻只有 20%</strong>。對於維護一個系統來說，這種情況除了相當浪費成本以外，也相當折磨工程師的心情，更糟的是，每次回來維護又要重新讀一次程式碼。</p>
-<h2 id="單一職責原則對專案的重要性？"><a href="#單一職責原則對專案的重要性？" class="headerlink" title="單一職責原則對專案的重要性？"></a>單一職責原則對專案的重要性？</h2><p>單一職責原則乍看之下好像很簡單，但實踐過程其實困難重重。現實狀況常常是：專案起初幾個版本的程式碼意圖都相當簡單明瞭，但是當需求隨著時間增長再加上開發時程短促，讓工程師不斷在原本的程式碼上堆疊新的程式碼。最後<strong>舊程式碼與新程式碼糾纏在一起，使得程式碼的意圖和邊界漸漸變得模糊且互相耦合</strong>。若在意圖模糊的程式碼上繼續擴充或修改，則會使程式碼的意圖逐漸流失並且擴大影響範圍，最後變成 <strong>技術債</strong> 折磨維護專案的工程師。</p>
+<h2><span id="單一職責原則對專案的重要性">單一職責原則對專案的重要性？</span></h2><p>單一職責原則乍看之下好像很簡單，但實踐過程其實困難重重。現實狀況常常是：專案起初幾個版本的程式碼意圖都相當簡單明瞭，但是當需求隨著時間增長再加上開發時程短促，讓工程師不斷在原本的程式碼上堆疊新的程式碼。最後<strong>舊程式碼與新程式碼糾纏在一起，使得程式碼的意圖和邊界漸漸變得模糊且互相耦合</strong>。若在意圖模糊的程式碼上繼續擴充或修改，則會使程式碼的意圖逐漸流失並且擴大影響範圍，最後變成 <strong>技術債</strong> 折磨維護專案的工程師。</p>
 <p>因此，單一職責原則在專案程式碼中作用是：</p>
 <blockquote>
 <p><strong>讓每段程式碼的意圖保持清晰，確保程式碼的意圖不會隨著需求或時間增長而流逝。</strong></p>
 </blockquote>
-<h3 id="為什麼意圖如此重要呢？"><a href="#為什麼意圖如此重要呢？" class="headerlink" title="為什麼意圖如此重要呢？"></a>為什麼意圖如此重要呢？</h3><p>維護專案時，最怕的就是修改程式碼時 <strong>不知道當初的開發者為什麼要這樣設計程式</strong>。要是冒然修改程式碼，就容易造成功能發生錯誤。<strong>這種不確定的感覺經常會變成工程師心中的恐懼</strong>，越是不懂的程式碼就越不敢去觸碰，當然更不用提修改了！對無知的恐懼常在工程師的心中作祟：「如果程式碼能好好運作，就別碰了吧！」這也是為什麼專案中經常會存在一段醜陋的程式碼，卻沒人去整理的原因。<strong>意圖模糊的程式碼一但被留下來就會成為專案長久的痛處</strong>，只要需求和意圖流失的程式碼相關，開發時程就容易變得緩慢且難以估計。</p>
+<h3><span id="為什麼意圖如此重要呢">為什麼意圖如此重要呢？</span></h3><p>維護專案時，最怕的就是修改程式碼時 <strong>不知道當初的開發者為什麼要這樣設計程式</strong>。要是冒然修改程式碼，就容易造成功能發生錯誤。<strong>這種不確定的感覺經常會變成工程師心中的恐懼</strong>，越是不懂的程式碼就越不敢去觸碰，當然更不用提修改了！對無知的恐懼常在工程師的心中作祟：「如果程式碼能好好運作，就別碰了吧！」這也是為什麼專案中經常會存在一段醜陋的程式碼，卻沒人去整理的原因。<strong>意圖模糊的程式碼一但被留下來就會成為專案長久的痛處</strong>，只要需求和意圖流失的程式碼相關，開發時程就容易變得緩慢且難以估計。</p>
 <p><img src="/blog/images/pasted-1.png" alt="圖一：一個函式包含多個意圖，並且難以辨認每段程式碼之間的意圖與界線。"></p>
 <p>若程式碼的意圖有被保留下來，這些程式碼就有機會被改善。<strong>保持程式碼意圖的方法就是盡量隔離意圖不同的程式碼</strong>，避免意圖不相同的程式碼耦合在一起，造成程式碼的意圖與界線都變得模糊。</p>
-<h2 id="隔離意圖也是隔離耦合"><a href="#隔離意圖也是隔離耦合" class="headerlink" title="隔離意圖也是隔離耦合"></a>隔離意圖也是隔離耦合</h2><p>單一職責原則並不只有保持程式碼意圖這項優點而已，因為隔離意圖的過程中，也會隔離不經意耦合的程式碼。<br>開發的過程中常常<strong>為了共用某些變數或邏輯，將意圖不相同的程式碼安排在一起</strong>，雖然程式碼可以運作，卻也造成不同意圖的程式碼互相耦合。耦合的程式碼對維護專案來說是相當致命的。</p>
+<h2><span id="隔離意圖也是隔離耦合">隔離意圖也是隔離耦合</span></h2><p>單一職責原則並不只有保持程式碼意圖這項優點而已，因為隔離意圖的過程中，也會隔離不經意耦合的程式碼。<br>開發的過程中常常<strong>為了共用某些變數或邏輯，將意圖不相同的程式碼安排在一起</strong>，雖然程式碼可以運作，卻也造成不同意圖的程式碼互相耦合。耦合的程式碼對維護專案來說是相當致命的。</p>
 <blockquote>
 <p><strong>意圖不相同的程式碼，通常也意味著修改的時機與頻率不相同</strong>。</p>
 </blockquote>
 <p>新舊程式碼因為共用變數或邏輯而被安排在一起，若因為需求異動，需要調整其中一段程式碼時，工程師會需要花費更多時間來確保程式碼的異動會不會造成其他程式碼無法正常運行。</p>
 <p>以<strong>（圖ㄧ）</strong>為例，不同意圖的程式碼共用一個 Foreach 迴圈，讓工程師很難判斷在整個大迴圈中修改任一變數，會不會造成其他程式碼片段發生錯誤。如果將每個意圖隔離開來，每段程式碼只需要維護自己的小迴圈，即可減少工程師閱讀程式碼的時間與發生錯誤的機率。</p>
-<h2 id="如何解除耦合？"><a href="#如何解除耦合？" class="headerlink" title="如何解除耦合？"></a>如何解除耦合？</h2><p>在導入單一職責原則的過程中，最常花時間在解除程式碼的耦合。實務上也有很多解除耦合的技術和技巧，但是在學習解除耦合技術之前必須先有辨認耦合的能力。耦合的程式碼耦通常會有下列特徵：</p>
+<h2><span id="如何解除耦合">如何解除耦合？</span></h2><p>在導入單一職責原則的過程中，最常花時間在解除程式碼的耦合。實務上也有很多解除耦合的技術和技巧，但是在學習解除耦合技術之前必須先有辨認耦合的能力。耦合的程式碼耦通常會有下列特徵：</p>
 <blockquote>
 <p><strong>將許多功能封裝在同一個類別、介面、方法，但這些功能彼此的意圖卻不相同。</strong></p>
 </blockquote>
 <p>接下來將用幾個較常見的耦合來當作範例，稍微認識一下常見的耦合長什麼樣子，以及如何解除耦合。</p>
-<h3 id="一、拆散大泥團"><a href="#一、拆散大泥團" class="headerlink" title="一、拆散大泥團"></a>一、拆散大泥團</h3><p>未完成章節：</p>
+<h3><span id="一-拆散大泥團">一、拆散大泥團</span></h3><p>未完成章節：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">   ### 怎樣才是耦合？</span><br><span class="line">       #### 正交性</span><br><span class="line">       #### 修改頻率不同</span><br><span class="line">   ### 解除耦合的方法</span><br><span class="line">       #### 拆散大泥團</span><br><span class="line">       #### 歸納相同意圖的程式碼</span><br><span class="line">       #### 拆分已知與未知的需求</span><br><span class="line">       #### 拆分修改頻率不同的程式碼</span><br><span class="line">       #### 引入介面(Interface)</span><br><span class="line">### 最新的定義</span><br><span class="line">	一個類別只對一個角色負責    </span><br><span class="line">  ## 套用 SRP 原則對程式碼的影響</span><br><span class="line">       ### 容易重複使用</span><br><span class="line">       ### 加快 Debug 速度</span><br><span class="line">       ### 容易單元測試</span><br></pre></td></tr></table></figure>
-<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>很多人被單一職責原則的名字給混淆了，以為一個類別只可以做一件事情。但事實上「一次只做一件事」是函式層級的原則。</p>
+<h1><span id="總結">總結</span></h1><p>很多人被單一職責原則的名字給混淆了，以為一個類別只可以做一件事情。但事實上「一次只做一件事」是函式層級的原則。</p>
 <p><strong>單一職責原則在類別層級是用來劃分介面與型別的邊界<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，將不同意圖、使用情境、影響範圍的功能劃分為各自獨立的「職責」，最後由類別來實現這些被獨立的職責</strong>。因此當一個職責的需求異動時，也表示只有 <strong>負責實現該職責的類別</strong> 需要被異動。</p>
 <p>為了讓類別容易被維護，一個類別應該盡可能減少負責的職責，這就是單一職責原則想傳達的概念：</p>
 <blockquote>
@@ -143,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck2r8wdps0000t2p15reo4v3w" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck3gnl9hz0005p2p15e5lgbbx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/OOP/" rel="tag">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-principles/" rel="tag">SOLID principles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SRP-principle/" rel="tag">SRP principle</a></li></ul>
@@ -173,6 +174,7 @@
 
   
 </article>
+
 
 </section>
         

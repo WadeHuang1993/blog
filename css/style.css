@@ -639,11 +639,12 @@ a.article-title:hover {
   padding: 0 0.5em;
 }
 .article-entry p {
-  font-size: 17px;
+  font-size: 1.1rem;
+  color: #303030;
 }
 .article-entry strong {
   font-weight: 900;
-  color: #222;
+  color: #000;
 }
 .article-entry .pullquote {
   text-align: left;
