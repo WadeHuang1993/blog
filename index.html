@@ -89,7 +89,7 @@
     <div class="article-entry" itemprop="articleBody">
       
 
-        <p><strong>框架(Framework)</strong> 是一種可以讓開發應用程式更快速、便利的工具，但是快速與便利的開發過程卻經常產生 <strong>技術債</strong>。<strong>技術債產生的主因是開發人員沒有把程式的可維護性當作工作目標</strong>。在缺少單元測試和良好的程式結構下，功能異動跟除錯都會變得越來越困難。</p>
+        <h1><span id="如何撰寫可測試與可維護-php-程式碼">如何撰寫可測試與可維護 PHP 程式碼</span></h1><p><strong>框架(Framework)</strong> 是一種可以讓開發應用程式更快速、便利的工具，但是快速與便利的開發過程卻經常產生 <strong>技術債</strong>。<strong>技術債產生的主因是開發人員沒有把程式的可維護性當作工作目標</strong>。在缺少單元測試和良好的程式結構下，功能異動跟除錯都會變得越來越困難。</p>
 <p>本文章將教您如何把程式碼變得更有結構，讓程式碼變得可測試與易於維護。（還有節省你的時間）</p>
 <h2><span id="你將會學到">你將會學到</span></h2><ul>
 <li>DRY 原則</li>
@@ -123,9 +123,12 @@
 <li>依賴資料庫連線。這會讓單元測試直接使用真實的資料庫。但若資料庫中沒有我們期望的資料時該怎麼進行測試？資料庫連線很慢又該如何解決？</li>
 <li>啟動整個應用程式初始化核心元件。這會增加測試的開銷，大大降低單元測試的速度。</li>
 </ol>
-<p>當然，上述的作法都不可行！理想狀況下，大部分的程式要能夠獨立於 <strong>框架</strong>，並且被執行測試。</p>
+<p>當然，上述的作法都不可行！</p>
+<blockquote>
+<p>理想狀況下，大部分的程式要能夠獨立於 <strong>框架</strong>，並且被執行測試。</p>
+</blockquote>
 <p>因此，接下來著手研究如何解除程式對 <strong>框架</strong> 的依賴。</p>
-<h2><span id="dry-原則">DRY 原則</span></h2><p>假設有一新需求要可以隨意撈取某個 User 的資料，但我們的程式只有 <code>User-&gt;getCurrentUser()</code> 時怎麼辦？若直接寫一個新的函式來撈取隨意一個 User 的資料，就會違反 DRY 原則。因為除了 <code>$user_id</code> 不一樣以外，其他邏輯都相同。</p>
+<h2><span id="dry-原則-dont-repeat-yourself">DRY 原則 (Don’t repeat yourself)</span></h2><p>假設有一新需求要可以隨意撈取某個 User 的資料，但我們的程式只有 <code>User-&gt;getCurrentUser()</code> 時怎麼辦？若直接寫一個新的函式來撈取隨意一個 User 的資料，就會違反 DRY 原則。因為除了 <code>$user_id</code> 不一樣以外，其他邏輯都相同。</p>
 <p>因此我們將改寫第一個範例，讓原本的函式變得更有彈性：</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">User</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">getUser</span><span class="params">($user_id)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $user = App::db-&gt;select(<span class="string">'user'</span>)</span><br><span class="line">        -&gt;where(<span class="string">'id'</span>, $user_id)</span><br><span class="line">        -&gt;limit(<span class="number">1</span>)</span><br><span class="line">        -&gt;get();</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">if</span> ($user-&gt;num_results() &gt; <span class="number">0</span>) &#123;</span><br><span class="line">            <span class="keyword">return</span> $user-&gt;row();</span><br><span class="line">        &#125;</span><br><span class="line"> </span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
@@ -176,21 +179,23 @@
 <p>導入介面後，我們就可以簡化一下單元測試！</p>
 <figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"> </span><br><span class="line"><span class="keyword">use</span> <span class="title">Mockery</span> <span class="title">as</span> <span class="title">Mock</span>;</span><br><span class="line"><span class="keyword">use</span> <span class="title">Fideloper</span>\<span class="title">User</span>;</span><br><span class="line"> </span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">ThirdUserTest</span> <span class="keyword">extends</span> <span class="title">PHPUnit_Framework_TestCase</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">testGetCurrentUserMock</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $userRepo = <span class="keyword">$this</span>-&gt;_mockUserRepo();</span><br><span class="line"></span><br><span class="line">        $user = <span class="keyword">new</span> User( $userRepo );</span><br><span class="line"></span><br><span class="line">        $result = $user-&gt;getUser( <span class="number">1</span> );</span><br><span class="line"></span><br><span class="line">        $expected = <span class="keyword">new</span> StdClass();</span><br><span class="line">        $expected-&gt;id = <span class="number">1</span>;</span><br><span class="line">        $expected-&gt;username = <span class="string">'fideloper'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">$this</span>-&gt;assertEquals($expected-&gt;id, $result-&gt;id, <span class="string">'User ID set correctly'</span> );</span><br><span class="line">        <span class="keyword">$this</span>-&gt;assertEquals($expected-&gt;username, $result-&gt;username, <span class="string">'Username set correctly'</span> );</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">protected</span> <span class="function"><span class="keyword">function</span> <span class="title">_mockUserRepo</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Mock expected result</span></span><br><span class="line">        <span class="comment">// 模擬預期結果</span></span><br><span class="line">        $result = <span class="keyword">new</span> StdClass();</span><br><span class="line">        $result-&gt;id = <span class="number">1</span>;</span><br><span class="line">        $result-&gt;username = <span class="string">'fideloper'</span>;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// Mock any user repository</span></span><br><span class="line">        <span class="comment">// 建立任何實作 UserRepositoryInterface 的假物件</span></span><br><span class="line">        $userRepo = Mock::mock(<span class="string">'Fideloper\Third\Repository\UserRepositoryInterface'</span>);</span><br><span class="line">        $userRepo-&gt;shouldReceive(<span class="string">'getUser'</span>)-&gt;once()-&gt;andReturn( $result );</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> $userRepo;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<p>We’ve taken the work of mocking a database connection out completely. Instead, we simply mock the data source, and tell it what to do when <code>getUser</code> is called.</p>
-<h2><span id="final-thoughts">Final Thoughts</span></h2><p>Over the course of this tutorial, we accomplished the following:</p>
+<p>範例中我們簡單地利用 Mock 建立 <code>資料來源物件</code> 的假物件，並告訴 <strong>假物件</strong> 的 <code>getUser()</code> 被調用時應該怎麼做。</p>
+<h2><span id="總結">總結</span></h2><p>經過了這篇文章的教學，我們完成了下列事項：</p>
 <ol>
-<li>Kept our code DRY and reusable</li>
-<li>Created maintainable code - We can switch out data sources for our objects in one location for the entire application if needed</li>
-<li>Made our code testable - We can mock objects easily without relying on bootstrapping our application or creating a test database</li>
-<li>Learned about using Dependency Injection and Interfaces, in order to enable creating testable and maintainable code</li>
-<li>Saw how containers can aid in making our application more maintainable</li>
+<li>讓我們的程式碼保持 DRY 原則，並且可以被重複使用。</li>
+<li>建立了 <strong>可維護</strong> 的程式碼 - 若需要的話，我們可以在整個應用程式中，隨意替 <code>User</code> 類別切換 <code>資料來源物件</code>。</li>
+<li>程式碼的變得 <strong>可測試</strong> - 我們可以簡單地使用 Mock 技術模擬資料庫的假物件。不再需要為了進行測試，而啟動整個應用程式或建立測試用的資料庫來進行資料庫連線。</li>
+<li>學習到如何使用 <strong>依賴注入（Dependency Injection）</strong> 技術和 <strong>導入介面（Interface）</strong>，讓既有的程式碼變得 <strong>可測試</strong> 與 <strong>容易維護</strong>。</li>
 </ol>
-<p>I’m sure you’ve noticed that we’ve added much more code in the name of maintainability and testability. A strong argument can be made against this implementation: we’re increasing complexity. Indeed, this requires a deeper knowledge of code, both for the main author and for collaborators of a project.</p>
-<p>However, the cost of explanation and understanding is far out-weighed by the extra overall decrease in technical debt.</p>
+<p>我相信您已經註意到，程式碼雖然變得 <strong>可維護性</strong> 和 <strong>可測試性</strong>，但卻也添加了許多程式碼，這經常反對聲量：「程式碼變得更複雜！」。確實，這樣子的開發方式不論是對原作者或開發團隊，都需要對程式碼有更深入的了解。</p>
+<p>但是，比起日增月益的 <strong>技術債</strong> ，這樣代價的其實是 CP 值很高的！</p>
 <ul>
-<li>The code is vastly more maintainable, making changes possible in one location, rather than several.</li>
-<li>Being able to unit test (quickly) will reduce bugs in code by a large margin - especially in long-term or community-driven (open-source) projects.</li>
-<li>Doing the extra-work up front will save time and headache later.</li>
+<li>程式碼變得更容易維護，可以讓改變都發生在同一個地方，而不是散落在整個應用程式中。</li>
+<li>能夠快速地進行單元測試，開發中導入單元測試可以大大減少程式碼的錯誤。尤其是長期維護或龐大複雜的專案。</li>
+<li>雖然開發過程會多做一些工作，但總是可以節省工程師未來維護程式的時間，以及發生頭痛的機率！</li>
+</ul>
+<h2><span id="參考連結">參考連結：</span></h2><ul>
+<li><a href="https://code.tutsplus.com/tutorials/how-to-write-testable-and-maintainable-code-in-php--net-31726" target="_blank" rel="noopener">原文: How to Write Testable and Maintainable Code in PHP</a></li>
 </ul>
 
       
