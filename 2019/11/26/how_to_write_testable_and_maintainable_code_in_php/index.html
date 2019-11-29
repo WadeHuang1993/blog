@@ -15,7 +15,7 @@
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
 <meta property="og:description" content="框架(Framework) 是一種可以讓開發應用程式更快速、便利的工具，但是快速與便利的開發過程卻經常產生 技術債。技術債產生的主因是開發人員沒有把程式的可維護性當作工作目標。在缺少單元測試和良好的程式結構下，功能異動跟除錯都會變得越來越困難。 本文章將教您如何把程式碼變得更有結構，讓程式碼變得可測試與易於維護。（還有節省你的時間） 你將會學到 DRY 原則 依賴注入 (Dependency In">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:updated_time" content="2019-11-29T06:08:02.632Z">
+<meta property="og:updated_time" content="2019-11-29T06:33:20.753Z">
 <meta name="twitter:card" content="summary">
   
     <link rel="alternate" href="/blog/atom.xml" title="WadeHuang1993&#39;s Blog" type="application/atom+xml">
@@ -150,7 +150,7 @@
 <p>Mockery 解決了一些問題：</p>
 <ol>
 <li>讓單元測試只測試 <code>User</code> 類別的邏輯，不再需要測試資料庫連線。</li>
-<li>我們可以控制 <code>假資料庫連線物件</code> 的輸入和輸出。我們可以知道輸入 user ID “1” 後，<code>假資料庫連線物件</code>會回傳一個假的 user 資料。因此測試環境已經不需要依賴真實的資料庫連線就可以進行測試。</li>
+<li>我們可以控制 <code>假資料庫連線物件</code> 的輸入和輸出。我們可以知道輸入 user ID “1” 後，<code>假資料庫連線物件</code> 會回傳一個假的 user 資料。因此測試環境已經不需要依賴真實的資料庫連線就可以進行測試。</li>
 <li>在執行測試時，不再需要為了初始化資料庫連線而啟動整個應用程式。</li>
 </ol>
 <p>但我們還可以做得更好！</p>
@@ -159,13 +159,14 @@
 
 <p>我在這個例子中做了幾件事：</p>
 <ol>
-<li>替 <code>資料來源</code> 定義一個介面：<code>UserRepositoryInterface</code>，這個介面公開了一個方法為：<code>addUser()</code>。</li>
+<li>替<strong>資料來源物件</strong>定義一個介面：<code>UserRepositoryInterface</code>，這個介面公開了一個方法為：<code>addUser()</code>。</li>
 <li>實作 <code>UserRepositoryInterface</code> 介面。在範例中我們建立一個 MySQL 資料庫操作類別 <code>MysqlUserRepository</code> 來實作介面。這個類別接受一個資料庫連接線物件 <code>$db_conneect</code>，並且透過這個物件來撈取使用者資訊。</li>
 <li>最後，替 <code>User</code> 類別建構函式的參數加上型別：<code>UserRepositoryInterface</code> 介面。這麼一來 <code>User</code> 類別就可以透過型別檢查機制 (Type Hinting) 確保被注入的 <code>資料來源</code> 總是可以提供 <code>addUser()</code> 方法。</li>
 </ol>
 <blockquote>
-<p>當 <code>User</code> 類別在建構函式使用型別檢查 (Type Hinting) 對參數宣告型別為 <code>UserRepositoryInterface</code> 介面時，表示以後依賴注入的參數一定都要實作 <code>UserRepositoryInterface</code> 介面，並且實作介面的所有 Public 方法。不然將會跳出型別錯誤。這是為了確保 <code>User</code> 類別一定可以使用依賴注入進來的 <code>資料來源物件</code> 的 <code>getUser</code> 方法。</p>
+<p>當 User 類別在建構函式使用型別檢查 (Type Hinting) 對參數宣告型別為 <strong>UserRepositoryInterface</strong> 介面時，表示以後依賴注入的參數一定都要實作 <strong>UserRepositoryInterface</strong> 介面，並且實作介面的所有 Public 方法。</p>
 </blockquote>
+<p>這是為了確保 <code>User</code> 類別一定可以使用依賴注入進來的 <strong>資料來源物件</strong> 的 <code>getUser()</code> 方法。若傳遞進來的來源物件沒有實作 UserRepositoryInterface 介面，程式就會出現型別錯誤。</p>
 <p>這樣做有什麼效果？</p>
 <ol>
 <li>我們的程式碼已經完全變得可測試了，現在可以輕易的透過 Mock 替換 <code>User</code> 類別的資料來源物件。</li>
@@ -196,7 +197,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/26/how_to_write_testable_and_maintainable_code_in_php/" data-id="ck3iitif20004top1fjn2fknk" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/26/how_to_write_testable_and_maintainable_code_in_php/" data-id="ck3jrl4ko0005lwp1825e1uii" class="article-share-link">Share</a>
       
       
     </footer>

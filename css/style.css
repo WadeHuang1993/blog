@@ -597,9 +597,11 @@ a.article-title:hover {
 .article-entry dl {
   margin-top: 1.6em;
   margin-bottom: 1.6em;
+  padding-left: 1em;
 }
 .article-entry li {
   font-size: 1rem;
+  line-height: 1.6em;
 }
 .article-entry img,
 .article-entry video {
@@ -648,6 +650,12 @@ a.article-title:hover {
 .article-entry strong {
   font-weight: 900;
   color: #000;
+}
+.article-entry code {
+  color: #c0341d;
+  background-color: #fbe5e1 !important;
+  border-radius: 4px;
+  padding: 0 0.1em !important;
 }
 .article-entry .pullquote {
   text-align: left;
