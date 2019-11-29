@@ -628,11 +628,12 @@ a.article-title:hover {
   padding: 10px 0;
 }
 .article-entry blockquote p {
-  font-size: 1.5em;
+  font-size: 1.4em;
   color: #000;
-  margin: 1em 20px;
-  text-align: center;
+  padding: 0 1em;
+  text-align: left;
   background-color: #f0f0f0;
+  border-left: 0.25em solid #4267b2;
 }
 .article-entry blockquote footer {
   font-size: 14px;
@@ -652,10 +653,11 @@ a.article-title:hover {
   color: #000;
 }
 .article-entry code {
-  color: #c0341d;
-  background-color: #fbe5e1 !important;
-  border-radius: 4px;
-  padding: 0 0.1em !important;
+  color: #a52a2a;
+  background-color: rgba(27,31,35,0.05) !important;
+  border-radius: 3px;
+  padding: 0 0.2em !important;
+  font-size: 92%;
 }
 .article-entry .pullquote {
   text-align: left;
