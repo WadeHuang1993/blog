@@ -8,17 +8,18 @@
   <title>單一職責原則，定義、解析與實踐 | WadeHuang1993&#39;s Blog</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
   <meta name="description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
-<meta name="keywords" content="SOLID principles,SRP principle,OOP">
+<meta name="keywords" content="PHP, OOP, JavaScript, Web development">
 <meta property="og:type" content="article">
 <meta property="og:title" content="單一職責原則，定義、解析與實踐">
-<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;04&#x2F;solid_srp_definition_and_practices&#x2F;index.html">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;2019&#x2F;12&#x2F;03&#x2F;solid_srp_definition_and_practices&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
 <meta property="og:description" content="單一職責原則(Single responsibility principle) 定義：  A class should have only one reason to change.以一個類別來說，應該只有一個引起它變化的原因。  ”等等，這是在說人話嗎？還是我理解能力不夠好？“ 這是我第一次讀到 SRP 原則定義的反應，當時覺得 SOLID 每個原則都是文字天書。若你也有跟我一樣的反應，不要緊張">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-2.png">
-<meta property="og:updated_time" content="2019-12-03T03:02:33.152Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-5.png">
+<meta property="og:updated_time" content="2019-12-03T03:05:36.274Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
   
@@ -73,8 +74,8 @@
       <div class="outer">
         <section id="main"><article id="post-solid_srp_definition_and_practices" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
-    <a href="/blog/2019/11/04/solid_srp_definition_and_practices/" class="article-date">
-  <time datetime="2019-11-04T02:31:00.000Z" itemprop="datePublished">2019-11-04</time>
+    <a href="/blog/2019/12/03/solid_srp_definition_and_practices/" class="article-date">
+  <time datetime="2019-12-03T03:04:44.000Z" itemprop="datePublished">2019-12-03</time>
 </a>
     
   </div>
@@ -199,7 +200,7 @@
 
 <p>這個步驟中，我們建立了一個名稱為 <code>StudentListPluginThatNotPaidBicyclePassFee</code> 的插件，這個插件裡面的邏輯，其實就是把原本寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移過來而已。其他的「學生列表」功能也要以此類推，把當初寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移到自己的插件中。這麼一來，就已經把核心邏輯與附加邏輯拆開了。</p>
 <p>最後在每個需求的 Controller 層，透過 <strong>StudentModel</strong> 的公開方法<code>setConditionPlugin()</code> 將插件注入 <strong>StudentModel</strong> 裡面。<strong>StudentModel</strong> 在撈取學生時就可以透過被注入的插件來擴充核心邏輯。</p>
-<h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可看見下面結構：<br>![圖三：每個插件都只負責一個職責](/Users/wade/Desktop/螢幕快照 2019-12-03 上午10.19.27.png)</p>
+<h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可看見下面結構：<br><img src="/blog/images/pasted-5.png" alt="圖三：每個插件都只負責一個職責"></p>
 <p><strong>（圖三）</strong>中，<strong>每個插件都只負責執行一個需求的程式碼</strong>；<code>StudentModel-&gt;studentList()</code> 函式則專注於撈取學生列表。兜了這麼大一圈，這才是 <strong>單一職責原則</strong> 要我們做的事情：</p>
 <ol>
 <li>隔離 <strong>核心邏輯</strong> 與 <strong>附加功能邏輯</strong></li>
@@ -220,30 +221,19 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/04/solid_srp_definition_and_practices/" data-id="ck3o8tk5j0004nop16sp56f7x" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck3pa7pgo00006dp1enbu97uv" class="article-share-link">Share</a>
       
       
-  <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/OOP/" rel="tag">OOP</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-principles/" rel="tag">SOLID principles</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SRP-principle/" rel="tag">SRP principle</a></li></ul>
-
     </footer>
   </div>
   
     
 <nav id="article-nav">
   
-    <a href="/blog/2019/11/21/Cluelessness/" id="article-nav-newer" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Newer</strong>
-      <div class="article-nav-title">
-        
-          軟體開發中的“無緒”
-        
-      </div>
-    </a>
   
-  
-    <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" id="article-nav-older" class="article-nav-link-wrap">
+    <a href="/blog/2019/11/22/cluelessness_in_self_learning/" id="article-nav-older" class="article-nav-link-wrap">
       <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">再談 SOLID 原則，Why SOLID?</div>
+      <div class="article-nav-title">自學時應該看破“無緒”</div>
     </a>
   
 </nav>
@@ -260,29 +250,15 @@
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">標籤</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/OOP/" rel="tag">OOP</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SOLID-principles/" rel="tag">SOLID principles</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SRP-principle/" rel="tag">SRP principle</a></li></ul>
-    </div>
-  </div>
-
 
   
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">標籤雲</h3>
-    <div class="widget tagcloud">
-      <a href="/blog/tags/OOP/" style="font-size: 10px;">OOP</a> <a href="/blog/tags/SOLID-principles/" style="font-size: 10px;">SOLID principles</a> <a href="/blog/tags/SRP-principle/" style="font-size: 10px;">SRP principle</a>
-    </div>
-  </div>
-
   
     
   <div class="widget-wrap">
     <h3 class="widget-title">彙整</h3>
     <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">十月 2019</a></li></ul>
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">十月 2019</a></li></ul>
     </div>
   </div>
 
@@ -295,15 +271,15 @@
       <ul>
         
           <li>
+            <a href="/blog/2019/12/03/solid_srp_definition_and_practices/">單一職責原則，定義、解析與實踐</a>
+          </li>
+        
+          <li>
             <a href="/blog/2019/11/22/cluelessness_in_self_learning/">自學時應該看破“無緒”</a>
           </li>
         
           <li>
             <a href="/blog/2019/11/21/Cluelessness/">軟體開發中的“無緒”</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/11/04/solid_srp_definition_and_practices/">單一職責原則，定義、解析與實踐</a>
           </li>
         
           <li>
