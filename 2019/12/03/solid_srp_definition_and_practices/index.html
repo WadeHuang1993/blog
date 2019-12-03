@@ -19,7 +19,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-3.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-2.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-5.png">
-<meta property="og:updated_time" content="2019-12-03T03:12:00.422Z">
+<meta property="og:updated_time" content="2019-12-03T03:27:54.983Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-1.png">
   
@@ -114,7 +114,7 @@
 <blockquote>
 <p><strong>每個程式碼片段都只關注一件事情</strong></p>
 </blockquote>
-<p>當每段程式碼只關注一件事情時，程式碼會更容易被理解和處理，且相較 <strong>低內聚</strong> 的程式碼來說更容易編寫。因此類別和函式 <strong>應該具有單一職責</strong>。    </p>
+<p>當每段程式碼只關注一件事情時，程式碼會更容易被理解和處理，且相較 <strong>低內聚</strong> 的程式碼來說更容易編寫。</p>
 <h3><span id="什麼情況會造成低內聚">什麼情況會造成低內聚?</span></h3><p><strong>當程式碼包含一個以上「互不相關」的邏輯或意圖時，程式碼的內聚性就會降低。</strong><br>(一般而言，低內聚的程式碼代表高耦合<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup>)</p>
 <p><strong>程式碼的內聚性一但降低，閱讀與維護程式碼的難度就會提升</strong>。當你必須從一個大函式裡面修改其中一小段邏輯，若不先花時間讀懂函式中每段程式碼之間的關係就直接修改程式碼，很容易破壞函式原先可正常運作的程式碼。為了避免對程式碼造成破壞，開發人員開發過程總是變成：<strong>花費 80% 時間閱讀程式碼，真正編寫程式碼的時間卻只有 20%</strong>。對於維護一個系統來說，這種情況除了相當浪費成本以外，也相當折磨開發人員的心情，更糟的是，每次回來維護又要重新讀一次程式碼。</p>
 <h2><span id="單一職責原則對專案的重要性">單一職責原則對專案的重要性？</span></h2><p>單一職責原則乍看之下好像很簡單，但實踐過程其實困難重重。現實狀況常常是：專案起初幾個版本的程式碼意圖都相當簡單明瞭，但是當需求隨著時間增長再加上開發時程短促，讓開發人員不斷在原本的程式碼上堆疊新的程式碼。最後 <strong>舊程式碼與新程式碼糾纏在一起，使得程式碼的意圖和邊界漸漸變得模糊且互相耦合</strong>。若在意圖模糊的程式碼上繼續擴充或修改，則會使程式碼的意圖逐漸流失並且擴大影響範圍，最後變成 <strong>技術債</strong> 折磨維護專案的人員。</p>
@@ -204,7 +204,7 @@
 
 <p>這個步驟中，我們建立了一個名稱為 <code>StudentListPluginThatNotPaidBicyclePassFee</code> 的插件，這個插件裡面的邏輯，其實就是把原本寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移過來而已。其他的「學生列表」功能也要以此類推，把當初寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移到自己的插件中。這麼一來，就已經把核心邏輯與附加邏輯拆開了。</p>
 <p>最後在每個需求的 Controller 層，透過 <strong>StudentModel</strong> 的公開方法<code>setConditionPlugin()</code> 將插件注入 <strong>StudentModel</strong> 裡面。<strong>StudentModel</strong> 在撈取學生時就可以透過被注入的插件來擴充核心邏輯。</p>
-<h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可看見下面結構：<br><img src="/blog/images/pasted-5.png" alt="圖三：每個插件都只負責一個職責"></p>
+<h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可產生新的結構：<br><img src="/blog/images/pasted-5.png" alt="圖三：每個插件都只負責一個職責"></p>
 <p><strong>（圖三）</strong>中，<strong>每個插件都只負責執行一個需求的程式碼</strong>；<code>StudentModel-&gt;studentList()</code> 函式則專注於撈取學生列表。兜了這麼大一圈，這才是 <strong>單一職責原則</strong> 要我們做的事情：</p>
 <ol>
 <li>隔離 <strong>核心邏輯</strong> 與 <strong>附加功能邏輯</strong></li>
@@ -213,7 +213,7 @@
 </ol>
 <p>單一職責原則，其實是以更高一層的角度在看程式碼。寫程式碼的時候，應該時時刻刻注意當前的程式碼會不會跟 <strong>當前需求</strong> 不相關的程式碼寫在一起。若有的話表示 <strong>核心邏輯</strong> 和 <strong>附加功能邏輯</strong> 可能已經混在一起了，這時就可以考慮導入單一職責原則，隔離 <strong>核心邏輯</strong> 和 <strong>附加邏輯</strong>，並且確保每個類別只負責一個需求的程式碼，避免程式碼的耦合越來越深。</p>
 <h1><span id="所以單一職責的職責到底是什麼">所以單一職責的職責到底是什麼？</span></h1><p>很多人被單一職責原則的名字給混淆了，以為一個類別只可以做一件事情。但事實上「一次只做一件事」是函式層級的原則。</p>
-<p><strong>單一職責原則在類別層級中，用來劃分介面、型別的邊界<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，將不同意圖、不同使用情境、不同需求、不同修改時機的功能劃分為各自獨立的「職責」，最後由類別來實現這些被獨立的職責</strong>。因此當一個職責的需求異動時，也表示只有 <strong>負責實現該職責的類別</strong> 需要被異動（修改局部化）。</p>
+<p><strong>單一職責原則在類別層級中，用來劃分介面和型別的邊界<sup id="fnref:2"><a href="#fn:2" rel="footnote">2</a></sup>，將不同意圖、不同使用情境、不同需求、不同修改時機的功能劃分為各自獨立的「職責」，最後由類別來實現這些被獨立的職責</strong>。因此當一個職責的需求異動時，也表示只有 <strong>負責實現該職責的類別</strong> 需要被異動（修改局部化）。</p>
 <p>為了讓類別容易被維護，一個類別應該盡可能減少負責的職責，這就是單一職責原則想傳達的概念：</p>
 <blockquote>
 <p>「A class should have only one reason to change.」<br>以一個類別來說，應該只有一個引起它變化的原因。</p>
