@@ -198,7 +198,8 @@
 
 <p>這個步驟中，我們建立了一個名稱為 <code>StudentListPluginThatNotPaidBicyclePassFee</code> 的插件，這個插件裡面的邏輯，其實就是把原本寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移過來而已。其他的「學生列表」功能也要以此類推，把當初寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移到自己的插件中。這麼一來，就已經把核心邏輯與附加邏輯拆開了。</p>
 <p>最後在每個需求的 Controller 層，透過 <strong>StudentModel</strong> 的公開方法<code>setConditionPlugin()</code> 將插件注入 <strong>StudentModel</strong> 裡面。<strong>StudentModel</strong> 在撈取學生時就可以透過被注入的插件來擴充核心邏輯。</p>
-<h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可產生新的結構：<br><img src="/blog/images/pasted-5.png" alt="圖三：每個插件都只負責一個職責"></p>
+<h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可產生新的結構：</p>
+<p><img src="/blog/images/pasted-6.png" alt="圖三：每個插件都只負責一個職責"></p>
 <p><strong>（圖三）</strong>中，<strong>每個插件都只負責執行一個需求的程式碼</strong>；<code>StudentModel-&gt;studentList()</code> 函式則專注於撈取學生列表。兜了這麼大一圈，這才是 <strong>單一職責原則</strong> 要我們做的事情：</p>
 <ol>
 <li>隔離 <strong>核心邏輯</strong> 與 <strong>附加功能邏輯</strong></li>
