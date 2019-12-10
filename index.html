@@ -98,25 +98,26 @@
 <hr>
 <p>開放封閉原則為軟體開發的 <strong>首要原則</strong>，很多軟體開發原則都是建構在這短短一句話之上，因此可以通過此原則引伸出其他原則。很多時候一個程式具有良好的設計，往往說明它是符合開放封閉原則。</p>
 <h2><span id="目的">目的</span></h2><blockquote>
-<p>隔離核心商業邏輯與附加邏輯，使核心商業邏輯更易於擴充，以便因應需求變化。</p>
+<p>隔離核心業務邏輯與附加邏輯，使核心業務邏輯更易於擴充，以便因應需求變化。</p>
 </blockquote>
-<h1><span id="解析">解析</span></h1><h2><span id="什麼是核心商業邏輯附加邏輯">什麼是核心商業邏輯？附加邏輯？</span></h2><p>一個系統總會有幾個極具價值的商業邏輯，這些商業邏輯可以延伸出更多功能，提供使用者的便利性。也就是說系統中有可能 <strong>20% 是核心商業邏輯</strong>，剩下的 <strong>80% 是圍繞著核心商業邏輯延伸出來的附加邏輯</strong>。</p>
-<p>舉例來說，一個診所掛號系統一開始只有「掛號與叫號」功能。但若需要的話，也可以延伸出「叫號時發送簡訊提醒患者」功能。掛號系統的案例中「掛號與叫號」是 <strong>核心商業邏輯</strong>；「叫號時發送簡訊提醒患」則是 <strong>隨著時間與需求延伸出來的附加邏輯</strong>。</p>
-<h2><span id="為什麼要隔離-核心商業邏輯-與-附加邏輯">為什麼要隔離 核心商業邏輯 與 附加邏輯？</span></h2><p>和軟體複雜的特質 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵(Software entropy)</a> 有關，指系統在經過修改後，程式碼的無序程度(意圖流失程度)與複雜程度皆會上昇。</p>
-<p>需求變更和除錯是造成系統修改的主因，系統會隨著時間不斷衍生出新需求。這些需求可能是工程浩大的新功能；也可能是為了某個特定案例且只使用一次的需求。甚至客戶往往在看見實際功能後，才想到有更好的解決方案或缺少哪些細項。於是剛釋出的功能馬上又進入重工(Rework)階段。</p>
-<p><strong>若開發人員不懂得將核心商業邏輯與附加邏輯分開，往往為了完成新需求，把附加邏輯寫在核心商業邏輯裡面，替核心商業邏輯擴充行為</strong>。這種做法一但遇到需求不停出現時，<strong>核心商業邏輯</strong> 與 <strong>附加邏輯</strong> 會漸漸地糊在一起變成一個大泥團導致程式脆弱化。新增需求和除錯更容易引入新的 Bug，解決新的 Bug 又引入更新的 Bug…。</p>
-<p><img src="/blog/images/pasted-7.png" alt="圖一：開發人員將附加邏輯寫在核心邏輯裡面，以擴充核心商業邏輯的行為來完成新需求。"></p>
-<p>（<strong>圖一</strong>）中的程式碼在專案中隨處可見，當 <strong>附加邏輯</strong> 與 <strong>核心商業邏輯</strong> 耦合在一起時，<strong>核心商業邏輯</strong> 會變得很難除錯、重複使用以及擴充，這些因素都會拉長開發時程，導致維護系統的成本增加。</p>
+<h1><span id="解析">解析</span></h1><h2><span id="什麼是核心業務邏輯附加邏輯">什麼是核心業務邏輯？附加邏輯？</span></h2><p>一個系統總會有幾個極具價值的商業邏輯，這些商業邏輯可以延伸出更多功能，提供使用者的便利性。也就是說系統中有可能 <strong>20% 是核心業務邏輯</strong>，剩下的 <strong>80% 是圍繞著核心業務邏輯延伸出來的附加邏輯</strong>。</p>
+<p>舉例來說，一個診所掛號系統一開始只有「掛號與叫號」功能。但若需要的話，也可以延伸出「叫號時發送簡訊提醒患者」功能。掛號系統的案例中「掛號與叫號」是 <strong>核心業務邏輯</strong>；「叫號時發送簡訊提醒患」則是 <strong>隨著時間與需求延伸出來的附加邏輯</strong>。</p>
+<h2><span id="為什麼要隔離-核心業務邏輯-與-附加邏輯">為什麼要隔離 核心業務邏輯 與 附加邏輯？</span></h2><p>和軟體複雜的特質 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵(Software entropy)</a> 有關，指系統在經過修改後，程式碼的無序程度(意圖流失程度)與複雜程度皆會上昇。</p>
+<p>需求變更和除錯是造成系統修改的主因，系統會隨著時間不斷衍生出新需求。這些需求可能是工程浩大的新功能；也可能是為了某個特定案例且只使用一次的需求。甚至客戶往往在看見實際功能後，才想到有更好的解決方案或缺少哪些細項。於是剛釋出的功能馬上又進入重工（Rework）階段。</p>
+<p><strong>若開發人員不懂得將核心業務邏輯與附加邏輯分開，往往為了完成新需求，把附加邏輯寫在核心業務邏輯裡面，替核心業務邏輯擴充行為</strong>。這種做法一但遇到需求不停出現時，<strong>核心業務邏輯</strong> 與 <strong>附加邏輯</strong> 會漸漸地糊在一起變成一個大泥團導致程式脆弱化。新增需求和除錯更容易引入新的 Bug，解決新的 Bug 又引入更新的 Bug…。</p>
+<p><img src="/blog/images/pasted-7.png" alt="圖一：開發人員將附加邏輯寫在核心邏輯裡面，以擴充核心業務邏輯的行為來完成新需求。"></p>
+<p>（<strong>圖一</strong>）中的程式碼在專案中隨處可見，當 <strong>附加邏輯</strong> 與 <strong>核心業務邏輯</strong> 耦合在一起時，<strong>核心業務邏輯</strong> 會變得很難除錯、重複使用以及擴充，這些因素都會拉長開發時程，導致維護系統的成本增加。</p>
 <p>因此開發人員應該要有個認知：</p>
 <blockquote>
 <p>雖然<strong>需求並不是程式設計環節能控制的，但是程式碼應該要能夠適應快速多變的需求。</strong></p>
 </blockquote>
-<h2><span id="由外部注入附加邏輯以便擴充核心商業邏輯">由外部注入附加邏輯，以便擴充核心商業邏輯</span></h2><p>由於新需求不斷出現，修改核心商業邏輯來擴充附加功能又會促長 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的程度。因此開放封閉原則指導開發人員在面對需求變化時應該要：</p>
+<p>核心業務邏輯本身只需要關心業務邏輯（Business Rule），不應該和附加邏輯耦合在一起。因此一定要隔離核心業務邏輯與附加邏輯，才能確保核心業務邏輯的彈性。一旦核心業務邏輯有了彈性，就可以較容易面對需求變化。</p>
+<h2><span id="開放擴充點由外部注入附加邏輯">開放擴充點，由外部注入附加邏輯</span></h2><p>由於新需求不斷出現，修改核心業務邏輯來擴充附加功能又會促長 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的程度。因此開放封閉原則指導開發人員在面對需求變化時應該要：</p>
 <blockquote>
 <p>盡可能減少對既有程式碼的修改，並開放擴充點，讓新需求可以從外部擴充核心邏輯。</p>
 </blockquote>
 <p>實際上 <strong>開放封閉原則的設計思維</strong> 早在物件導向技術出現之前就存在，並且被廣泛應用在各種層面，從程式設計乃至框架、系統層級：</p>
-<h3><span id="程式設計層面jquery-ajax">程式設計層面：jQuery ajax</span></h3><p>透過從外部注入 $.ajax 的 <code>done</code>, <code>fail</code>, <code>always</code> 等屬性，擴充 $.ajax 行為：</p>
+<h3><span id="程式設計層面jquery-ajax">程式設計層面：jQuery ajax</span></h3><p>透過 $.ajax 的 <code>done</code>, <code>fail</code>, <code>always</code> 等公開函式從外部注入閉包，擴充 $.ajax 行為：</p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  method: <span class="string">"POST"</span>,</span><br><span class="line">  url: <span class="string">"some.php"</span>,</span><br><span class="line">  data: &#123; <span class="attr">name</span>: <span class="string">"John"</span>, <span class="attr">location</span>: <span class="string">"Boston"</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  .done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"success"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"error"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">   .always(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"complete"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 
 <h3><span id="框架層面laravel-controller">框架層面：Laravel Controller</span></h3><p>透過繼承 MVC 框架內建的 <code>Controller</code> 類別，擴充 Controller 層的行為：</p>
@@ -132,13 +133,27 @@
 <li>手機透過安裝 APP，擴充手機行為。</li>
 <li>…</li>
 </ul>
+<p>上述這些耳熟能詳的範例中，每個技術都被應用到成千上萬個不同的需求。這些高彈性的技術總會有一個 <strong>開放的擴充點</strong>，讓開發人員可以寫入自己的邏輯來完成功能。</p>
 <p><strong>開放封閉原則</strong> 讓開發人員不需要修改已經造好的輪子，就可以完成新需求所需的功能。這也是為什麼軟體技術能夠以海量增長的原因。</p>
-<p>但是要怎樣才能做到開放封閉原則呢？</p>
-<h2><span id="找出核心邏輯與附加邏輯的邊界">找出核心邏輯與附加邏輯的邊界</span></h2><p>核心業務邏輯 (1).png<br><img src="/blog/images/pasted-8.png" alt="業務邏輯與附加邏輯只能透過抽象介面互動"></p>
-<h2><span id="核心商業邏輯不需要了解外部的邏輯">核心商業邏輯不需要了解外部的邏輯</span></h2><blockquote>
-<p>通過封裝變化的方式，可以把系統中穩定不變的部分和容易變化的部分隔離開來。在系統的 演變過程中，我們只需要替換那些容易變化的部分，如果這些部分是已經被封裝好的，那麼替換 起來也相對容易。而變化部分之外的就是穩定的部分。在系統的演變過程中，穩定的部分是不需 要改變的。</p>
+<p>但是開放封閉原則的原理是什麼呢？</p>
+<h2><span id="關鍵是抽象">關鍵是抽象</span></h2><blockquote>
+<p>解除耦合的實踐方式，就是讓程式碼不知道彼此的存在。</p>
 </blockquote>
-<h2><span id="開放擴充點關鍵是抽象">開放擴充點，關鍵是抽象</span></h2><p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
+<p>程式碼可以透過繼承、引入介面或注入閉包等 <strong>多型的特性</strong>，得到隔離彼此的效果。</p>
+<p><img src="/blog/images/pasted-8.png?500x" alt="核心業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
+<p>引入抽象後，核心業務邏輯與附加邏輯 <strong>只能透過抽象介面與彼此互動</strong>。如此一來，核心業務邏輯可以專注於本身的業務邏輯，而附加邏輯則可以隨時被<strong>多個不同的實作替換掉</strong>，並且核心業務邏輯完全不需要關心這些事。</p>
+<h3><span id="找出核心業務邏輯與附加邏輯的邊界">找出核心業務邏輯與附加邏輯的邊界</span></h3><p>開發人員必須懂得如何找出核心業務邏輯與附加邏輯的邊界，才能從中開放擴充點引入抽象隔離彼此。</p>
+<p>簡單有效的方法是，把重要與不重要的事情分開。例如 UI 介面與業務規則無關，所以它們之間應該要有一個邊界。也可以 <strong>已變化為軸的地方</strong> 繪製邊界，邊界另一側的元件將以不同的速率以及不同的原因改變：</p>
+<ul>
+<li><strong>附加邏輯 與 核心業務規則</strong> 相比，彼此在不同的時間以不同的速率改變，因此它們之間應該有個邊界；</li>
+<li><strong>附加邏輯 與 其他附加邏輯</strong> 相比，每個附加邏輯都在不同的時間和不同的原因改變，所以它們之間應該也要有邊界。</li>
+</ul>
+<p>說到底，其實一直都是單一職責原則告訴我們應該如何切割邊界。</p>
+<blockquote>
+<p>事實上，軟體開發技術的歷史就是「如何方便地建立 plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob.</p>
+</blockquote>
+<p>一旦開放封閉的架構形成就能建立防火牆，使變動不會傳播出去。附加邏輯的變動不會影響核心業務邏輯；附加邏輯引入 Bug 也不會影響其他附加邏輯。</p>
+<p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
 <h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><p><img src="/blog/images/pasted-9.png" alt="叫號功能與附加邏輯"></p>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
@@ -146,6 +161,9 @@
 </blockquote>
 <blockquote>
 <p>設計模式就是給做的好的設計取個名字。幾乎所有的設計模式都是遵守開放封閉原則的，我們見到的好設計，通常都經得起開放封閉原則的考驗。不管是具體的各種設計 模式，還是更抽象的面向對象設計原則，比如單一職責原則、最少知識原則、依賴倒置原則等， 都是為了讓程序遵守開放封閉原則而出現的。可以這樣說，開放封閉原則是編寫一個好程序的 目標，其他設計原則都是達到這個目標的過程。</p>
+</blockquote>
+<blockquote>
+<p>通過封裝變化的方式，可以把系統中穩定不變的部分和容易變化的部分隔離開來。</p>
 </blockquote>
 <blockquote>
 <p>開閉原則是一個終極目標，任何人包括大師級人物都無法百分之百做到，但朝這個方向努力，可以非常顯著地改善一個系統的架構，真正做到“擁抱變化”。</p>
@@ -158,7 +176,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck3z7yv0r0000r4p1dq6g17vu" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck40df040000gtgp17hao29no" class="article-share-link">Share</a>
       
       
     </footer>
@@ -328,7 +346,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck3pa7pgo00006dp1enbu97uv" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck40df046000htgp1cxvganck" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -394,7 +412,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck3o8tk4c0001nop18pqy83re" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck40df02t0000tgp1eg22cpdq" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -476,7 +494,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck3o8tk460000nop13zqa9b34" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck40df0330001tgp10u6h85ac" class="article-share-link">Share</a>
       
       
     </footer>
@@ -573,7 +591,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck3o8tk5k0005nop1dtcp1okf" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck40df03b0004tgp1e27m3xq9" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -666,7 +684,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck3o8tk4e0002nop1ew3o73n9" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck40df0380003tgp1594bf7vk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -789,5 +807,6 @@
 
 
   </div>
+  <script src="/blog/js/hexo_resize_image.js"></script>
 </body>
 </html>
