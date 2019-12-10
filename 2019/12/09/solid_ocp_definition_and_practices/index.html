@@ -16,7 +16,8 @@
 <meta property="og:description" content="開放封閉原則（Open-Closed Principle） 定義： Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.--軟體中的類別、模組、函式等等應該開放擴充，但是封閉修改。  白話版本為： 當系統需要擴充功能時，應該藉由">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
-<meta property="og:updated_time" content="2019-12-10T08:00:09.392Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png">
+<meta property="og:updated_time" content="2019-12-10T08:38:44.898Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
   
@@ -104,17 +105,17 @@
 <p>隔離核心商業邏輯與附加邏輯，使核心商業邏輯更易於擴充，以便因應需求變化。</p>
 </blockquote>
 <h1><span id="解析">解析</span></h1><h2><span id="什麼是核心商業邏輯附加邏輯">什麼是核心商業邏輯？附加邏輯？</span></h2><p>一個系統總會有幾個極具價值的商業邏輯，這些商業邏輯可以延伸出更多功能，提供使用者的便利性。也就是說系統中有可能 <strong>20% 是核心商業邏輯</strong>，剩下的 <strong>80% 是圍繞著核心商業邏輯延伸出來的附加邏輯</strong>。</p>
-<p>舉例來說，一個診所掛號系統的核心商業邏輯為「掛號」，掛號系統一開始只有「掛號與叫號」功能。但若需要的話，也可以延伸出「叫號時發送簡訊提醒患者」功能。掛號系統的案例中「掛號與叫號」是 <strong>核心商業邏輯</strong>；「叫號時發送簡訊提醒患」則是 <strong>隨著時間與需求延伸出來的附加邏輯</strong>。</p>
+<p>舉例來說，一個診所掛號系統一開始只有「掛號與叫號」功能。但若需要的話，也可以延伸出「叫號時發送簡訊提醒患者」功能。掛號系統的案例中「掛號與叫號」是 <strong>核心商業邏輯</strong>；「叫號時發送簡訊提醒患」則是 <strong>隨著時間與需求延伸出來的附加邏輯</strong>。</p>
 <h2><span id="為什麼要隔離-核心商業邏輯-與-附加邏輯">為什麼要隔離 核心商業邏輯 與 附加邏輯？</span></h2><p>和軟體複雜的特質 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵(Software entropy)</a> 有關，指系統在經過修改後，程式碼的無序程度(意圖流失程度)與複雜程度皆會上昇。</p>
-<p>需求變更和除錯是造成系統修改的原因，系統會隨著時間不斷衍生出新需求。這些需求可能是工程浩大的新功能；也可能是為了某個特定案例且只使用一次的需求。甚至客戶往往在看見實際功能後，才想到有更好的解決方案或缺少哪些細項。於是剛釋出的功能馬上又進入重工(Rework)階段。</p>
-<p>若開發人員不懂得將核心商業邏輯與附加邏輯分開，往往會把新需求的附加邏輯寫在核心商業邏輯裡面，以便擴充核心邏輯的行為來完成新需求。這種做法一但遇到需求不停出現時，<strong>核心商業邏輯</strong> 與 <strong>附加邏輯</strong> 會漸漸地糊在一起變成一個大泥團導致程式脆弱化。新增需求和除錯變得容易引入新的 Bug，解決新的 Bug 又引入更新的 Bug…。</p>
+<p>需求變更和除錯是造成系統修改的主因，系統會隨著時間不斷衍生出新需求。這些需求可能是工程浩大的新功能；也可能是為了某個特定案例且只使用一次的需求。甚至客戶往往在看見實際功能後，才想到有更好的解決方案或缺少哪些細項。於是剛釋出的功能馬上又進入重工(Rework)階段。</p>
+<p><strong>若開發人員不懂得將核心商業邏輯與附加邏輯分開，往往為了完成新需求，把附加邏輯寫在核心商業邏輯裡面，替核心商業邏輯擴充行為</strong>。這種做法一但遇到需求不停出現時，<strong>核心商業邏輯</strong> 與 <strong>附加邏輯</strong> 會漸漸地糊在一起變成一個大泥團導致程式脆弱化。新增需求和除錯更容易引入新的 Bug，解決新的 Bug 又引入更新的 Bug…。</p>
 <p><img src="/blog/images/pasted-7.png" alt="圖一：開發人員將附加邏輯寫在核心邏輯裡面，以擴充核心商業邏輯的行為來完成新需求。"></p>
 <p>（<strong>圖一</strong>）中的程式碼在專案中隨處可見，當 <strong>附加邏輯</strong> 與 <strong>核心商業邏輯</strong> 耦合在一起時，<strong>核心商業邏輯</strong> 會變得很難除錯、重複使用以及擴充，這些因素都會拉長開發時程，導致維護系統的成本增加。</p>
 <p>因此開發人員應該要有個認知：</p>
 <blockquote>
 <p>雖然<strong>需求並不是程式設計環節能控制的，但是程式碼應該要能夠適應快速多變的需求。</strong></p>
 </blockquote>
-<h2><span id="由外部注入附加邏輯以便擴充核心商業邏輯">由外部注入附加邏輯，以便擴充核心商業邏輯</span></h2><p>由於新需求不斷出現，修改核心商業邏輯來擴充附加功能又會促長 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a>。因此開放封閉原則指導開發人員在面對需求變化時應該要：</p>
+<h2><span id="由外部注入附加邏輯以便擴充核心商業邏輯">由外部注入附加邏輯，以便擴充核心商業邏輯</span></h2><p>由於新需求不斷出現，修改核心商業邏輯來擴充附加功能又會促長 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的程度。因此開放封閉原則指導開發人員在面對需求變化時應該要：</p>
 <blockquote>
 <p>盡可能減少對既有程式碼的修改，並開放擴充點，讓新需求可以從外部擴充核心邏輯。</p>
 </blockquote>
@@ -137,10 +138,11 @@
 </ul>
 <p><strong>開放封閉原則</strong> 讓開發人員不需要修改已經造好的輪子，就可以完成新需求所需的功能。這也是為什麼軟體技術能夠以海量增長的原因。</p>
 <p>但是要怎樣才能做到開放封閉原則呢？</p>
-<h2><span id="開放擴充點邊界-畫線">開放擴充點（邊界、畫線）</span></h2><blockquote>
+<h2><span id="找出核心邏輯與附加邏輯的邊界">找出核心邏輯與附加邏輯的邊界</span></h2><p>核心業務邏輯 (1).png<br><img src="/blog/images/pasted-8.png" alt="業務邏輯與附加邏輯只能透過抽象介面互動"></p>
+<h2><span id="核心商業邏輯不需要了解外部的邏輯">核心商業邏輯不需要了解外部的邏輯</span></h2><blockquote>
 <p>通過封裝變化的方式，可以把系統中穩定不變的部分和容易變化的部分隔離開來。在系統的 演變過程中，我們只需要替換那些容易變化的部分，如果這些部分是已經被封裝好的，那麼替換 起來也相對容易。而變化部分之外的就是穩定的部分。在系統的演變過程中，穩定的部分是不需 要改變的。</p>
 </blockquote>
-<h2><span id="核心商業邏輯不需要了解外部的邏輯">核心商業邏輯不需要了解外部的邏輯</span></h2><h2><span id="關鍵是抽象">關鍵是抽象</span></h2><p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
+<h2><span id="開放擴充點關鍵是抽象">開放擴充點，關鍵是抽象</span></h2><p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
 <h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
 <p>在面向對象的程序設計中，開放封閉原則(OCP)是最重要的一條原則。很多時候，一個 5 程序具有良好的設計，往往說明它是符合開放封閉原則的。</p>
