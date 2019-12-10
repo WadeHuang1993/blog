@@ -18,7 +18,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png?500x">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-9.png">
-<meta property="og:updated_time" content="2019-12-10T21:22:04.836Z">
+<meta property="og:updated_time" content="2019-12-10T21:29:59.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
   
@@ -111,13 +111,13 @@
 <p>需求變更和除錯是造成系統修改的主因，系統會隨著時間不斷衍生出新需求。這些需求可能是工程浩大的新功能；也可能是為了某個特定案例且只使用一次的需求。甚至客戶往往在看見實際功能後，才想到有更好的解決方案或缺少哪些細項。於是剛釋出的功能馬上又進入重工（Rework）階段。</p>
 <p><strong>若開發人員不懂得將核心業務邏輯與附加邏輯分開，往往為了完成新需求，把附加邏輯寫在核心業務邏輯裡面，替核心業務邏輯擴充行為</strong>。這種做法一但遇到需求不停出現時，<strong>核心業務邏輯</strong> 與 <strong>附加邏輯</strong> 會漸漸地糊在一起變成一個大泥團導致程式脆弱化。新增需求和除錯更容易引入新的 Bug，解決新的 Bug 又引入更新的 Bug…。</p>
 <p><img src="/blog/images/pasted-7.png" alt="圖一：開發人員將附加邏輯寫在核心邏輯裡面，以擴充核心業務邏輯的行為來完成新需求。"></p>
-<p>（<strong>圖一</strong>）中的程式碼在專案中隨處可見，當 <strong>附加邏輯</strong> 與 <strong>核心業務邏輯</strong> 耦合在一起時，<strong>核心業務邏輯</strong> 會變得很難除錯、重複使用以及擴充，這些因素都會拉長開發時程，導致維護系統的成本增加。</p>
+<p>（<strong>圖一</strong>）中的程式碼在專案中隨處可見，當 <strong>附加邏輯</strong> 與 <strong>核心業務邏輯</strong> 耦合在一起時，<strong>核心業務邏輯</strong> 會變得很難除錯、重複使用以及擴充，這些因素都會拉長開發時程，增加維護系統的成本。</p>
 <p>因此開發人員應該要有個認知：</p>
 <blockquote>
 <p>雖然<strong>需求並不是程式設計環節能控制的，但是程式碼應該要能夠適應快速多變的需求。</strong></p>
 </blockquote>
-<p>核心業務邏輯本身只需要關心業務邏輯（Business Rule），不應該和附加邏輯耦合在一起。因此一定要隔離核心業務邏輯與附加邏輯，才能確保核心業務邏輯的彈性。一旦核心業務邏輯有了彈性，就可以較容易面對需求變化。</p>
-<h2><span id="開放擴充點由外部注入附加邏輯">開放擴充點，由外部注入附加邏輯</span></h2><p>由於新需求不斷出現，修改核心業務邏輯來擴充附加功能又會促長 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的程度。因此開放封閉原則指導開發人員在面對需求變化時應該要：</p>
+<p>核心業務邏輯本身只需要關心業務邏輯（Business Rule），不應該和附加邏輯耦合在一起。一定要隔離核心業務邏輯與附加邏輯，才能確保核心業務邏輯的彈性。一旦核心業務邏輯有了彈性，程式就較容易面對需求變化。</p>
+<h2><span id="開放擴充點由外部注入附加邏輯">開放擴充點，由外部注入附加邏輯</span></h2><p>由於新需求不斷出現，修改核心業務邏輯來擴充附加功能又會促進 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的成長。因此開放封閉原則指導開發人員在面對需求變化時應該要：</p>
 <blockquote>
 <p>盡可能減少對既有程式碼的修改，並開放擴充點，讓新需求可以從外部擴充核心邏輯。</p>
 </blockquote>
@@ -135,14 +135,14 @@
 <ul>
 <li>JavaScript 透過註冊 event 事件，擴充瀏覽器行為。</li>
 <li>瀏覽器透過安裝擴充套件，擴充瀏覽器行為。</li>
-<li>手機透過安裝 APP，擴充手機行為。</li>
+<li>手機透過安裝 APP，擴充手機 OS 行為。</li>
 <li>…</li>
 </ul>
 <p>上述這些耳熟能詳的範例中，每個技術都被應用到成千上萬個不同的需求。這些高彈性的技術總會有一個 <strong>開放的擴充點</strong>，讓開發人員可以寫入自己的邏輯來完成功能。</p>
-<p><strong>開放封閉原則</strong> 讓開發人員不需要修改已經造好的輪子，就可以完成新需求所需的功能。這也是為什麼軟體技術能夠以海量增長的原因。</p>
+<p><strong>開放封閉原則</strong> 讓開發人員不需要修改已經造好的輪子，就可以完成自己所需的功能。這也是為什麼軟體技術能夠以海量增長的原因。</p>
 <p>但是開放封閉原則的原理是什麼呢？</p>
 <h2><span id="關鍵是抽象">關鍵是抽象</span></h2><blockquote>
-<p>解除耦合的實踐方式，就是讓程式碼不知道彼此的存在。</p>
+<p>解除耦合的方法，就是讓程式碼不知道彼此的存在。</p>
 </blockquote>
 <p>程式碼可以透過繼承、引入介面或注入閉包等 <strong>多型的特性</strong>，得到隔離彼此的效果。</p>
 <p><img src="/blog/images/pasted-8.png?500x" alt="核心業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
