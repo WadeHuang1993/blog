@@ -18,7 +18,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-10.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png?500x">
-<meta property="og:updated_time" content="2019-12-11T09:35:39.865Z">
+<meta property="og:updated_time" content="2019-12-11T09:41:13.325Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
   
@@ -196,6 +196,7 @@ class HelloController extends Controller
 {
     public function index()
     {
+        /** 1. 撈取信件的內容，並產生信件 HTML */
         // 取得所有使用者昨天收到的系統通知
         $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
 
@@ -205,7 +206,7 @@ class HelloController extends Controller
         // 產生信件 HTML 內容
         $mail_contents = $this-&gt;make_mail_contents($system_notifies);
 
-        // 開始寄送 mail
+        /** 2. 寄送信件 */
         $this-&gt;send_mail($mail_contents);
     }
 
@@ -225,6 +226,7 @@ class HelloController extends Controller
 {
     public function index()
     {
+        /** 1. 撈取信件的內容，並產生信件 HTML */
         // 取得所有使用者昨天收到的系統通知
         $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
         // 依照收件者的 email 分群通知訊息
@@ -237,7 +239,8 @@ class HelloController extends Controller
 
         // 產生信件 HTML 內容
         $mail_contents = $this-&gt;make_mail_contents($system_notifies, $messages, $message_users);
-        // 開始寄送 mail
+
+        /** 2. 寄送信件 */
         $this-&gt;send_mail($mail_contents);
     }
 
@@ -248,6 +251,7 @@ class HelloController extends Controller
 {
     public function index()
     {
+        /** 1. 撈取信件的內容，並產生信件 HTML */
         // 取得所有使用者昨天收到的系統通知
         $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
         // 依照收件者的 email 分群通知訊息
@@ -266,7 +270,8 @@ class HelloController extends Controller
 
         // 產生信件 HTML 內容
         $mail_contents = $this-&gt;make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers);
-        // 開始寄送 mail
+
+        /** 2. 寄送信件 */
         $this-&gt;send_mail($mail_contents);
     }
 
@@ -282,9 +287,7 @@ class HelloController extends Controller
      */
     public function index()
     {
-        /**
-         * 產生每日要寄送的信件內容
-         */
+        /** 1. 撈取信件的內容，並產生信件 HTML */
         $today_email_maker = new Today_email_maker();
         $today_email_maker-&gt;add_handler(new System_notify_handler());
         $today_email_maker-&gt;add_handler(new Message_handler());
@@ -298,9 +301,7 @@ class HelloController extends Controller
             array_push($email_contents, $handler-&gt;make_email_content());
         }
 
-        /**
-         * 開始寄信
-         */
+        /** 2. 寄送信件 */
         $this-&gt;send_mail($email_contents);
     }
 
