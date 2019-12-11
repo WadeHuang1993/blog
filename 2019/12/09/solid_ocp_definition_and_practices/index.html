@@ -18,7 +18,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png?500x">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-9.png">
-<meta property="og:updated_time" content="2019-12-11T05:35:15.839Z">
+<meta property="og:updated_time" content="2019-12-11T05:40:17.690Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
   
@@ -27,8 +27,6 @@
   
     <link rel="icon" href="/favicon.png">
   
-  
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
   
   <link rel="stylesheet" href="/blog/css/style.css">
 </head>
@@ -123,14 +121,39 @@
 </blockquote>
 <p>實際上 <strong>開放封閉原則的設計思維</strong> 早在物件導向技術出現之前就存在，並且被廣泛應用在各種層面，從程式設計乃至框架、系統層級：</p>
 <h3><span id="程式設計層面jquery-ajax">程式設計層面：jQuery ajax</span></h3><p>透過 $.ajax 的 <code>done</code>, <code>fail</code>, <code>always</code> 等公開函式從外部注入閉包，擴充 $.ajax 行為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  method: <span class="string">"POST"</span>,</span><br><span class="line">  url: <span class="string">"some.php"</span>,</span><br><span class="line">  data: &#123; <span class="attr">name</span>: <span class="string">"John"</span>, <span class="attr">location</span>: <span class="string">"Boston"</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  .done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"success"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"error"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">   .always(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"complete"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">$.ajax({
+  method: &quot;POST&quot;,
+  url: &quot;some.php&quot;,
+  data: { name: &quot;John&quot;, location: &quot;Boston&quot; }
+})
+  .done(function() {
+    alert(&quot;success&quot;);
+  })
+  .fail(function() {
+    alert(&quot;error&quot;);
+  })
+   .always(function() {
+    alert(&quot;complete&quot;);
+  });</code></pre>
 <h3><span id="框架層面laravel-controller">框架層面：Laravel Controller</span></h3><p>透過繼承 MVC 框架內建的 <code>Controller</code> 類別，擴充 Controller 層的行為：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">&lt;?php
 
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HelloController extends Controller
+{
+    public function index(Request $request){
+        return &#39;Hello World!&#39;;
+    }
+}</code></pre>
 <h3><span id="框架層面reactjs">框架層面：React.js</span></h3><p>透過繼承 <code>React.Component</code> 類別，擴充 Component 的行為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}</code></pre>
 <p>其他範例：</p>
 <ul>
 <li>JavaScript 透過註冊 event 事件，擴充瀏覽器行為。</li>
@@ -183,7 +206,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck40df040000gtgp17hao29no" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck40wp7f0000j8ep11wc4h7iy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -289,7 +312,13 @@
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.0/build/styles/github-gist.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 </footer>
+
     </div>
     <nav id="mobile-nav">
   

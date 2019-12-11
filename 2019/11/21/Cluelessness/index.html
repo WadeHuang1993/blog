@@ -24,8 +24,6 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/blog/css/style.css">
 </head>
 
@@ -109,16 +107,26 @@
 <p>當然也可以學習每件事物背後的知識原理，但是必要性與 CP 值通常不大。因此大多數人在日常生活中只需要 <strong>淺層理解</strong> 就足夠了。</p>
 <h2><span id="軟體開發中的無緒">軟體開發中的“無緒”</span></h2><p>在軟體開發中，“無緒” 也表示大部分的時間中，開發人員只需要 <strong>淺層理解</strong> 就足以應付工作。這裡的 <strong>淺層理解</strong> 並不是指開發人員不需要懂得編寫程式。以下舉個例子來說明軟體開發中的 <strong>淺層理解</strong> 與 <strong>深層理解</strong> 之間的差異。</p>
 <h3><span id="電子商務網站">「電子商務網站」：</span></h3><p>某天 PM 告知下一個專案是「電子商務網站」。那麼，實作這個網站有兩種做法：</p>
-<h4><span id="實作方法一">實作方法一：</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在專案初始階段：  </span><br><span class="line">我需要打開 HTTP 協定的文件，解析 HTTP 傳輸格式、</span><br><span class="line">研究如何實現 POST、GET 請求....等等。  </span><br><span class="line">此外還要閱讀 RFC 文件，並實現文件中的各項內容。  </span><br><span class="line">全部都搞定後才能開始打造「電子商務網站」。</span><br></pre></td></tr></table></figure>
-<h4><span id="實作方法二">實作方法二：</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在專案初始階段，在作業系統中下載並安裝 Apache、PHP、MySQL，  </span><br><span class="line">設定妥當後即開始打造「電子商務網站」。</span><br></pre></td></tr></table></figure>
-
-<p>相信 <strong>實作方法二</strong> 才是大家熟悉開發的方式，因為現代軟體都是基於組件組裝出來的，沒有人需要獨自從頭到尾完成所有內容。在一個作業系統上安裝 Web 服務並開始編寫 HTML，對現在的開發人員來說是易如反掌。但事實上光是 Web 服務就已經複雜到極點，應該沒人敢說自己了解 Web 服務的所有內容。這一現象正是 <strong>淺層理解</strong> 的體現，讓開發人員在大部分的時間中，只需要掌握系統、框架、程式庫的使用方法，即可以將現成的組件應用到自己的應用程式，或是在組件上堆疊自己的應用程式。</p>
+<h4><span id="實作方法一">實作方法一：</span></h4><pre><code>在專案初始階段：  
+我需要打開 HTTP 協定的文件，解析 HTTP 傳輸格式、
+研究如何實現 POST、GET 請求....等等。  
+此外還要閱讀 RFC 文件，並實現文件中的各項內容。  
+全部都搞定後才能開始打造「電子商務網站」。</code></pre><h4><span id="實作方法二">實作方法二：</span></h4><pre><code>在專案初始階段，在作業系統中下載並安裝 Apache、PHP、MySQL，  
+設定妥當後即開始打造「電子商務網站」。</code></pre><p>相信 <strong>實作方法二</strong> 才是大家熟悉開發的方式，因為現代軟體都是基於組件組裝出來的，沒有人需要獨自從頭到尾完成所有內容。在一個作業系統上安裝 Web 服務並開始編寫 HTML，對現在的開發人員來說是易如反掌。但事實上光是 Web 服務就已經複雜到極點，應該沒人敢說自己了解 Web 服務的所有內容。這一現象正是 <strong>淺層理解</strong> 的體現，讓開發人員在大部分的時間中，只需要掌握系統、框架、程式庫的使用方法，即可以將現成的組件應用到自己的應用程式，或是在組件上堆疊自己的應用程式。</p>
 <h2><span id="設計原則中的無緒">設計原則中的“無緒”</span></h2><p>我們的目標是找到一種軟體開發的實踐方式：讓開發人員不用深入了解所有組件或者模組的實現原理，僅用最少的知識就可以很好地完成自己所需要的功能。這種開發方式被稱為「<strong>選擇性無緒(selective cluelessness)</strong>」。</p>
 <p><strong>選擇性無緒</strong> 的思維，正好符合軟體設計原則的 <strong>緊湊性</strong>。<strong>當一個程式具有緊湊性時，即具有「易於理解、使用、組合」等特性</strong>。這些特性讓使用者幾乎可以不用閱讀文件，即可自然而然的使用這些程式。但是要注意的是，緊湊性並不等同於「容易學習」。</p>
 <p>以下提供一個緊湊與不緊湊的範例：</p>
-<h4><span id="原生的-javascript-的-date-物件是不緊湊的">原生的 JavaScript 的 Date 物件是不緊湊的：</span></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 時間格式轉換</span></span><br><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();  </span><br><span class="line"><span class="keyword">var</span> year = now.getFullYear();  </span><br><span class="line"><span class="keyword">var</span> month = (<span class="string">"0"</span> + (now.getMonth() + <span class="number">1</span>)).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> day = (<span class="string">"0"</span> + (now.getDate() + <span class="number">1</span>)).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> hour = (<span class="string">"0"</span> + (now.getHours() )).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> minute = (<span class="string">"0"</span> + now.getMinutes() ).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> second = (<span class="string">"0"</span> + now.getSeconds() ).slice(<span class="number">-2</span>);  </span><br><span class="line">year + <span class="string">'/'</span> + month + <span class="string">'/'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute+ <span class="string">':'</span> + second;</span><br></pre></td></tr></table></figure>
-
-<h4><span id="momentjs-的-moment-物件是緊湊的">moment.js 的 moment 物件是緊湊的：</span></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 時間格式轉換</span></span><br><span class="line">moment().format(<span class="string">'YYYY/MM/DD HH:mm:ss'</span>);</span><br></pre></td></tr></table></figure>
+<h4><span id="原生的-javascript-的-date-物件是不緊湊的">原生的 JavaScript 的 Date 物件是不緊湊的：</span></h4><pre><code class="javascript">// 時間格式轉換
+var now = new Date();  
+var year = now.getFullYear();  
+var month = (&quot;0&quot; + (now.getMonth() + 1)).slice(-2);  
+var day = (&quot;0&quot; + (now.getDate() + 1)).slice(-2);  
+var hour = (&quot;0&quot; + (now.getHours() )).slice(-2);  
+var minute = (&quot;0&quot; + now.getMinutes() ).slice(-2);  
+var second = (&quot;0&quot; + now.getSeconds() ).slice(-2);  
+year + &#39;/&#39; + month + &#39;/&#39; + day + &#39; &#39; + hour + &#39;:&#39; + minute+ &#39;:&#39; + second;  </code></pre>
+<h4><span id="momentjs-的-moment-物件是緊湊的">moment.js 的 moment 物件是緊湊的：</span></h4><pre><code class="javascript">// 時間格式轉換
+moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
 <p>若程式設計得當，維護人員就可以使用 <strong>淺層理解</strong> 來學習你的程式。若程式設計得不夠緊湊，維護人員往往需要將頭腦切換成 <strong>深層理解</strong> 的模式來探索你的程式碼，並學習是如何運作的。</p>
 <p>因此編寫程式的過程中，應該時時刻刻想著如何讓你的程式變得 “無緒”，讓使用者可以用最少的力氣學習你的程式。<strong>這樣的設計思維適用於「函式、類別、模組、類別庫、架構、框架以及系統」的情境</strong>。也就是 Martin Rinard 所說的：</p>
 <blockquote>
@@ -136,7 +144,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck40df0330001tgp10u6h85ac" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck40wp7dt00008ep13s56fd8k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -251,7 +259,13 @@
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.0/build/styles/github-gist.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 </footer>
+
     </div>
     <nav id="mobile-nav">
   

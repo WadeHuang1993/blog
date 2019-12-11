@@ -21,8 +21,6 @@
     <link rel="icon" href="/favicon.png">
   
   
-    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
-  
   <link rel="stylesheet" href="/blog/css/style.css">
 </head>
 
@@ -118,14 +116,39 @@
 </blockquote>
 <p>實際上 <strong>開放封閉原則的設計思維</strong> 早在物件導向技術出現之前就存在，並且被廣泛應用在各種層面，從程式設計乃至框架、系統層級：</p>
 <h3><span id="程式設計層面jquery-ajax">程式設計層面：jQuery ajax</span></h3><p>透過 $.ajax 的 <code>done</code>, <code>fail</code>, <code>always</code> 等公開函式從外部注入閉包，擴充 $.ajax 行為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  method: <span class="string">"POST"</span>,</span><br><span class="line">  url: <span class="string">"some.php"</span>,</span><br><span class="line">  data: &#123; <span class="attr">name</span>: <span class="string">"John"</span>, <span class="attr">location</span>: <span class="string">"Boston"</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  .done(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"success"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .fail(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"error"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">   .always(<span class="function"><span class="keyword">function</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="string">"complete"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">$.ajax({
+  method: &quot;POST&quot;,
+  url: &quot;some.php&quot;,
+  data: { name: &quot;John&quot;, location: &quot;Boston&quot; }
+})
+  .done(function() {
+    alert(&quot;success&quot;);
+  })
+  .fail(function() {
+    alert(&quot;error&quot;);
+  })
+   .always(function() {
+    alert(&quot;complete&quot;);
+  });</code></pre>
 <h3><span id="框架層面laravel-controller">框架層面：Laravel Controller</span></h3><p>透過繼承 MVC 框架內建的 <code>Controller</code> 類別，擴充 Controller 層的行為：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">namespace</span> <span class="title">App</span>\<span class="title">Http</span>\<span class="title">Controllers</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">use</span> <span class="title">Illuminate</span>\<span class="title">Http</span>\<span class="title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">HelloController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">index</span><span class="params">(Request $request)</span></span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">'Hello World!'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">&lt;?php
 
+namespace App\Http\Controllers;
+
+use Illuminate\Http\Request;
+
+class HelloController extends Controller
+{
+    public function index(Request $request){
+        return &#39;Hello World!&#39;;
+    }
+}</code></pre>
 <h3><span id="框架層面reactjs">框架層面：React.js</span></h3><p>透過繼承 <code>React.Component</code> 類別，擴充 Component 的行為：</p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Welcome</span> <span class="keyword">extends</span> <span class="title">React</span>.<span class="title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="xml"><span class="tag">&lt;<span class="name">h1</span>&gt;</span>Hello, &#123;this.props.name&#125;<span class="tag">&lt;/<span class="name">h1</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-
+<pre><code class="javascript">class Welcome extends React.Component {
+  render() {
+    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
+  }
+}</code></pre>
 <p>其他範例：</p>
 <ul>
 <li>JavaScript 透過註冊 event 事件，擴充瀏覽器行為。</li>
@@ -178,7 +201,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck40df040000gtgp17hao29no" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck40wp7f0000j8ep11wc4h7iy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -254,14 +277,119 @@
 <h3><span id="範例學生列表">範例：學生列表</span></h3><p>某系統最原始的版本中，有一個「學生列表」的功能，其需求為：顯示某班級的所有學生。</p>
 <p><img src="/blog/images/pasted-3.png" alt="某班級的學生列表"></p>
 <p>其程式碼分為 <code>StudentController</code> 與 <code>StudentModel</code> 兩部份。<br>Controller 負責接收 HTTP 參數，並返回學生資料。Model 負責從資料庫撈取學生資料。</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/** var StudentModel **/</span></span><br><span class="line">    <span class="keyword">private</span> $model;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $classId = <span class="keyword">$this</span>-&gt;input-&gt;get(<span class="string">'classId'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;model-&gt;studentList($classId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentModel</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $db;</span><br><span class="line">    </span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;select(<span class="string">'*'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;from(<span class="string">'students'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;where(<span class="string">'students.classId'</span>, $classId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;db-&gt;get()-&gt;resultArray();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">class StudentController extends Controller
+{
+    /** var StudentModel **/
+    private $model;
 
+    public function studentList()
+    {
+        $classId = $this-&gt;input-&gt;get(&#39;classId&#39;);
+
+        return $this-&gt;model-&gt;studentList($classId);
+    }
+}
+
+class StudentModel extends Model
+{
+    private $db;
+
+    public function studentList($classId)
+    {
+        $this-&gt;db-&gt;select(&#39;*&#39;);
+        $this-&gt;db-&gt;from(&#39;students&#39;);
+        $this-&gt;db-&gt;where(&#39;students.classId&#39;, $classId);
+
+        return $this-&gt;db-&gt;get()-&gt;resultArray();
+    }
+}</code></pre>
 <h4><span id="新需求已完成作業的學生列表">新需求：已完成作業的學生列表</span></h4><p>隨著新需求新增，老師想要有一個「已完成作業的學生列表」的畫面。<br>因此開發人員在 Controller 新增一個 <code>studentListByHomeworkStatus()</code> 函式，並且調整 StudentModel 的 <code>studentList()</code> 函式以便撈取對應的查詢條件：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/** var StudentModel **/</span></span><br><span class="line">    <span class="keyword">private</span> $model;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 顯示某班級的所有學生 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId)</span> </span>&#123;<span class="comment">/** ...省略 */</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 已完成作業的學生列表 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentListByHomeworkStatus</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $classId = <span class="keyword">$this</span>-&gt;input-&gt;get(<span class="string">'classId'</span>);</span><br><span class="line">        $homeworkId = <span class="keyword">$this</span>-&gt;input-&gt;get(<span class="string">'homeworkId'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;model-&gt;studentList($classId, $homeworkId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentModel</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $db;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId, $homeworkId = null)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;select(<span class="string">'*'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;join(<span class="string">'homeworks'</span>, <span class="string">'students.id = homeworks.studentId'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;from(<span class="string">'students'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ($homeworkId != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;where(<span class="string">'homework.id'</span>, $homeworkId);</span><br><span class="line">            <span class="keyword">$this</span>-&gt;where(<span class="string">'homeworks.status'</span>, <span class="string">'done'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;where(<span class="string">'students.classId'</span>, $classId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;db-&gt;get()-&gt;resultArray();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">class StudentController extends Controller
+{
+    /** var StudentModel **/
+    private $model;
 
+    /** 顯示某班級的所有學生 **/
+    public function studentList($classId) {/** ...省略 */}
+
+    /** 已完成作業的學生列表 **/
+    public function studentListByHomeworkStatus()
+    {
+        $classId = $this-&gt;input-&gt;get(&#39;classId&#39;);
+        $homeworkId = $this-&gt;input-&gt;get(&#39;homeworkId&#39;);
+
+        return $this-&gt;model-&gt;studentList($classId, $homeworkId);
+    }
+}
+
+class StudentModel extends Model
+{
+    private $db;
+
+    public function studentList($classId, $homeworkId = null)
+    {
+        $this-&gt;db-&gt;select(&#39;*&#39;);
+        $this-&gt;db-&gt;join(&#39;homeworks&#39;, &#39;students.id = homeworks.studentId&#39;);
+        $this-&gt;db-&gt;from(&#39;students&#39;);
+
+        if ($homeworkId != null) {
+            $this-&gt;where(&#39;homework.id&#39;, $homeworkId);
+            $this-&gt;where(&#39;homeworks.status&#39;, &#39;done&#39;);
+        }
+
+        $this-&gt;db-&gt;where(&#39;students.classId&#39;, $classId);
+
+        return $this-&gt;db-&gt;get()-&gt;resultArray();
+    }
+}</code></pre>
 <h4><span id="臨時需求尚未繳交-108-學年度腳踏車證費用的學生列表">臨時需求：尚未繳交 108 學年度腳踏車證費用的學生列表</span></h4><p>突然有臨時的需求，校務人員需要匯出「尚未繳交 108 學年度腳踏車證費用的學生列表」，於是開發人員又做了以下變動：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/** var StudentModel **/</span></span><br><span class="line">    <span class="keyword">private</span> $model;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 顯示某班級的所有學生 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId)</span> </span>&#123;<span class="comment">/** ...省略 */</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 已完成作業的學生列表 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentListByHomeworkStatus</span><span class="params">()</span> </span>&#123;<span class="comment">/** ...省略 */</span>&#125;</span><br><span class="line">   </span><br><span class="line">    <span class="comment">/** 尚未繳交 108 學年度腳踏車證費用的學生列表 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentListThatNotPaidBicyclePassFee</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $classId = <span class="keyword">$this</span>-&gt;input-&gt;get(<span class="string">'classId'</span>);</span><br><span class="line">        $bicyclePassYear = <span class="number">108</span>;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;model-&gt;studentList($classId, <span class="keyword">null</span>, $bicyclePassYear);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentModel</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $db;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId, $homeworkId = null, $bicyclePassYear = null)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;select(<span class="string">'*'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;join(<span class="string">'homeworks'</span>, <span class="string">'students.id = homeworks.studentId'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;leftJoin(<span class="string">'bicyclePass'</span>, <span class="string">'students.id = bicyclePass.studentId'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;from(<span class="string">'students'</span>);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">if</span> ($homeworkId != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;where(<span class="string">'homework.id'</span>, $homeworkId);</span><br><span class="line">            <span class="keyword">$this</span>-&gt;where(<span class="string">'homeworks.status'</span>, <span class="string">'done'</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">if</span> ($bicyclePassYear != <span class="keyword">null</span>) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;db-&gt;where(<span class="string">'bicyclePass.year'</span>, $bicyclePassYear);</span><br><span class="line">            <span class="keyword">$this</span>-&gt;db-&gt;where(<span class="string">'bicyclePass.payStatus'</span>, <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;where(<span class="string">'students.classId'</span>, $classId);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;db-&gt;get()-&gt;resultArray();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">class StudentController extends Controller
+{
+    /** var StudentModel **/
+    private $model;
 
+    /** 顯示某班級的所有學生 **/
+    public function studentList($classId) {/** ...省略 */}
+
+    /** 已完成作業的學生列表 **/
+    public function studentListByHomeworkStatus() {/** ...省略 */}
+
+    /** 尚未繳交 108 學年度腳踏車證費用的學生列表 **/
+    public function studentListThatNotPaidBicyclePassFee()
+    {
+        $classId = $this-&gt;input-&gt;get(&#39;classId&#39;);
+        $bicyclePassYear = 108;
+
+        return $this-&gt;model-&gt;studentList($classId, null, $bicyclePassYear);
+    }
+}
+
+class StudentModel extends Model
+{
+    private $db;
+
+    public function studentList($classId, $homeworkId = null, $bicyclePassYear = null)
+    {
+        $this-&gt;db-&gt;select(&#39;*&#39;);
+        $this-&gt;db-&gt;join(&#39;homeworks&#39;, &#39;students.id = homeworks.studentId&#39;);
+        $this-&gt;db-&gt;leftJoin(&#39;bicyclePass&#39;, &#39;students.id = bicyclePass.studentId&#39;);
+        $this-&gt;db-&gt;from(&#39;students&#39;);
+
+        if ($homeworkId != null) {
+            $this-&gt;where(&#39;homework.id&#39;, $homeworkId);
+            $this-&gt;where(&#39;homeworks.status&#39;, &#39;done&#39;);
+        }
+
+        if ($bicyclePassYear != null) {
+            $this-&gt;db-&gt;where(&#39;bicyclePass.year&#39;, $bicyclePassYear);
+            $this-&gt;db-&gt;where(&#39;bicyclePass.payStatus&#39;, false);
+        }
+
+        $this-&gt;db-&gt;where(&#39;students.classId&#39;, $classId);
+
+        return $this-&gt;db-&gt;get()-&gt;resultArray();
+    }
+}</code></pre>
 <h4><span id="新需求只會不斷地出現">新需求只會不斷地出現</span></h4><p>隨著時間的推移，功能也會不斷出現新需求，需求幾乎是無限上綱的。例如：以性別撈取學生、以戶籍地址撈取學生、撈取沒繳午餐費的學生、撈取午餐吃素的學生、已經繳交學雜費撈取學生 …等。</p>
 <p>當這些需求都被寫在同一個功能裡面時，就能發現 <code>studentList()</code> 函式中充滿意圖不同的程式碼：</p>
 <p><img src="/blog/images/pasted-2.png" alt="圖二：studentList 函式中充滿意圖不同的程式碼"></p>
@@ -304,8 +432,36 @@
 <li>將新的插件注入核心邏輯中。</li>
 </ol>
 <h3><span id="1-找出核心邏輯並開放擴充介面">1. 找出核心邏輯，並開放擴充介面</span></h3><p>各種「學生列表」功能中，最常被執行的功能為 <code>StudentModel-&gt;studentList()</code>，因此我們可以斷定核心邏輯應該在這個函式裡面，並做了些調整：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// ConditionPlugin：擴充 DB 查詢條件的介面</span></span><br><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">ConditionPlugin</span> </span>&#123;</span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setWhereCondition</span><span class="params">($db)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentModel</span> <span class="keyword">extends</span> <span class="title">Model</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $db;</span><br><span class="line">    <span class="comment">/** <span class="doctag">@var</span> ConditionPlugin */</span></span><br><span class="line">    <span class="keyword">private</span> $plugin = <span class="keyword">null</span>;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 開放從外面注入擴充邏輯 */</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setConditionPlugin</span><span class="params">(ConditionPlugin $plugin)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;plugin = $plugin;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;select(<span class="string">'*'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;from(<span class="string">'students'</span>);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;db-&gt;where(<span class="string">'students.classId'</span>, $classId);</span><br><span class="line"></span><br><span class="line">        <span class="comment">// 執行擴充邏輯</span></span><br><span class="line">        <span class="keyword">if</span> (<span class="keyword">$this</span>-&gt;plugin) &#123;</span><br><span class="line">            <span class="keyword">$this</span>-&gt;plugin-&gt;setWhereCondition(<span class="keyword">$this</span>-&gt;db);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;db-&gt;get()-&gt;resultArray();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">// ConditionPlugin：擴充 DB 查詢條件的介面
+interface ConditionPlugin {
+    public function setWhereCondition($db);
+}
 
+class StudentModel extends Model
+{
+    private $db;
+    /** @var ConditionPlugin */
+    private $plugin = null;
+
+    /** 開放從外面注入擴充邏輯 */
+    public function setConditionPlugin(ConditionPlugin $plugin) {
+        $this-&gt;plugin = $plugin;
+    }
+
+    public function studentList($classId)
+    {
+        $this-&gt;db-&gt;select(&#39;*&#39;);
+        $this-&gt;db-&gt;from(&#39;students&#39;);
+        $this-&gt;db-&gt;where(&#39;students.classId&#39;, $classId);
+
+        // 執行擴充邏輯
+        if ($this-&gt;plugin) {
+            $this-&gt;plugin-&gt;setWhereCondition($this-&gt;db);
+        }
+
+        return $this-&gt;db-&gt;get()-&gt;resultArray();
+    }
+}</code></pre>
 <p>這個步驟中，首先要找出核心邏輯。您可以發現 <code>studentList()</code> 只被保留了最核心的邏輯，也就是隨著需求與時間不變的邏輯。其他的邏輯暫時被忽略了，它們都是附加功能的邏輯，等等會再提及。</p>
 <p>找出最核心的邏輯後，下個步驟是開放擴充點。範例中我做了四件事，讓 <code>studentList()</code> 開放了擴充點：</p>
 <ul>
@@ -317,8 +473,55 @@
 <p>其中，<code>ConditionPlugin</code> 是插件需要實作的介面，實作的內容即為：<strong>擴充核心邏輯，以便完成需求</strong>。只要類別有實作 <code>ConditionPlugin</code> 介面，都可以透過 <code>setConditionPlugin</code> 函式將插件注入到 <strong>StudentModel</strong> 中。這樣的作法是利用物件導向 <strong>多型</strong> 的特性，讓程式碼可以隨著 <code>$plugin</code> 變數運作時的真實物件，會引發不同的動作，達到擴充核心邏輯的效果。</p>
 <p>接下來我們將依照 <code>ConditionPlugin</code> 介面的定義，實作各種「學生列表」功能的插件：</p>
 <h3><span id="2-實作插件介面並於注入插件">2. 實作插件介面，並於注入插件</span></h3><p>為了縮短範例的長度，此步驟只挑出「尚未繳交 108 學年度腳踏車證費用的學生列表」的需求來講解，其餘的需求則先帶過：</p>
-<figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 新增一個類別（插件）並實作 ConditionPlugin 介面：</span></span><br><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> *「學生列表」插件：撈取指定學年度與符合付款狀態的學生</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentListPluginThatNotPaidBicyclePassFee</span> <span class="keyword">implements</span> <span class="title">ConditionPlugin</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="keyword">private</span> $bicyclePassYear;</span><br><span class="line">    <span class="keyword">private</span> $payStatus;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">__construct</span><span class="params">($bicyclePassYear, $payStatus)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;bicyclePassYear = $bicyclePassYear;</span><br><span class="line">        <span class="keyword">$this</span>-&gt;payStatus = $payStatus;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">// 2. 將原本放在 `StudentModel-&gt;studentList()` 的邏輯搬移至此</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">setWhereCondition</span><span class="params">($db)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $db-&gt;leftJoin(<span class="string">'bicyclePass'</span>, <span class="string">'students.id = bicyclePass.studentId'</span>);</span><br><span class="line">        $db-&gt;where(<span class="string">'bicyclePass.year'</span>, <span class="keyword">$this</span>-&gt;bicyclePassYear);</span><br><span class="line">        $db-&gt;where(<span class="string">'bicyclePass.payStatus'</span>, <span class="keyword">$this</span>-&gt;payStatus);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 修改 StudentController，從 Controller 配置 StudentModel 的擴充插件</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">StudentController</span> <span class="keyword">extends</span> <span class="title">Controller</span></span></span><br><span class="line"><span class="class"></span>&#123;</span><br><span class="line">    <span class="comment">/** var \StudentModel **/</span></span><br><span class="line">    <span class="keyword">private</span> $model;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 顯示某班級的所有學生 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentList</span><span class="params">($classId)</span> </span>&#123; <span class="comment">/** ...省略 */</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 已完成作業的學生列表 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentListByHomeworkStatus</span><span class="params">()</span></span>&#123; <span class="comment">/** ...省略 */</span> &#125;</span><br><span class="line"></span><br><span class="line">    <span class="comment">/** 尚未繳交 108 學年度腳踏車證費用的學生列表 **/</span></span><br><span class="line">    <span class="keyword">public</span> <span class="function"><span class="keyword">function</span> <span class="title">studentListThatNotPaidBicyclePassFee</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        $classId = <span class="keyword">$this</span>-&gt;input-&gt;get(<span class="string">'classId'</span>);</span><br><span class="line">        $bicyclePassYear = <span class="number">108</span>;</span><br><span class="line">        $payStatus = <span class="keyword">false</span>;</span><br><span class="line"></span><br><span class="line">        $ConditionPlugin = <span class="keyword">new</span> StudentListPluginThatNotPaidBicyclePassFee($bicyclePassYear, $payStatus);</span><br><span class="line">        <span class="keyword">$this</span>-&gt;model-&gt;setConditionPlugin($ConditionPlugin);</span><br><span class="line"></span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">$this</span>-&gt;model-&gt;studentList($classId);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<pre><code class="php">// 1. 新增一個類別（插件）並實作 ConditionPlugin 介面：
+/**
+ *「學生列表」插件：撈取指定學年度與符合付款狀態的學生
+ */
+class StudentListPluginThatNotPaidBicyclePassFee implements ConditionPlugin
+{
+    private $bicyclePassYear;
+    private $payStatus;
 
+    public function __construct($bicyclePassYear, $payStatus)
+    {
+        $this-&gt;bicyclePassYear = $bicyclePassYear;
+        $this-&gt;payStatus = $payStatus;
+    }
+
+    // 2. 將原本放在 `StudentModel-&gt;studentList()` 的邏輯搬移至此
+    public function setWhereCondition($db)
+    {
+        $db-&gt;leftJoin(&#39;bicyclePass&#39;, &#39;students.id = bicyclePass.studentId&#39;);
+        $db-&gt;where(&#39;bicyclePass.year&#39;, $this-&gt;bicyclePassYear);
+        $db-&gt;where(&#39;bicyclePass.payStatus&#39;, $this-&gt;payStatus);
+    }
+}
+
+// 3. 修改 StudentController，從 Controller 配置 StudentModel 的擴充插件
+class StudentController extends Controller
+{
+    /** var \StudentModel **/
+    private $model;
+
+    /** 顯示某班級的所有學生 **/
+    public function studentList($classId) { /** ...省略 */}
+
+    /** 已完成作業的學生列表 **/
+    public function studentListByHomeworkStatus(){ /** ...省略 */ }
+
+    /** 尚未繳交 108 學年度腳踏車證費用的學生列表 **/
+    public function studentListThatNotPaidBicyclePassFee()
+    {
+        $classId = $this-&gt;input-&gt;get(&#39;classId&#39;);
+        $bicyclePassYear = 108;
+        $payStatus = false;
+
+        $ConditionPlugin = new StudentListPluginThatNotPaidBicyclePassFee($bicyclePassYear, $payStatus);
+        $this-&gt;model-&gt;setConditionPlugin($ConditionPlugin);
+
+        return $this-&gt;model-&gt;studentList($classId);
+    }
+}</code></pre>
 <p>這個步驟中，我們建立了一個名稱為 <code>StudentListPluginThatNotPaidBicyclePassFee</code> 的插件，這個插件裡面的邏輯，其實就是把原本寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移過來而已。其他的「學生列表」功能也要以此類推，把當初寫在 <code>StudentModel-&gt;studentList()</code> 的邏輯搬移到自己的插件中。這麼一來，就已經把核心邏輯與附加邏輯拆開了。</p>
 <p>最後在每個需求的 Controller 層，透過 <strong>StudentModel</strong> 的公開方法<code>setConditionPlugin()</code> 將插件注入 <strong>StudentModel</strong> 裡面。<strong>StudentModel</strong> 在撈取學生時就可以透過被注入的插件來擴充核心邏輯。</p>
 <h1><span id="3-每個插件都只負責一個職責">3. 每個插件都只負責一個職責</span></h1><p>上一步驟中，將每個附加邏輯與核心邏輯隔離後，即可產生新的結構：</p>
@@ -348,7 +551,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck40df046000htgp1cxvganck" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck40wp7ff000k8ep1d3l65bnk" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -414,7 +617,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck40df02t0000tgp1eg22cpdq" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck40wp7e100018ep10p0l2tzb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -469,16 +672,26 @@
 <p>當然也可以學習每件事物背後的知識原理，但是必要性與 CP 值通常不大。因此大多數人在日常生活中只需要 <strong>淺層理解</strong> 就足夠了。</p>
 <h2><span id="軟體開發中的無緒">軟體開發中的“無緒”</span></h2><p>在軟體開發中，“無緒” 也表示大部分的時間中，開發人員只需要 <strong>淺層理解</strong> 就足以應付工作。這裡的 <strong>淺層理解</strong> 並不是指開發人員不需要懂得編寫程式。以下舉個例子來說明軟體開發中的 <strong>淺層理解</strong> 與 <strong>深層理解</strong> 之間的差異。</p>
 <h3><span id="電子商務網站">「電子商務網站」：</span></h3><p>某天 PM 告知下一個專案是「電子商務網站」。那麼，實作這個網站有兩種做法：</p>
-<h4><span id="實作方法一">實作方法一：</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">在專案初始階段：  </span><br><span class="line">我需要打開 HTTP 協定的文件，解析 HTTP 傳輸格式、</span><br><span class="line">研究如何實現 POST、GET 請求....等等。  </span><br><span class="line">此外還要閱讀 RFC 文件，並實現文件中的各項內容。  </span><br><span class="line">全部都搞定後才能開始打造「電子商務網站」。</span><br></pre></td></tr></table></figure>
-<h4><span id="實作方法二">實作方法二：</span></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">在專案初始階段，在作業系統中下載並安裝 Apache、PHP、MySQL，  </span><br><span class="line">設定妥當後即開始打造「電子商務網站」。</span><br></pre></td></tr></table></figure>
-
-<p>相信 <strong>實作方法二</strong> 才是大家熟悉開發的方式，因為現代軟體都是基於組件組裝出來的，沒有人需要獨自從頭到尾完成所有內容。在一個作業系統上安裝 Web 服務並開始編寫 HTML，對現在的開發人員來說是易如反掌。但事實上光是 Web 服務就已經複雜到極點，應該沒人敢說自己了解 Web 服務的所有內容。這一現象正是 <strong>淺層理解</strong> 的體現，讓開發人員在大部分的時間中，只需要掌握系統、框架、程式庫的使用方法，即可以將現成的組件應用到自己的應用程式，或是在組件上堆疊自己的應用程式。</p>
+<h4><span id="實作方法一">實作方法一：</span></h4><pre><code>在專案初始階段：  
+我需要打開 HTTP 協定的文件，解析 HTTP 傳輸格式、
+研究如何實現 POST、GET 請求....等等。  
+此外還要閱讀 RFC 文件，並實現文件中的各項內容。  
+全部都搞定後才能開始打造「電子商務網站」。</code></pre><h4><span id="實作方法二">實作方法二：</span></h4><pre><code>在專案初始階段，在作業系統中下載並安裝 Apache、PHP、MySQL，  
+設定妥當後即開始打造「電子商務網站」。</code></pre><p>相信 <strong>實作方法二</strong> 才是大家熟悉開發的方式，因為現代軟體都是基於組件組裝出來的，沒有人需要獨自從頭到尾完成所有內容。在一個作業系統上安裝 Web 服務並開始編寫 HTML，對現在的開發人員來說是易如反掌。但事實上光是 Web 服務就已經複雜到極點，應該沒人敢說自己了解 Web 服務的所有內容。這一現象正是 <strong>淺層理解</strong> 的體現，讓開發人員在大部分的時間中，只需要掌握系統、框架、程式庫的使用方法，即可以將現成的組件應用到自己的應用程式，或是在組件上堆疊自己的應用程式。</p>
 <h2><span id="設計原則中的無緒">設計原則中的“無緒”</span></h2><p>我們的目標是找到一種軟體開發的實踐方式：讓開發人員不用深入了解所有組件或者模組的實現原理，僅用最少的知識就可以很好地完成自己所需要的功能。這種開發方式被稱為「<strong>選擇性無緒(selective cluelessness)</strong>」。</p>
 <p><strong>選擇性無緒</strong> 的思維，正好符合軟體設計原則的 <strong>緊湊性</strong>。<strong>當一個程式具有緊湊性時，即具有「易於理解、使用、組合」等特性</strong>。這些特性讓使用者幾乎可以不用閱讀文件，即可自然而然的使用這些程式。但是要注意的是，緊湊性並不等同於「容易學習」。</p>
 <p>以下提供一個緊湊與不緊湊的範例：</p>
-<h4><span id="原生的-javascript-的-date-物件是不緊湊的">原生的 JavaScript 的 Date 物件是不緊湊的：</span></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 時間格式轉換</span></span><br><span class="line"><span class="keyword">var</span> now = <span class="keyword">new</span> <span class="built_in">Date</span>();  </span><br><span class="line"><span class="keyword">var</span> year = now.getFullYear();  </span><br><span class="line"><span class="keyword">var</span> month = (<span class="string">"0"</span> + (now.getMonth() + <span class="number">1</span>)).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> day = (<span class="string">"0"</span> + (now.getDate() + <span class="number">1</span>)).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> hour = (<span class="string">"0"</span> + (now.getHours() )).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> minute = (<span class="string">"0"</span> + now.getMinutes() ).slice(<span class="number">-2</span>);  </span><br><span class="line"><span class="keyword">var</span> second = (<span class="string">"0"</span> + now.getSeconds() ).slice(<span class="number">-2</span>);  </span><br><span class="line">year + <span class="string">'/'</span> + month + <span class="string">'/'</span> + day + <span class="string">' '</span> + hour + <span class="string">':'</span> + minute+ <span class="string">':'</span> + second;</span><br></pre></td></tr></table></figure>
-
-<h4><span id="momentjs-的-moment-物件是緊湊的">moment.js 的 moment 物件是緊湊的：</span></h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 時間格式轉換</span></span><br><span class="line">moment().format(<span class="string">'YYYY/MM/DD HH:mm:ss'</span>);</span><br></pre></td></tr></table></figure>
+<h4><span id="原生的-javascript-的-date-物件是不緊湊的">原生的 JavaScript 的 Date 物件是不緊湊的：</span></h4><pre><code class="javascript">// 時間格式轉換
+var now = new Date();  
+var year = now.getFullYear();  
+var month = (&quot;0&quot; + (now.getMonth() + 1)).slice(-2);  
+var day = (&quot;0&quot; + (now.getDate() + 1)).slice(-2);  
+var hour = (&quot;0&quot; + (now.getHours() )).slice(-2);  
+var minute = (&quot;0&quot; + now.getMinutes() ).slice(-2);  
+var second = (&quot;0&quot; + now.getSeconds() ).slice(-2);  
+year + &#39;/&#39; + month + &#39;/&#39; + day + &#39; &#39; + hour + &#39;:&#39; + minute+ &#39;:&#39; + second;  </code></pre>
+<h4><span id="momentjs-的-moment-物件是緊湊的">moment.js 的 moment 物件是緊湊的：</span></h4><pre><code class="javascript">// 時間格式轉換
+moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
 <p>若程式設計得當，維護人員就可以使用 <strong>淺層理解</strong> 來學習你的程式。若程式設計得不夠緊湊，維護人員往往需要將頭腦切換成 <strong>深層理解</strong> 的模式來探索你的程式碼，並學習是如何運作的。</p>
 <p>因此編寫程式的過程中，應該時時刻刻想著如何讓你的程式變得 “無緒”，讓使用者可以用最少的力氣學習你的程式。<strong>這樣的設計思維適用於「函式、類別、模組、類別庫、架構、框架以及系統」的情境</strong>。也就是 Martin Rinard 所說的：</p>
 <blockquote>
@@ -496,7 +709,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck40df0330001tgp10u6h85ac" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck40wp7dt00008ep13s56fd8k" class="article-share-link">Share</a>
       
       
     </footer>
@@ -593,7 +806,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck40df03b0004tgp1e27m3xq9" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck40wp7ed00058ep143mj2ito" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -686,7 +899,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck40df0380003tgp1594bf7vk" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck40wp7e900038ep1eljk2yvd" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -786,7 +999,13 @@
       Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
     </div>
   </div>
+<link rel="stylesheet"
+      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.0/build/styles/github-gist.min.css">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+<script>hljs.initHighlightingOnLoad();</script>
+
 </footer>
+
     </div>
     <nav id="mobile-nav">
   
