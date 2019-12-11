@@ -241,7 +241,7 @@ class HelloController extends Controller
 
     /** ...省略 */
 }</code></pre>
-<p>第二版本加入了新需求，Send_today_mail 的程式碼一下子從 93 行暴增到 195 行。而且 為了撈取昨天的 Messages 並建立信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
+<p>第二版本加入了新需求，Send_today_mail 的程式碼一下子從 93 行增加到 195 行。而且 為了撈取昨天的 Messages 並建立信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
 <h2><span id="3-第三需求寄送明日課程內容給教師">3. 第三需求：寄送明日課程內容給教師</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
 {
     public function index()
@@ -274,7 +274,7 @@ class HelloController extends Controller
 }</code></pre>
 <p>第三個版本，Send_today_mail 的總行數來到 404 行，<code>make_mail_contents()</code> 函式的耦合更加嚴重。</p>
 <p>到目前為止，Send_today_mail 已經變得難以維護，這個 Controller 裡面包含了 16 個函式，其中好幾個函式卻都是在做一樣的事情：「撈取信件的內容，並產生信件 HTML」。</p>
-<p>為了避免 Send_today_mail 持續膨脹，接下來將開始替 Send_today_mail 進行一次重構。這次重構的目的將是引入抽象，消除重複的內容。</p>
+<p>為了避免 Send_today_mail 持續膨脹，接下來將開始替 Send_today_mail 進行一次重構。這次重構的目的將是引入抽象，拆散<strong>隨著時間增加的附加邏輯</strong>。</p>
 <h2><span id="第一次重構引入抽象減輕負擔">第一次重構：引入抽象減輕負擔</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
 {
     /**
