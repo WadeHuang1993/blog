@@ -317,22 +317,63 @@ class HelloController extends Controller
         $today_email_maker-&gt;add_handler(new System_notify_handler());
         $today_email_maker-&gt;add_handler(new Message_handler());
         $today_email_maker-&gt;add_handler(new Course_start_handler());
-
-        // 取得每日通知信件內容，並建立信件 HTML
-        $email_contents = array();
-        foreach ($today_email_maker-&gt;handlers() as $handler) {
-            $handler-&gt;get_email_content();
-            $handler-&gt;make_email_template_variables();
-            array_push($email_contents, $handler-&gt;make_email_content());
-        }
+        $mail_contents = $today_email_maker-&gt;make_mail_contents();
 
         /** 2. 寄送信件 */
         $this-&gt;send_mail($email_contents);
     }
 
-    /** 省略 */
+    private function send_mail($mail_contents) {/** ... */}
+}</code></pre>
+<p>這一步驟中，我們做了很多事情。重構後的結果如上，細節如下：先這樣 </p>
+<pre><code class="php">interface Today_email_handler
+{
+    /** 取得今日信件內容 */
+    public function get_email_content();
+    /** 建立 Email HTML 樣板變數 */
+    public function make_email_template_variables();
+    /** 建立 Email HTML 內容 */
+    public function make_email_content();
 }
-</code></pre>
+
+class Today_email_maker
+{
+    /** @var Today_email_handler[] */
+    private $handlers = array();
+
+    public function add_handler(Today_email_maker $handler)
+    {
+        array_push($this-&gt;handlers, $handler);
+    }
+
+    public function make_mail_contents()
+    {
+        foreach ($this-&gt;handlers as $handler) {
+            $handler-&gt;get_email_content();
+            $handler-&gt;make_email_template_variables();
+            array_push($email_contents, $handler-&gt;make_email_content());
+        }
+    }
+}
+
+class System_notify_handler implements Today_email_handler
+{
+    public function get_email_content() { /** ... */}
+    public function make_email_template_variables() { /** ... */}
+    public function make_email_content() { /** ... */}
+}
+class Message_handler implements Today_email_handler
+{
+    public function get_email_content() { /** ... */}
+    public function make_email_template_variables() { /** ... */}
+    public function make_email_content() { /** ... */}
+}
+class Course_start_handler implements Today_email_handler
+{
+    public function get_email_content() { /** ... */}
+    public function make_email_template_variables() { /** ... */}
+    public function make_email_content() { /** ... */}
+}</code></pre>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
 <p>在面向對象的程序設計中，開放封閉原則(OCP)是最重要的一條原則。很多時候，一個 5 程序具有良好的設計，往往說明它是符合開放封閉原則的。</p>
