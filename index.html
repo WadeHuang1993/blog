@@ -110,7 +110,7 @@
 <p>雖然<strong>需求並不是程式設計環節能控制的，但是程式碼應該要能夠適應快速多變的需求。</strong></p>
 </blockquote>
 <p>業務邏輯本身只需要關心業務規則（Business Rule），不應該和附加邏輯耦合在一起。一定要隔離業務邏輯與附加邏輯，才能確保業務邏輯的彈性。一旦業務邏輯有了彈性，程式就較容易面對需求變化。</p>
-<h2><span id="開放擴充點由外部注入附加邏輯">開放擴充點，由外部注入附加邏輯</span></h2><p>新需求不斷出現，修改業務邏輯來擴充附加功能卻會促進 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 成長，造成系統複雜度飆升。為了避免 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的問題，開放封閉原則指導開發人員在面對需求變化時應該要：</p>
+<h2><span id="開放擴充點由外部注入附加邏輯">開放擴充點，由外部注入附加邏輯</span></h2><p>新需求不斷出現，修改業務邏輯來擴充附加功能卻會促進 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 成長，增加維護系統的困難度。為了避免 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的問題，開放封閉原則指導開發人員在面對需求變化時應該要：</p>
 <blockquote>
 <p>盡可能減少對既有程式碼的修改，並開放擴充點，讓新需求可以從外部擴充業務邏輯。</p>
 </blockquote>
@@ -161,11 +161,17 @@ class HelloController extends Controller
 <p><strong>開放封閉原則</strong> 讓開發人員不需要修改已經造好的輪子，就可以完成自己所需的功能。</p>
 </blockquote>
 <p>這也是為什麼軟體技術能夠以海量增長的原因。但是開放封閉原則的原理是什麼呢？</p>
-<h2><span id="原理關鍵是抽象">原理：關鍵是抽象</span></h2><blockquote>
+<h2><span id="原理利用抽象隔離不相關的程式">原理：利用抽象隔離不相關的程式</span></h2><blockquote>
 <p>解除耦合的方法，就是讓程式碼不知道彼此的存在。</p>
 </blockquote>
-<p>程式碼可以透過繼承、引入介面或注入閉包等 <strong>多型的特性</strong>，得到隔離彼此的效果。</p>
-<p><img src="/blog/images/pasted-8.png?500x" alt="業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
+<p>程式碼可以透過繼承、引入介面或注入閉包等技術，<strong>統一附加邏輯的公開介面（Public Methods）</strong>。而業務邏輯在需要擴充的時機，也只能透過 <strong>統一的公開介面</strong> 來調用附加邏輯。</p>
+<p><img src="/blog/images/pasted-10.png" alt="圖二：在業務邏輯與附加邏輯之間引入抽象"></p>
+<p>這其實是利用 <strong>多型的特性</strong>，在業務邏輯和附加邏輯之間引入一個抽象（繼承、介面、閉包等）：</p>
+<ul>
+<li>對業務邏輯來說，原本寫死在業務邏輯裡面的附加邏輯將被 <strong>抽象的變數</strong> 取代。只有等程式碼運行中，藉由 <strong>當時實作抽象介面的實體（類別、閉包）</strong> 來決定附加邏輯的行為。</li>
+<li>對附加邏輯來說，只需要按照 <strong>抽象介面</strong> 的定義，實作完成新需求所需的程式。最後注入業務邏輯中，以便擴充業務邏輯。</li>
+</ul>
+<p><img src="/blog/images/pasted-8.png?500x" alt="圖三：業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
 <p>引入抽象後，業務邏輯與附加邏輯 <strong>只能透過抽象介面與彼此互動</strong>。如此一來，業務邏輯可以專注於本身的業務規則（Business Rule），而附加邏輯則可以隨時被<strong>多個不同的實作替換掉</strong>，並且業務邏輯完全不需要關心這些事。</p>
 <h3><span id="找出業務邏輯與附加邏輯的邊界">找出業務邏輯與附加邏輯的邊界</span></h3><p>開發人員必須懂得如何找出業務邏輯與附加邏輯的邊界，才能從中開放擴充點引入抽象隔離彼此。</p>
 <p>簡單有效的方法是，把重要與不重要的事情分開。例如 UI 介面所需的邏輯與業務規則無關，所以它們之間應該要有一個邊界。也可以 <strong>已變化為軸的地方</strong> 繪製邊界，邊界另一側的元件將以不同的速率以及不同的原因改變：</p>
@@ -179,7 +185,37 @@ class HelloController extends Controller
 </blockquote>
 <p>一旦開放封閉的架構形成就能建立防火牆，使變動不會傳播出去。附加邏輯的變動不會影響業務邏輯；附加邏輯引入 Bug 也不會影響其他附加邏輯。</p>
 <p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
-<h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><p><img src="/blog/images/pasted-9.png" alt="叫號功能與附加邏輯"></p>
+<h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
+<h2><span id="每日信件功能最初需求">每日信件功能（最初需求）</span></h2><p>某校園系統中，有一個寄信排程會在每天凌晨寄送「每日信件」，最初的需求為：</p>
+<h3><span id="寄送使用者昨天收到的所有系統通知">寄送使用者昨天收到的所有系統通知。</span></h3><pre><code class="php">class Send_today_notify_mail extends MX_Controller
+{
+    /**
+     * 寄送系統每日收到的所有通知訊息
+     */
+    public function index()
+    {
+        // 取得所有使用者昨天收到的系統通知
+        $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
+
+        // 依照收件者的 email 分群通知訊息
+        $target_mail_collection = $this-&gt;target_mail_collection($system_notifies);
+
+        // 產生信件 HTML 內容
+        $mail_contents = $this-&gt;make_mail_contents($target_mail_collection);
+
+        // 開始寄送 mail
+        $mailer = new Mailer();
+        $title = &#39;今日信件(&#39; . date(&#39;Y-m-d&#39;) . &#39;)，昨日系統通知，請務必查看。&#39;;
+        foreach ($mail_contents as $target_mail =&gt; $mail_content) {
+            $mailer-&gt;sendmail($target_mail, $title, $mail_content);
+        }
+    }
+
+    private function target_mail_collection($notifies) {/** ...省略 */}
+
+    /** 產生信件 HTML 內容 */
+    private function make_mail_contents($mail_collection){/** ...省略 */}
+}</code></pre>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
 <p>在面向對象的程序設計中，開放封閉原則(OCP)是最重要的一條原則。很多時候，一個 5 程序具有良好的設計，往往說明它是符合開放封閉原則的。</p>
@@ -201,7 +237,7 @@ class HelloController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck40wp7f0000j8ep11wc4h7iy" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck41131ti000jowp1ejsmbplt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -551,7 +587,7 @@ class StudentController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck40wp7ff000k8ep1d3l65bnk" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck41131uf000kowp10jkghnyu" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -617,7 +653,7 @@ class StudentController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck40wp7e100018ep10p0l2tzb" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck41131sa0000owp12s4ldd0r" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -709,7 +745,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck40wp7dt00008ep13s56fd8k" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck41131si0001owp11oqiauvh" class="article-share-link">Share</a>
       
       
     </footer>
@@ -806,7 +842,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck40wp7ed00058ep143mj2ito" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck41131sq0005owp1cnrb9oby" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -899,7 +935,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck40wp7e900038ep1eljk2yvd" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck41131sp0004owp14meaeszt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>

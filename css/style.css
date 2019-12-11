@@ -667,7 +667,6 @@ a.article-title:hover {
   color: #000;
 }
 .article-entry code {
-  color: #a52a2a;
   background-color: rgba(27,31,35,0.05);
   border-radius: 3px;
   padding: 0 0.2em;
