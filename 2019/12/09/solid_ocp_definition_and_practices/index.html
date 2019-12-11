@@ -18,7 +18,7 @@
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-10.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png?500x">
-<meta property="og:updated_time" content="2019-12-11T08:22:47.904Z">
+<meta property="og:updated_time" content="2019-12-11T08:31:20.701Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
   
@@ -209,17 +209,16 @@ class HelloController extends Controller
         $mail_contents = $this-&gt;make_mail_contents($target_mail_collection);
 
         // 開始寄送 mail
-        $mailer = new Mailer();
-        $title = &#39;今日信件(&#39; . date(&#39;Y-m-d&#39;) . &#39;)，昨日系統通知，請務必查看。&#39;;
-        foreach ($mail_contents as $target_mail =&gt; $mail_content) {
-            $mailer-&gt;sendmail($target_mail, $title, $mail_content);
-        }
+        $this-&gt;send_mail($mail_contents);
     }
 
     private function target_mail_collection($notifies) {/** ...省略 */}
 
     /** 產生信件 HTML 內容 */
     private function make_mail_contents($mail_collection){/** ...省略 */}
+
+    /** 發送 E-mail 給使用者 */
+    private function send_mail($mail_contents) {/** ...省略 */}
 }</code></pre>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
@@ -242,7 +241,7 @@ class HelloController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck41131ti000jowp1ejsmbplt" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck411jgp0000ju4p16hmk498j" class="article-share-link">Share</a>
       
       
     </footer>

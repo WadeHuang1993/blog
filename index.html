@@ -204,17 +204,16 @@ class HelloController extends Controller
         $mail_contents = $this-&gt;make_mail_contents($target_mail_collection);
 
         // 開始寄送 mail
-        $mailer = new Mailer();
-        $title = &#39;今日信件(&#39; . date(&#39;Y-m-d&#39;) . &#39;)，昨日系統通知，請務必查看。&#39;;
-        foreach ($mail_contents as $target_mail =&gt; $mail_content) {
-            $mailer-&gt;sendmail($target_mail, $title, $mail_content);
-        }
+        $this-&gt;send_mail($mail_contents);
     }
 
     private function target_mail_collection($notifies) {/** ...省略 */}
 
     /** 產生信件 HTML 內容 */
     private function make_mail_contents($mail_collection){/** ...省略 */}
+
+    /** 發送 E-mail 給使用者 */
+    private function send_mail($mail_contents) {/** ...省略 */}
 }</code></pre>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
@@ -237,7 +236,7 @@ class HelloController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck41131ti000jowp1ejsmbplt" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck411jgp0000ju4p16hmk498j" class="article-share-link">Share</a>
       
       
     </footer>
@@ -587,7 +586,7 @@ class StudentController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck41131uf000kowp10jkghnyu" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck411jgpg000ku4p16yschhjf" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -653,7 +652,7 @@ class StudentController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck41131sa0000owp12s4ldd0r" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck411jgny0001u4p12krueqpb" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -745,7 +744,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck41131si0001owp11oqiauvh" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck411jgnt0000u4p182g78aie" class="article-share-link">Share</a>
       
       
     </footer>
@@ -842,7 +841,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck41131sq0005owp1cnrb9oby" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck411jgo60005u4p15j5o5yym" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -935,7 +934,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck41131sp0004owp14meaeszt" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck411jgo30003u4p1a1e3gsfx" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>

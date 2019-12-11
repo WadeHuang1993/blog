@@ -1294,6 +1294,9 @@ pre .keyword,
 pre .javascript .function {
   color: #c9c;
 }
+pre .hljs-comment {
+  color: #3aa03e !important;
+}
 @media screen and (max-width: 479px) {
   #mobile-nav {
     position: absolute;
