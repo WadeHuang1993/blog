@@ -187,11 +187,8 @@ class HelloController extends Controller
 <p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
 <h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
 <h2><span id="每日信件功能">每日信件功能</span></h2><p>某校園系統中，有一個寄信排程會在每天凌晨寄送「每日信件」，最初的需求為：</p>
-<h3><span id="1-最初需求寄送使用者昨天收到的系統通知">1. 最初需求：寄送使用者昨天收到的系統通知。</span></h3><pre><code class="php">class Send_today_notify_mail extends MX_Controller
+<h3><span id="1-最初需求寄送使用者昨天收到的系統通知">1. 最初需求：寄送使用者昨天收到的系統通知。</span></h3><pre><code class="php">class Send_today_mail extends MX_Controller
 {
-    /**
-     * 寄送系統每日收到的所有通知訊息
-     */
     public function index()
     {
         // 取得所有使用者昨天收到的系統通知
@@ -215,15 +212,12 @@ class HelloController extends Controller
 }</code></pre>
 <p>第一版本的程式碼中可以看見寄信功能主要分兩個部分：</p>
 <ol>
-<li>撈取要寄信的內容並產生信件 HTML </li>
+<li>撈取信件的內容，並產生信件 HTML </li>
 <li>寄送信件</li>
 </ol>
-<p>Send_today_notify_mail 的最初版本中，總共只有 93 行程式碼。</p>
-<h2><span id="2-第二需求寄送使用者昨日收到的-messenger-訊息">2. 第二需求：寄送使用者昨日收到的 Messenger 訊息</span></h2><pre><code class="php">class Send_today_notify_mail extends MX_Controller
+<p>Send_today_mail 的最初版本中，總共只有 93 行程式碼。</p>
+<h2><span id="2-第二需求寄送使用者昨日收到的-messenger-訊息">2. 第二需求：寄送使用者昨日收到的 Messenger 訊息</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
 {
-    /**
-     * 寄送系統每日收到的所有通知訊息
-     */
     public function index()
     {
         // 取得所有使用者昨天收到的系統通知
@@ -240,8 +234,74 @@ class HelloController extends Controller
         $mail_contents = $this-&gt;make_mail_contents($system_notifies, $messages, $message_users);
         // 開始寄送 mail
         $this-&gt;send_mail($mail_contents);
-    }</code></pre>
-<p>第二版本加入了新需求，Send_today_notify_mail 的程式碼一下子從 93 行暴增到 195 行。而且 為了撈取昨天的 Messages 並建立信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
+    }
+
+    /** ...省略 */
+}</code></pre>
+<p>第二版本加入了新需求，Send_today_mail 的程式碼一下子從 93 行暴增到 195 行。而且 為了撈取昨天的 Messages 並建立信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
+<h2><span id="3-第三需求寄送明日課程內容給教師">3. 第三需求：寄送明日課程內容給教師</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
+{
+    public function index()
+    {
+        // 取得所有使用者昨天收到的系統通知
+        $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
+        // 依照收件者的 email 分群通知訊息
+        $system_notifies = $this-&gt;group_system_notify_by_email($system_notifies);
+
+        // 取得 Messenger 使用者、對話群組 id
+        list($message_users, $group_ids) = $this-&gt;message_api-&gt;get_all_message_users();
+        // 取得昨日的 Messages
+        $messages = $this-&gt;message_api-&gt;get_yesterday_message($group_ids);
+
+        // 取得明日的課程資訊
+        $tomorrow_course = $this-&gt;course_api-&gt;get_tomorrow_course();
+        // 取得課程教師資訊
+        $course_ids = array_column($tomorrow_course, &#39;course_id&#39;);
+        $teachers = $this-&gt;course_api-&gt;get_course_teachers($course_ids);
+
+        // 產生信件 HTML 內容
+        $mail_contents = $this-&gt;make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers);
+        // 開始寄送 mail
+        $this-&gt;send_mail($mail_contents);
+    }
+
+    /** ...省略 */
+}</code></pre>
+<p>第三個版本，Send_today_mail 的總行數來到 404 行，<code>make_mail_contents()</code> 函式的耦合更加嚴重。</p>
+<p>到目前為止，Send_today_mail 已經變得難以維護，這個 Controller 裡面包含了 16 個函式，其中好幾個函式卻都是在做一樣的事情：「撈取信件的內容，並產生信件 HTML」。</p>
+<p>為了避免 Send_today_mail 持續膨脹，接下來將開始替 Send_today_mail 進行一次重構。這次重構的目的將是引入抽象，消除重複的內容。</p>
+<h2><span id="第一次重構引入抽象減輕負擔">第一次重構：引入抽象減輕負擔</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
+{
+    /**
+     * 寄送系統每日收到的所有通知訊息
+     */
+    public function index()
+    {
+        /**
+         * 產生每日要寄送的信件內容
+         */
+        $today_email_maker = new Today_email_maker();
+        $today_email_maker-&gt;add_handler(new System_notify_handler());
+        $today_email_maker-&gt;add_handler(new Message_handler());
+        $today_email_maker-&gt;add_handler(new Course_start_handler());
+
+        // 取得每日通知信件內容，並建立信件 HTML
+        $email_contents = array();
+        foreach ($today_email_maker-&gt;handlers() as $handler) {
+            $handler-&gt;get_email_content();
+            $handler-&gt;make_email_template_variables();
+            array_push($email_contents, $handler-&gt;make_email_content());
+        }
+
+        /**
+         * 開始寄信
+         */
+        $this-&gt;send_mail($email_contents);
+    }
+
+    /** 省略 */
+}
+</code></pre>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
 <p>在面向對象的程序設計中，開放封閉原則(OCP)是最重要的一條原則。很多時候，一個 5 程序具有良好的設計，往往說明它是符合開放封閉原則的。</p>
