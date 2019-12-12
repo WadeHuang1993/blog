@@ -17,8 +17,9 @@
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-10.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-11.png?480x">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png?500x">
-<meta property="og:updated_time" content="2019-12-11T13:01:02.394Z">
+<meta property="og:updated_time" content="2019-12-12T01:13:11.434Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
   
@@ -176,19 +177,20 @@ class HelloController extends Controller
 <li>對業務邏輯來說，原本寫死在業務邏輯裡面的附加邏輯將被 <strong>抽象的變數</strong> 取代。只有等程式碼運行中，藉由 <strong>當時實作抽象介面的實體（類別、閉包）</strong> 來決定附加邏輯的行為。</li>
 <li>對附加邏輯來說，只需要按照 <strong>抽象介面</strong> 的定義，實作完成新需求所需的程式。最後注入業務邏輯中，以便擴充業務邏輯。</li>
 </ul>
-<p><img src="/blog/images/pasted-8.png?500x" alt="圖三：業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
-<p>引入抽象後，業務邏輯與附加邏輯 <strong>只能透過抽象介面與彼此互動</strong>。如此一來，業務邏輯可以專注於本身的業務規則（Business Rule），而附加邏輯則可以隨時被<strong>多個不同的實作替換掉</strong>，並且業務邏輯完全不需要關心這些事。</p>
-<h3><span id="找出業務邏輯與附加邏輯的邊界">找出業務邏輯與附加邏輯的邊界</span></h3><p>開發人員必須懂得如何找出業務邏輯與附加邏輯的邊界，才能從中開放擴充點引入抽象隔離彼此。</p>
+<h3><span id="找出業務邏輯與附加邏輯的邊界">找出業務邏輯與附加邏輯的邊界</span></h3><p><img src="/blog/images/pasted-11.png?480x" alt="圖三：業務邏輯與不相關的邏輯應該要有邊界隔離彼此"></p>
+<p>開發人員必須懂得如何找出業務邏輯與附加邏輯的邊界，才能從中開放擴充點引入抽象隔離彼此。</p>
 <p>簡單有效的方法是，把重要與不重要的事情分開。例如 UI 介面所需的邏輯與業務規則無關，所以它們之間應該要有一個邊界。也可以 <strong>已變化為軸的地方</strong> 繪製邊界，邊界另一側的元件將以不同的速率以及不同的原因改變：</p>
 <ul>
 <li><strong>附加邏輯 與 業務邏輯</strong> 相比，彼此在不同的時間以不同的速率改變，因此它們之間應該有個邊界；</li>
 <li><strong>附加邏輯 與 其他附加邏輯</strong> 相比，每個附加邏輯都在不同的時間和不同的原因改變，所以它們之間應該也要有邊界。</li>
 </ul>
 <p>說到底，其實一直都是 <strong>單一職責原則</strong> 指導我們應該如何切割邊界。</p>
+<p><img src="/blog/images/pasted-8.png?500x" alt="圖四：業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
+<p>引入抽象後，業務邏輯與附加邏輯 <strong>只能透過抽象介面與彼此互動</strong>。如此一來，業務邏輯可以專注於本身的業務規則（Business Rule），而附加邏輯則可以隨時被<strong>多個不同的實作替換掉</strong>，並且業務邏輯完全不需要關心這些事。</p>
+<p>如一但建立起開放封閉原則的架構（圖四），就能擁有一個安全的防火牆。程式碼之間的變動不會傳播出去。附加邏輯的變動不會影響到業務邏輯。</p>
 <blockquote>
-<p>事實上，軟體開發技術的歷史就是「如何方便地建立 plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob.</p>
+<p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob.</p>
 </blockquote>
-<p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
 <h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
 <h2><span id="每日信件功能">每日信件功能</span></h2><p>某校園系統中，有一個寄信排程會在每天凌晨寄送「每日信件」，最初的需求為：</p>
 <h3><span id="1-最初需求寄送使用者昨天收到的系統通知">1. 最初需求：寄送使用者昨天收到的系統通知。</span></h3><pre><code class="php">class Send_today_mail extends MX_Controller
@@ -359,25 +361,32 @@ class Today_email_maker
             array_push($email_contents, $handler-&gt;make_email_content());
         }
     }
-}
-
-class System_notify_handler implements Today_email_handler
+}</code></pre>
+<p>附加邏輯如下：</p>
+<pre><code class="php">class System_notify_handler implements Today_email_handler
 {
     public function get_email_content() { /** ... */}
     public function make_email_template_variables() { /** ... */}
     public function make_email_content() { /** ... */}
+    private function xxxx() { /** ... */}
 }
+
 class Message_handler implements Today_email_handler
 {
     public function get_email_content() { /** ... */}
     public function make_email_template_variables() { /** ... */}
     public function make_email_content() { /** ... */}
+    private function xxxx() { /** ... */}
+    /** ... */
 }
+
 class Course_start_handler implements Today_email_handler
 {
     public function get_email_content() { /** ... */}
     public function make_email_template_variables() { /** ... */}
     public function make_email_content() { /** ... */}
+    private function xxxx() { /** ... */}
+    /** ... */
 }</code></pre>
 <h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
 <blockquote>
@@ -395,6 +404,7 @@ class Course_start_handler implements Today_email_handler
 <blockquote>
 <p>但我們還是能找到一些讓程序盡量遵守開放封閉原則的規律，最明顯的就是找出程序中將要發生變化的地方，然後把變化封裝起來。</p>
 </blockquote>
+<p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
 <h3><span id="結尾只要抓得到老鼠都是好貓">結尾：只要抓得到老鼠都是好貓？</span></h3><p>在軟體初期忽略的一個錯誤，在後期將需花費50-200倍的代價來解決。</p>
 
       
