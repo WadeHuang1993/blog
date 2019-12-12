@@ -164,7 +164,7 @@ class HelloController extends Controller
 <h2><span id="原理利用抽象隔離不相關的程式">原理：利用抽象隔離不相關的程式</span></h2><blockquote>
 <p>解除耦合的方法，就是讓程式碼不知道彼此的存在。</p>
 </blockquote>
-<p>程式碼可以透過繼承、引入介面或注入閉包等技術，<strong>統一附加邏輯的公開介面（Public Methods）</strong>。而業務邏輯在需要擴充的時機，也只能透過 <strong>統一的公開介面</strong> 來調用附加邏輯。</p>
+<p>程式碼可以透過繼承、引入介面或注入閉包等技術，讓附加邏輯可以”<strong>共用公開的介面</strong>“。業務邏輯在需要擴充的時機，則須透過 <strong>統一的公開介面</strong> 來調用附加邏輯。</p>
 <p><img src="/blog/images/pasted-10.png" alt="圖二：在業務邏輯與附加邏輯之間引入抽象"></p>
 <p>這其實是利用 <strong>多型的特性</strong>，在業務邏輯和附加邏輯之間引入一個抽象（繼承、介面、閉包等）：</p>
 <ul>
@@ -183,10 +183,11 @@ class HelloController extends Controller
 <p>引入抽象後，業務邏輯與附加邏輯 <strong>只能透過抽象介面與彼此互動</strong>。如此一來，業務邏輯可以專注於本身的業務規則（Business Rule），而附加邏輯則可以隨時被<strong>多個不同的實作替換掉</strong>，並且業務邏輯完全不需要關心這些事。</p>
 <p>如一但建立起開放封閉原則的架構（圖四），就能擁有一個安全的防火牆。程式碼之間的變動不會傳播出去。附加邏輯的變動不會影響到業務邏輯。</p>
 <blockquote>
-<p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob.</p>
+<p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob. 《Clean Architecture》</p>
 </blockquote>
-<h1><span id="實踐when-then-how">實踐(When、Then、How)</span></h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
-<h2><span id="每日信件功能">每日信件功能</span></h2><p>某校園系統中，有一個寄信排程會在每天凌晨寄送「每日信件」，最初的需求為：</p>
+<h1><span id="實踐每日信件功能">實踐：每日信件功能</span></h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
+<hr>
+<p>某校園系統中，有一個寄信排程會在每天凌晨寄送「每日信件」，最初的需求為：</p>
 <h3><span id="1-最初需求寄送使用者昨天收到的系統通知">1. 最初需求：寄送使用者昨天收到的系統通知。</span></h3><pre><code class="php">class Send_today_mail extends MX_Controller
 {
     public function index()
@@ -304,9 +305,9 @@ class HelloController extends Controller
     private function send_mail($mail_contents) {/** ... */}
 }</code></pre>
 <p>第三個版本，Send_today_mail 的總行數來到 504 行，<code>make_mail_contents()</code> 函式的耦合更加嚴重。</p>
-<p>到目前為止，Send_today_mail 已經變得難以維護，這個 Controller 裡面包含了 12 個函式，其中好幾個函式卻都是在做一樣的事情：「撈取信件的內容，並產生信件 HTML」。</p>
-<p>為了避免 Send_today_mail 持續膨脹，接下來將開始替 Send_today_mail 進行一次重構。這次重構的目的將是引入抽象，拆散<strong>隨著時間增加的附加邏輯</strong>。</p>
-<h2><span id="第一次重構引入抽象隔離附加邏輯">第一次重構：引入抽象，隔離附加邏輯</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
+<p>到目前為止，Send_today_mail 已經變得不太容易維護，這個 Controller 裡面包含了 12 個函式，其中好幾個函式卻都是在做一樣的事情：「撈取信件的內容，並產生信件 HTML」。</p>
+<p>為了避免 Send_today_mail 因新需求的出現不斷膨脹，接下來將開始替 Send_today_mail 進行一次重構。這次重構的目的將是引入抽象，拆散 <strong>隨著時間增加的附加邏輯</strong>。</p>
+<h2><span id="第一次重構拆散職責">第一次重構：拆散職責</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
 {
     /**
      * 寄送系統每日收到的所有通知訊息
@@ -314,11 +315,11 @@ class HelloController extends Controller
     public function index()
     {
         /** 1. 撈取信件的內容，並產生信件 HTML */
-        $today_email_maker = new Today_email_maker();
-        $today_email_maker-&gt;add_handler(new System_notify_handler());
-        $today_email_maker-&gt;add_handler(new Message_handler());
-        $today_email_maker-&gt;add_handler(new Course_start_handler());
-        $mail_contents = $today_email_maker-&gt;make_mail_contents();
+        $email_maker = new Today_email_maker();
+        $email_maker-&gt;add_handler(new System_notify_handler());
+        $email_maker-&gt;add_handler(new Message_handler());
+        $email_maker-&gt;add_handler(new Course_start_handler());
+        $mail_contents = $email_maker-&gt;make_mail_contents();
 
         /** 2. 寄送信件 */
         $this-&gt;send_mail($email_contents);
@@ -326,8 +327,24 @@ class HelloController extends Controller
 
     private function send_mail($mail_contents) {/** ... */}
 }</code></pre>
-<p>這一步驟中，我們做了很多事情。重構後的結果如上，細節如下：先這樣 </p>
-<pre><code class="php">interface Today_email_handler
+<p>上面是重構後的結果，Send_today_mail 的程式碼大幅減少，可讀性也有提高。</p>
+<p>這樣拆分職責的邏輯是「已變化為軸的地方劃分界限」：<br>Send_today_mail 從第一次發佈以來就一直新增 <strong>信件種類</strong>，這些 <strong>信件種類</strong> 最後都需要透過 <code>make_mail_contents()</code> 產生信件內容。那麼隨著新需求冒出來的信件種類，就是容易變動的地方，也就是 <strong>附加邏輯</strong>；負責產生信件 HTML 內容的 <code>make_mail_contents()</code> 則是在流程中不變的邏輯，故可視為 <strong>業務邏輯</strong>。</p>
+<p>找出 <strong>業務邏輯</strong> 與 <strong>附加邏輯</strong> 後，即可將邏輯拆分成下面結構：</p>
+<ol>
+<li>將產生多個信件 HTML 內容的 <code>make_mail_contents()</code> 搬移至 <code>Today_email_maker</code> 類別。</li>
+<li>負責 <strong>撈取各種信件種類內容</strong> 的邏輯則拆散至各自的類別：<ul>
+<li><code>System_notify_handler</code></li>
+<li><code>Message_handler</code></li>
+<li><code>Course_start_handler</code></li>
+</ul>
+</li>
+</ol>
+<p>具體細節如下：</p>
+<p><img src="/blog/images/pasted-12.png" alt="圖五：重構後的程式碼結構，引入抽象隔離業務邏輯與附加邏輯"></p>
+<p>在（圖五）結構圖中可以看見<strong>業務邏輯和附加邏輯之間引入一個抽象介面（Daily_email）</strong>。<strong>業務邏輯</strong> 透過公開 <code>add_handler(Daily_email $handler)</code> 函式，讓 Controller 層可以從外部注入 <strong>附加邏輯</strong>。附加邏輯則須按照 Daily_email 介面的定義，實作完成新需求所需的程式碼。</p>
+<p>這是利用多型的特性，讓 <code>add_handler(Daily_email $handler)</code> 可以接收任何有實作 Daily_email 介面的物件。這也是為什麼 Controller 層可以對 <code>Today_email_maker</code> 注入多個附加邏輯類別的原因。</p>
+<p>下面附上重構後的範例程式碼：</p>
+<pre><code class="php">interface Daily_email
 {
     /** 取得今日信件內容 */
     public function get_email_content();
@@ -339,33 +356,28 @@ class HelloController extends Controller
 
 class Today_email_maker
 {
-    /** @var Today_email_handler[] */
+    /** @var Daily_email[] */
     private $handlers = array();
 
-    public function add_handler(Today_email_maker $handler)
+    public function add_handler(Daily_email $handler)
     {
         array_push($this-&gt;handlers, $handler);
     }
 
     public function make_mail_contents()
     {
+        $mail_contents = array();
         foreach ($this-&gt;handlers as $handler) {
             $handler-&gt;get_email_content();
             $handler-&gt;make_email_template_variables();
-            array_push($email_contents, $handler-&gt;make_email_content());
+            array_push($mail_contents, $handler-&gt;make_email_content());
         }
+
+        return $mail_contents;
     }
 }</code></pre>
 <p>附加邏輯如下：</p>
-<pre><code class="php">class System_notify_handler implements Today_email_handler
-{
-    public function get_email_content() { /** ... */}
-    public function make_email_template_variables() { /** ... */}
-    public function make_email_content() { /** ... */}
-    private function xxxx() { /** ... */}
-}
-
-class Message_handler implements Today_email_handler
+<pre><code class="php">class System_notify_handler implements Daily_email
 {
     public function get_email_content() { /** ... */}
     public function make_email_template_variables() { /** ... */}
@@ -374,7 +386,16 @@ class Message_handler implements Today_email_handler
     /** ... */
 }
 
-class Course_start_handler implements Today_email_handler
+class Message_handler implements Daily_email
+{
+    public function get_email_content() { /** ... */}
+    public function make_email_template_variables() { /** ... */}
+    public function make_email_content() { /** ... */}
+    private function xxxx() { /** ... */}
+    /** ... */
+}
+
+class Course_start_handler implements Daily_email
 {
     public function get_email_content() { /** ... */}
     public function make_email_template_variables() { /** ... */}
@@ -382,24 +403,48 @@ class Course_start_handler implements Today_email_handler
     private function xxxx() { /** ... */}
     /** ... */
 }</code></pre>
-<h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><h2><span id="結論">結論</span></h2><p>![](/Users/wade/Desktop/螢幕快照 2019-12-06 上午10.11.49.png)</p>
-<blockquote>
-<p>在面向對象的程序設計中，開放封閉原則(OCP)是最重要的一條原則。很多時候，一個 5 程序具有良好的設計，往往說明它是符合開放封閉原則的。</p>
-</blockquote>
-<blockquote>
-<p>設計模式就是給做的好的設計取個名字。幾乎所有的設計模式都是遵守開放封閉原則的，我們見到的好設計，通常都經得起開放封閉原則的考驗。不管是具體的各種設計 模式，還是更抽象的面向對象設計原則，比如單一職責原則、最少知識原則、依賴倒置原則等， 都是為了讓程序遵守開放封閉原則而出現的。可以這樣說，開放封閉原則是編寫一個好程序的 目標，其他設計原則都是達到這個目標的過程。</p>
-</blockquote>
-<blockquote>
-<p>通過封裝變化的方式，可以把系統中穩定不變的部分和容易變化的部分隔離開來。</p>
-</blockquote>
-<blockquote>
-<p>開閉原則是一個終極目標，任何人包括大師級人物都無法百分之百做到，但朝這個方向努力，可以非常顯著地改善一個系統的架構，真正做到“擁抱變化”。</p>
-</blockquote>
-<blockquote>
-<p>但我們還是能找到一些讓程序盡量遵守開放封閉原則的規律，最明顯的就是找出程序中將要發生變化的地方，然後把變化封裝起來。</p>
-</blockquote>
-<p><a href="https://www.gss.com.tw/eis/55-eis52/222-2010-12-22-09-33-55" target="_blank" rel="noopener">從客戶端觀點 思考軟體開發的精神</a></p>
-<h3><span id="結尾只要抓得到老鼠都是好貓">結尾：只要抓得到老鼠都是好貓？</span></h3><p>在軟體初期忽略的一個錯誤，在後期將需花費50-200倍的代價來解決。</p>
+<p>重構前，只要每新增一種信件，<code>make_email_content</code> 就會耦合新的信件種類資料，以便產生信件 HTML 內容。</p>
+<pre><code class="php">    /** 重構前 Send_today_mail.php */
+    private function make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers){/** ... */}
+    {
+        // 建立 Notifies 信件樣板變數
+        $tplVar = $this-&gt;make_notifies_template_variables($notifies);
+        // 建立 Messages 信件樣板變數
+        $tplVar = $this-&gt;make_message_template_variables($messages, $message_users, $tplVar);
+        // 建立 明日課程 信件樣板變數
+        $tplVar = $this-&gt;make_tomorrow_course_template_variables($tomorrow_course, $teachers, $tplVar);
+
+        // 建立信件樣板
+        $mail_contents = [];
+        foreach ($tplVar as $target_mail =&gt; $template_data) {
+            // 以使用者的 email 做區隔
+            $mail_contents[$target_mail] = $this-&gt;load-&gt;view(&#39;send_today_notify_mail/mail_template&#39;, $template_data, true);
+        }
+
+        return $mail_contents;
+    }</code></pre>
+<p>重構後，不管再新增多少種類的信件，<code>Today_email_maker</code> 都不需修改任何程式碼（封閉修改）。只需新增實作 Daily_email 介面的附加邏輯即可完成新需求（開放擴充）。而且還可以隨時移除任何一種信件種類。這就是利用開放封閉原則的成果，讓程式碼可以適應需求變化。</p>
+<pre><code class="php">    /** 重構後 Today_email_maker.php */
+    public function add_handler(Daily_email $handler)
+    {
+        array_push($this-&gt;handlers, $handler);
+    }
+
+    public function make_mail_contents()
+    {
+        $mail_contents = array();
+        foreach ($this-&gt;handlers as $handler) {
+            $handler-&gt;get_email_content();
+            $handler-&gt;make_email_template_variables();
+            array_push($mail_contents, $handler-&gt;make_email_content());
+        }
+
+        return $mail_contents;
+    }</code></pre>
+<h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><p>你可能已經發現了，引入抽象後程式碼變得比重構前還要複雜。沒錯，引入抽象確實會讓程式碼變複雜。若每個新功能都要符合開放封閉原則，系統結構會變得極其複雜，而且還會有很多抽象沒有實質效益。</p>
+<p>因此 Uncle Bob 建議可以接受不合理的程式碼帶來的第一次愚弄。在最初寫程式的時候，可以先假設變化永遠不會發生，這有利於我們迅速完成需求。當變化發生並且對我們接下來的工作造成影響的時候，再回過頭來封裝這些變化的地方。確保我們不會掉進同一個坑里。</p>
+<h2><span id="結論">結論</span></h2><p>在寫程式的時候，可以把開放封閉原則當作目標，因為設計良好的程式通常都經得起開放封閉原則的考驗。也有人說設計模式其實只是幫良好的設計取個名字，因為設計模式幾乎都是遵守開放封閉原則的。開放封閉原則延伸出來單一職責原則、依賴倒置原則等其他設計原則，其實都只是為了完成開放封閉原則這個目標的過程。</p>
+<p>開放封閉原則是終極目標，甚至任何人包括大師級人物都無法百分之百做到，但只要朝著原則的方向努力，就可以不斷改善系統的架構，讓程式碼可以擁抱變化“。</p>
 
       
     </div>
