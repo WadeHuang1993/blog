@@ -181,7 +181,7 @@ class HelloController extends Controller
 <p>說到底，其實一直都是 <strong>單一職責原則</strong> 指導我們應該如何切割邊界。</p>
 <p><img src="/blog/images/pasted-8.png?500x" alt="圖四：業務邏輯與附加邏輯之間，只能透過抽象介面與彼此互動"></p>
 <p>引入抽象後，業務邏輯與附加邏輯 <strong>只能透過抽象介面與彼此互動</strong>。如此一來，業務邏輯可以專注於本身的業務規則（Business Rule），而附加邏輯則可以隨時被<strong>多個不同的實作替換掉</strong>，並且業務邏輯完全不需要關心這些事。</p>
-<p>如一但建立起開放封閉原則的架構（圖四），就能擁有一個安全的防火牆。程式碼之間的變動不會傳播出去。附加邏輯的變動不會影響到業務邏輯。</p>
+<p>一但建立起開放封閉原則的架構（圖四），就能擁有一個安全的防火牆。程式碼之間的變動不會傳播出去。附加邏輯的變動不會影響到業務邏輯。</p>
 <blockquote>
 <p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob. 《Clean Architecture》</p>
 </blockquote>
@@ -256,7 +256,7 @@ class HelloController extends Controller
     private function make_mail_contents($system_notifies, $messages, $message_users){/** ... */}
     private function send_mail($mail_contents) {/** ... */}
 }</code></pre>
-<p>第二版本加入了新需求，Send_today_mail 的程式碼一下子從 93 行增加到 295 行。而且 為了撈取昨天的 Messages 並建立信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
+<p>第二版本加入了新需求，Send_today_mail 的程式碼一下子從 93 行增加到 295 行。為了產生 系統通知 和 Messages 的信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
 <h2><span id="3-第三需求寄送明日課程內容給教師">3. 第三需求：寄送明日課程內容給教師</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
 {
     public function index()
@@ -333,9 +333,9 @@ class HelloController extends Controller
 <ol>
 <li>將產生多個信件 HTML 內容的 <code>make_mail_contents()</code> 搬移至 <code>Today_email_maker</code> 類別。</li>
 <li>負責 <strong>撈取各種信件種類內容</strong> 的邏輯則拆散至各自的類別：<ul>
-<li><code>System_notify_handler</code></li>
-<li><code>Message_handler</code></li>
-<li><code>Course_start_handler</code></li>
+<li>System_notify_handler</li>
+<li>Message_handler</li>
+<li>Course_start_handler</li>
 </ul>
 </li>
 </ol>
@@ -458,7 +458,7 @@ class Course_start_handler implements Daily_email
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck42baws2000kngp14ep8huum" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck42g7wht000j0vp13fwcbuvn" class="article-share-link">Share</a>
       
       
     </footer>
@@ -809,7 +809,7 @@ class StudentController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck42baws1000jngp1f28l6iyl" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/12/03/solid_srp_definition_and_practices/" data-id="ck42g7whv000k0vp1abxfh906" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -875,7 +875,7 @@ class StudentController extends Controller
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck42bawqn0000ngp18lgp80t2" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/22/cluelessness_in_self_learning/" data-id="ck42g7wgi00010vp1aklz7jds" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
@@ -967,7 +967,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck42bawqu0001ngp116ym2egn" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/21/Cluelessness/" data-id="ck42g7wg900000vp1e11b7whb" class="article-share-link">Share</a>
       
       
     </footer>
@@ -1065,7 +1065,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck42bawr30005ngp11n5j7xx2" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/11/01/why_we_need_SOLID_principles/" data-id="ck42g7wgr00050vp1e96m9nlt" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li></ul>
@@ -1159,7 +1159,7 @@ moment().format(&#39;YYYY/MM/DD HH:mm:ss&#39;);</code></pre>
       
     </div>
     <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck42bawr10004ngp14pszgzfu" class="article-share-link">Share</a>
+      <a data-url="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/" data-id="ck42g7wgo00030vp1h2y0aozg" class="article-share-link">Share</a>
       
       
   <ul class="article-tag-list" itemprop="keywords"><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li><li class="article-tag-list-item"><a class="article-tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
