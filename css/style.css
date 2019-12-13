@@ -5,7 +5,7 @@ html {
   font-size: 14px;
 }
 body {
-  background-color: #f7f7f7;
+  background-color: #f5f8f9;
 }
 body,
 button,
@@ -190,7 +190,7 @@ img.thumbnail {
   width: 9px;
   height: 9px;
   top: 1.3rem;
-  background: #dbdbdb;
+  background: #209cee;
   border-radius: 50%;
 }
 .timeline .media:first-child:before {
