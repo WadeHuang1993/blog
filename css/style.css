@@ -215,6 +215,9 @@ img.thumbnail {
   line-height: line-height;
   margin: 1em 0;
 }
+.article .content blockquote {
+  border-left: 5px solid #a0b9ea;
+}
 .article .content blockquote.pullquote {
   float: right;
   max-width: 50%;
@@ -552,4 +555,10 @@ figure.highlight .section {
 }
 .gist .file {
   all: initial;
+}
+.menu-label {
+  color: #000;
+  font-size: 1em;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
 }
