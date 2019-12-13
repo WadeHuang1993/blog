@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html>
+<html  lang="zh">
 <head>
-  <meta charset="utf-8">
-  
+    <meta charset="utf-8" />
 
-  
-  <title>物件導向設計原則：開放封閉原則，定義、解析與實踐 | WadeHuang1993&#39;s Blog</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="開放封閉原則（Open-Closed Principle） 定義： Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.--軟體中的類別、模組、函式等等應該開放擴充，但是封閉修改。  白話版本為： 當系統需要擴充功能時，應該藉由">
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<title>物件導向設計原則：開放封閉原則，定義、解析與實踐 - WadeHuang1993&#39;s Blog</title>
+
+
+    <meta name="description" content="開放封閉原則（Open-Closed Principle） 定義： Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.--軟體中的類別、模組、函式等等應該開放擴充，但是封閉修改。  白話版本為： 當系統需要擴充功能時，應該藉由">
 <meta name="keywords" content="PHP, OOP, JavaScript, Web development">
 <meta property="og:type" content="article">
 <meta property="og:title" content="物件導向設計原則：開放封閉原則，定義、解析與實踐">
@@ -15,99 +18,158 @@
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
 <meta property="og:description" content="開放封閉原則（Open-Closed Principle） 定義： Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.--軟體中的類別、模組、函式等等應該開放擴充，但是封閉修改。  白話版本為： 當系統需要擴充功能時，應該藉由">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-10.png">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-11.png?480x">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-8.png?500x">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-12.png">
-<meta property="og:updated_time" content="2019-12-12T06:15:44.836Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.png">
+<meta property="og:updated_time" content="2019-12-13T06:45:15.633Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;pasted-7.png">
-  
-    <link rel="alternate" href="/blog/atom.xml" title="WadeHuang1993&#39;s Blog" type="application/atom+xml">
-  
-  
-    <link rel="icon" href="/favicon.png">
-  
-  
-  <link rel="stylesheet" href="/blog/css/style.css">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/blog/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-light.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/back-to-top.css">
+
+    
+    
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/blog/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/blog/css/style.css">
 </head>
-
-<body>
-  <div id="container">
-    <div id="wrap">
-      <header id="header">
-  <div id="banner"></div>
-  <div id="header-outer" class="outer">
-    <div id="header-title" class="inner">
-      <h1 id="logo-wrap">
-        <a href="/blog/" id="logo">WadeHuang1993&#39;s Blog</a>
-      </h1>
-      
-        <h2 id="subtitle-wrap">
-          <a href="/blog/" id="subtitle">WadeHuang1993 的學習迷航記</a>
-        </h2>
-      
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/blog/">
+            
+                <img src="/blog/images/mylogo.png" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/blog/">首頁</a>
+                
+                <a class="navbar-item"
+                href="/blog/archives">文章時間軸</a>
+                
+                <a class="navbar-item"
+                href="/blog/categories">分類檢索</a>
+                
+                <a class="navbar-item"
+                href="/blog/tags">標籤</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜尋" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
     </div>
-    <div id="header-inner" class="inner">
-      <nav id="main-nav">
-        <a id="main-nav-toggle" class="nav-icon"></a>
-        
-          <a class="main-nav-link" href="/blog/">首頁</a>
-        
-          <a class="main-nav-link" href="/blog/archives">文章列表</a>
-        
-      </nav>
-      <nav id="sub-nav">
-        
-          <a id="nav-rss-link" class="nav-icon" href="/blog/atom.xml" title="RSS Feed"></a>
-        
-        <a id="nav-search-btn" class="nav-icon" title="搜尋"></a>
-      </nav>
-      <div id="search-form-wrap">
-        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="https://wadehuang1993.github.io/blog"></form>
-      </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.png" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐">
+        </span>
     </div>
-  </div>
-</header>
-      <div class="outer">
-        <section id="main"><article id="post-solid_ocp_definition_and_practices" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/blog/2019/12/09/solid_ocp_definition_and_practices/" class="article-date">
-  <time datetime="2019-12-09T06:11:48.000Z" itemprop="datePublished">2019-12-09</time>
-</a>
     
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
+    <div class="card-content article ">
         
-  
-    <h1 class="article-title" itemprop="name">
-      物件導向設計原則：開放封閉原則，定義、解析與實踐
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-
-        <p>開放封閉原則（Open-Closed Principle）</p>
-<h1><span id="定義">定義：</span></h1><blockquote>
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-09T06:11:48.000Z">2019-12-09</time>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    35 分鐘 閱讀文 (大約 5248 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                物件導向設計原則：開放封閉原則，定義、解析與實踐
+            
+        </h1>
+        <div class="content">
+            <p>開放封閉原則（Open-Closed Principle）</p>
+<h1 id="定義："><a href="#定義：" class="headerlink" title="定義："></a>定義：</h1><blockquote>
 <p>Software entities (classes, modules, functions, etc.) should be open for extension, but closed for modification.<br>--<br>軟體中的類別、模組、函式等等應該開放擴充，但是封閉修改。</p>
 </blockquote>
 <p>白話版本為：</p>
 <p>當系統需要擴充功能時，應該藉由 <code>增加新的程式碼</code> 來擴充系統的功能，而 <code>不是藉由修改原本已經存在的程式碼</code> 來擴充系統的功能。</p>
+<a id="more"></a>
+
 <hr>
 <p>開放封閉原則為軟體開發的 <strong>首要原則</strong>，很多軟體開發原則都是建構在這短短一句話之上，因此可以通過此原則引伸出其他原則。很多時候一個程式具有良好的設計，往往說明它是符合開放封閉原則。</p>
-<h2><span id="目的">目的</span></h2><blockquote>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><blockquote>
 <p>隔離業務邏輯與附加邏輯，使業務邏輯更易於擴充，以便因應需求變化。</p>
 </blockquote>
-<h1><span id="解析">解析</span></h1><h2><span id="什麼是業務邏輯附加邏輯">什麼是業務邏輯？附加邏輯？</span></h2><p>一個系統總有幾個極具價值的核心邏輯，這些核心邏輯實現了企業或專案的業務規則（Business Rule）與 Know How。通常可以從核心邏輯延伸出更多功能，提供使用者的便利性，以下將這些核心業務邏輯簡稱為「業務邏輯」。也就是說系統中有可能 <strong>20% 是業務邏輯</strong>，剩下的 <strong>80% 是圍繞著業務邏輯延伸出來的附加邏輯</strong>。</p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="什麼是業務邏輯？附加邏輯？"><a href="#什麼是業務邏輯？附加邏輯？" class="headerlink" title="什麼是業務邏輯？附加邏輯？"></a>什麼是業務邏輯？附加邏輯？</h2><p>一個系統總有幾個極具價值的核心邏輯，這些核心邏輯實現了企業或專案的業務規則（Business Rule）與 Know How。通常可以從核心邏輯延伸出更多功能，提供使用者的便利性，以下將這些核心業務邏輯簡稱為「業務邏輯」。也就是說系統中有可能 <strong>20% 是業務邏輯</strong>，剩下的 <strong>80% 是圍繞著業務邏輯延伸出來的附加邏輯</strong>。</p>
 <p>舉例來說，一個診所掛號系統一開始只有「掛號與叫號」功能。但若需要的話，也可以延伸出「叫號時發送簡訊提醒患者」功能。掛號系統的案例中<strong>業務邏輯</strong>是「掛號與叫號」；而「叫號時發送簡訊提醒患者」則是 <strong>隨著時間與新需求延伸出來的附加邏輯</strong>。</p>
-<h2><span id="為什麼要隔離-業務邏輯-與-附加邏輯">為什麼要隔離 業務邏輯 與 附加邏輯？</span></h2><p>和軟體複雜的特質 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵(Software entropy)</a> 有關，指系統在經過修改後，程式碼的無序程度(意圖流失程度)與複雜程度皆會上昇。</p>
+<h2 id="為什麼要隔離-業務邏輯-與-附加邏輯？"><a href="#為什麼要隔離-業務邏輯-與-附加邏輯？" class="headerlink" title="為什麼要隔離 業務邏輯 與 附加邏輯？"></a>為什麼要隔離 業務邏輯 與 附加邏輯？</h2><p>和軟體複雜的特質 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵(Software entropy)</a> 有關，指系統在經過修改後，程式碼的無序程度(意圖流失程度)與複雜程度皆會上昇。</p>
 <p>需求變更和除錯是系統修改的主因，系統會隨著時間不斷衍生出新需求。這些需求可能是工程浩大的新功能；也可能是為了某個特定案例只使用一次的需求。甚至客戶往往在看見實際功能後，才想到有更好的解決方案或缺少哪些細項。於是剛釋出的功能馬上又進入重工（Rework）階段。</p>
 <p><strong>若開發人員不懂得將業務邏輯與附加邏輯分開，往往為了完成新需求，把附加邏輯寫在業務邏輯裡面，替業務邏輯擴充行為</strong>。這種做法一但遇到需求不停出現時，<strong>業務邏輯</strong> 與 <strong>附加邏輯</strong> 會漸漸地糊在一起變成一個大泥團導致程式脆弱化。新增需求和除錯更容易引入新的 Bug，解決新的 Bug 又引入更新的 Bug…。</p>
 <p><img src="/blog/images/pasted-7.png" alt="圖一：開發人員將附加邏輯寫在業務邏輯裡面，以擴充業務邏輯的行為來完成新需求。"></p>
@@ -117,45 +179,20 @@
 <p>雖然<strong>需求並不是程式設計環節能控制的，但是程式碼應該要能夠適應快速多變的需求。</strong></p>
 </blockquote>
 <p>業務邏輯本身只需要關心業務規則（Business Rule），不應該和附加邏輯耦合在一起。一定要隔離業務邏輯與附加邏輯，才能確保業務邏輯的彈性。一旦業務邏輯有了彈性，程式就較容易面對需求變化。</p>
-<h2><span id="開放擴充點由外部注入附加邏輯">開放擴充點，由外部注入附加邏輯</span></h2><p>新需求不斷出現，修改業務邏輯來擴充附加功能卻會促進 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 成長，增加維護系統的困難度。為了避免 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的問題，開放封閉原則指導開發人員在面對需求變化時應該要：</p>
+<h2 id="開放擴充點，由外部注入附加邏輯"><a href="#開放擴充點，由外部注入附加邏輯" class="headerlink" title="開放擴充點，由外部注入附加邏輯"></a>開放擴充點，由外部注入附加邏輯</h2><p>新需求不斷出現，修改業務邏輯來擴充附加功能卻會促進 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 成長，增加維護系統的困難度。為了避免 <a href="https://zh.wikipedia.org/zh-tw/%E8%BB%9F%E9%AB%94%E7%86%B5" target="_blank" rel="noopener">軟體熵</a> 的問題，開放封閉原則指導開發人員在面對需求變化時應該要：</p>
 <blockquote>
 <p>盡可能減少對既有程式碼的修改，並開放擴充點，讓新需求可以從外部擴充業務邏輯。</p>
 </blockquote>
 <p>實際上 <strong>開放封閉原則的設計思維</strong> 早在物件導向技術出現之前就存在，並且被廣泛應用在各種層面，從程式設計乃至框架、系統層級：</p>
-<h3><span id="程式設計層面jquery-ajax">程式設計層面：jQuery ajax</span></h3><p>透過 $.ajax 的 <code>done</code>, <code>fail</code>, <code>always</code> 等公開函式從外部注入閉包，擴充 $.ajax 行為：</p>
-<pre><code class="javascript">$.ajax({
-  method: &quot;POST&quot;,
-  url: &quot;some.php&quot;,
-  data: { name: &quot;John&quot;, location: &quot;Boston&quot; }
-})
-  .done(function() {
-    alert(&quot;success&quot;);
-  })
-  .fail(function() {
-    alert(&quot;error&quot;);
-  })
-   .always(function() {
-    alert(&quot;complete&quot;);
-  });</code></pre>
-<h3><span id="框架層面laravel-controller">框架層面：Laravel Controller</span></h3><p>透過繼承 MVC 框架內建的 <code>Controller</code> 類別，擴充 Controller 層的行為：</p>
-<pre><code class="php">&lt;?php
+<h3 id="程式設計層面：jQuery-ajax"><a href="#程式設計層面：jQuery-ajax" class="headerlink" title="程式設計層面：jQuery ajax"></a>程式設計層面：jQuery ajax</h3><p>透過 $.ajax 的 <code>done</code>, <code>fail</code>, <code>always</code> 等公開函式從外部注入閉包，擴充 $.ajax 行為：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">  method: <span class="hljs-string">"POST"</span>,</span><br><span class="line">  url: <span class="hljs-string">"some.php"</span>,</span><br><span class="line">  data: &#123; <span class="hljs-attr">name</span>: <span class="hljs-string">"John"</span>, <span class="hljs-attr">location</span>: <span class="hljs-string">"Boston"</span> &#125;</span><br><span class="line">&#125;)</span><br><span class="line">  .done(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">"success"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">  .fail(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">"error"</span>);</span><br><span class="line">  &#125;)</span><br><span class="line">   .always(<span class="hljs-function"><span class="hljs-keyword">function</span>(<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    alert(<span class="hljs-string">"complete"</span>);</span><br><span class="line">  &#125;);</span><br></pre></td></tr></table></figure>
 
-namespace App\Http\Controllers;
+<h3 id="框架層面：Laravel-Controller"><a href="#框架層面：Laravel-Controller" class="headerlink" title="框架層面：Laravel Controller"></a>框架層面：Laravel Controller</h3><p>透過繼承 MVC 框架內建的 <code>Controller</code> 類別，擴充 Controller 層的行為：</p>
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;?php</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">namespace</span> <span class="hljs-title">App</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Controllers</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">use</span> <span class="hljs-title">Illuminate</span>\<span class="hljs-title">Http</span>\<span class="hljs-title">Request</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">HelloController</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Controller</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">(Request $request)</span></span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">'Hello World!'</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-use Illuminate\Http\Request;
+<h3 id="框架層面：React-js"><a href="#框架層面：React-js" class="headerlink" title="框架層面：React.js"></a>框架層面：React.js</h3><p>透過繼承 <code>React.Component</code> 類別，擴充 Component 的行為：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Welcome</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>&#123;</span><br><span class="line">  render() &#123;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Hello, &#123;this.props.name&#125;<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span></span>;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-class HelloController extends Controller
-{
-    public function index(Request $request){
-        return &#39;Hello World!&#39;;
-    }
-}</code></pre>
-<h3><span id="框架層面reactjs">框架層面：React.js</span></h3><p>透過繼承 <code>React.Component</code> 類別，擴充 Component 的行為：</p>
-<pre><code class="javascript">class Welcome extends React.Component {
-  render() {
-    return &lt;h1&gt;Hello, {this.props.name}&lt;/h1&gt;;
-  }
-}</code></pre>
 <p>其他範例：</p>
 <ul>
 <li>JavaScript 透過註冊 event 事件，擴充瀏覽器行為。</li>
@@ -168,7 +205,7 @@ class HelloController extends Controller
 <p><strong>開放封閉原則</strong> 讓開發人員不需要修改已經造好的輪子，就可以完成自己所需的功能。</p>
 </blockquote>
 <p>這也是為什麼軟體技術能夠以海量增長的原因。但是開放封閉原則的原理是什麼呢？</p>
-<h2><span id="原理利用抽象隔離不相關的程式">原理：利用抽象隔離不相關的程式</span></h2><blockquote>
+<h2 id="原理：利用抽象隔離不相關的程式"><a href="#原理：利用抽象隔離不相關的程式" class="headerlink" title="原理：利用抽象隔離不相關的程式"></a>原理：利用抽象隔離不相關的程式</h2><blockquote>
 <p>解除耦合的方法，就是讓程式碼不知道彼此的存在。</p>
 </blockquote>
 <p>程式碼可以透過繼承、引入介面或注入閉包等技術，讓附加邏輯可以”<strong>共用公開的介面</strong>“。業務邏輯在需要擴充的時機，則須透過 <strong>統一的公開介面</strong> 來調用附加邏輯。</p>
@@ -178,7 +215,7 @@ class HelloController extends Controller
 <li>對業務邏輯來說，原本寫死在業務邏輯裡面的附加邏輯將被 <strong>抽象的變數</strong> 取代。只有等程式碼運行中，藉由 <strong>當時實作抽象介面的實體（類別、閉包）</strong> 來決定附加邏輯的行為。</li>
 <li>對附加邏輯來說，只需要按照 <strong>抽象介面</strong> 的定義，實作完成新需求所需的程式。最後注入業務邏輯中，以便擴充業務邏輯。</li>
 </ul>
-<h3><span id="找出業務邏輯與附加邏輯的邊界">找出業務邏輯與附加邏輯的邊界</span></h3><p><img src="/blog/images/pasted-11.png?480x" alt="圖三：業務邏輯與不相關的邏輯應該要有邊界隔離彼此"></p>
+<h3 id="找出業務邏輯與附加邏輯的邊界"><a href="#找出業務邏輯與附加邏輯的邊界" class="headerlink" title="找出業務邏輯與附加邏輯的邊界"></a>找出業務邏輯與附加邏輯的邊界</h3><p><img src="/blog/images/pasted-11.png?480x" alt="圖三：業務邏輯與不相關的邏輯應該要有邊界隔離彼此"></p>
 <p>開發人員必須懂得如何找出業務邏輯與附加邏輯的邊界，才能從中開放擴充點引入抽象隔離彼此。</p>
 <p>簡單有效的方法是，把重要與不重要的事情分開。例如 UI 介面所需的邏輯與業務規則無關，所以它們之間應該要有一個邊界。也可以 <strong>已變化為軸的地方</strong> 繪製邊界，邊界另一側的元件將以不同的速率以及不同的原因改變：</p>
 <ul>
@@ -192,148 +229,27 @@ class HelloController extends Controller
 <blockquote>
 <p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob. 《Clean Architecture》</p>
 </blockquote>
-<h1><span id="實踐每日信件功能">實踐：每日信件功能</span></h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
+<h1 id="實踐：每日信件功能"><a href="#實踐：每日信件功能" class="headerlink" title="實踐：每日信件功能"></a>實踐：每日信件功能</h1><p>從原理中可以發現，開放封閉原則能夠解除業務邏輯與附加邏輯之間的耦合，並且保持業務邏輯的彈性。接下來將透過一個「每日信件功能」的案例，講解如何讓開放封閉原則落地。</p>
 <hr>
 <p>某校園系統中，有一個寄信排程會在每天凌晨寄送「每日信件」，最初的需求為：</p>
-<h3><span id="1-最初需求寄送使用者昨天收到的系統通知">1. 最初需求：寄送使用者昨天收到的系統通知。</span></h3><pre><code class="php">class Send_today_mail extends MX_Controller
-{
-    public function index()
-    {
-        /** 1. 撈取信件的內容，並產生信件 HTML */
-        // 取得所有使用者昨天收到的系統通知
-        $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
+<h3 id="1-最初需求：寄送使用者昨天收到的系統通知。"><a href="#1-最初需求：寄送使用者昨天收到的系統通知。" class="headerlink" title="1. 最初需求：寄送使用者昨天收到的系統通知。"></a>1. 最初需求：寄送使用者昨天收到的系統通知。</h3><figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Send_today_mail</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MX_Controller</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-comment">/** 1. 撈取信件的內容，並產生信件 HTML */</span></span><br><span class="line">        <span class="hljs-comment">// 取得所有使用者昨天收到的系統通知</span></span><br><span class="line">        $system_notifies = <span class="hljs-keyword">$this</span>-&gt;notify_api-&gt;get_yesterday_notify();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 依照收件者的 email 分群通知訊息</span></span><br><span class="line">        $system_notifies = <span class="hljs-keyword">$this</span>-&gt;group_system_notify_by_email($system_notifies);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 產生信件 HTML 內容</span></span><br><span class="line">        $mail_contents = <span class="hljs-keyword">$this</span>-&gt;make_mail_contents($system_notifies);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">/** 2. 寄送信件 */</span></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;send_mail($mail_contents);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 建立系統通知信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_yesterday_notify</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">group_system_notify_by_email</span><span class="hljs-params">($system_notifies)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_notifies_template_variables</span><span class="hljs-params">($notifies, $tplVar = array<span class="hljs-params">()</span>)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_mail_contents</span><span class="hljs-params">($system_notifies)</span></span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send_mail</span><span class="hljs-params">($mail_contents)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        // 依照收件者的 email 分群通知訊息
-        $system_notifies = $this-&gt;group_system_notify_by_email($system_notifies);
-
-        // 產生信件 HTML 內容
-        $mail_contents = $this-&gt;make_mail_contents($system_notifies);
-
-        /** 2. 寄送信件 */
-        $this-&gt;send_mail($mail_contents);
-    }
-
-    /** 建立系統通知信件 */
-    private function get_yesterday_notify() {/** ... */}
-    private function group_system_notify_by_email($system_notifies) {/** ... */}
-    private function make_notifies_template_variables($notifies, $tplVar = array()) {/** ... */}
-
-    private function make_mail_contents($system_notifies){/** ... */}
-    private function send_mail($mail_contents) {/** ... */}
-}</code></pre>
 <p>第一版本的程式碼中可以看見寄信功能主要分兩個部分：</p>
 <ol>
 <li>撈取信件的內容，並產生信件 HTML </li>
 <li>寄送信件</li>
 </ol>
 <p>Send_today_mail 的最初版本中，總共只有 93 行程式碼。</p>
-<h2><span id="2-第二需求寄送使用者昨日收到的-messenger-訊息">2. 第二需求：寄送使用者昨日收到的 Messenger 訊息</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
-{
-    public function index()
-    {
-        /** 1. 撈取信件的內容，並產生信件 HTML */
-        // 取得所有使用者昨天收到的系統通知
-        $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
-        // 依照收件者的 email 分群通知訊息
-        $system_notifies = $this-&gt;group_system_notify_by_email($system_notifies);
+<h2 id="2-第二需求：寄送使用者昨日收到的-Messenger-訊息"><a href="#2-第二需求：寄送使用者昨日收到的-Messenger-訊息" class="headerlink" title="2. 第二需求：寄送使用者昨日收到的 Messenger 訊息"></a>2. 第二需求：寄送使用者昨日收到的 Messenger 訊息</h2><figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Send_today_mail</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MX_Controller</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-comment">/** 1. 撈取信件的內容，並產生信件 HTML */</span></span><br><span class="line">        <span class="hljs-comment">// 取得所有使用者昨天收到的系統通知</span></span><br><span class="line">        $system_notifies = <span class="hljs-keyword">$this</span>-&gt;notify_api-&gt;get_yesterday_notify();</span><br><span class="line">        <span class="hljs-comment">// 依照收件者的 email 分群通知訊息</span></span><br><span class="line">        $system_notifies = <span class="hljs-keyword">$this</span>-&gt;group_system_notify_by_email($system_notifies);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 取得 Messenger 使用者、對話群組 id</span></span><br><span class="line">        <span class="hljs-keyword">list</span>($message_users, $group_ids) = <span class="hljs-keyword">$this</span>-&gt;message_api-&gt;get_all_message_users();</span><br><span class="line">        <span class="hljs-comment">// 取得昨日的 Messages</span></span><br><span class="line">        $messages = <span class="hljs-keyword">$this</span>-&gt;get_yesterday_message($group_ids);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 產生信件 HTML 內容</span></span><br><span class="line">        $mail_contents = <span class="hljs-keyword">$this</span>-&gt;make_mail_contents($system_notifies, $messages, $message_users);</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">/** 2. 寄送信件 */</span></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;send_mail($mail_contents);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** 建立系統通知信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_yesterday_notify</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">group_system_notify_by_email</span><span class="hljs-params">($system_notifies)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_notifies_template_variables</span><span class="hljs-params">($notifies, $tplVar = array<span class="hljs-params">()</span>)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 建立 Messenger 訊息信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_yesterday_message</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">message_filter</span><span class="hljs-params">($messages, $group_id)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_message_template_variables</span><span class="hljs-params">($messages, $message_users, $tplVar)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** 合併信件內容並寄送信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_mail_contents</span><span class="hljs-params">($system_notifies, $messages, $message_users)</span></span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send_mail</span><span class="hljs-params">($mail_contents)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        // 取得 Messenger 使用者、對話群組 id
-        list($message_users, $group_ids) = $this-&gt;message_api-&gt;get_all_message_users();
-        // 取得昨日的 Messages
-        $messages = $this-&gt;get_yesterday_message($group_ids);
-
-        // 產生信件 HTML 內容
-        $mail_contents = $this-&gt;make_mail_contents($system_notifies, $messages, $message_users);
-
-        /** 2. 寄送信件 */
-        $this-&gt;send_mail($mail_contents);
-    }
-
-    /** 建立系統通知信件 */
-    private function get_yesterday_notify() {/** ... */}
-    private function group_system_notify_by_email($system_notifies) {/** ... */}
-    private function make_notifies_template_variables($notifies, $tplVar = array()) {/** ... */}
-
-    /** 建立 Messenger 訊息信件 */
-    private function get_yesterday_message() {/** ... */}
-    private function message_filter($messages, $group_id) {/** ... */}
-    private function make_message_template_variables($messages, $message_users, $tplVar) {/** ... */}
-
-    /** 合併信件內容並寄送信件 */
-    private function make_mail_contents($system_notifies, $messages, $message_users){/** ... */}
-    private function send_mail($mail_contents) {/** ... */}
-}</code></pre>
 <p>第二版本加入了新需求，Send_today_mail 的程式碼一下子從 93 行增加到 295 行。為了產生 系統通知 和 Messages 的信件 HTML 內容，<code>make_mail_contents()</code> 函式已經開始出現耦合。</p>
-<h2><span id="3-第三需求寄送明日課程內容給教師">3. 第三需求：寄送明日課程內容給教師</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
-{
-    public function index()
-    {
-        /** 1. 撈取信件的內容，並產生信件 HTML */
-        // 取得所有使用者昨天收到的系統通知
-        $system_notifies = $this-&gt;notify_api-&gt;get_yesterday_notify();
-        // 依照收件者的 email 分群通知訊息
-        $system_notifies = $this-&gt;group_system_notify_by_email($system_notifies);
+<h2 id="3-第三需求：寄送明日課程內容給教師"><a href="#3-第三需求：寄送明日課程內容給教師" class="headerlink" title="3. 第三需求：寄送明日課程內容給教師"></a>3. 第三需求：寄送明日課程內容給教師</h2><figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Send_today_mail</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MX_Controller</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-comment">/** 1. 撈取信件的內容，並產生信件 HTML */</span></span><br><span class="line">        <span class="hljs-comment">// 取得所有使用者昨天收到的系統通知</span></span><br><span class="line">        $system_notifies = <span class="hljs-keyword">$this</span>-&gt;notify_api-&gt;get_yesterday_notify();</span><br><span class="line">        <span class="hljs-comment">// 依照收件者的 email 分群通知訊息</span></span><br><span class="line">        $system_notifies = <span class="hljs-keyword">$this</span>-&gt;group_system_notify_by_email($system_notifies);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 取得 Messenger 使用者、對話群組 id</span></span><br><span class="line">        <span class="hljs-keyword">list</span>($message_users, $group_ids) = <span class="hljs-keyword">$this</span>-&gt;message_api-&gt;get_all_message_users();</span><br><span class="line">        <span class="hljs-comment">// 取得昨日的 Messages</span></span><br><span class="line">        $messages = <span class="hljs-keyword">$this</span>-&gt;message_api-&gt;get_yesterday_message($group_ids);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 取得明日的課程資訊</span></span><br><span class="line">        $tomorrow_course = <span class="hljs-keyword">$this</span>-&gt;get_tomorrow_course();</span><br><span class="line">        <span class="hljs-comment">// 取得課程教師資訊</span></span><br><span class="line">        $course_ids = array_column($tomorrow_course, <span class="hljs-string">'course_id'</span>);</span><br><span class="line">        $teachers = <span class="hljs-keyword">$this</span>-&gt;course_api-&gt;get_course_teachers($course_ids);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 產生信件 HTML 內容</span></span><br><span class="line">        $mail_contents = <span class="hljs-keyword">$this</span>-&gt;make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers);</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">/** 2. 寄送信件 */</span></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;send_mail($mail_contents);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 建立系統通知信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_yesterday_notify</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">group_system_notify_by_email</span><span class="hljs-params">($system_notifies)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_notifies_template_variables</span><span class="hljs-params">($notifies, $tplVar = array<span class="hljs-params">()</span>)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/** 建立 Messenger 訊息信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_yesterday_message</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">message_filter</span><span class="hljs-params">($messages, $group_id)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_message_template_variables</span><span class="hljs-params">($messages, $message_users, $tplVar)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** 建立 明日課程 信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_tomorrow_course</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_course_teachers</span><span class="hljs-params">(course_ids)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_course_start_template_variables</span><span class="hljs-params">()</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">/** 合併信件內容並寄送信件 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_mail_contents</span><span class="hljs-params">($system_notifies, $messages, $message_users, $tomorrow_course, $teachers)</span></span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send_mail</span><span class="hljs-params">($mail_contents)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        // 取得 Messenger 使用者、對話群組 id
-        list($message_users, $group_ids) = $this-&gt;message_api-&gt;get_all_message_users();
-        // 取得昨日的 Messages
-        $messages = $this-&gt;message_api-&gt;get_yesterday_message($group_ids);
-
-        // 取得明日的課程資訊
-        $tomorrow_course = $this-&gt;get_tomorrow_course();
-        // 取得課程教師資訊
-        $course_ids = array_column($tomorrow_course, &#39;course_id&#39;);
-        $teachers = $this-&gt;course_api-&gt;get_course_teachers($course_ids);
-
-        // 產生信件 HTML 內容
-        $mail_contents = $this-&gt;make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers);
-
-        /** 2. 寄送信件 */
-        $this-&gt;send_mail($mail_contents);
-    }
-
-    /** 建立系統通知信件 */
-    private function get_yesterday_notify() {/** ... */}
-    private function group_system_notify_by_email($system_notifies) {/** ... */}
-    private function make_notifies_template_variables($notifies, $tplVar = array()) {/** ... */}
-
-    /** 建立 Messenger 訊息信件 */
-    private function get_yesterday_message() {/** ... */}
-    private function message_filter($messages, $group_id) {/** ... */}
-    private function make_message_template_variables($messages, $message_users, $tplVar) {/** ... */}
-
-    /** 建立 明日課程 信件 */
-    private function get_tomorrow_course() {/** ... */}
-    private function get_course_teachers(course_ids) {/** ... */}
-    private function make_course_start_template_variables() {/** ... */}
-
-    /** 合併信件內容並寄送信件 */
-    private function make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers){/** ... */}
-    private function send_mail($mail_contents) {/** ... */}
-}</code></pre>
 <p>第三個版本，Send_today_mail 的總行數來到 504 行，<code>make_mail_contents()</code> 函式的耦合更加嚴重。</p>
 <p>到目前為止，Send_today_mail 已經變得不太容易維護，這個 Controller 裡面包含了 12 個函式，其中好幾個函式卻都是在做一樣的事情：「撈取信件的內容，並產生信件 HTML」。</p>
 <p>為了避免 Send_today_mail 因新需求的出現不斷膨脹，接下來將開始替 Send_today_mail 進行一次重構。這次重構的目的將是引入抽象，拆散 <strong>隨著時間增加的附加邏輯</strong>。</p>
-<h2><span id="第一次重構拆散職責">第一次重構：拆散職責</span></h2><pre><code class="php">class Send_today_mail extends MX_Controller
-{
-    /**
-     * 寄送系統每日收到的所有通知訊息
-     */
-    public function index()
-    {
-        /** 1. 撈取信件的內容，並產生信件 HTML */
-        $email_maker = new Today_email_maker();
-        $email_maker-&gt;add_handler(new System_notify_handler());
-        $email_maker-&gt;add_handler(new Message_handler());
-        $email_maker-&gt;add_handler(new Course_start_handler());
-        $mail_contents = $email_maker-&gt;make_mail_contents();
+<h2 id="第一次重構：拆散職責"><a href="#第一次重構：拆散職責" class="headerlink" title="第一次重構：拆散職責"></a>第一次重構：拆散職責</h2><figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Send_today_mail</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">MX_Controller</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 寄送系統每日收到的所有通知訊息</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">index</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-comment">/** 1. 撈取信件的內容，並產生信件 HTML */</span></span><br><span class="line">        $email_maker = <span class="hljs-keyword">new</span> Today_email_maker();</span><br><span class="line">        $email_maker-&gt;add_handler(<span class="hljs-keyword">new</span> System_notify_handler());</span><br><span class="line">        $email_maker-&gt;add_handler(<span class="hljs-keyword">new</span> Message_handler());</span><br><span class="line">        $email_maker-&gt;add_handler(<span class="hljs-keyword">new</span> Course_start_handler());</span><br><span class="line">        $mail_contents = $email_maker-&gt;make_mail_contents();</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-comment">/** 2. 寄送信件 */</span></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;send_mail($email_contents);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">send_mail</span><span class="hljs-params">($mail_contents)</span> </span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        /** 2. 寄送信件 */
-        $this-&gt;send_mail($email_contents);
-    }
-
-    private function send_mail($mail_contents) {/** ... */}
-}</code></pre>
 <p>上面是重構後的結果，Send_today_mail 的程式碼大幅減少，可讀性也有提高。</p>
 <p>這樣拆分職責的邏輯是「已變化為軸的地方劃分界限」：<br>Send_today_mail 從第一次發佈以來就一直新增 <strong>信件種類</strong>，這些 <strong>信件種類</strong> 最後都需要透過 <code>make_mail_contents()</code> 產生信件內容。那麼隨著新需求冒出來的信件種類，就是容易變動的地方，也就是 <strong>附加邏輯</strong>；負責產生信件 HTML 內容的 <code>make_mail_contents()</code> 則是在流程中不變的邏輯，故可視為 <strong>業務邏輯</strong>。</p>
 <p>找出 <strong>業務邏輯</strong> 與 <strong>附加邏輯</strong> 後，即可將邏輯拆分成下面結構：</p>
@@ -351,255 +267,443 @@ class HelloController extends Controller
 <p>在（圖五）結構圖中可以看見<strong>業務邏輯和附加邏輯之間引入一個抽象介面（Daily_email）</strong>。<strong>業務邏輯</strong> 透過公開 <code>add_handler(Daily_email $handler)</code> 函式，讓 Controller 層可以從外部注入 <strong>附加邏輯</strong>。附加邏輯則須按照 Daily_email 介面的定義，實作完成新需求所需的程式碼。</p>
 <p>這是利用多型的特性，讓 <code>add_handler(Daily_email $handler)</code> 可以接收任何有實作 Daily_email 介面的物件。這也是為什麼 Controller 層可以對 <code>Today_email_maker</code> 注入多個附加邏輯類別的原因。</p>
 <p>下面附上重構後的範例程式碼：</p>
-<pre><code class="php">interface Daily_email
-{
-    /** 取得今日信件內容 */
-    public function get_email_content();
-    /** 建立 Email HTML 樣板變數 */
-    public function make_email_template_variables();
-    /** 建立 Email HTML 內容 */
-    public function make_email_content();
-}
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Daily_email</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/** 取得今日信件內容 */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_email_content</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-comment">/** 建立 Email HTML 樣板變數 */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_template_variables</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-comment">/** 建立 Email HTML 內容 */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_content</span><span class="hljs-params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Today_email_maker</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Daily_email[] */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> $handlers = <span class="hljs-keyword">array</span>();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_handler</span><span class="hljs-params">(Daily_email $handler)</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        array_push(<span class="hljs-keyword">$this</span>-&gt;handlers, $handler);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_mail_contents</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        $mail_contents = <span class="hljs-keyword">array</span>();</span><br><span class="line">        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">$this</span>-&gt;handlers <span class="hljs-keyword">as</span> $handler) &#123;</span><br><span class="line">            $handler-&gt;get_email_content();</span><br><span class="line">            $handler-&gt;make_email_template_variables();</span><br><span class="line">            array_push($mail_contents, $handler-&gt;make_email_content());</span><br><span class="line">        &#125;</span><br><span class="line">        </span><br><span class="line">        <span class="hljs-keyword">return</span> $mail_contents;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-class Today_email_maker
-{
-    /** @var Daily_email[] */
-    private $handlers = array();
-
-    public function add_handler(Daily_email $handler)
-    {
-        array_push($this-&gt;handlers, $handler);
-    }
-
-    public function make_mail_contents()
-    {
-        $mail_contents = array();
-        foreach ($this-&gt;handlers as $handler) {
-            $handler-&gt;get_email_content();
-            $handler-&gt;make_email_template_variables();
-            array_push($mail_contents, $handler-&gt;make_email_content());
-        }
-
-        return $mail_contents;
-    }
-}</code></pre>
 <p>附加邏輯如下：</p>
-<pre><code class="php">class System_notify_handler implements Daily_email
-{
-    public function get_email_content() { /** ... */}
-    public function make_email_template_variables() { /** ... */}
-    public function make_email_content() { /** ... */}
-    private function xxxx() { /** ... */}
-    /** ... */
-}
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">System_notify_handler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Daily_email</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_email_content</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_template_variables</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_content</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">xxxx</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-comment">/** ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Message_handler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Daily_email</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_email_content</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_template_variables</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_content</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">xxxx</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-comment">/** ... */</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Course_start_handler</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Daily_email</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">get_email_content</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_template_variables</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_email_content</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">xxxx</span><span class="hljs-params">()</span> </span>&#123; <span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">    <span class="hljs-comment">/** ... */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-class Message_handler implements Daily_email
-{
-    public function get_email_content() { /** ... */}
-    public function make_email_template_variables() { /** ... */}
-    public function make_email_content() { /** ... */}
-    private function xxxx() { /** ... */}
-    /** ... */
-}
-
-class Course_start_handler implements Daily_email
-{
-    public function get_email_content() { /** ... */}
-    public function make_email_template_variables() { /** ... */}
-    public function make_email_content() { /** ... */}
-    private function xxxx() { /** ... */}
-    /** ... */
-}</code></pre>
 <p>重構前，只要每新增一種信件，<code>make_email_content</code> 就會耦合新的信件種類資料，以便產生信件 HTML 內容。</p>
-<pre><code class="php">    /** 重構前 Send_today_mail.php */
-    private function make_mail_contents($system_notifies, $messages, $message_users, $tomorrow_course, $teachers){/** ... */}
-    {
-        // 建立 Notifies 信件樣板變數
-        $tplVar = $this-&gt;make_notifies_template_variables($notifies);
-        // 建立 Messages 信件樣板變數
-        $tplVar = $this-&gt;make_message_template_variables($messages, $message_users, $tplVar);
-        // 建立 明日課程 信件樣板變數
-        $tplVar = $this-&gt;make_tomorrow_course_template_variables($tomorrow_course, $teachers, $tplVar);
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 重構前 Send_today_mail.php */</span></span><br><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_mail_contents</span><span class="hljs-params">($system_notifies, $messages, $message_users, $tomorrow_course, $teachers)</span></span>&#123;<span class="hljs-comment">/** ... */</span>&#125;</span><br><span class="line">&#123;</span><br><span class="line">    <span class="hljs-comment">// 建立 Notifies 信件樣板變數</span></span><br><span class="line">    $tplVar = <span class="hljs-keyword">$this</span>-&gt;make_notifies_template_variables($notifies);</span><br><span class="line">    <span class="hljs-comment">// 建立 Messages 信件樣板變數</span></span><br><span class="line">    $tplVar = <span class="hljs-keyword">$this</span>-&gt;make_message_template_variables($messages, $message_users, $tplVar);</span><br><span class="line">    <span class="hljs-comment">// 建立 明日課程 信件樣板變數</span></span><br><span class="line">    $tplVar = <span class="hljs-keyword">$this</span>-&gt;make_tomorrow_course_template_variables($tomorrow_course, $teachers, $tplVar);</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 建立信件樣板</span></span><br><span class="line">    $mail_contents = [];</span><br><span class="line">    <span class="hljs-keyword">foreach</span> ($tplVar <span class="hljs-keyword">as</span> $target_mail =&gt; $template_data) &#123;</span><br><span class="line">        <span class="hljs-comment">// 以使用者的 email 做區隔</span></span><br><span class="line">        $mail_contents[$target_mail] = <span class="hljs-keyword">$this</span>-&gt;load-&gt;view(<span class="hljs-string">'send_today_notify_mail/mail_template'</span>, $template_data, <span class="hljs-keyword">true</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> $mail_contents;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-        // 建立信件樣板
-        $mail_contents = [];
-        foreach ($tplVar as $target_mail =&gt; $template_data) {
-            // 以使用者的 email 做區隔
-            $mail_contents[$target_mail] = $this-&gt;load-&gt;view(&#39;send_today_notify_mail/mail_template&#39;, $template_data, true);
-        }
 
-        return $mail_contents;
-    }</code></pre>
 <p>重構後，不管再新增多少種類的信件，<code>Today_email_maker</code> 都不需修改任何程式碼（封閉修改）。只需新增實作 Daily_email 介面的附加邏輯即可完成新需求（開放擴充）。而且還可以隨時移除任何一種信件種類。這就是利用開放封閉原則的成果，讓程式碼可以適應需求變化。</p>
-<pre><code class="php">    /** 重構後 Today_email_maker.php */
-    public function add_handler(Daily_email $handler)
-    {
-        array_push($this-&gt;handlers, $handler);
-    }
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** 重構後 Today_email_maker.php */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_handler</span><span class="hljs-params">(Daily_email $handler)</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    array_push(<span class="hljs-keyword">$this</span>-&gt;handlers, $handler);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">make_mail_contents</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    $mail_contents = <span class="hljs-keyword">array</span>();</span><br><span class="line">    <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">$this</span>-&gt;handlers <span class="hljs-keyword">as</span> $handler) &#123;</span><br><span class="line">        $handler-&gt;get_email_content();</span><br><span class="line">        $handler-&gt;make_email_template_variables();</span><br><span class="line">        array_push($mail_contents, $handler-&gt;make_email_content());</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">return</span> $mail_contents;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-    public function make_mail_contents()
-    {
-        $mail_contents = array();
-        foreach ($this-&gt;handlers as $handler) {
-            $handler-&gt;get_email_content();
-            $handler-&gt;make_email_template_variables();
-            array_push($mail_contents, $handler-&gt;make_email_content());
-        }
-
-        return $mail_contents;
-    }</code></pre>
-<h2><span id="接受第一次愚弄">接受第一次愚弄</span></h2><p>你可能已經發現了，引入抽象後程式碼變得比重構前還要複雜。若每個新功能都要符合開放封閉原則，系統結構會變得極其複雜，而且還會有很多抽象沒有實質效益。</p>
+<h2 id="接受第一次愚弄"><a href="#接受第一次愚弄" class="headerlink" title="接受第一次愚弄"></a>接受第一次愚弄</h2><p>你可能已經發現了，引入抽象後程式碼變得比重構前還要複雜。若每個新功能都要符合開放封閉原則，系統結構會變得極其複雜，而且還會有很多抽象沒有實質效益。</p>
 <p>因此 Uncle Bob 建議可以接受不合理的程式碼帶來的第一次愚弄。在最初寫程式的時候，可以先假設變化永遠不會發生，這有利於我們迅速完成需求。當變化發生並且對我們接下來的工作造成影響的時候，再回過頭來封裝這些變化的地方。確保未來不會掉進同一個坑里。</p>
-<h2><span id="結論">結論</span></h2><p>在寫程式的時候，可以把開放封閉原則當作目標，因為設計良好的程式通常都經得起開放封閉原則的考驗。也有人說設計模式就是幫良好的設計取個名字，因為設計模式幾乎都是遵守開放封閉原則的。開放封閉原則延伸出單一職責原則、依賴倒置原則等其他設計原則，其實都只是為了完成開放封閉原則這個目標的過程。</p>
+<h2 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h2><p>在寫程式的時候，可以把開放封閉原則當作目標，因為設計良好的程式通常都經得起開放封閉原則的考驗。也有人說設計模式就是幫良好的設計取個名字，因為設計模式幾乎都是遵守開放封閉原則的。開放封閉原則延伸出單一職責原則、依賴倒置原則等其他設計原則，其實都只是為了完成開放封閉原則這個目標的過程。</p>
 <p>開放封閉原則是終極目標，很少人可以無法百分之百做到，但只要朝著原則的方向努力，就可以不斷改善系統的架構，讓程式碼可以“擁抱變化“。</p>
-<h2><span id="系列文章">系列文章：</span></h2><ol>
+<h2 id="系列文章："><a href="#系列文章：" class="headerlink" title="系列文章："></a>系列文章：</h2><ol>
 <li><a href="/blog/2019/10/30/why_SOLID_principles_matter_to_you/">淺談物件導向 SOLID 原則對工程師的好處與如何影響能力</a></li>
 <li><a href="/blog/2019/11/01/why_we_need_SOLID_principles/">再談 SOLID 原則，Why SOLID?</a></li>
 <li><a href="/blog/2019/12/03/solid_srp_definition_and_practices/">物件導向設計原則：單一職責原則，定義、解析與實踐</a></li>
 <li><a href="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/">物件導向設計原則：開放封閉原則，定義、解析與實踐</a></li>
 </ol>
-<h2><span id="推薦閱讀">推薦閱讀：</span></h2><ul>
+<h2 id="推薦閱讀："><a href="#推薦閱讀：" class="headerlink" title="推薦閱讀："></a>推薦閱讀：</h2><ul>
 <li><a href="https://www.tenlong.com.tw/products/9789864342945" target="_blank" rel="noopener">Clean Architecture 無瑕的程式碼－整潔的軟體設計與架構篇</a></li>
 </ul>
 
-      
+        </div>
+        
+        
+        
     </div>
-    <footer class="article-footer">
-      <a data-url="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/" data-id="ck42g7wht000j0vp13fwcbuvn" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/blog/2019/12/03/solid_srp_definition_and_practices/">
+                <span class="level-item">物件導向設計原則：單一職責原則，定義、解析與實踐</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
-<nav id="article-nav">
-  
-  
-    <a href="/blog/2019/12/03/solid_srp_definition_and_practices/" id="article-nav-older" class="article-nav-link-wrap">
-      <strong class="article-nav-caption">Older</strong>
-      <div class="article-nav-title">物件導向設計原則：單一職責原則，定義、解析與實踐</div>
-    </a>
-  
-</nav>
-
-  
-</article>
-
-
-</section>
         
-          <aside id="sidebar">
-  
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    文章目錄
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#定義：">
+        <span class="has-mr-6">1</span>
+        <span>定義：</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#目的">
+        <span class="has-mr-6">1.1</span>
+        <span>目的</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#解析">
+        <span class="has-mr-6">2</span>
+        <span>解析</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#什麼是業務邏輯？附加邏輯？">
+        <span class="has-mr-6">2.1</span>
+        <span>什麼是業務邏輯？附加邏輯？</span>
+        </a></li><li>
+        <a class="is-flex" href="#為什麼要隔離-業務邏輯-與-附加邏輯？">
+        <span class="has-mr-6">2.2</span>
+        <span>為什麼要隔離 業務邏輯 與 附加邏輯？</span>
+        </a></li><li>
+        <a class="is-flex" href="#開放擴充點，由外部注入附加邏輯">
+        <span class="has-mr-6">2.3</span>
+        <span>開放擴充點，由外部注入附加邏輯</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#程式設計層面：jQuery-ajax">
+        <span class="has-mr-6">2.3.1</span>
+        <span>程式設計層面：jQuery ajax</span>
+        </a></li><li>
+        <a class="is-flex" href="#框架層面：Laravel-Controller">
+        <span class="has-mr-6">2.3.2</span>
+        <span>框架層面：Laravel Controller</span>
+        </a></li><li>
+        <a class="is-flex" href="#框架層面：React-js">
+        <span class="has-mr-6">2.3.3</span>
+        <span>框架層面：React.js</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#原理：利用抽象隔離不相關的程式">
+        <span class="has-mr-6">2.4</span>
+        <span>原理：利用抽象隔離不相關的程式</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#找出業務邏輯與附加邏輯的邊界">
+        <span class="has-mr-6">2.4.1</span>
+        <span>找出業務邏輯與附加邏輯的邊界</span>
+        </a></li></ul></li></ul></li><li>
+        <a class="is-flex" href="#實踐：每日信件功能">
+        <span class="has-mr-6">3</span>
+        <span>實踐：每日信件功能</span>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-最初需求：寄送使用者昨天收到的系統通知。">
+        <span class="has-mr-6">3.1.1</span>
+        <span>1. 最初需求：寄送使用者昨天收到的系統通知。</span>
+        </a></li></ul><li>
+        <a class="is-flex" href="#2-第二需求：寄送使用者昨日收到的-Messenger-訊息">
+        <span class="has-mr-6">3.2</span>
+        <span>2. 第二需求：寄送使用者昨日收到的 Messenger 訊息</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-第三需求：寄送明日課程內容給教師">
+        <span class="has-mr-6">3.3</span>
+        <span>3. 第三需求：寄送明日課程內容給教師</span>
+        </a></li><li>
+        <a class="is-flex" href="#第一次重構：拆散職責">
+        <span class="has-mr-6">3.4</span>
+        <span>第一次重構：拆散職責</span>
+        </a></li><li>
+        <a class="is-flex" href="#接受第一次愚弄">
+        <span class="has-mr-6">3.5</span>
+        <span>接受第一次愚弄</span>
+        </a></li><li>
+        <a class="is-flex" href="#結論">
+        <span class="has-mr-6">3.6</span>
+        <span>結論</span>
+        </a></li><li>
+        <a class="is-flex" href="#系列文章：">
+        <span class="has-mr-6">3.7</span>
+        <span>系列文章：</span>
+        </a></li><li>
+        <a class="is-flex" href="#推薦閱讀：">
+        <span class="has-mr-6">3.8</span>
+        <span>推薦閱讀：</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">分類</h3>
-    <div class="widget">
-      <ul class="category-list"><li class="category-list-item"><a class="category-list-link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a></li></ul>
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分類
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">
+            <span class="level-start">
+                <span class="level-item">軟體開發思維</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">5</span>
+            </span>
+        </a></li>
+            </ul>
+        </div>
     </div>
-  </div>
-
-
-  
+</div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">標籤</h3>
-    <div class="widget">
-      <ul class="tag-list" itemprop="keywords"><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a></li><li class="tag-list-item"><a class="tag-list-link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a></li></ul>
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/blog/2019/12/09/solid_ocp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.png" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T06:11:48.000Z">2019-12-09</time></div>
+                    <a href="/blog/2019/12/09/solid_ocp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：開放封閉原則，定義、解析與實踐</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/2019/12/03/solid_srp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.png" alt="物件導向設計原則：單一職責原則，定義、解析與實踐">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T03:04:00.000Z">2019-12-03</time></div>
+                    <a href="/blog/2019/12/03/solid_srp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：單一職責原則，定義、解析與實踐</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/2019/11/22/cluelessness_in_self_learning/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.png" alt="自學時應該看破“無緒”">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-22T03:09:00.000Z">2019-11-22</time></div>
+                    <a href="/blog/2019/11/22/cluelessness_in_self_learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">自學時應該看破“無緒”</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/2019/11/21/Cluelessness/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.png" alt="軟體開發中的“無緒”">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T09:41:00.000Z">2019-11-21</time></div>
+                    <a href="/blog/2019/11/21/Cluelessness/" class="title has-link-black-ter is-size-6 has-text-weight-normal">軟體開發中的“無緒”</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.png" alt="再談 SOLID 原則，Why SOLID?">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-01T01:34:00.000Z">2019-11-01</time></div>
+                    <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" class="title has-link-black-ter is-size-6 has-text-weight-normal">再談 SOLID 原則，Why SOLID?</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
     </div>
-  </div>
-
-
-  
+</div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">標籤雲</h3>
-    <div class="widget tagcloud">
-      <a href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" style="font-size: 20px;">SOLID 原則</a> <a href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" style="font-size: 10px;">自學技巧</a>
-    </div>
-  </div>
-
-  
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">彙整</h3>
-    <div class="widget">
-      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/12/">十二月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/11/">十一月 2019</a></li><li class="archive-list-item"><a class="archive-list-link" href="/blog/archives/2019/10/">十月 2019</a></li></ul>
-    </div>
-  </div>
-
-
-  
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
     
-  <div class="widget-wrap">
-    <h3 class="widget-title">最新文章</h3>
-    <div class="widget">
-      <ul>
-        
-          <li>
-            <a href="/blog/2019/12/09/solid_ocp_definition_and_practices/">物件導向設計原則：開放封閉原則，定義、解析與實踐</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/12/03/solid_srp_definition_and_practices/">物件導向設計原則：單一職責原則，定義、解析與實踐</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/11/22/cluelessness_in_self_learning/">自學時應該看破“無緒”</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/11/21/Cluelessness/">軟體開發中的“無緒”</a>
-          </li>
-        
-          <li>
-            <a href="/blog/2019/11/01/why_we_need_SOLID_principles/">再談 SOLID 原則，Why SOLID?</a>
-          </li>
-        
-      </ul>
-    </div>
-  </div>
+</div>
 
-  
-</aside>
-        
-      </div>
-      <footer id="footer">
-  
-  <div class="outer">
-    <div id="footer-info" class="inner">
-      &copy; 2019 WadeHuangTW1993<br>
-      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/blog/">
+                
+                    <img src="/blog/images/mylogo.png" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 WadeHuangTW1993&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
     </div>
-  </div>
-<link rel="stylesheet"
-      href="//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.0/build/styles/github-gist.min.css">
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
-<script>hljs.initHighlightingOnLoad();</script>
-
 </footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-TW");</script>
 
-    </div>
-    <nav id="mobile-nav">
-  
-    <a href="/blog/" class="mobile-nav-link">首頁</a>
-  
-    <a href="/blog/archives" class="mobile-nav-link">文章列表</a>
-  
-</nav>
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/blog/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/blog/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到頁首" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/blog/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
-<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
 
+<script src="/blog/js/main.js" defer></script>
 
-  <link rel="stylesheet" href="/blog/fancybox/jquery.fancybox.css">
-  <script src="/blog/fancybox/jquery.fancybox.pack.js"></script>
-
-
-<script src="/blog/js/script.js"></script>
-
-
-
-  </div>
-  <script src="/blog/js/hexo_resize_image.js"></script>
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/blog/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/blog/js/insight.js" defer></script>
+<link rel="stylesheet" href="/blog/css/search.css">
+<link rel="stylesheet" href="/blog/css/insight.css">
+    
 </body>
 </html>
