@@ -584,6 +584,73 @@
 
 
 
+    
+<div class="card">
+    
+    <div class="card-image">
+        <a href="/blog/refactoring_definition_and_purpose/" class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/REFACTORING.jpg" alt="重構的定義與目的">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-05T12:57:00.000Z">2018-10-05</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">重構</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    7 分鐘 閱讀文 (大約 1026 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/blog/refactoring_definition_and_purpose/">重構的定義與目的</a>
+            
+        </h1>
+        <div class="content">
+            <h3 id="重構定義："><a href="#重構定義：" class="headerlink" title="重構定義："></a>重構定義：</h3><blockquote>
+<p>在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。</p>
+</blockquote>
+<h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>重構的主要目的就是為了提升程式碼品質、<strong>提升程式碼的可讀性</strong>，以及為了日後有新需求的變化時，程式碼可以 <strong>更容易修改或是擴充</strong>（提高可維護性）。</p>
+<h3 id="優點："><a href="#優點：" class="headerlink" title="優點："></a>優點：</h3><h4 id="1-改進程式碼的設計："><a href="#1-改進程式碼的設計：" class="headerlink" title="1. 改進程式碼的設計："></a>1. 改進程式碼的設計：</h4><p>消除重覆的程式碼，每個小功能被歸責到適當的物件中，讓程式碼的職責更清楚就會更容易維護。<br>將雜亂無序的程式碼，重構成一連串的 <strong>精心設計</strong> 的流程，讓程式碼更容易擴充。</p>
+<h4 id="2-程式碼更容易被理解："><a href="#2-程式碼更容易被理解：" class="headerlink" title="2. 程式碼更容易被理解："></a>2. 程式碼更容易被理解：</h4><p>重構簡單的講，就是整理程式碼，可以透過 <a href="https://laravel-china.org/topics/7774/the-conciseness-of-the-php-code-php-clean-code" target="_blank" rel="noopener">Clean Code 的規範</a> 來整理程式碼，提升可讀性。<br>想想程式碼過一段時間後的第二個讀者，而且這個人常常是你自己。</p>
+<h4 id="3-Debug-更容易："><a href="#3-Debug-更容易：" class="headerlink" title="3. Debug 更容易："></a>3. Debug 更容易：</h4><p>重構的過程中，會透過單一職責原則，依照程式碼的工作責任將程式碼整理至責任相同的類別中。有責任清楚的物件，就能更快釐清問題點，除錯速度自然能夠提升。</p>
+<h1 id="什麼時候可以開始重構？"><a href="#什麼時候可以開始重構？" class="headerlink" title="什麼時候可以開始重構？"></a>什麼時候可以開始重構？</h1><p>事實上，重構並不是一項需要額外撥出時間來進行的工作，<strong>重構應該是在你的開發過程中持續在發生的事情</strong>。 重構的活動，最理想的情況，就是透過持續不斷的整理，掃除那些有礙程式可讀性及可維護性的程式碼，讓程式碼持續盡可能地保持在一定健康的狀態。</p>
+<p>既然重構是一個持續進行的活動，但又不是特意安排、特別撥出時間來做的工作，那麼，在什麼樣明確的時間點，應該觸發重構的進行呢？基本上，<strong>重構的活動應該伴隨著我們一般開發過程中的主要活動來進行。這些主要活動包括了：增加新功能、修正錯誤、以及程式碼審查的時候，還有三次法則</strong>。</p>
+<h2 id="三次法則："><a href="#三次法則：" class="headerlink" title="三次法則："></a>三次法則：</h2><p>同樣的事做三次，犯了 <a href="https://zh.wikipedia.org/wiki/%E4%B8%80%E6%AC%A1%E4%B8%94%E4%BB%85%E4%B8%80%E6%AC%A1" target="_blank" rel="noopener">Don’t Repeat Yourself</a> 原則，表示重複的邏輯該被重構成唯一且適當的物件或函式了。</p>
+<h3 id="新增功能時重構："><a href="#新增功能時重構：" class="headerlink" title="新增功能時重構："></a>新增功能時重構：</h3><blockquote>
+<p>當我們試著增加新功能時，便有可能發現舊有的程式碼可以進行一些調整，而達成了必須重構所想要達成的目的。</p>
+</blockquote>
+<p>但如果你在增加功能的時候，發現原設計就足以優雅地讓你將新功能擴充上去，那麼，這意謂著，還不太需要做什麼重構。</p>
+<h3 id="除錯時重構："><a href="#除錯時重構：" class="headerlink" title="除錯時重構："></a>除錯時重構：</h3><p>除錯的時候，你不僅會接觸到舊有的程式碼，而且，你通常得搞懂它真正的運作邏輯，當你真的懂了之後，就會知道如何用更清晰、簡潔的方式來改寫這段程式碼。</p>
+<h2 id="總結："><a href="#總結：" class="headerlink" title="總結："></a>總結：</h2><p>很多架構良好的程式，並不是一開始就規畫出來的，而是每天不斷不斷的重構、改進。重構也不用刻意安排時間去做，在每次做新功能或修改功能時就順便做重構整理，如果可以也一起加入 Unit Test。童子軍有一條軍規是 <strong>讓營地比你來時更乾淨</strong>，套用在寫程式上，就是在每次的 checkin ，<strong>程式碼應該都是要比 checkout 時更乾淨簡潔</strong>。</p>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
 </div>
                 
 
@@ -712,9 +779,17 @@
                 <span class="level-item">軟體開發思維</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">7</span>
+                <span class="level-item tag">8</span>
             </span>
-        </a></li>
+        </a><ul><li>
+        <a class="level is-marginless" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">
+            <span class="level-start">
+                <span class="level-item">重構</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
             </ul>
         </div>
     </div>
@@ -772,6 +847,17 @@
             </a>
         </li>
         
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
         </ul>
         </div>
     </div>
@@ -788,7 +874,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/blog/tags/Clean-Code/">
                         <span class="tag">Clean Code</span>
-                        <span class="tag is-grey">6</span>
+                        <span class="tag is-grey">7</span>
                     </a>
                 </div>
                 
@@ -817,6 +903,13 @@
                     <a class="tags has-addons" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/">
                         <span class="tag">自學技巧</span>
                         <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/%E9%87%8D%E6%A7%8B/">
+                        <span class="tag">重構</span>
+                        <span class="tag is-grey">1</span>
                     </a>
                 </div>
                 
@@ -865,7 +958,7 @@
                     </p>
                     <a href="/blog/archives">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -877,7 +970,7 @@
                     </p>
                     <a href="/blog/categories">
                         <p class="title has-text-weight-normal">
-                            1
+                            2
                         </p>
                     </a>
                 </div>
@@ -889,7 +982,7 @@
                     </p>
                     <a href="/blog/tags">
                         <p class="title has-text-weight-normal">
-                            5
+                            6
                         </p>
                     </a>
                 </div>
@@ -1008,7 +1101,7 @@
                     </p>
                     <a href="/blog/archives">
                         <p class="title has-text-weight-normal">
-                            7
+                            8
                         </p>
                     </a>
                 </div>
@@ -1020,7 +1113,7 @@
                     </p>
                     <a href="/blog/categories">
                         <p class="title has-text-weight-normal">
-                            1
+                            2
                         </p>
                     </a>
                 </div>
@@ -1032,7 +1125,7 @@
                     </p>
                     <a href="/blog/tags">
                         <p class="title has-text-weight-normal">
-                            5
+                            6
                         </p>
                     </a>
                 </div>
