@@ -11,16 +11,16 @@
 <title>重構的定義與目的 - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="description" content="重構定義： 在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。  目的：重構的主要目的就是為了提升程式碼品質、提升程式碼的可讀性，以及為了日後有新需求的變化時，程式碼可以 更容易修改或是擴充（提高可維護性）。 優點：1. 改進程式碼的設計：消除重覆的程式碼，每個小功能被歸責到適當的物件中，讓程式碼的職責更清楚就會更容易維護。將雜亂無序的程式碼，重構成一連串的 精心設計 的流程">
+    <meta name="description" content="重構定義： 在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。  目的：重構的主要目的就是為了提升程式碼品質、提升程式碼的可讀性，以及為了日後有新需求的變化時，程式碼可以 更容易修改或是擴充（提高可維護性）。">
 <meta name="keywords" content="Clean Code,重構">
 <meta property="og:type" content="article">
 <meta property="og:title" content="重構的定義與目的">
 <meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;refactoring_definition_and_purpose&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
-<meta property="og:description" content="重構定義： 在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。  目的：重構的主要目的就是為了提升程式碼品質、提升程式碼的可讀性，以及為了日後有新需求的變化時，程式碼可以 更容易修改或是擴充（提高可維護性）。 優點：1. 改進程式碼的設計：消除重覆的程式碼，每個小功能被歸責到適當的物件中，讓程式碼的職責更清楚就會更容易維護。將雜亂無序的程式碼，重構成一連串的 精心設計 的流程">
+<meta property="og:description" content="重構定義： 在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。  目的：重構的主要目的就是為了提升程式碼品質、提升程式碼的可讀性，以及為了日後有新需求的變化時，程式碼可以 更容易修改或是擴充（提高可維護性）。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;REFACTORING.jpg">
-<meta property="og:updated_time" content="2019-12-18T14:28:13.172Z">
+<meta property="og:updated_time" content="2019-12-18T14:33:22.309Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;REFACTORING.jpg">
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1026 個字)
+                    7 分鐘 閱讀文 (大約 1027 個字)
                 </span>
                 
                 
@@ -172,6 +172,8 @@
 <p>在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。</p>
 </blockquote>
 <h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>重構的主要目的就是為了提升程式碼品質、<strong>提升程式碼的可讀性</strong>，以及為了日後有新需求的變化時，程式碼可以 <strong>更容易修改或是擴充</strong>（提高可維護性）。</p>
+<a id="more"></a>
+
 <h3 id="優點："><a href="#優點：" class="headerlink" title="優點："></a>優點：</h3><h4 id="1-改進程式碼的設計："><a href="#1-改進程式碼的設計：" class="headerlink" title="1. 改進程式碼的設計："></a>1. 改進程式碼的設計：</h4><p>消除重覆的程式碼，每個小功能被歸責到適當的物件中，讓程式碼的職責更清楚就會更容易維護。<br>將雜亂無序的程式碼，重構成一連串的 <strong>精心設計</strong> 的流程，讓程式碼更容易擴充。</p>
 <h4 id="2-程式碼更容易被理解："><a href="#2-程式碼更容易被理解：" class="headerlink" title="2. 程式碼更容易被理解："></a>2. 程式碼更容易被理解：</h4><p>重構簡單的講，就是整理程式碼，可以透過 <a href="https://laravel-china.org/topics/7774/the-conciseness-of-the-php-code-php-clean-code" target="_blank" rel="noopener">Clean Code 的規範</a> 來整理程式碼，提升可讀性。<br>想想程式碼過一段時間後的第二個讀者，而且這個人常常是你自己。</p>
 <h4 id="3-Debug-更容易："><a href="#3-Debug-更容易：" class="headerlink" title="3. Debug 更容易："></a>3. Debug 更容易：</h4><p>重構的過程中，會透過單一職責原則，依照程式碼的工作責任將程式碼整理至責任相同的類別中。有責任清楚的物件，就能更快釐清問題點，除錯速度自然能夠提升。</p>

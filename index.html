@@ -522,7 +522,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1084 個字)
+                    7 分鐘 閱讀文 (大約 1085 個字)
                 </span>
                 
                 
@@ -537,41 +537,16 @@
         <div class="content">
             <h1 id="CodeIgniter-框架擴展：HMVC"><a href="#CodeIgniter-框架擴展：HMVC" class="headerlink" title="CodeIgniter 框架擴展：HMVC"></a>CodeIgniter 框架擴展：HMVC</h1><p>Hierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。</p>
 <h2 id="為什麼需要-HMVC"><a href="#為什麼需要-HMVC" class="headerlink" title="為什麼需要 HMVC"></a>為什麼需要 HMVC</h2><h3 id="單層-MVC-的限制"><a href="#單層-MVC-的限制" class="headerlink" title="單層 MVC 的限制"></a>單層 MVC 的限制</h3><p><code>原 MVC 架構中只有單層 MVC</code>，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得<strong>巨大、縱錯複雜、互相耦合、難以維護</strong>。試想一下，一個 Controller 內有 7、8 千行程式碼會容易維護嗎。</p>
-<p>原 CodeIgniter MVC 架構(單層 MVC)示意圖：</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">application</span><br><span class="line">	|- controllers</span><br><span class="line">		|- controllersA.php</span><br><span class="line">		|- controllersB.php</span><br><span class="line">		|- ...(所有 Controller 都只能放在同一層）</span><br><span class="line">	|- models</span><br><span class="line">		|- models1.php</span><br><span class="line">		|- models2.php</span><br><span class="line">		|- ...(所有 Model 都只能放在同一層）</span><br><span class="line">	|- views</span><br><span class="line">		|- views1</span><br><span class="line">			|- index.php</span><br><span class="line">			|- footer.php</span><br><span class="line">			|- ...</span><br><span class="line">		|- views2</span><br><span class="line">			|- index.php</span><br><span class="line">			|- footer.php</span><br></pre></td></tr></table></figure>
-
-<h3 id="HMVC-帶來的解決方案："><a href="#HMVC-帶來的解決方案：" class="headerlink" title="HMVC 帶來的解決方案："></a>HMVC 帶來的解決方案：</h3><p>擴展 MVC 架構，<code>讓 MVC 底下可以再擴充一層或多層子 MVC</code>，讓單層 MVC 變成階層式 MVC，而這些擴充的 MVC，又稱作為模組、模塊(Modules)。<br>使用模組好處是：</p>
-<ul>
-<li>使每個功能都可以獨立出來</li>
-<li>因模組變得獨立，降低各個功能模組之間的耦合性</li>
-<li>提高程式碼複用性</li>
-<li>每個模組都有自己的 MVC 結構</li>
-</ul>
-<h4 id="HMVC-架構示意圖："><a href="#HMVC-架構示意圖：" class="headerlink" title="HMVC 架構示意圖："></a>HMVC 架構示意圖：</h4><p><img src="/blog/images/pasted-13.png" alt="HMVC 架構示意圖"></p>
-<h3 id="CodeIgniter-HMVC-擴展模組後，其結構-階層式-MVC-如下："><a href="#CodeIgniter-HMVC-擴展模組後，其結構-階層式-MVC-如下：" class="headerlink" title="CodeIgniter HMVC 擴展模組後，其結構(階層式 MVC)如下："></a>CodeIgniter HMVC 擴展模組後，其結構(階層式 MVC)如下：</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">application</span><br><span class="line">	|- modules</span><br><span class="line">		|- moduleA </span><br><span class="line">			|- controllers</span><br><span class="line">				|- controllers.php</span><br><span class="line">			|- models</span><br><span class="line">				|- models.php</span><br><span class="line">			|- views</span><br><span class="line">				|- index.php</span><br><span class="line">				|- footer.php</span><br><span class="line">				|- ...</span><br><span class="line">			|- modules (模組 A 底下還可以有子模組...）</span><br><span class="line">				|- controllers</span><br><span class="line">		|- moduleB </span><br><span class="line">			|- controllers</span><br><span class="line">				|- controllers.php</span><br><span class="line">			|- models</span><br><span class="line">				|- models.php</span><br><span class="line">			|- views</span><br><span class="line">				|- index.php</span><br><span class="line">				|- footer.php</span><br><span class="line">				|- ...</span><br><span class="line">                 	|- modules (模組 B 底下還可以有子模組...）</span><br><span class="line">				|- controllers</span><br><span class="line">		|- ....</span><br><span class="line">	|- controllers</span><br><span class="line">		|- ...</span><br><span class="line">	|- models</span><br><span class="line">		|- ...</span><br><span class="line">	|- views</span><br><span class="line">		|- ...</span><br></pre></td></tr></table></figure>
-
-<h2 id="真實使用情境："><a href="#真實使用情境：" class="headerlink" title="真實使用情境："></a>真實使用情境：</h2><p>某系統中有個 <code>表單管理</code> 的功能如下圖，但是 <code>表單管理</code> 底下其實有多個功能，這些功能都屬於 <code>表單管理</code> 的範疇:  </p>
-<p><img src="/blog/images/pasted-14.png" alt="真實使用情境"></p>
-<p>只有單層 MVC 架構的情況下，這些功能的程式碼都必須寫在同一個 Controller 裡面。因此 <strong>單層 Controller 會在很短的時間內便得龐大又複雜</strong>。</p>
-<p>在 HMVC 架構中，則可以把這些功能全部拆分成 <code>表單管理</code> 底下的模組。<br>這麼做 <strong>減輕了單層 Controller 對每個功能模組的耦合。拆出去的模組也變得高內聚，且模組的功能變得更容易複用。</strong></p>
-<h3 id="表單管理-HMVC-模組結構"><a href="#表單管理-HMVC-模組結構" class="headerlink" title="表單管理 HMVC 模組結構"></a>表單管理 HMVC 模組結構</h3><p><img src="/blog/images/pasted-15.png" alt="表單管理 HMVC 模組結構"></p>
-<h2 id="不斷地抽象、封裝"><a href="#不斷地抽象、封裝" class="headerlink" title="不斷地抽象、封裝"></a>不斷地抽象、封裝</h2><p>HMVC 可以說是物件導向程式設計的體現。</p>
-<p><strong>一個良好的物件導向系統，會隨著程式碼的複雜度上升與變化增加，不斷的進行抽象、封裝。</strong></p>
-<p>抽象是將一系列相關的程式碼做歸納，目的是降低人類的認知超載。<br>而封裝是抽象過程中的一種技術，且物件導向開發<strong>傾封裝複雜的過程</strong>，以便重複利用。</p>
-<p>如果不做抽象會怎樣？嘗試一下下面的範例:</p>
-<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// If url is an object, simulate pre-1.5 signature</span></span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">typeof</span> url === <span class="hljs-string">"object"</span>) &#123;</span><br><span class="line">    options = url;</span><br><span class="line">    url = <span class="hljs-literal">undefined</span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// Force options to be an object</span></span><br><span class="line">options = options || &#123;&#125;;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">var</span> <span class="hljs-comment">// Create the final options object</span></span><br><span class="line">s = jQuery.ajaxSetup(&#123;&#125;, options),</span><br><span class="line"><span class="hljs-comment">// Callbacks context</span></span><br><span class="line">callbackContext = s.context || s,</span><br><span class="line"><span class="hljs-keyword">var</span> <span class="hljs-comment">// Create the final options object</span></span><br><span class="line">s = jQuery.ajaxSetup(&#123;&#125;, options),</span><br><span class="line"><span class="hljs-comment">// Callbacks context</span></span><br><span class="line">callbackContext = s.context || s,</span><br><span class="line"><span class="hljs-comment">// Context for global events</span></span><br><span class="line"><span class="hljs-comment">// It's the callbackContext if one was provided in the options</span></span><br><span class="line"><span class="hljs-comment">// and if it's a DOM node or a jQuery collection</span></span><br><span class="line">globalEventContext = callbackContext !== s &amp;&amp;</span><br><span class="line">( callbackContext.nodeType || callbackContext <span class="hljs-keyword">instanceof</span> jQuery ) ?</span><br><span class="line">    jQuery(callbackContext) : jQuery.event,</span><br><span class="line"><span class="hljs-comment">// Deferreds</span></span><br><span class="line">deferred = jQuery.Deferred(),</span><br><span class="line">completeDeferred = jQuery.Callbacks(<span class="hljs-string">"once memory"</span>),</span><br><span class="line"><span class="hljs-comment">// Status-dependent callbacks</span></span><br><span class="line">statusCode = s.statusCode || &#123;&#125;,</span><br><span class="line"><span class="hljs-comment">// ifModified key</span></span><br><span class="line">ifModifiedKey,</span><br><span class="line"><span class="hljs-comment">// Headers (they are sent all at once)</span></span><br><span class="line">requestHeaders = &#123;&#125;,</span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> *  ajax 全長有 380 行程式碼，故省略。</span></span><br><span class="line"><span class="hljs-comment"> **/</span></span><br></pre></td></tr></table></figure>
-
-<p>上面這段程式碼都是「實作」非同步連線功能的程式碼。而 jQuery 將這段程式碼<code>抽象成大家熟悉的 $.ajax</code>。<br>如果每次使用非同步連線功能都要寫 380 行程式碼，那真的會瘋掉。</p>
-<h4 id="HMVC-除了封裝以外，又讓模組享有-MVC-的功能"><a href="#HMVC-除了封裝以外，又讓模組享有-MVC-的功能" class="headerlink" title="HMVC 除了封裝以外，又讓模組享有 MVC 的功能"></a>HMVC 除了封裝以外，又讓模組享有 MVC 的功能</h4><p>HMVC 不只是單純的進行抽象，<strong>也讓每個模組享有 MVC 架構的功能</strong>！</p>
-<h3 id="參考資源"><a href="#參考資源" class="headerlink" title="參考資源"></a>參考資源</h3><ul>
-<li><a href="https://blog.csdn.net/yxwb1253587469/article/details/51917152" target="_blank" rel="noopener">讓Codeigniter支持HMVC架構</a></li>
-<li><a href="https://www.oschina.net/question/5189_23653" target="_blank" rel="noopener">什麼是 HMVC</a></li>
-<li><a href="https://zh.wikipedia.org/wiki/HMVC" target="_blank" rel="noopener">HMVC Wiki</a></li>
-<li><a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" target="_blank" rel="noopener">wiredesignz-codeigniter-hmvc</a></li>
-</ul>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/blog/codeigniter_3_hmvc/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>
@@ -607,7 +582,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1026 個字)
+                    7 分鐘 閱讀文 (大約 1027 個字)
                 </span>
                 
                 
@@ -624,21 +599,16 @@
 <p>在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。</p>
 </blockquote>
 <h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>重構的主要目的就是為了提升程式碼品質、<strong>提升程式碼的可讀性</strong>，以及為了日後有新需求的變化時，程式碼可以 <strong>更容易修改或是擴充</strong>（提高可維護性）。</p>
-<h3 id="優點："><a href="#優點：" class="headerlink" title="優點："></a>優點：</h3><h4 id="1-改進程式碼的設計："><a href="#1-改進程式碼的設計：" class="headerlink" title="1. 改進程式碼的設計："></a>1. 改進程式碼的設計：</h4><p>消除重覆的程式碼，每個小功能被歸責到適當的物件中，讓程式碼的職責更清楚就會更容易維護。<br>將雜亂無序的程式碼，重構成一連串的 <strong>精心設計</strong> 的流程，讓程式碼更容易擴充。</p>
-<h4 id="2-程式碼更容易被理解："><a href="#2-程式碼更容易被理解：" class="headerlink" title="2. 程式碼更容易被理解："></a>2. 程式碼更容易被理解：</h4><p>重構簡單的講，就是整理程式碼，可以透過 <a href="https://laravel-china.org/topics/7774/the-conciseness-of-the-php-code-php-clean-code" target="_blank" rel="noopener">Clean Code 的規範</a> 來整理程式碼，提升可讀性。<br>想想程式碼過一段時間後的第二個讀者，而且這個人常常是你自己。</p>
-<h4 id="3-Debug-更容易："><a href="#3-Debug-更容易：" class="headerlink" title="3. Debug 更容易："></a>3. Debug 更容易：</h4><p>重構的過程中，會透過單一職責原則，依照程式碼的工作責任將程式碼整理至責任相同的類別中。有責任清楚的物件，就能更快釐清問題點，除錯速度自然能夠提升。</p>
-<h1 id="什麼時候可以開始重構？"><a href="#什麼時候可以開始重構？" class="headerlink" title="什麼時候可以開始重構？"></a>什麼時候可以開始重構？</h1><p>事實上，重構並不是一項需要額外撥出時間來進行的工作，<strong>重構應該是在你的開發過程中持續在發生的事情</strong>。 重構的活動，最理想的情況，就是透過持續不斷的整理，掃除那些有礙程式可讀性及可維護性的程式碼，讓程式碼持續盡可能地保持在一定健康的狀態。</p>
-<p>既然重構是一個持續進行的活動，但又不是特意安排、特別撥出時間來做的工作，那麼，在什麼樣明確的時間點，應該觸發重構的進行呢？基本上，<strong>重構的活動應該伴隨著我們一般開發過程中的主要活動來進行。這些主要活動包括了：增加新功能、修正錯誤、以及程式碼審查的時候，還有三次法則</strong>。</p>
-<h2 id="三次法則："><a href="#三次法則：" class="headerlink" title="三次法則："></a>三次法則：</h2><p>同樣的事做三次，犯了 <a href="https://zh.wikipedia.org/wiki/%E4%B8%80%E6%AC%A1%E4%B8%94%E4%BB%85%E4%B8%80%E6%AC%A1" target="_blank" rel="noopener">Don’t Repeat Yourself</a> 原則，表示重複的邏輯該被重構成唯一且適當的物件或函式了。</p>
-<h3 id="新增功能時重構："><a href="#新增功能時重構：" class="headerlink" title="新增功能時重構："></a>新增功能時重構：</h3><blockquote>
-<p>當我們試著增加新功能時，便有可能發現舊有的程式碼可以進行一些調整，而達成了必須重構所想要達成的目的。</p>
-</blockquote>
-<p>但如果你在增加功能的時候，發現原設計就足以優雅地讓你將新功能擴充上去，那麼，這意謂著，還不太需要做什麼重構。</p>
-<h3 id="除錯時重構："><a href="#除錯時重構：" class="headerlink" title="除錯時重構："></a>除錯時重構：</h3><p>除錯的時候，你不僅會接觸到舊有的程式碼，而且，你通常得搞懂它真正的運作邏輯，當你真的懂了之後，就會知道如何用更清晰、簡潔的方式來改寫這段程式碼。</p>
-<h2 id="總結："><a href="#總結：" class="headerlink" title="總結："></a>總結：</h2><p>很多架構良好的程式，並不是一開始就規畫出來的，而是每天不斷不斷的重構、改進。重構也不用刻意安排時間去做，在每次做新功能或修改功能時就順便做重構整理，如果可以也一起加入 Unit Test。童子軍有一條軍規是 <strong>讓營地比你來時更乾淨</strong>，套用在寫程式上，就是在每次的 checkin ，<strong>程式碼應該都是要比 checkout 時更乾淨簡潔</strong>。</p>
-
         </div>
         
+        
+        <div class="level is-mobile">
+            <div class="level-start">
+                <div class="level-item">
+                <a class="button is-size-7 is-light" href="/blog/refactoring_definition_and_purpose/#more">繼續閱讀</a>
+                </div>
+            </div>
+        </div>
         
         
     </div>

@@ -20,7 +20,7 @@
 <meta property="og:description" content="CodeIgniter 框架擴展：HMVCHierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。 為什麼需要 HMVC單層 MVC 的限制原 MVC 架構中只有單層 MVC，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得巨大、縱錯複雜、互相耦合、難">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHP.jpg">
-<meta property="og:updated_time" content="2019-12-18T14:23:53.416Z">
+<meta property="og:updated_time" content="2019-12-18T14:33:04.961Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHP.jpg">
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1084 個字)
+                    7 分鐘 閱讀文 (大約 1085 個字)
                 </span>
                 
                 
@@ -170,6 +170,8 @@
         <div class="content">
             <h1 id="CodeIgniter-框架擴展：HMVC"><a href="#CodeIgniter-框架擴展：HMVC" class="headerlink" title="CodeIgniter 框架擴展：HMVC"></a>CodeIgniter 框架擴展：HMVC</h1><p>Hierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。</p>
 <h2 id="為什麼需要-HMVC"><a href="#為什麼需要-HMVC" class="headerlink" title="為什麼需要 HMVC"></a>為什麼需要 HMVC</h2><h3 id="單層-MVC-的限制"><a href="#單層-MVC-的限制" class="headerlink" title="單層 MVC 的限制"></a>單層 MVC 的限制</h3><p><code>原 MVC 架構中只有單層 MVC</code>，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得<strong>巨大、縱錯複雜、互相耦合、難以維護</strong>。試想一下，一個 Controller 內有 7、8 千行程式碼會容易維護嗎。</p>
+<a id="more"></a>
+
 <p>原 CodeIgniter MVC 架構(單層 MVC)示意圖：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">application</span><br><span class="line">	|- controllers</span><br><span class="line">		|- controllersA.php</span><br><span class="line">		|- controllersB.php</span><br><span class="line">		|- ...(所有 Controller 都只能放在同一層）</span><br><span class="line">	|- models</span><br><span class="line">		|- models1.php</span><br><span class="line">		|- models2.php</span><br><span class="line">		|- ...(所有 Model 都只能放在同一層）</span><br><span class="line">	|- views</span><br><span class="line">		|- views1</span><br><span class="line">			|- index.php</span><br><span class="line">			|- footer.php</span><br><span class="line">			|- ...</span><br><span class="line">		|- views2</span><br><span class="line">			|- index.php</span><br><span class="line">			|- footer.php</span><br></pre></td></tr></table></figure>
 
