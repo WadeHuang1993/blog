@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
+    
+    <lastmod>2019-12-18T14:33:59.021Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wadehuang1993.github.io/blog/refactoring_definition_and_purpose/</loc>
     
     <lastmod>2019-12-18T14:33:22.309Z</lastmod>
@@ -16,9 +23,9 @@
   </url>
   
   <url>
-    <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
+    <loc>https://wadehuang1993.github.io/blog/Cluelessness/</loc>
     
-    <lastmod>2019-12-18T13:54:58.196Z</lastmod>
+    <lastmod>2019-12-18T14:32:51.697Z</lastmod>
     
   </url>
   
@@ -40,13 +47,6 @@
     <loc>https://wadehuang1993.github.io/blog/why_we_need_SOLID_principles/</loc>
     
     <lastmod>2019-12-14T03:34:47.443Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/Cluelessness/</loc>
-    
-    <lastmod>2019-12-14T03:34:38.484Z</lastmod>
     
   </url>
   
