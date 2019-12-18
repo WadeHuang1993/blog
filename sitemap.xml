@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wadehuang1993.github.io/blog/codeigniter_3_hmvc/</loc>
+    
+    <lastmod>2019-12-18T13:55:15.328Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
+    
+    <lastmod>2019-12-18T13:54:58.196Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
     
     <lastmod>2019-12-16T09:31:47.511Z</lastmod>
@@ -26,13 +40,6 @@
     <loc>https://wadehuang1993.github.io/blog/Cluelessness/</loc>
     
     <lastmod>2019-12-14T03:34:38.484Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
-    
-    <lastmod>2019-12-14T03:34:11.415Z</lastmod>
     
   </url>
   

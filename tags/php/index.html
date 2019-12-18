@@ -8,21 +8,18 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <meta name="google-site-verification" content="5JWyXG4mx6i5avE6xJfXIRHu_YCofrhDQRCEgbm_5ak" />
-<title>再談 SOLID 原則，Why SOLID? - WadeHuang1993&#39;s Blog</title>
+<title>標籤: php - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="description" content="Why SOLID? 在前一篇文章中介紹 SOLID 對一個工程師的影響，這裡再稍微補充一下為什麼軟體開發會需要 SOLID 原則？">
-<meta name="keywords" content="SOLID 原則,Clean Code">
-<meta property="og:type" content="article">
-<meta property="og:title" content="再談 SOLID 原則，Why SOLID?">
-<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;2019&#x2F;11&#x2F;01&#x2F;why_we_need_SOLID_principles&#x2F;index.html">
+    <meta name="keywords" content="PHP, OOP, JavaScript, Web development">
+<meta property="og:type" content="website">
+<meta property="og:title" content="WadeHuang1993&#39;s Blog">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;tags&#x2F;php&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
-<meta property="og:description" content="Why SOLID? 在前一篇文章中介紹 SOLID 對一個工程師的影響，這裡再稍微補充一下為什麼軟體開發會需要 SOLID 原則？">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
-<meta property="og:updated_time" content="2019-12-14T03:34:47.443Z">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;og_image.png">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;og_image.png">
 
 
 
@@ -83,14 +80,14 @@
 <link rel="stylesheet" href="/blog/css/style.css">
 
 </head>
-<!-- <body class="is-2-column"> -->
+<!-- <body class="is-3-column"> -->
 <body class="is-3-column">
     <nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/blog/">
             
-                <img src="/blog/images/mylogo.png" alt="再談 SOLID 原則，Why SOLID?" height="28">
+                <img src="/blog/images/mylogo.png" alt="WadeHuang1993&#39;s Blog" height="28">
             
             </a>
         </div>
@@ -115,10 +112,6 @@
             <div class="navbar-end">
                 
                 
-                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
-                    <i class="fas fa-list-ul"></i>
-                </a>
-                
                 
                 <a class="navbar-item search" title="搜尋" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -132,143 +125,55 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
-<div class="card">
-    
-    <div class="card-image">
-        <span  class="image is-7by1">
-            <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="再談 SOLID 原則，Why SOLID?">
-        </span>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-11-01T01:34:00.000Z">2019-11-01</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    9 分鐘 閱讀文 (大約 1347 個字)
-                </span>
-                
-                
-            </div>
-        </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
-            
-                再談 SOLID 原則，Why SOLID?
-            
-        </h1>
-        <div class="content">
-            <p>Why SOLID?</p>
-<p>在<a href="https://wadehuang1993.github.io/blog/2019/10/30/why_SOLID_principles_matter_to_you/">前一篇文章中介紹 SOLID 對一個工程師的影響</a>，這裡再稍微補充一下為什麼軟體開發會需要 SOLID 原則？</p>
-<a id="more"></a>
-
-<h2 id="軟體複雜的本質"><a href="#軟體複雜的本質" class="headerlink" title="軟體複雜的本質"></a>軟體複雜的本質</h2><p>專案經常會歷經「商業邏輯調整」和「快速且多變的需求」，這都不是開發環節所能控制的，但是一個專案會「遇到困難」常常是因為 糟糕的程式設計 和其他技術層面導致。</p>
-<p>其中 糟糕的程式設計 又可分成三大因素：</p>
-<ul>
-<li>程式碼變更</li>
-<li>Bug 修復</li>
-<li>複雜度控制</li>
-</ul>
-<p>在添加功能前應該 <strong>閱讀代碼並細心設計</strong>，但實際上更常發生的是，開發者選擇<strong>直接在程式碼上面堆疊新的程式碼</strong>。<strong>新舊版本</strong> 和 <strong>意圖不同</strong> 的程式碼錯綜複雜之下，會讓專案難以在不引發連鎖反應的情況下增加功能。最後新的功能引入 Bug，從而導致另一個 Bug，然後一個接著一個，這樣的事情不斷發生。</p>
-<p>在 <strong>沒有做過可擴展性設計的程式碼</strong> 上進行擴展功能，常常是火上加油！<br>那為什麼不把程式「設計」成可擴展就好了呢？</p>
-<h2 id="開發者知識普遍不足"><a href="#開發者知識普遍不足" class="headerlink" title="開發者知識普遍不足"></a>開發者知識普遍不足</h2><p>一個充滿外行人的產業</p>
-<p>開發者們來自不同的背景，且有大量不同的方式去解決問題，但是一個開發者應該具備什麼樣的知識體系，卻沒有一個廣泛的共識。</p>
-<p>更不幸的是，許多開發者在學校裡面學到的知識是過時的，學校提供的程式設計課程並未給學生做好準備。這些課程通常只關注程式語言的功能，但是 …</p>
-<blockquote>
-<p>掌握一門程式語言並不能使你成為軟體開發者，正如掌握一門自然語言並不能使你成為作家</p>
-</blockquote>
-<p>學校所教的知識，並不是大部分軟體開發者的工作內容。<strong>開發者也許能編寫一個可運行的程式碼，但若要回頭去擴展程式碼卻常常是艱難且冒險的</strong>。</p>
-<p>軟體開發過程中，開發者需要做出無數個選擇，加上每個開發者用不同的方法解決問題，助長了難以維護、難以擴展的程式碼。最終讓 <strong>系統設計的思想溝通</strong> 變得困難。</p>
-<blockquote>
-<p>工程師必須花費大量時間閱讀程式碼。</p>
-</blockquote>
-<p>不論是開發者還是管理者都需要對 <strong>軟體複雜的本質</strong> 做管理。為了編寫出更容易應對變化的程式碼，我們必須填補基礎認知方面的空白。</p>
-<h2 id="導入設計原則"><a href="#導入設計原則" class="headerlink" title="導入設計原則"></a>導入設計原則</h2><p>若有一些原則可以指導工程師在 <strong>一定的情況下理解每個選擇的所得所失</strong> 並做出最佳權衡，則可以統一工程師解決問題的方法，降低 <strong>系統設計思想溝通</strong> 的困難度。</p>
-<p>Uncle Bob 花費多年整理了許多開發人員、研究人員的思想和著作結晶，提出了 5 個設計原則：</p>
-<ul>
-<li>單一職責原則（The Single Responsibility Principle, 簡稱 SRP)</li>
-<li>開放-封閉原則 (The Open-Close Principle, 簡稱 OCP)</li>
-<li>里氏替換原則 (The Liskov Substitution Principle, 簡稱 LSP)</li>
-<li>依賴倒置原則 (The Dependency Inversion Principle, 簡稱 DIP)</li>
-<li>接口隔離原則 (Interface Segregation Principle, 簡稱 ISP)</li>
-</ul>
-<blockquote>
-<p>SOLID 原則目的是讓程式碼在面對改變時，能有一套策略來應對。</p>
-</blockquote>
-<p>SOLID 原則指導開發者們該 <strong>如何將函式和資料結構安排到類別中</strong>，以及這些 <strong>類別該如何互相關聯</strong>。</p>
-<p>遵循 SOLID 原則的程式碼具有以下特性：</p>
-<ul>
-<li>能夠容忍變化</li>
-<li>容易擴展新邏輯</li>
-<li>容易理解</li>
-<li>容易複用</li>
-</ul>
-<p>雖然 SOLID 原則是 <strong>物件導向</strong> 的設計原則，但事實上這些原則與思維一直存在軟體工程中。因此 SOLID 原則的思維可以延伸套用至非物件導向語言、系統架構等等領域。</p>
-<p>順帶一提，SOLID 原則並沒有順序關係，單純是 Michael Feathers(1 發了電子郵件告訴 Uncle Bob 可以用 SOLID 這個詞彙將 5 個原則串起來變成口訣方便記憶。<br>所以在學習 SOLID 原則的過程中，可以不用按照順序學習。</p>
-<p>備註：</p>
-<ol>
-<li>Michael Feathers 是 Working Effectively with Legacy Code 的作者，也是一本開發者必讀經典書籍。</li>
-</ol>
-<p>此文章也會同步到：<a href="https://wadehuanglearning.blogspot.com/2019/10/solid-why-solid.html" target="_blank" rel="noopener">我的部落格</a></p>
-<h2 id="系列文章："><a href="#系列文章：" class="headerlink" title="系列文章："></a>系列文章：</h2><ol>
-<li><a href="/blog/2019/10/30/why_SOLID_principles_matter_to_you/">淺談物件導向 SOLID 原則對工程師的好處與如何影響能力</a></li>
-<li><a href="/blog/2019/11/01/why_we_need_SOLID_principles/">再談 SOLID 原則，Why SOLID?</a></li>
-<li><a href="/blog/2019/12/03/solid_srp_definition_and_practices/">物件導向設計原則：單一職責原則，定義、解析與實踐</a></li>
-<li><a href="https://wadehuang1993.github.io/blog/2019/12/09/solid_ocp_definition_and_practices/">物件導向設計原則：開放封閉原則，定義、解析與實踐</a></li>
-</ol>
-
-        </div>
-        
-        <div class="level is-size-7 is-uppercase">
-            <div class="level-start">
-                <div class="level-item">
-                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
-                    <a class="has-link-grey -link" href="/blog/tags/Clean-Code/" rel="tag">Clean Code</a>, <a class="has-link-grey -link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a>
-                </div>
-            </div>
-        </div>
-        
-        
-        
+                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main"><div class="card">
+    <div class="card-content">
+        <nav class="breadcrumb" aria-label="breadcrumbs">
+        <ul>
+            <li><a href="/blog/tags">標籤</a></li>
+            <li class="is-active"><a href="#" aria-current="page">php</a></li>
+        </ul>
+        </nav>
     </div>
 </div>
 
-
-
-
-
-<div class="card card-transparent">
-    <div class="level post-navigation is-flex-wrap is-mobile">
         
-        <div class="level-start">
-            <a class="level level-item has-link-grey  article-nav-prev" href="/blog/2019/11/21/Cluelessness/">
-                <i class="level-item fas fa-chevron-left"></i>
-                <span class="level-item">軟體開發中的“無緒”</span>
-            </a>
+<div class="card widget">
+    <div class="card-content">
+        <h3 class="tag is-link">
+        2019
+        </h3>
+        <div class="timeline">
+        
+            <article class="media">
+                
+                <a href="/blog/codeigniter_3_hmvc/" class="media-left">
+                    <p class="image is-64x64">
+                        <img class="thumbnail" src="/blog/images/thumbnail/PHP.jpg" alt="階層式架構">
+                    </p>
+                </a>
+                
+                <div class="media-content">
+                    <div class="content">
+                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-05-22T12:29:00.000Z">2019-05-22</time>
+                        <a href="/blog/codeigniter_3_hmvc/" class="title has-link-black-ter is-size-6 has-text-weight-normal">階層式架構</a>
+                        <div class="level article-meta is-mobile">
+                            <div class="level-left">
+                                
+                                <div class="level-item is-size-7 is-uppercase">
+                                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                                </div>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </article>
+        
         </div>
-        
-        
-        <div class="level-end">
-            <a class="level level-item has-link-grey  article-nav-next" href="/blog/2019/10/30/why_SOLID_principles_matter_to_you/">
-                <span class="level-item">淺談物件導向 SOLID 原則對工程師的好處與如何影響能力</span>
-                <i class="level-item fas fa-chevron-right"></i>
-            </a>
-        </div>
-        
     </div>
 </div>
 
-
+    
 </div>
                 
 
@@ -278,34 +183,6 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
     
         
-
-    <div class="card widget" id="toc">
-        <div class="card-content">
-            <div class="menu">
-                <h3 class="menu-label">
-                    文章目錄
-                </h3>
-                <ul class="menu-list"><li>
-        <a class="is-flex" href="#軟體複雜的本質">
-        <span class="has-mr-6">1</span>
-        <span>軟體複雜的本質</span>
-        </a></li><li>
-        <a class="is-flex" href="#開發者知識普遍不足">
-        <span class="has-mr-6">2</span>
-        <span>開發者知識普遍不足</span>
-        </a></li><li>
-        <a class="is-flex" href="#導入設計原則">
-        <span class="has-mr-6">3</span>
-        <span>導入設計原則</span>
-        </a></li><li>
-        <a class="is-flex" href="#系列文章：">
-        <span class="has-mr-6">4</span>
-        <span>系列文章：</span>
-        </a></li></ul>
-            </div>
-        </div>
-    </div>
-
     
         <div class="card widget">
     <div class="card-content">
@@ -315,7 +192,7 @@
         
         <article class="media">
             
-            <a href="/blog/2019/12/09/solid_ocp_definition_and_practices/" class="media-left">
+            <a href="/blog/solid_ocp_definition_and_practices/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐">
                 </p>
@@ -324,7 +201,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T06:11:00.000Z">2019-12-09</time></div>
-                    <a href="/blog/2019/12/09/solid_ocp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：開放封閉原則，定義、解析與實踐</a>
+                    <a href="/blog/solid_ocp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：開放封閉原則，定義、解析與實踐</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
                     </p>
@@ -334,7 +211,7 @@
         
         <article class="media">
             
-            <a href="/blog/2019/12/03/solid_srp_definition_and_practices/" class="media-left">
+            <a href="/blog/solid_srp_definition_and_practices/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：單一職責原則，定義、解析與實踐">
                 </p>
@@ -343,7 +220,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T03:04:00.000Z">2019-12-03</time></div>
-                    <a href="/blog/2019/12/03/solid_srp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：單一職責原則，定義、解析與實踐</a>
+                    <a href="/blog/solid_srp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：單一職責原則，定義、解析與實踐</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
                     </p>
@@ -353,7 +230,7 @@
         
         <article class="media">
             
-            <a href="/blog/2019/11/22/cluelessness_in_self_learning/" class="media-left">
+            <a href="/blog/cluelessness_in_self_learning/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/blog/images/thumbnail/SELF_TEACHING.jpg" alt="自學時應該看破“無緒”">
                 </p>
@@ -362,7 +239,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-22T03:09:00.000Z">2019-11-22</time></div>
-                    <a href="/blog/2019/11/22/cluelessness_in_self_learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">自學時應該看破“無緒”</a>
+                    <a href="/blog/cluelessness_in_self_learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">自學時應該看破“無緒”</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
                     </p>
@@ -372,7 +249,7 @@
         
         <article class="media">
             
-            <a href="/blog/2019/11/21/Cluelessness/" class="media-left">
+            <a href="/blog/Cluelessness/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="軟體開發中的“無緒”">
                 </p>
@@ -381,7 +258,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T09:41:00.000Z">2019-11-21</time></div>
-                    <a href="/blog/2019/11/21/Cluelessness/" class="title has-link-black-ter is-size-6 has-text-weight-normal">軟體開發中的“無緒”</a>
+                    <a href="/blog/Cluelessness/" class="title has-link-black-ter is-size-6 has-text-weight-normal">軟體開發中的“無緒”</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
                     </p>
@@ -391,7 +268,7 @@
         
         <article class="media">
             
-            <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" class="media-left">
+            <a href="/blog/why_we_need_SOLID_principles/" class="media-left">
                 <p class="image is-64x64">
                     <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="再談 SOLID 原則，Why SOLID?">
                 </p>
@@ -400,7 +277,7 @@
             <div class="media-content">
                 <div class="content">
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-01T01:34:00.000Z">2019-11-01</time></div>
-                    <a href="/blog/2019/11/01/why_we_need_SOLID_principles/" class="title has-link-black-ter is-size-6 has-text-weight-normal">再談 SOLID 原則，Why SOLID?</a>
+                    <a href="/blog/why_we_need_SOLID_principles/" class="title has-link-black-ter is-size-6 has-text-weight-normal">再談 SOLID 原則，Why SOLID?</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
                     </p>
@@ -425,7 +302,7 @@
                 <span class="level-item">軟體開發思維</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">6</span>
+                <span class="level-item tag">7</span>
             </span>
         </a></li>
             </ul>
@@ -474,6 +351,17 @@
             </a>
         </li>
         
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
         </ul>
         </div>
     </div>
@@ -502,6 +390,20 @@
                 </div>
                 
                 <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/codeigiter3/">
+                        <span class="tag">codeigiter3</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/php/">
+                        <span class="tag">php</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
                     <a class="tags has-addons" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/">
                         <span class="tag">自學技巧</span>
                         <span class="tag is-grey">2</span>
@@ -516,11 +418,284 @@
     
         <div class="column-right-shadow is-hidden-widescreen ">
         
+            
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/blog/images/avatar.jpg" alt="WadeHuangtw1993">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        WadeHuangtw1993
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        來自南部的菜鳥 RD
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Kaohsiung City, Taiwan</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/blog/archives">
+                        <p class="title has-text-weight-normal">
+                            7
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分類
+                    </p>
+                    <a href="/blog/categories">
+                        <p class="title has-text-weight-normal">
+                            1
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        標籤
+                    </p>
+                    <a href="/blog/tags">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="mailto:a2335825@gmail.com" target="_blank">
+                聯絡我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/WadeHuang1993">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Mail" href="mailto:a2335825@gmail.com">
+                
+                <i class="far fa-envelope"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+        
+            <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            連結
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://trello.com/b/lsamRb8y/%E6%9B%B8%E5%96%AE" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">我的書單</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">trello.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">hexo-theme-icarus</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+        
         </div>
     
 </div>
 
                 
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <nav class="level">
+            <div class="level-item has-text-centered" style="flex-shrink: 1">
+                <div>
+                    
+                    <figure class="image is-128x128 has-mb-6">
+                        <img class="is-rounded" src="/blog/images/avatar.jpg" alt="WadeHuangtw1993">
+                    </figure>
+                    
+                    <p class="is-size-4 is-block">
+                        WadeHuangtw1993
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-block">
+                        來自南部的菜鳥 RD
+                    </p>
+                    
+                    
+                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
+                        <i class="fas fa-map-marker-alt has-mr-7"></i>
+                        <span>Kaohsiung City, Taiwan</span>
+                    </p>
+                    
+                </div>
+            </div>
+        </nav>
+        <nav class="level is-mobile">
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        文章
+                    </p>
+                    <a href="/blog/archives">
+                        <p class="title has-text-weight-normal">
+                            7
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        分類
+                    </p>
+                    <a href="/blog/categories">
+                        <p class="title has-text-weight-normal">
+                            1
+                        </p>
+                    </a>
+                </div>
+            </div>
+            <div class="level-item has-text-centered is-marginless">
+                <div>
+                    <p class="heading">
+                        標籤
+                    </p>
+                    <a href="/blog/tags">
+                        <p class="title has-text-weight-normal">
+                            5
+                        </p>
+                    </a>
+                </div>
+            </div>
+        </nav>
+        
+        <div class="level">
+            <a class="level-item button is-link is-rounded" href="mailto:a2335825@gmail.com" target="_blank">
+                聯絡我</a>
+        </div>
+        
+        
+        
+        <div class="level is-mobile">
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Github" href="https://github.com/WadeHuang1993">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+            
+            <a class="level-item button is-white is-marginless" target="_blank"
+                title="Mail" href="mailto:a2335825@gmail.com">
+                
+                <i class="far fa-envelope"></i>
+                
+            </a>
+            
+        </div>
+        
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            連結
+        </h3>
+        <ul class="menu-list">
+        
+            <li>
+                <a class="level is-mobile" href="https://trello.com/b/lsamRb8y/%E6%9B%B8%E5%96%AE" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">我的書單</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">trello.com</span>
+                    </span>
+                </a>
+            </li>
+        
+            <li>
+                <a class="level is-mobile" href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">
+                    <span class="level-left">
+                        <span class="level-item">hexo-theme-icarus</span>
+                    </span>
+                    <span class="level-right">
+                        <span class="level-item tag">github.com</span>
+                    </span>
+                </a>
+            </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+
+    
+    
+</div>
+
             </div>
         </div>
     </section>
@@ -530,7 +705,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/blog/">
                 
-                    <img src="/blog/images/mylogo.png" alt="再談 SOLID 原則，Why SOLID?" height="28">
+                    <img src="/blog/images/mylogo.png" alt="WadeHuang1993&#39;s Blog" height="28">
                 
                 </a>
                 <p class="is-size-7">
