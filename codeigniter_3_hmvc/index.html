@@ -11,16 +11,16 @@
 <title>CodeIgniter 3 框架擴展套件：HMVC - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="description" content="CodeIgniter 框架擴展：HMVCHierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。 為什麼需要 HMVC單層 MVC 的限制原 MVC 架構中只有單層 MVC，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得巨大、縱錯複雜、互相耦合、難">
+    <meta name="description" content="Hierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。 為什麼需要 HMVC單層 MVC 的限制原 MVC 架構中只有單層 MVC，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得巨大、縱錯複雜、互相耦合、難以維護。試想一下，一個 Controlle">
 <meta name="keywords" content="codeigiter3,php">
 <meta property="og:type" content="article">
 <meta property="og:title" content="CodeIgniter 3 框架擴展套件：HMVC">
 <meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;codeigniter_3_hmvc&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
-<meta property="og:description" content="CodeIgniter 框架擴展：HMVCHierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。 為什麼需要 HMVC單層 MVC 的限制原 MVC 架構中只有單層 MVC，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得巨大、縱錯複雜、互相耦合、難">
+<meta property="og:description" content="Hierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。 為什麼需要 HMVC單層 MVC 的限制原 MVC 架構中只有單層 MVC，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得巨大、縱錯複雜、互相耦合、難以維護。試想一下，一個 Controlle">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHP.jpg">
-<meta property="og:updated_time" content="2019-12-18T14:33:04.961Z">
+<meta property="og:updated_time" content="2019-12-18T14:44:10.143Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHP.jpg">
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    7 分鐘 閱讀文 (大約 1085 個字)
+                    7 分鐘 閱讀文 (大約 1078 個字)
                 </span>
                 
                 
@@ -168,7 +168,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="CodeIgniter-框架擴展：HMVC"><a href="#CodeIgniter-框架擴展：HMVC" class="headerlink" title="CodeIgniter 框架擴展：HMVC"></a>CodeIgniter 框架擴展：HMVC</h1><p>Hierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。</p>
+            <p>Hierarchical(階層式的)-Model-View-Controller（HMVC）模式，也可以叫做 Layered MVC。</p>
 <h2 id="為什麼需要-HMVC"><a href="#為什麼需要-HMVC" class="headerlink" title="為什麼需要 HMVC"></a>為什麼需要 HMVC</h2><h3 id="單層-MVC-的限制"><a href="#單層-MVC-的限制" class="headerlink" title="單層 MVC 的限制"></a>單層 MVC 的限制</h3><p><code>原 MVC 架構中只有單層 MVC</code>，單層 MVC 的設計本身沒問題，但隨著系統功能逐漸變多變複雜時，程式碼卻只能塞進單層 MVC 裡面，程式碼很快就會變得<strong>巨大、縱錯複雜、互相耦合、難以維護</strong>。試想一下，一個 Controller 內有 7、8 千行程式碼會容易維護嗎。</p>
 <a id="more"></a>
 
@@ -264,42 +264,46 @@
                     文章目錄
                 </h3>
                 <ul class="menu-list"><li>
-        <a class="is-flex" href="#CodeIgniter-框架擴展：HMVC">
-        <span class="has-mr-6">1</span>
-        <span>CodeIgniter 框架擴展：HMVC</span>
-        </a><ul class="menu-list"><li>
         <a class="is-flex" href="#為什麼需要-HMVC">
-        <span class="has-mr-6">1.1</span>
+        <span class="has-mr-6">1</span>
         <span>為什麼需要 HMVC</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#單層-MVC-的限制">
-        <span class="has-mr-6">1.1.1</span>
+        <span class="has-mr-6">1.1</span>
         <span>單層 MVC 的限制</span>
         </a></li><li>
         <a class="is-flex" href="#HMVC-帶來的解決方案：">
-        <span class="has-mr-6">1.1.2</span>
+        <span class="has-mr-6">1.2</span>
         <span>HMVC 帶來的解決方案：</span>
-        </a></li><li>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#HMVC-架構示意圖：">
+        <span class="has-mr-6">1.2.1</span>
+        <span>HMVC 架構示意圖：</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#CodeIgniter-HMVC-擴展模組後，其結構-階層式-MVC-如下：">
-        <span class="has-mr-6">1.1.3</span>
+        <span class="has-mr-6">1.3</span>
         <span>CodeIgniter HMVC 擴展模組後，其結構(階層式 MVC)如下：</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#真實使用情境：">
-        <span class="has-mr-6">1.2</span>
+        <span class="has-mr-6">2</span>
         <span>真實使用情境：</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#表單管理-HMVC-模組結構">
-        <span class="has-mr-6">1.2.1</span>
+        <span class="has-mr-6">2.1</span>
         <span>表單管理 HMVC 模組結構</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#不斷地抽象、封裝">
-        <span class="has-mr-6">1.3</span>
+        <span class="has-mr-6">3</span>
         <span>不斷地抽象、封裝</span>
-        </a><ul class="menu-list"><li>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#HMVC-除了封裝以外，又讓模組享有-MVC-的功能">
+        <span class="has-mr-6">3.1.1</span>
+        <span>HMVC 除了封裝以外，又讓模組享有 MVC 的功能</span>
+        </a></li></ul><li>
         <a class="is-flex" href="#參考資源">
-        <span class="has-mr-6">1.3.1</span>
+        <span class="has-mr-6">3.2</span>
         <span>參考資源</span>
-        </a></li></ul></li></ul></li></ul>
+        </a></li></ul></li></ul>
             </div>
         </div>
     </div>
