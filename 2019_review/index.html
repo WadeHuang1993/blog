@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為理論知識必須經過堆">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-19T14:13:10.396Z">
+<meta property="og:updated_time" content="2019-12-19T14:17:45.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    12 分鐘 閱讀文 (大約 1870 個字)
+                    13 分鐘 閱讀文 (大約 1878 個字)
                 </span>
                 
                 
@@ -171,7 +171,7 @@
 <h1 id="替專案導入單元測試-2018末-2019"><a href="#替專案導入單元測試-2018末-2019" class="headerlink" title="替專案導入單元測試(2018末~2019)"></a>替專案導入單元測試(2018末~2019)</h1><p>時間拉回到剛搬到高雄的 2018 末。當時我才剛學會重構和單元測試。面試時，公司的技術顧問說公司想要導入單元測試和重構，希望我一定要進公司幫忙。我也答應了！真的很感謝有這個機會進來幫忙。</p>
 <p>這間公司的專案使用 CodeIgniter 3 框架（後面簡稱 CI3)，CI3 本身並不是倡導物件導向開發風格的框架，專案的程式碼自然而然也是偏向義大利麵風格。加上專案是維護多年的大系統，在這樣的環境下導入單元測試變得很困難！  </p>
 <p>雖然說導入單元測試很困難，但說真的，除非專案使用物件導向風格開發以及有持續重構的習慣，不然不可能輕易導入單元測試吧！而且從身邊碼農朋友的經驗看來，幾乎 100% 的專案沒辦法輕易導入單元測試。所以我<strong>把這次的困難當作挑戰，練習如何讓單元測試在一個 Legacy Application 落地</strong>。</p>
-<h3 id="建立測試框架"><a href="#建立測試框架" class="headerlink" title="建立測試框架"></a>建立測試框架</h3><p>CI3 架構內建的單元測試功能很少，因此我選用整合了 PHPUnit 的 <a href="https://github.com/kenjis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 來當作專案的測試框架。建立測試框架其實是導入單元測試最快最簡單的步驟，因為其他開發人員並不懂單元測試的相關知識，所以一定要盡可能地簡化單元測試，才能讓單元測試“較有機會”導入開發團隊…</p>
+<h3 id="建立測試框架"><a href="#建立測試框架" class="headerlink" title="建立測試框架"></a>建立測試框架</h3><p>由於 CI3 架構內建的單元測試功能很少，所以我選用整合了 PHPUnit 的 <a href="https://github.com/kenjis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 來當作專案的測試框架。建立測試框架其實是導入單元測試最快最簡單的步驟，因為其他開發人員並不懂單元測試的相關知識，所以一定要盡可能地簡化撰寫單元測試的複雜度，才能讓單元測試“較有機會”導入開發團隊…</p>
 <h3 id="隔離測試環境對-DB-的副作用"><a href="#隔離測試環境對-DB-的副作用" class="headerlink" title="隔離測試環境對 DB 的副作用"></a>隔離測試環境對 DB 的副作用</h3><p>為了避免測試環境的行為污染 DB 的資料，因此要隔離單元測試與 DB。當時第一個想法是：”在測試環境下一律使用 SQLite”，因為 SQLite 可開啟 In Memory 模式，在記憶體中操作資料庫。當程式關閉後，記憶體內的 SQLite 資料庫也會清空，相當適合測試環境使用（無副作用）。</p>
 <p>做法很簡單，只要把 MySQL 的備份檔案轉成 SQLite，再到 CI3 的設定檔案中將測試環境的 DB 驅動器改成 SQLite 就可以了…。  </p>
 <p>但是實際運作起來，總有一些功能會發生錯誤。原本以為是 MySQL 的資料在轉換成 SQLite 的過程中有失真。經過百般測試後發現，原來是專案很多功能是用手寫的字串來組織 SQL 指令，而不是透過 CI3 的 QueryBuilder 來建立 SQL 指令。手寫的 MySQL 指令讓測試環境中的 SQLite 驅動器編譯失敗。我也因此學到一個教訓：</p>
