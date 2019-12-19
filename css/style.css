@@ -209,6 +209,11 @@ img.thumbnail {
 .article {
   padding: 2rem 4rem;
 }
+@media (max-width: 1280px) {
+  .article {
+    padding: 1.5rem;
+  }
+}
 .article .article-meta {
   margin-bottom: 0.5rem !important;
 }
