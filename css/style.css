@@ -205,11 +205,14 @@ img.thumbnail {
 .timeline .media:first-child:last-child:after {
   top: calc(0.3rem + 9px);
 }
+.article {
+  padding: 2rem 4rem;
+}
 .article .article-meta {
   margin-bottom: 0.5rem !important;
 }
 .article .content p {
-  font-family: sans-serif;
+  font-family: monospace;
   font-size: 1.3rem;
   color: #303030;
   margin: 1em 0;
@@ -560,4 +563,7 @@ figure.highlight .section {
   font-size: 1em;
   letter-spacing: 0.1em;
   text-transform: uppercase;
+}
+.hljs-comment {
+  color: #3b8888 !important;
 }
