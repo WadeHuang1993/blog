@@ -1,0 +1,772 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<meta name="google-site-verification" content="5JWyXG4mx6i5avE6xJfXIRHu_YCofrhDQRCEgbm_5ak" />
+<title>Git Commit Message 這樣寫會更好，替專案引入規範與範例 - WadeHuang1993&#39;s Blog</title>
+
+
+    <meta name="description" content="其實寫 Commit Message 有時候跟寫程式註解還蠻像的，最好可以寫下「為什麼」你要作這樣的異動，而不是單單只記錄下你做了「什麼」異動，  Commit Message 最好兼俱 Why 及 What，讓日後進行維護人員更快進入狀況。  Commit Message 這樣寫會更好：">
+<meta name="keywords" content="PHP, OOP, JavaScript, Web development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Git Commit Message 這樣寫會更好，替專案引入規範與範例">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;git_commit_message_best_practice&#x2F;index.html">
+<meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
+<meta property="og:description" content="其實寫 Commit Message 有時候跟寫程式註解還蠻像的，最好可以寫下「為什麼」你要作這樣的異動，而不是單單只記錄下你做了「什麼」異動，  Commit Message 最好兼俱 Why 及 What，讓日後進行維護人員更快進入狀況。  Commit Message 這樣寫會更好：">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;GIT.png">
+<meta property="og:updated_time" content="2019-12-20T01:39:38.765Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;GIT.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/blog/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154595924-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154595924-1');
+</script>
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/blog/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/blog/css/style.css">
+
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/blog/">
+            
+                <img src="/blog/images/mylogo.png" alt="Git Commit Message 這樣寫會更好，替專案引入規範與範例" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/blog/">首頁</a>
+                
+                <a class="navbar-item"
+                href="/blog/archives">文章時間軸</a>
+                
+                <a class="navbar-item"
+                href="/blog/categories">分類檢索</a>
+                
+                <a class="navbar-item"
+                href="/blog/tags">標籤</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜尋" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/GIT.png" alt="Git Commit Message 這樣寫會更好，替專案引入規範與範例">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2018-10-11T06:20:00.000Z">2018-10-11</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    19 分鐘 閱讀文 (大約 2817 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                Git Commit Message 這樣寫會更好，替專案引入規範與範例
+            
+        </h1>
+        <div class="content">
+            <p>其實寫 Commit Message 有時候跟寫程式註解還蠻像的，<br>最好可以寫下「為什麼」你要作這樣的異動，<br>而不是單單只記錄下你做了「什麼」異動，</p>
+<blockquote>
+<p>Commit Message 最好兼俱 Why 及 What，讓日後進行維護人員更快進入狀況。</p>
+</blockquote>
+<h2 id="Commit-Message-這樣寫會更好："><a href="#Commit-Message-這樣寫會更好：" class="headerlink" title="Commit Message 這樣寫會更好："></a>Commit Message 這樣寫會更好：</h2><a id="more"></a>
+<ul>
+<li>做 issue 的時候，不應該一次 Commit 所有異動！應該獨立 Commit 每個不同意義的異動，這樣 commit 訊息才會跟異動的程式碼有關聯。</li>
+<li>每次 Commit 都是針對異動的檔案做說明：Why &amp; What。這樣的 Commit Message 能讓日後的維護人員更快進入狀況</li>
+<li>每次 Commit 都加上 issue 編號，方便追蹤相關的程式異動原因。</li>
+</ul>
+<p>若 Commit Message 寫得妥當，在閱讀追蹤程式碼的意圖會相當容易。如果只把 Git 當作版本控制，隨意撰寫 Commit Message 就太可惜了！</p>
+<blockquote>
+<p>不能只把 Git 當作程式碼的 FTP，這樣太可惜了，要把 Git 當作歷史查閱的工具才拿發揮 Git 的功能。</p>
+</blockquote>
+<h2 id="好與不好的真實案例"><a href="#好與不好的真實案例" class="headerlink" title="好與不好的真實案例"></a>好與不好的真實案例</h2><p><a href="https://docs.google.com/presentation/d/e/2PACX-1vRI5E0g1mDyXPcSuMG9nZ_XpBmnkk3SmloLt2Z5-ArEjFAM-GBtz9FXCT4Pxw0fq7hdbf0cId22DwxZ/pub?start=false&loop=false&delayms=60000" target="_blank" rel="noopener">用一個小插曲證實 Commit 訊息的重要性</a><br>上面 PPT 是我在工作中遇到的兩個案例，範例中包含「好的 Commit Message」與「不良的 Commit Message」。<br>在範例中可見：</p>
+<ul>
+<li>良好的 Commit Message: <code>如何在「一年後」讓維護人員進入狀況</code></li>
+<li>不良的 Commit Message: <code>如何在「一個月內」讓維護人員找不出程式異動的原因</code>。</li>
+</ul>
+<h2 id="Commit-Message-之規範"><a href="#Commit-Message-之規範" class="headerlink" title="Commit Message 之規範"></a>Commit Message 之規範</h2><p>在撰寫 Git 與 SVN 等版本控制軟體 Commit Message 時，可以參照國外 AngularJS 團隊的規範： <a href="https://docs.google.com/document/d/1QrDFcIiPjSLDn3EL15IJygNPiHORgU1_OOAqWjiDU5Y/edit#heading=h.greljkmo14y0" target="_blank" rel="noopener">AngularJS Git Commit Message Conventions</a></p>
+<p>以下為這套訊息規範的展示與說明：<br>Commit Message 規範範例：<br><img src="https://4.bp.blogspot.com/-UzdmPX3St5I/XMvp8pIAiKI/AAAAAAAAAQ4/NOKaQxrwYpI8sey4SnV0DOWNpRxhvOyCQCLcBGAs/s1600/111.png" alt><br>Commit Message 規範範例解析：<br><img src="https://4.bp.blogspot.com/-HdNhJQb0D94/XMvqErOYGLI/AAAAAAAAAQ8/FQiuZsG7TT0WcQ8Q4zcccHCsuBOEDrouACLcBGAs/s1600/222.png" alt></p>
+<h2 id="Commit-Message-規範組成："><a href="#Commit-Message-規範組成：" class="headerlink" title="Commit Message 規範組成："></a>Commit Message 規範組成：</h2><figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">Header: <span class="hljs-tag">&lt;<span class="hljs-name">type</span>&gt;</span>(<span class="hljs-tag">&lt;<span class="hljs-name">scope</span>&gt;</span>): <span class="hljs-tag">&lt;<span class="hljs-name">subject</span>&gt;</span></span><br><span class="line"> - type: 代表 commit 的類別：feat, fix, docs, style, refactor, test, chore，必要欄位。</span><br><span class="line"> - scope 代表 commit 影響的範圍，例如資料庫、控制層、模板層等等，視專案不同而不同，為可選欄位。</span><br><span class="line"> - subject 代表此 commit 的簡短描述，不要超過 50 個字元，結尾不要加句號，為必要欄位。</span><br><span class="line"></span><br><span class="line">Body: 72-character wrapped. This should answer:</span><br><span class="line"> * Body 部份是對本次 Commit 的詳細描述，可以分成多行，每一行不要超過 72 個字元。</span><br><span class="line"> * 說明程式碼變動的項目與原因，還有與先前行為的對比。</span><br><span class="line"></span><br><span class="line">Footer: </span><br><span class="line"> - 填寫任務編號（如果有的話）.</span><br><span class="line"> - BREAKING CHANGE（可忽略），記錄不兼容的變動，</span><br><span class="line">   以 BREAKING CHANGE: 開頭，後面是對變動的描述、以及變動原因和遷移方法。</span><br></pre></td></tr></table></figure>
+<p>type: subject 是簡述不要超過 50 個字元</p>
+<h3 id="type-只允許使用以下類別："><a href="#type-只允許使用以下類別：" class="headerlink" title="type 只允許使用以下類別："></a>type 只允許使用以下類別：</h3><ul>
+<li>feat: 新增/修改功能 (feature)。</li>
+<li>fix: 修補 bug (bug fix)。</li>
+<li>docs: 文件 (documentation)。</li>
+<li>style: 格式 (不影響程式碼運行的變動 white-space, formatting, missing semi colons, etc)。</li>
+<li>refactor: 重構 (既不是新增功能，也不是修補 bug 的程式碼變動)。</li>
+<li>perf: 改善效能 (A code change that improves performance)。</li>
+<li>test: 增加測試 (when adding missing tests)。</li>
+<li>chore: 建構程序或輔助工具的變動 (maintain)。</li>
+<li>revert: 撤銷回覆先前的 commit 例如：revert: type(scope): subject (回覆版本：xxxx)。</li>
+</ul>
+<p>Type 是用來告訴進行 Code Review 的人應該以什麼態度來檢視 Commit 內容。<br>例如：  </p>
+<ul>
+<li>看到 Type 為 fix，進行 Code Review 的人就可以用「觀察 Commit 如何解決錯誤」的角度來閱讀程式碼。</li>
+<li>若是 refactor，則可以放輕鬆閱讀程式碼如何被重構，因為重構的本質是不會影響既有的功能。</li>
+</ul>
+<p>利用不同的 Type 來決定進行 Code Review 檢視的角度，可以提升 Code Review 的速度。因此開發團隊應該要對這些 Type 的使用時機有一致的認同。</p>
+<h2 id="Commit-訊息範例"><a href="#Commit-訊息範例" class="headerlink" title="Commit 訊息範例"></a>Commit 訊息範例</h2><h3 id="範例-fix："><a href="#範例-fix：" class="headerlink" title="範例 fix："></a>範例 fix：</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">fix: 自訂表單新增/編輯頁面，修正離開頁面提醒邏輯</span><br><span class="line"></span><br><span class="line">問題：</span><br><span class="line">1. 原程式碼進入新增頁面後，沒做任何動作之下，離開頁面會跳提醒</span><br><span class="line">2. 原程式碼從新增/編輯頁面回到上一頁後（表單列表頁面），離開頁面會跳提醒</span><br><span class="line"></span><br><span class="line">原因：</span><br><span class="line">1. 新增頁面時，頁面自動建立空白題組會調用 sort_item，造成初始化 unload 事件處理器。</span><br><span class="line">2. 回到上一頁後，就不需要監聽 unload 事件，應該把 unload 事件取消。</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. 初始化 unload 事件處理器：排除新增表單時，頁面自動建立空白題組調用 sort_item 的情境</span><br><span class="line">2. 回到上一頁後，復原表單被異動狀態且清除 unload 事件處理器</span><br><span class="line"></span><br><span class="line">issue #1335</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fix: 意見反應，信件看不到圖片問題</span><br><span class="line"></span><br><span class="line">問題：</span><br><span class="line">1. 客戶反應：意見反應的信件都看不到圖片。</span><br><span class="line"></span><br><span class="line">原因：</span><br><span class="line">1. 目前程式碼都會要求先登入後才可查看使用者上傳的檔案，</span><br><span class="line">   造成在信件上會看不見圖片的問題。</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. File.php，經討論後，開放讓意見反應頁面上傳的檔案，不用登入就可以查看/下載。</span><br><span class="line"></span><br><span class="line">issue #1229</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="範例-feat"><a href="#範例-feat" class="headerlink" title="範例 feat:"></a>範例 feat:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">feat: message 信件通知功能</span><br><span class="line"></span><br><span class="line">因應新需求做調整：</span><br><span class="line"> 通知和 message 都要寄發每日信件，</span><br><span class="line"> 通知和 message 都用放在同一封信裡面就好，</span><br><span class="line"> 不然信件太多可能也不會有人想去看。</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. mail_template.php，新增 message 區塊。</span><br><span class="line">2. Send_today_notify_mail.php，新增 取得每日 Message 邏輯。</span><br><span class="line">3. Message_model_api.php，新增 $where 參數，以便取得每日訊息。</span><br><span class="line">4. Message_api.php、Message_group_user_model_api.php，新增 **取得訊息使用者** 邏輯，以便撈取每日訊息。</span><br><span class="line"></span><br><span class="line">issue #863</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">feat: 表單統計，多顯示計畫名稱欄位</span><br><span class="line"></span><br><span class="line">因應需求做調整：</span><br><span class="line">1. 列表資訊多加「計畫名稱」欄位，以利後續匯出資料處理。</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. Assessment_form.php，匯出表單統計時，新增訓練計畫名欄位。</span><br><span class="line">2. customize.php，表單統計查詢時，多顯示訓練計畫名欄位。</span><br><span class="line">3. Complex_assessment_form_api.php、Complex_assessment_form_model_api.php：</span><br><span class="line">  - 取得表單統計資料時，多取得計畫名稱。</span><br><span class="line"></span><br><span class="line">issue #1200</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="範例-chore"><a href="#範例-chore" class="headerlink" title="範例 chore:"></a>範例 chore:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">chore: 更新 testing 環境</span><br><span class="line"></span><br><span class="line">更新 ci-phpunit-test 套件 0.16 =&gt; 0.17</span><br><span class="line"></span><br><span class="line">for Request GET 帶參數功能。</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">chore:調整單元測試環境</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. MX/Modules</span><br><span class="line">將客製化 Testing 的邏輯移除，否則在測試環境中無法正確存取檔案。</span><br><span class="line">2. 加入 tests/unit 與 tests/integration 目錄，並將測試檔案移至合宜的位置。</span><br><span class="line">3. AdminTestCase.php，繼承 TestCase，實作登入邏輯、setUp 與 tearDown，供其他測試案例繼承使用。</span><br><span class="line">4. Bootstrap.php，引入 AdminTestCase.php 共測試案例繼承用。</span><br><span class="line">5. Login.php，因測試案例中不能有 header 的設定，更動系統登入邏輯，在測試環境中改用 redirect 轉址。</span><br><span class="line">6. phpunit.xml，取消嚴謹宣告覆蓋模式，避免造成測試不通過（若需知道你的測試案例覆蓋了哪些類別或邏輯，可自行打開）。</span><br><span class="line"></span><br><span class="line">## 備註： unit 與 integration 目錄</span><br><span class="line">分別為「單元測試目錄」與「整合測試目錄」，單元測試目錄負責測試 Api 與 Model，整合測試目錄則負責測試 Controller。</span><br><span class="line"></span><br><span class="line">issue #709</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="範例-style"><a href="#範例-style" class="headerlink" title="範例 style:"></a>範例 style:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">style: message 頁面，對 Component 做 Beautifier</span><br><span class="line"></span><br><span class="line">經 IE 瀏覽器測試後發現 Component 裡面仍然夾帶 ES6 語法，</span><br><span class="line">但是目前 Component 的程式碼都被壓縮成一行，</span><br><span class="line">為了日後修改程式方便，故先對所有被壓縮的程式碼做 Beautifier</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. 針對所有被壓縮的程式碼做 Beautifier</span><br><span class="line">2. 移除被註解的程式碼，原本被註解的程式碼應該是壓縮前的程式碼，但是經測試後發現這些被註解的程式碼都是舊 Code，故移除。</span><br><span class="line"></span><br><span class="line">issue #1219</span><br><span class="line">issue #1028</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">style: 統一換行符號 CRLF to LF</span><br><span class="line"></span><br><span class="line">統一換行符號</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">style: 調整 HTML 縮排</span><br><span class="line"></span><br><span class="line">issue #964</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="範例-refactor"><a href="#範例-refactor" class="headerlink" title="範例 refactor:"></a>範例 refactor:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">refactor: 重構取得「簽核流程種類名稱」邏輯</span><br><span class="line"></span><br><span class="line">原程式碼取得流程名稱的邏輯散落在多個檔案，</span><br><span class="line">為了讓未來新增/修改種類名稱時，不必到多個檔案找查程式，</span><br><span class="line">現在統一透過 Process::get_type_name($process_type) 方法，</span><br><span class="line">取得流程種類名稱。</span><br><span class="line"></span><br><span class="line">調整項目：</span><br><span class="line">1. Process.php，新增 get_type_name() 方法，供取得流程名稱稱用。</span><br><span class="line">2. workflow_type_name.php，此 View 檔案只是為了取得流程名稱，現在以 Process:: get_type_name() 取代，故刪除。</span><br><span class="line">3. Workflow_api.php，get_process_name() 方法是為了取得流程名稱，現在以 Process:: get_type_name() 取代，故刪除。</span><br><span class="line">4. 其他檔案：改用 Process:: get_type_name()  取得流程名稱。</span><br><span class="line"></span><br><span class="line">issue #1253</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">refactor: 表單統計，語意化調整</span><br><span class="line"></span><br><span class="line">匯出表單時的表單答題資料，</span><br><span class="line">應該是以表單 $assessment_result  為基準做統計，</span><br><span class="line">故更改變數名稱 $user =&gt; $assessment_result</span><br><span class="line"></span><br><span class="line">issue #1200</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">refactor: 每日通知信件，重構程式結構</span><br><span class="line"></span><br><span class="line">考量將來可能會需要寄送多種資訊給使用者，</span><br><span class="line">故重構程式結構，讓未來擴充功能時比較方便。</span><br><span class="line"></span><br><span class="line">調整內容：</span><br><span class="line">1. Send_today_notify_mail：</span><br><span class="line">  - 把取得「系統通知」邏輯搬移至 System_notify_handler.php</span><br><span class="line">  - 把取得「站內訊息」邏輯搬移至 Message_handler.php</span><br><span class="line">  - 引入 Pipeline，把取得各種系統資訊的邏輯注入進 Pipeline。</span><br><span class="line">  - 透過 Pipeline 取得每日通知信件內容，並建立信件 HTML</span><br><span class="line">2. Daily_email 介面：</span><br><span class="line">  - 定義 每日信件處理器 Xxx_handler 的方法</span><br><span class="line">  - 之後要擴充新的功能，必須按照 Daily_email 介面的定義，實作方法。</span><br><span class="line">3. message.php、system_notify.php：</span><br><span class="line">  - 將「系統通知」與「站內訊息」的 Email 頁面獨立出來。</span><br><span class="line"></span><br><span class="line">issue #1308</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="範例-perf"><a href="#範例-perf" class="headerlink" title="範例 perf:"></a>範例 perf:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">perf: 評核表單列表，優化取得受評者速度</span><br><span class="line"></span><br><span class="line">原本取得受評者的邏輯會造成載入頁面緩慢（開發機約 52 秒），故做優化。</span><br><span class="line"></span><br><span class="line">調整方式：</span><br><span class="line">原程式碼每個表單迴圈進入 DB 取得受評者資料。</span><br><span class="line">改成</span><br><span class="line">進 DB 一次撈取全部受評者資料，再回到 PHP 分配資料。</span><br><span class="line"></span><br><span class="line">結果：</span><br><span class="line">開發機載入頁面時間  52 秒 =&gt; 5秒</span><br><span class="line"></span><br><span class="line">issue #1272</span><br></pre></td></tr></table></figure>
+
+<hr>
+<h3 id="範例-docs"><a href="#範例-docs" class="headerlink" title="範例 docs:"></a>範例 docs:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">docs: 新增註解</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docs: 修正型別註解</span><br><span class="line"></span><br><span class="line">讓 IDE 可以讀取到正確的類別</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">docs: 移除過期的註解</span><br><span class="line"></span><br><span class="line">issue #1229</span><br></pre></td></tr></table></figure>
+
+
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        <div class="level-start">
+            <a class="level level-item has-link-grey  article-nav-prev" href="/blog/codeigniter_3_hmvc/">
+                <i class="level-item fas fa-chevron-left"></i>
+                <span class="level-item">CodeIgniter 3 框架擴展套件：HMVC</span>
+            </a>
+        </div>
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/blog/refactoring_definition_and_purpose/">
+                <span class="level-item">重構的定義與目的</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    文章目錄
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#Commit-Message-這樣寫會更好：">
+        <span class="has-mr-6">1</span>
+        <span>Commit Message 這樣寫會更好：</span>
+        </a></li><li>
+        <a class="is-flex" href="#好與不好的真實案例">
+        <span class="has-mr-6">2</span>
+        <span>好與不好的真實案例</span>
+        </a></li><li>
+        <a class="is-flex" href="#Commit-Message-之規範">
+        <span class="has-mr-6">3</span>
+        <span>Commit Message 之規範</span>
+        </a></li><li>
+        <a class="is-flex" href="#Commit-Message-規範組成：">
+        <span class="has-mr-6">4</span>
+        <span>Commit Message 規範組成：</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#type-只允許使用以下類別：">
+        <span class="has-mr-6">4.1</span>
+        <span>type 只允許使用以下類別：</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#Commit-訊息範例">
+        <span class="has-mr-6">5</span>
+        <span>Commit 訊息範例</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#範例-fix：">
+        <span class="has-mr-6">5.1</span>
+        <span>範例 fix：</span>
+        </a></li><li>
+        <a class="is-flex" href="#範例-feat">
+        <span class="has-mr-6">5.2</span>
+        <span>範例 feat:</span>
+        </a></li><li>
+        <a class="is-flex" href="#範例-chore">
+        <span class="has-mr-6">5.3</span>
+        <span>範例 chore:</span>
+        </a></li><li>
+        <a class="is-flex" href="#範例-style">
+        <span class="has-mr-6">5.4</span>
+        <span>範例 style:</span>
+        </a></li><li>
+        <a class="is-flex" href="#範例-refactor">
+        <span class="has-mr-6">5.5</span>
+        <span>範例 refactor:</span>
+        </a></li><li>
+        <a class="is-flex" href="#範例-perf">
+        <span class="has-mr-6">5.6</span>
+        <span>範例 perf:</span>
+        </a></li><li>
+        <a class="is-flex" href="#範例-docs">
+        <span class="has-mr-6">5.7</span>
+        <span>範例 docs:</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/blog/2019_review/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/2019_reviews.png" alt="2019 回顧工作與學習歷程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-19T06:48:16.000Z">2019-12-19</time></div>
+                    <a href="/blog/2019_review/" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 回顧工作與學習歷程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/solid_ocp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T06:11:00.000Z">2019-12-09</time></div>
+                    <a href="/blog/solid_ocp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：開放封閉原則，定義、解析與實踐</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/solid_srp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：單一職責原則，定義、解析與實踐">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T03:04:00.000Z">2019-12-03</time></div>
+                    <a href="/blog/solid_srp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：單一職責原則，定義、解析與實踐</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/cluelessness_in_self_learning/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/SELF_TEACHING.jpg" alt="自學時應該看破“無緒”">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-22T03:09:00.000Z">2019-11-22</time></div>
+                    <a href="/blog/cluelessness_in_self_learning/" class="title has-link-black-ter is-size-6 has-text-weight-normal">自學時應該看破“無緒”</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/Cluelessness/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="軟體開發中的“無緒”">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T09:41:00.000Z">2019-11-21</time></div>
+                    <a href="/blog/Cluelessness/" class="title has-link-black-ter is-size-6 has-text-weight-normal">軟體開發中的“無緒”</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分類
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">
+            <span class="level-start">
+                <span class="level-item">軟體開發思維</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">9</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">
+            <span class="level-start">
+                <span class="level-item">重構</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                標籤
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/Clean-Code/">
+                        <span class="tag">Clean Code</span>
+                        <span class="tag is-grey">7</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/">
+                        <span class="tag">SOLID 原則</span>
+                        <span class="tag is-grey">4</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/codeigiter3/">
+                        <span class="tag">codeigiter3</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/php/">
+                        <span class="tag">php</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/">
+                        <span class="tag">自學技巧</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/%E9%87%8D%E6%A7%8B/">
+                        <span class="tag">重構</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/blog/">
+                
+                    <img src="/blog/images/mylogo.png" alt="Git Commit Message 這樣寫會更好，替專案引入規範與範例" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2019 WadeHuangTW1993&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-TW");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/blog/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/blog/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到頁首" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/blog/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/blog/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/blog/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/blog/js/insight.js" defer></script>
+<link rel="stylesheet" href="/blog/css/search.css">
+<link rel="stylesheet" href="/blog/css/insight.css">
+    
+
+    <script src="/blog/js/hexo_resize_image.js"></script>
+</body>
+</html>
