@@ -240,7 +240,7 @@ img.thumbnail {
   display: block;
 }
 .article .content li {
-  font-size: 1.1rem;
+  font-size: 1.25rem;
   line-height: 1.6em;
 }
 .rtl {
@@ -471,6 +471,7 @@ figure.highlight pre {
 }
 figure.highlight pre .line {
   line-height: 1.5rem;
+  font-size: 1rem;
 }
 figure.highlight figcaption,
 figure.highlight .gutter {
