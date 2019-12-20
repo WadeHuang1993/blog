@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為理論知識必須經">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-20T04:04:47.404Z">
+<meta property="og:updated_time" content="2019-12-20T04:09:21.784Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    18 分鐘 閱讀文 (大約 2717 個字)
+                    18 分鐘 閱讀文 (大約 2723 個字)
                 </span>
                 
                 
@@ -171,8 +171,8 @@
 <h1 id="2018-10-替專案導入-Git-規範"><a href="#2018-10-替專案導入-Git-規範" class="headerlink" title="2018/10-替專案導入 Git 規範"></a>2018/10-替專案導入 Git 規範</h1><p>到職第一天發現公司的開發人員沒有統一撰寫 Git Commit Message 的格式，這對一個長期維護的系統來說並不是一件好事！打開 Git History 幾乎找不出對程式碼異動的意圖與原因，往往只有原作者知道自己的程式碼在做什麼…。</p>
 <p>為了解決這個問題，我向眾開發人員提議可以導入 Commit Message 規範，規範的詳細內容已經被記錄在「<a href="http://localhost:4000/blog/git_commit_message_best_practice/" target="_blank" rel="noopener">Git Commit Message 這樣寫會更好，替專案引入規範與範例
 </a>」 文章中。</p>
-<h3 id="實際案例："><a href="#實際案例：" class="headerlink" title="實際案例："></a>實際案例：</h3><h4 id="同事一年前的-Commit-Message："><a href="#同事一年前的-Commit-Message：" class="headerlink" title="同事一年前的 Commit Message："></a>同事一年前的 Commit Message：</h4><p><img src="/blog/images/pasted-16.png" alt></p>
-<h4 id="導入規範後，開始會紀錄異動原因與內容："><a href="#導入規範後，開始會紀錄異動原因與內容：" class="headerlink" title="導入規範後，開始會紀錄異動原因與內容："></a>導入規範後，開始會紀錄異動原因與內容：</h4><p><img src="/blog/images/pasted-17.png" alt></p>
+<h3 id="實際案例"><a href="#實際案例" class="headerlink" title="實際案例"></a>實際案例</h3><p><strong>1. 同事一年前的 Commit Message：</strong><br><img src="/blog/images/pasted-16.png" alt></p>
+<p><strong>2. 導入規範後，開始會紀錄異動原因與內容：</strong><br><img src="/blog/images/pasted-17.png" alt></p>
 <p>雖然過了好幾個月才讓大部分的開發人員確實按規範撰寫 Commit Message，但是一個良好的文化已經培養成功了！良好 Commit Message 持續被 Commit 進程式庫，以後新進人員將會自然而然地遵循前人的格式撰寫 Commit Message。</p>
 <h1 id="2018-10-2019-替專案導入單元測試"><a href="#2018-10-2019-替專案導入單元測試" class="headerlink" title="2018/10~2019-替專案導入單元測試"></a>2018/10~2019-替專案導入單元測試</h1><p>時間拉回到剛搬到高雄的 2018 末。當時我才剛學會重構和單元測試。面試時，公司的技術顧問說公司想要導入單元測試和重構，希望我一定要進公司幫忙。我也答應了！真的很感謝有這個機會進來幫忙。</p>
 <p>這間公司的專案使用 CodeIgniter 3 框架（後面簡稱 CI3)，CI3 本身並不是倡導物件導向開發風格的框架，專案的程式碼自然而然也是偏向義大利麵風格。加上專案是維護多年的大系統，在這樣的環境下導入單元測試變得很困難！  </p>
@@ -194,7 +194,7 @@
 
 <h3 id="替-Bug-撰寫測試案例"><a href="#替-Bug-撰寫測試案例" class="headerlink" title="替 Bug 撰寫測試案例"></a>替 Bug 撰寫測試案例</h3><p>值得一提的是，拷貝資料的做法除了提供 TDD 或 BDD 測試資料以外，也可以應用在 Debug。每當遇到 Bug 時，就可以把具有「Bug 特徵的輸入值」Copy 起來，並且為這個測試資料建立一個 <strong>Bug fix 測試案例</strong>。接著我們要修正程式碼讓 Bug fix 的測試案例通過。<strong>當測試案例通過的時候，表示我們把 Bug 修正了</strong>。<strong>之後遇到新的問題的時候，不但要通過新問題的測試案例，也需要通過所有「舊的 Bug fix 測試案例」</strong>，才能確保新的 Debug 不會改到原本正常運作的邏輯！</p>
 <h1 id="2019-01-提出系統重構流程"><a href="#2019-01-提出系統重構流程" class="headerlink" title="2019/01-提出系統重構流程"></a>2019/01-提出系統重構流程</h1><p><a href="/blog/images/refactoring_proposal.pdf">系統重構流程.pdf</a></p>
-<h1 id="2019-02-學習-DDD（領域驅動設計）"><a href="#2019-02-學習-DDD（領域驅動設計）" class="headerlink" title="2019/02-學習 DDD（領域驅動設計）"></a>2019/02-學習 DDD（領域驅動設計）</h1><h1 id="2019-03-2019-06-帶領大學生學習程式設計"><a href="#2019-03-2019-06-帶領大學生學習程式設計" class="headerlink" title="2019/03~2019/06-帶領大學生學習程式設計"></a>2019/03~2019/06-帶領大學生學習程式設計</h1><h2 id="翻轉教育"><a href="#翻轉教育" class="headerlink" title="翻轉教育"></a>翻轉教育</h2><h2 id="嚴謹的-Code-Review"><a href="#嚴謹的-Code-Review" class="headerlink" title="嚴謹的 Code Review"></a>嚴謹的 Code Review</h2><h2 id="導入-Clean-Code-與重構觀念"><a href="#導入-Clean-Code-與重構觀念" class="headerlink" title="導入 Clean Code 與重構觀念"></a>導入 Clean Code 與重構觀念</h2><h1 id="2019-06-學習-Clean-Architecture"><a href="#2019-06-學習-Clean-Architecture" class="headerlink" title="2019/06-學習 Clean Architecture"></a>2019/06-學習 Clean Architecture</h1><h2 id="利用分層架構，防止程式腐敗"><a href="#利用分層架構，防止程式腐敗" class="headerlink" title="利用分層架構，防止程式腐敗"></a>利用分層架構，防止程式腐敗</h2><h1 id="使用設計模式”擁抱變化”"><a href="#使用設計模式”擁抱變化”" class="headerlink" title="使用設計模式”擁抱變化”"></a>使用設計模式”擁抱變化”</h1><h2 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h2><h2 id="Police"><a href="#Police" class="headerlink" title="Police"></a>Police</h2><h2 id="Flyweight"><a href="#Flyweight" class="headerlink" title="Flyweight"></a>Flyweight</h2><h2 id="State"><a href="#State" class="headerlink" title="State"></a>State</h2><h2 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h2><h2 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h2><h2 id="Obersever"><a href="#Obersever" class="headerlink" title="Obersever"></a>Obersever</h2><h1 id="導入-Event-Sourcing-概念紀錄系統日誌"><a href="#導入-Event-Sourcing-概念紀錄系統日誌" class="headerlink" title="導入 Event Sourcing 概念紀錄系統日誌"></a>導入 Event Sourcing 概念紀錄系統日誌</h1>
+<h1 id="2019-02-學習-DDD《領域驅動設計》"><a href="#2019-02-學習-DDD《領域驅動設計》" class="headerlink" title="2019/02-學習 DDD《領域驅動設計》"></a>2019/02-學習 DDD《領域驅動設計》</h1><h1 id="2019-03-2019-06-帶領大學生學習程式設計"><a href="#2019-03-2019-06-帶領大學生學習程式設計" class="headerlink" title="2019/03~2019/06-帶領大學生學習程式設計"></a>2019/03~2019/06-帶領大學生學習程式設計</h1><h3 id="翻轉教育"><a href="#翻轉教育" class="headerlink" title="翻轉教育"></a>翻轉教育</h3><h3 id="嚴謹的-Code-Review"><a href="#嚴謹的-Code-Review" class="headerlink" title="嚴謹的 Code Review"></a>嚴謹的 Code Review</h3><h3 id="導入-Clean-Code-與重構觀念"><a href="#導入-Clean-Code-與重構觀念" class="headerlink" title="導入 Clean Code 與重構觀念"></a>導入 Clean Code 與重構觀念</h3><h1 id="2019-06-學習《Clean-Architecture》"><a href="#2019-06-學習《Clean-Architecture》" class="headerlink" title="2019/06-學習《Clean Architecture》"></a>2019/06-學習《Clean Architecture》</h1><h3 id="利用分層架構，防止程式腐敗"><a href="#利用分層架構，防止程式腐敗" class="headerlink" title="利用分層架構，防止程式腐敗"></a>利用分層架構，防止程式腐敗</h3><h1 id="持續重構：使用設計模式”擁抱變化”"><a href="#持續重構：使用設計模式”擁抱變化”" class="headerlink" title="持續重構：使用設計模式”擁抱變化”"></a>持續重構：使用設計模式”擁抱變化”</h1><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><h3 id="Police"><a href="#Police" class="headerlink" title="Police"></a>Police</h3><h3 id="Flyweight"><a href="#Flyweight" class="headerlink" title="Flyweight"></a>Flyweight</h3><h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><h3 id="Obersever"><a href="#Obersever" class="headerlink" title="Obersever"></a>Obersever</h3><h1 id="導入-Event-Sourcing-概念紀錄系統日誌"><a href="#導入-Event-Sourcing-概念紀錄系統日誌" class="headerlink" title="導入 Event Sourcing 概念紀錄系統日誌"></a>導入 Event Sourcing 概念紀錄系統日誌</h1>
         </div>
         
         
@@ -245,42 +245,42 @@
         <a class="is-flex" href="#2018-10-替專案導入-Git-規範">
         <span class="has-mr-6">2</span>
         <span>2018/10-替專案導入 Git 規範</span>
-        </a><ul class="menu-list"><ul class="menu-list"><li>
-        <a class="is-flex" href="#實際案例：">
-        <span class="has-mr-6">2.1.1</span>
-        <span>實際案例：</span>
-        </a></li></ul></ul></li><li>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#實際案例">
+        <span class="has-mr-6">2.1</span>
+        <span>實際案例</span>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#2018-10-2019-替專案導入單元測試">
         <span class="has-mr-6">3</span>
         <span>2018/10~2019-替專案導入單元測試</span>
-        </a><ul class="menu-list"><ul class="menu-list"><li>
+        </a><ul class="menu-list"><li>
         <a class="is-flex" href="#建立測試框架">
-        <span class="has-mr-6">3.1.1</span>
+        <span class="has-mr-6">3.1</span>
         <span>建立測試框架</span>
         </a></li><li>
         <a class="is-flex" href="#隔離測試環境對-DB-的副作用">
-        <span class="has-mr-6">3.1.2</span>
+        <span class="has-mr-6">3.2</span>
         <span>隔離測試環境對 DB 的副作用</span>
         </a></li><li>
         <a class="is-flex" href="#利用-DB-交易機制避免副作用">
-        <span class="has-mr-6">3.1.3</span>
+        <span class="has-mr-6">3.3</span>
         <span>利用 DB 交易機制避免副作用</span>
         </a></li><li>
         <a class="is-flex" href="#拷貝「具有象徵性的真實資料」當作測試資料">
-        <span class="has-mr-6">3.1.4</span>
+        <span class="has-mr-6">3.4</span>
         <span>拷貝「具有象徵性的真實資料」當作測試資料</span>
         </a></li><li>
         <a class="is-flex" href="#替-Bug-撰寫測試案例">
-        <span class="has-mr-6">3.1.5</span>
+        <span class="has-mr-6">3.5</span>
         <span>替 Bug 撰寫測試案例</span>
-        </a></li></ul></ul></li><li>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#2019-01-提出系統重構流程">
         <span class="has-mr-6">4</span>
         <span>2019/01-提出系統重構流程</span>
         </a></li><li>
-        <a class="is-flex" href="#2019-02-學習-DDD（領域驅動設計）">
+        <a class="is-flex" href="#2019-02-學習-DDD《領域驅動設計》">
         <span class="has-mr-6">5</span>
-        <span>2019/02-學習 DDD（領域驅動設計）</span>
+        <span>2019/02-學習 DDD《領域驅動設計》</span>
         </a></li><li>
         <a class="is-flex" href="#2019-03-2019-06-帶領大學生學習程式設計">
         <span class="has-mr-6">6</span>
@@ -298,17 +298,17 @@
         <span class="has-mr-6">6.3</span>
         <span>導入 Clean Code 與重構觀念</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#2019-06-學習-Clean-Architecture">
+        <a class="is-flex" href="#2019-06-學習《Clean-Architecture》">
         <span class="has-mr-6">7</span>
-        <span>2019/06-學習 Clean Architecture</span>
+        <span>2019/06-學習《Clean Architecture》</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#利用分層架構，防止程式腐敗">
         <span class="has-mr-6">7.1</span>
         <span>利用分層架構，防止程式腐敗</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#使用設計模式”擁抱變化”">
+        <a class="is-flex" href="#持續重構：使用設計模式”擁抱變化”">
         <span class="has-mr-6">8</span>
-        <span>使用設計模式”擁抱變化”</span>
+        <span>持續重構：使用設計模式”擁抱變化”</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#Factory">
         <span class="has-mr-6">8.1</span>
