@@ -574,3 +574,7 @@ figure.highlight .section {
 .hljs-comment {
   color: #3b8888 !important;
 }
+#toc {
+  overflow: scroll;
+  max-height: 700px !important;
+}

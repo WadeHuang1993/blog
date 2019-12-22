@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為理論知識必須經">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-22T07:51:54.981Z">
+<meta property="og:updated_time" content="2019-12-22T08:35:01.925Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    30 分鐘 閱讀文 (大約 4450 個字)
+                    31 分鐘 閱讀文 (大約 4697 個字)
                 </span>
                 
                 
@@ -165,7 +165,7 @@
         </h1>
         <div class="content">
             <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。</p>
-<p>為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為理論知識必須經過堆疊和內化才能在真實專案中落地實踐。再加上這一年很<strong>榮幸受邀到高雄科技大學，帶領一批資工系的學生學習 PHP 式設計課程</strong>，備課與上課的時間幾乎吃掉了三個月的休閒時間，也就是平常我能用來自學或練習的時間 …<a id="more"></a>。</p>
+<p>為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為理論知識必須經過堆疊和內化才能在真實專案中落地實踐。再加上這一年很<strong>榮幸受邀到高雄科技大學，帶領一批資工系的學生學習 PHP 式設計課程</strong>，備課與上課的時間幾乎吃掉了三個月的休閒時間，也就是平常能用來自學或練習的時間 …<a id="more"></a>。</p>
 <p>至於工作呢？這份工作是我搬來高雄的第一份工作，工作內容主要是維護一個大型的 Legacy Application。雖然說是維護，但仍不斷有新需求一直進來。這也是為什麼我必須花費很多時間閱讀如何處理 Legacy Application 的相關書籍和技術。很慶幸我也有機會將學到的知識導入專案中，增加部分功能的彈性；或是阻止部分功能繼續腐敗。改善程式碼品質的成就感讓我更多的動力繼續學習。</p>
 <p>可惜 2019 對我來說是一眨眼就結束，到年尾了還來不及紀錄下學習與實踐的東西。所以想先以流水帳的形式紀錄一下 2019 年所學的知識和工作中實踐的技術。</p>
 <hr>
@@ -176,7 +176,7 @@
 </a>」 文章中。</p>
 <h3 id="實際案例"><a href="#實際案例" class="headerlink" title="實際案例"></a>實際案例</h3><p><strong>1. 同事一年前的 Commit Message：</strong><br><img src="/blog/images/pasted-16.png" alt></p>
 <p><strong>2. 導入規範後，開始會紀錄異動原因與內容：</strong><br><img src="/blog/images/pasted-17.png" alt></p>
-<p>雖然過了好幾個月才讓大部分的開發人員確實按規範撰寫 Commit Message，但是<strong>開發團隊中已經養成一個優良的文化！良好 Commit Message 持續被 Commit 進程式庫，以後新進人員將會自然而然地遵循前人的格式撰寫 Commit Message</strong>。</p>
+<p>雖然過了好幾個月才讓大部分的開發人員確實按規範撰寫 Commit Message，但是<strong>開發團隊中已經養成一個優良的文化！當良好 Commit Message 持續被 Commit 進程式庫，新進人員將自然而然地遵循前人的格式撰寫 Commit Message</strong>。</p>
 <hr>
 <p>　　
 　　</p>
@@ -198,7 +198,8 @@
 <h3 id="拷貝「具有象徵性的真實資料」當作測試資料"><a href="#拷貝「具有象徵性的真實資料」當作測試資料" class="headerlink" title="拷貝「具有象徵性的真實資料」當作測試資料"></a>拷貝「具有象徵性的真實資料」當作測試資料</h3><p>《<a href="https://www.tenlong.com.tw/products/9789862019481" target="_blank" rel="noopener">Specification By Example</a>》中提及，若專案的較難建立就可以拷貝「具有象徵性的真實資料」，並且把被拷貝的資料存放在某個檔案中，進行測試的時候再將這些檔案轉譯成測試資料。這個方法讓我不再煩惱如何建立測試資料，現在只需要透過 PHP 的 <code>var_export()</code> 或 <code>json_encode()</code> 就可以將需要多道程序才能建立的資料拷貝起來，然後將拷貝的資料放在專門提供單元測試資料的類別(Test Data Provider)，供測試案例使用：</p>
 <figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * feat: 表單填寫頁面，選擇題允許輸入文字時，必填時也要檢查輸入文字 input</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">test_check_form_with_options_that_text_writable</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>&#123;</span><br><span class="line">    <span class="hljs-keyword">$this</span>-&gt;describe(<span class="hljs-string">'必填「多選題」允許輸入文字，當沒有填寫 **所有已挑選選項** 的文字時，不可通過必填檢查'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-params">()</span> </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// @given 必填「多選題」允許輸入文字</span></span><br><span class="line">        <span class="hljs-comment">// @given 沒有填寫所有已挑選的選項之文字方塊</span></span><br><span class="line">        $data_provider = <span class="hljs-keyword">new</span> Test_data_provider();</span><br><span class="line">        <span class="hljs-keyword">list</span>($question_block, $input, $ai_id, $role_id) = $data_provider-&gt;form_with_checkbox_that_text_writable_and_not_filled_all_text();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @when 進行表單必填檢查</span></span><br><span class="line">        $answer_checker = <span class="hljs-keyword">new</span> Answer_checker();</span><br><span class="line">        $required_notice = $answer_checker-&gt;check_form($ai_id, $question_block, $input, $role_id);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @then 不通過表單必填檢查</span></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;assertEquals(<span class="hljs-number">1</span>, count($required_notice));</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h3 id="替-Bug-撰寫測試案例"><a href="#替-Bug-撰寫測試案例" class="headerlink" title="替 Bug 撰寫測試案例"></a>替 Bug 撰寫測試案例</h3><p>值得一提的是，拷貝資料的做法除了提供 TDD 或 BDD 測試資料以外，也可以應用在 Debug。每當遇到 Bug 時，就可以把具有「Bug 特徵的輸入值」Copy 起來，並且為這個測試資料建立一個 <strong>Bug fix 測試案例</strong>。接著我們要修正程式碼讓 Bug fix 的測試案例通過。<strong>當測試案例通過的時候，表示我們把 Bug 修正了</strong>。<strong>之後遇到新的問題的時候，不但要通過新問題的測試案例，也需要通過所有「舊的 Bug fix 測試案例」</strong>，才能確保新的 Debug 不會改到原本正常運作的邏輯！</p>
+<h3 id="替-Bug-撰寫測試案例"><a href="#替-Bug-撰寫測試案例" class="headerlink" title="替 Bug 撰寫測試案例"></a>替 Bug 撰寫測試案例</h3><p>值得一提的是，拷貝資料的做法除了提供 TDD 或 BDD 測試資料以外，也可以應用在 Debug。每當遇到 Bug 時，就可以把具有「Bug 特徵的輸入值」Copy 起來，並且為這個測試資料建立一個 <strong>Bug fix 測試案例</strong>。</p>
+<p>接著我們要修正程式碼讓 Bug fix 的測試案例通過。當測試案例通過的時候，表示我們把 Bug 修正了。<strong>之後遇到新的問題的時候，不但要通過新的 Bug fix 測試案例，也需要通過所有「舊的 Bug fix 測試案例」</strong>，才能確保新的 Bug fix 不會破壞原本正常運作的邏輯！</p>
 <hr>
 <p>　　
 　　</p>
@@ -235,7 +236,7 @@
 <hr>
 <p>　　
 　　</p>
-<h1 id="2019-03-2019-07-帶領大學生學習程式設計"><a href="#2019-03-2019-07-帶領大學生學習程式設計" class="headerlink" title="2019/03~2019/07-帶領大學生學習程式設計"></a>2019/03~2019/07-帶領大學生學習程式設計</h1><p>技術顧問對 1 月份提出的 <strong>系統重構流程</strong> 相當有興趣，故將此重構計畫整合至校外課堂中，帶領一批學生一起進行重構計畫，希望透過讓學生閱讀企業級的程式碼，栽培學生寫出「成熟」的程式。在這個計畫中，公司由經理和我每個禮拜中抽出兩天的空閒時間到高雄科技大學替學生上課，上課的主題是網站系統開發，包含：</p>
+<h1 id="2019-03-2019-07-帶領大學生學習程式設計"><a href="#2019-03-2019-07-帶領大學生學習程式設計" class="headerlink" title="2019/03~2019/07-帶領大學生學習程式設計"></a>2019/03~2019/07-帶領大學生學習程式設計</h1><p>技術顧問對 1 月份提出的 <strong>系統重構流程</strong> 相當有興趣，故將重構計畫整合至校外課堂中，帶領一批學生一起參與重構計畫，希望透過讓學生閱讀企業級的程式碼，栽培學生寫出「成熟」的程式。在這個計畫中，公司由經理和我每個禮拜中抽出兩天的時間到高雄科技大學替學生上課，上課的主題是網站系統開發，包含：</p>
 <ul>
 <li>Gitlab 基本操作  <ul>
 <li>Commit</li>
@@ -252,14 +253,23 @@
 <li>CodeIgniter 3</li>
 <li>如何閱讀程式碼</li>
 </ul>
-<h3 id="翻轉教室"><a href="#翻轉教室" class="headerlink" title="翻轉教室"></a>翻轉教室</h3><p>每週兩天的課程對網站開發沒概念的學生來說，實在是太少了，因此必須設計一套適合的課程來解決時間太少的問題。最後的解決方案是遵循一套名為「翻轉教室」的教學方式，設計出讓學生在非上課時間也能夠自主學習的課程。</p>
+<h3 id="翻轉教室"><a href="#翻轉教室" class="headerlink" title="翻轉教室"></a>翻轉教室</h3><p>每週兩天的上課時間，對網站開發沒概念的學生來說實在是太少了，因此必須設計一套適合的課程來解決時間太少的問題。最後遵循一套名為「翻轉教室」的教學方式，設計出讓學生在非上課時間也能夠自主學習的課程。</p>
 <p><img src="/blog/images/pasted-19.png" alt="安排目標與練習，讓學生主動找時間學習"></p>
-<p>翻轉教育的課程必須事先幫學生定製一系列的主題與範圍（如 HTML、JavaScript)，再給予每個主題的學習資源，讓學生以概括的方式快速了解主題。最後每個主搭配一些題目或情境，讓學生以解決問題導向的方式進行學習。另外，為了因應學生素質不一致的問題，教學資源和題目必須由淺至深，讓進度較快的學生不必等其他同學的進度，就能持續往下練習。</p>
-<p>到學校上課前幾週，只需要幫學生起個頭，簡介一下主題的內容與主題之間的關聯，並且指派每週作業。下課後學生就會自行找出解決問題的相關知識，從中學習知識並且得到解決問題的成就感。</p>
+<p>翻轉教育的課程必須事先幫學生定製一系列的主題與範圍（如 HTML、JavaScript)，再給予每個主題的學習資源，讓學生以概括的方式快速了解主題。最後每個主搭配一些題目或情境，讓學生以解決問題導向的方式進行學習。另外，為了因應學生素質不一致的問題，教學資源和題目包含淺至深的議題，讓進度較快的學生不必等其他同學的進度，就能持續往下練習。</p>
+<p>開始上課前幾週，只需要幫學生起個頭，簡介一下主題的內容與主題之間的關聯，並且指派每週作業。下課後學生就會自行找出實踐作業的相關知識，從中學習知識並且得到解決問題的成就感。</p>
 <p>當學生熟悉翻轉教室的形式後，每次到學校上課都是與學生探討在作業中遇到常見錯誤、困難，並且提出良好的解決方案或學習方向。</p>
 <h3 id="Gitlab-當作回饋機制"><a href="#Gitlab-當作回饋機制" class="headerlink" title="Gitlab 當作回饋機制"></a>Gitlab 當作回饋機制</h3><p><strong>翻轉教室主要是讓學生透過自主學習的方式進行學習，因此必須有個回饋機制讓學生知道自己學得正不正確</strong>。原本翻轉教室是利用每次上課時間，讓學生分享作業；以及講師帶領學生探討寫作業過程中遇到的問題來當作回饋。</p>
-<p>我和經理選擇導入更適合開發人員的 Gitlab 來實踐回饋機制。利用 Milestone 要求學生將作業繳交至 Gitlab。issue 功能則變得像 StackOverflow，讓學生可以公開討論自己的問題，即便平時個性較羞怯的學生也能在 Gitlab 與講師或同學進行交流。最棒的是 Merge Request 機制讓我們可以對學生的作業進行審視，將學生做得不夠好的地方與建議即時回饋給學生。</p>
-<h3 id="利用-Merge-Request-導入良好的開發觀念"><a href="#利用-Merge-Request-導入良好的開發觀念" class="headerlink" title="利用 Merge Request 導入良好的開發觀念"></a>利用 Merge Request 導入良好的開發觀念</h3><hr>
+<p>我和經理選擇導入更適合開發人員的 Gitlab 來實踐回饋機制：</p>
+<ul>
+<li>利用 Milestone 要求學生將作業繳交至 Gitlab。</li>
+<li>issue 功能則像 StackOverflow，讓學生可以公開討論自己的問題，個性羞怯的學生也能在 Gitlab 與講師或同學進行交流。</li>
+<li>Merge Request 機制用來審視學生的作業，將學生做得不好的地方與建議即時回饋給學生。</li>
+</ul>
+<h3 id="利用-Merge-Request-導入良好的開發觀念"><a href="#利用-Merge-Request-導入良好的開發觀念" class="headerlink" title="利用 Merge Request 導入良好的開發觀念"></a>利用 Merge Request 導入良好的開發觀念</h3><p>Merge Request 讓我變成學生的個人教練，學生上傳程式碼後會立刻得到錯誤報告與改善建議。發現常見問題時，也可以 tag 所有學生一起討論並學習解決方案。</p>
+<p>我和經理在 Merge Request 階段進行嚴謹的 Code Review，審查內容包含 Commit Message 規範、統一 Coding Style、重構和 Clean Code 觀念 …等，只要不合格就退回並給予改善建議。前幾個作業中，學生都被多次退回才通過 Code Review。</p>
+<p>不到一個月，學生的程式碼變得相當成熟，不再有意義不明的變數名稱，也不會寫出巢狀 if，並且有能力釐清程式碼的職責。甚至能力較好的學生還會回頭重構前幾次的作業呢！</p>
+<p>Code Review 除了訓練學生效果很好以外，我認為一個 IT 公司也應該好好利用 Code Review 持續培養開發人員良好的開發習慣與思維！</p>
+<hr>
 <p>　　
 　　</p>
 <h1 id="2019-06-學習《Clean-Architecture》"><a href="#2019-06-學習《Clean-Architecture》" class="headerlink" title="2019/06-學習《Clean Architecture》"></a>2019/06-學習《Clean Architecture》</h1><h3 id="利用分層架構，防止程式腐敗"><a href="#利用分層架構，防止程式腐敗" class="headerlink" title="利用分層架構，防止程式腐敗"></a>利用分層架構，防止程式腐敗</h3><h1 id="持續重構：使用設計模式”擁抱變化”"><a href="#持續重構：使用設計模式”擁抱變化”" class="headerlink" title="持續重構：使用設計模式”擁抱變化”"></a>持續重構：使用設計模式”擁抱變化”</h1><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><h3 id="Police"><a href="#Police" class="headerlink" title="Police"></a>Police</h3><h3 id="Flyweight"><a href="#Flyweight" class="headerlink" title="Flyweight"></a>Flyweight</h3><h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><h3 id="Obersever"><a href="#Obersever" class="headerlink" title="Obersever"></a>Obersever</h3><hr>
@@ -298,7 +308,7 @@
 
 
 
-<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left ">
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
 
