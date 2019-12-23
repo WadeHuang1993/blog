@@ -577,6 +577,22 @@ figure.highlight .section {
 #toc {
   overflow: scroll;
   max-height: 700px !important;
-  margin-left: -60px !important;
-  min-width: 350px;
+}
+@media screen and (max-width: 1472px) {
+  #toc {
+    margin-left: -60px !important;
+    min-width: 350px;
+  }
+}
+@media screen and (max-width: 1280px) {
+  #toc {
+    margin-left: -60px !important;
+    min-width: 365px;
+  }
+}
+@media screen and (max-width: 1088px) {
+  #toc {
+    margin-left: 0px !important;
+    min-width: 100%;
+  }
 }
