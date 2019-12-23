@@ -577,4 +577,6 @@ figure.highlight .section {
 #toc {
   overflow: scroll;
   max-height: 700px !important;
+  margin-left: -60px;
+  min-width: 370px;
 }
