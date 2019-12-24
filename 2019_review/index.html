@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為理論知識必須經">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-23T14:04:01.159Z">
+<meta property="og:updated_time" content="2019-12-24T00:11:23.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    36 分鐘 閱讀文 (大約 5365 個字)
+                    36 分鐘 閱讀文 (大約 5405 個字)
                 </span>
                 
                 
@@ -272,21 +272,20 @@
 <hr>
 <p>　　
 　　</p>
-<h1 id="2019-06-學習《Clean-Architecture》"><a href="#2019-06-學習《Clean-Architecture》" class="headerlink" title="2019/06-學習《Clean Architecture》"></a>2019/06-學習《Clean Architecture》</h1><p>《Clean Architechure》本來並不在我 2019 的書單裡面，但是在學習 DDD 的過程中發現不斷有人拿《Clean Architechure》的架構來跟 DDDLite 架構做比較，這才引起我對《Clean Architechure》的興趣，想說是 Uncle Bob 的著作就安心訂購。</p>
-<p>很幸運的，這又是一本可以讓程式設計思維提升好幾個層次的好書！《Clean Architechure》可以說是物件導向設計 SOLID 原則的延伸，如果說 SOLID 是指導開發人員如何設計物件，那麼《Clean Architechure》就是指導開發人員如何將多個物件組織起來，並且讓利用一套清晰易懂的規則讓物件與物件彼此協作，完成系統需求所需的功能。</p>
+<h1 id="2019-06-學習《Clean-Architecture》"><a href="#2019-06-學習《Clean-Architecture》" class="headerlink" title="2019/06-學習《Clean Architecture》"></a>2019/06-學習《Clean Architecture》</h1><p>《<a href="https://www.tenlong.com.tw/products/9789864342945" target="_blank" rel="noopener">Clean Architechure</a>》本來並不在我 2019 的書單裡面，但是在學習 DDD 的過程中發現不斷有人拿 Clean Architechure 的架構來跟 DDDLite 架構做比較，這才引起我對 Clean Architechure 的興趣，想說是 Uncle Bob 的著作就安心訂購。</p>
+<p>很幸運的，這又是一本可以讓程式設計思維提升好幾個層次的好書！Clean Architechure 可以說是物件導向設計 SOLID 原則的延伸，如果說 SOLID 是指導開發人員如何設計物件，那麼 Clean Architechure 就是指導開發人員如何將多個物件組織起來，並且讓利用一套清晰易懂的規則讓物件與物件彼此協作，完成系統需求所需的功能。</p>
 <p><img src="/blog/images/pasted-20.png?500x" alt="Clean-Architecture-graph"></p>
 <p>整潔架構中，依照程式的重要程度來劃分層級：</p>
 <blockquote>
 <p>越核心的邏輯越往內圈靠，容易變化的附加邏輯則越往外層靠。</p>
 </blockquote>
-<p>整潔架構中，越內圈的邏輯層次就越高，最內圈屬於業務規則的<strong>核心策略</strong>，外圈則是圍繞著核心業務規則並隨著需求不斷變化的 <strong>機制</strong>。這樣劃分的原因是，系統必須保持核心業務邏輯的彈性，以便因應多種不同的需求。所以越內圈的程式碼彈性會越高，為了保持內圈的彈性，也會引入較多的抽象。越外圈的程式碼則彈性越低，以便因應千變萬化的需求。</p>
-<p>除了這樣分層以外，還需要遵循「相依性規則」：</p>
+<p>整潔架構中，越內圈的邏輯層次就越高，最內圈屬於業務規則的<strong>核心策略</strong>，外圈則是圍繞著核心業務規則並隨著需求不斷變化的 <strong>機制</strong>。這樣劃分的原因是，系統必須保持核心業務邏輯的彈性，以便因應多種不同的需求。所以越內圈的程式碼彈為了保持彈性，也會引入較多的抽象；外圈的程式碼則是按需求所需，透過內圈公開的抽象來存取或擴充核心業務規則，以完成需求所需的功能。</p>
+<p>除了分層以外，還需要遵循「相依性規則」：</p>
 <blockquote>
 <p>原始碼依賴關係只能指向內部，朝向更高層級的策略。</p>
 </blockquote>
-<p>這裏指的是，內圈不能知道外圈的存在，包含外圈的變數、類別、函式。只要在內圈看到 <code>import</code> 或是 <code>using</code> 外圈的引入就代表違反了規定。這樣的好處是可以將 <strong>策略</strong> 與 <strong>機制</strong> 隔離開來。身為一個開發人員必須意識到，不能讓 UI 介面（機制）的需求變動影響影響到核心業務邏輯，若將機制與策略寫在一起，當機制變動時，策略也必須重新編譯。被隔離開的程式碼會以不同的速率和原因被修改，</p>
-<p>外圈是機制，內圈是策略。Clean Architecture 書中有提到：</p>
-<h3 id="利用分層架構，防止程式腐敗"><a href="#利用分層架構，防止程式腐敗" class="headerlink" title="利用分層架構，防止程式腐敗"></a>利用分層架構，防止程式腐敗</h3><h1 id="持續重構：使用設計模式”擁抱變化”"><a href="#持續重構：使用設計模式”擁抱變化”" class="headerlink" title="持續重構：使用設計模式”擁抱變化”"></a>持續重構：使用設計模式”擁抱變化”</h1><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><h3 id="Police"><a href="#Police" class="headerlink" title="Police"></a>Police</h3><h3 id="Flyweight"><a href="#Flyweight" class="headerlink" title="Flyweight"></a>Flyweight</h3><h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><h3 id="Obersever"><a href="#Obersever" class="headerlink" title="Obersever"></a>Obersever</h3><hr>
+<p>這裏指的是，內圈不能知道外圈的存在，包含外圈的變數、類別、函式。只要在內圈看到 <code>import</code> 或是 <code>using</code> 引入外圈的東西就代表違反了規定。這樣的好處是可以將 <strong>策略</strong> 與 <strong>機制</strong> 隔離開來。身為一個開發人員必須意識到，將 <strong>策略</strong> 和 <strong>機制</strong> 寫在一起是很致命的錯誤！因為 <strong>機制</strong>（如 UI 介面）的需求變動頻率很大，而且有很大的機率修改到 <strong>策略</strong>（核心業務邏輯）的程式碼。為了避免 <strong>策略</strong> 被影響，應該隔離 <strong>策略</strong> 與 <strong>機制</strong>，這麼一來被隔離開的程式碼會以不同的速率和原因被修改，並且不會影響到彼此的程式碼。</p>
+<h3 id="隔離策略與機制，防止程式碼腐敗"><a href="#隔離策略與機制，防止程式碼腐敗" class="headerlink" title="隔離策略與機制，防止程式碼腐敗"></a>隔離策略與機制，防止程式碼腐敗</h3><h1 id="持續重構：使用設計模式”擁抱變化”"><a href="#持續重構：使用設計模式”擁抱變化”" class="headerlink" title="持續重構：使用設計模式”擁抱變化”"></a>持續重構：使用設計模式”擁抱變化”</h1><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><h3 id="Police"><a href="#Police" class="headerlink" title="Police"></a>Police</h3><h3 id="Flyweight"><a href="#Flyweight" class="headerlink" title="Flyweight"></a>Flyweight</h3><h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><h3 id="Obersever"><a href="#Obersever" class="headerlink" title="Obersever"></a>Obersever</h3><hr>
 <p>　　
 　　</p>
 <h1 id="導入-Event-Sourcing-概念紀錄系統日誌q"><a href="#導入-Event-Sourcing-概念紀錄系統日誌q" class="headerlink" title="導入 Event Sourcing 概念紀錄系統日誌q"></a>導入 Event Sourcing 概念紀錄系統日誌q</h1>
@@ -401,9 +400,9 @@
         <span class="has-mr-6">7</span>
         <span>2019/06-學習《Clean Architecture》</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#利用分層架構，防止程式腐敗">
+        <a class="is-flex" href="#隔離策略與機制，防止程式碼腐敗">
         <span class="has-mr-6">7.1</span>
-        <span>利用分層架構，防止程式腐敗</span>
+        <span>隔離策略與機制，防止程式碼腐敗</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#持續重構：使用設計模式”擁抱變化”">
         <span class="has-mr-6">8</span>
