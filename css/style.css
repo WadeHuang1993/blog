@@ -572,7 +572,7 @@ figure.highlight .section {
   text-transform: uppercase;
 }
 .hljs-comment {
-  color: #3b8888 !important;
+  color: #3fc16d !important;
 }
 #toc {
   overflow: scroll;
