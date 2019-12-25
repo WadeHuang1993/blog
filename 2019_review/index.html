@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-24T08:56:45.026Z">
+<meta property="og:updated_time" content="2019-12-25T07:29:16.996Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    41 分鐘 閱讀文 (大約 6103 個字)
+                    42 分鐘 閱讀文 (大約 6231 個字)
                 </span>
                 
                 
@@ -200,17 +200,18 @@
 <p><code>StudentModel-&gt;studentList()</code> 是一個正在腐敗的程式碼，因為它的 <strong>策略</strong> 與 <strong>機制</strong> 被寫在一起了。這種安排程式的方式往往會在遇到新需求時，就替函式新增幾個參數或 if 來完成新需求的功能。雖然這個案例看起來很小又不複雜，但是，<strong>如果開發人員不懂得將策略與機制隔離，不用一下子專案中就會充滿又臭又長的大函式</strong>！而且這些大函式常常又是 <strong>策略</strong> 與 <strong>機制</strong> 完全攪在一起，開發人員根本難以辨認函式最原始的邏輯是什麼！</p>
 <h3 id="隔離策略與機制，防止程式碼腐敗"><a href="#隔離策略與機制，防止程式碼腐敗" class="headerlink" title="隔離策略與機制，防止程式碼腐敗"></a>隔離策略與機制，防止程式碼腐敗</h3><p>在我維護的專案中，有一個核心功能為「簽核公文」。使用者需要有一個「簽核歷史紀錄」的畫面來追蹤公文狀態：</p>
 <p><img src="/blog/images/pasted-21.png?700x" alt="顯示簽核紀錄功能"></p>
-<p>簽核紀錄功能的資料是經由 <code>Workflow-&gt;process()</code> 撈取的，但是只有撈取簽核歷史紀錄是不夠的，因為客戶要求「簽核歷史紀錄」畫面需要更多的資訊：</p>
+<p>簽核紀錄功能的資料是經由 Workflow 類別的 <code>process()</code> 函式撈取的：</p>
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Workflow</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> array 所有簽核 */</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> $process = <span class="hljs-keyword">array</span>();</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Workflow_repository 資料庫操作層 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> $repo;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 取得 所有簽核資料</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> array</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;repo-&gt;get_process(<span class="hljs-keyword">$this</span>-&gt;workflow_id)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// ... 省略</span></span><br></pre></td></tr></table></figure>
+
+<p>但是 <code>Workflow-&gt;process()</code> 只有撈取「簽核資料」是不夠的，因為客戶要求「簽核歷史紀錄」畫面需要更多的資訊：</p>
 <ol>
 <li>隱藏匿名簽核成員的名稱</li>
 <li>異常的流程須標記成紅色</li>
 <li>顯示異常流程的原因</li>
 </ol>
-<p>到目前為止可以看到，「簽核歷史紀錄」是屬於與 UI 相關的新需求。在 Clean Architecture 架構的同心圓中，UI 被分類在外圈，也就是 <strong>機制</strong>。Workflow 類別則是系統的核心功能，故屬於同心圓的內圈，也就是 <strong>策略</strong>。因此我們不應該為了完成 UI 的功能去修改</p>
-<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Workflow</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> array 所有簽核 */</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> $process = <span class="hljs-keyword">array</span>();</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Workflow_repository 資料庫操作層 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> $repo;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 取得 所有簽核</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> array</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;repo-&gt;get_process(<span class="hljs-keyword">$this</span>-&gt;workflow_id)</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="hljs-comment">// ... 省略</span></span><br></pre></td></tr></table></figure>
-
-
-
+<p>到目前為止可以看到，「簽核歷史紀錄」是屬於與 UI 相關的新需求。在 Clean Architecture 架構的同心圓中，UI 被分類在外圈，也就是 <strong>機制</strong>。Workflow 類別則是系統的核心功能，故屬於同心圓的內圈，也就是 <strong>策略</strong>。</p>
+<p>如果開發人員直接擴充 <code>Workflow-&gt;process()</code> 的程式碼來完成「簽核歷史紀錄」的功能，等同於“把機制的程式碼寫進策略中”，不但使程式碼變得不易維護，還讓系統中其他調用 <code>Workflow-&gt;process()</code> 的功能都被迫執行「簽核歷史紀錄」的程式碼！</p>
+<p>因此應該遵循 Clean Architecture 的「隔離策略與機制」原則，我們必須隔離<code>Workflow-&gt;process()</code> 與「簽核歷史紀錄」的程式碼。</p>
 <h1 id="工作實踐經驗"><a href="#工作實踐經驗" class="headerlink" title="工作實踐經驗"></a>工作實踐經驗</h1><h2 id="替專案導入-Commit-Message-規範"><a href="#替專案導入-Commit-Message-規範" class="headerlink" title="替專案導入 Commit Message 規範"></a>替專案導入 Commit Message 規範</h2><p>打開新公司的程式碼，發現這裡的開發人員沒有統一撰寫 Git Commit Message 的格式，這對一個長期維護的系統來說並不是一件好事！打開 Git History 幾乎找不出;對程式碼異動的意圖與原因，往往只有原作者知道自己的程式碼在做什麼…。</p>
 <p>為了解決這個問題，我向眾開發人員提議可以導入 Commit Message 規範，規範的詳細內容已經被記錄在「<a href="http://localhost:4000/blog/git_commit_message_best_practice/" target="_blank" rel="noopener">Git Commit Message 這樣寫會更好，替專案引入規範與範例
 </a>」 文章中。</p>
