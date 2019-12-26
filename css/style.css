@@ -243,6 +243,11 @@ img.thumbnail {
   font-size: 1.25rem;
   line-height: 1.6em;
 }
+.article .content ol {
+  margin-left: 3em;
+!important
+}
+!important
 .rtl {
   direction: rtl;
 }
