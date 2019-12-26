@@ -596,3 +596,6 @@ figure.highlight .section {
     min-width: 100%;
   }
 }
+.gallery-item img {
+  border: solid 1px #ddd;
+}
