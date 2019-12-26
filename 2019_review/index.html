@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-26T07:37:20.470Z">
+<meta property="og:updated_time" content="2019-12-26T08:56:00.781Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小時 閱讀文 (大約 7159 個字)
+                    1 小時 閱讀文 (大約 7938 個字)
                 </span>
                 
                 
@@ -285,10 +285,24 @@
 <li>如何撰寫領域模型的單元測試。</li>
 </ol>
 <p>這份簡報的原意只是想用來討論 SOP，不過技術顧問看完後就開始調動人員準備執行了！</p>
-<h2 id="持續重構，利用設計模式”擁抱變化“"><a href="#持續重構，利用設計模式”擁抱變化“" class="headerlink" title="持續重構，利用設計模式”擁抱變化“"></a>持續重構，利用設計模式”擁抱變化“</h2><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><p>手頭上的專案每次遇到要匯出 Excel 的需求都會很頭痛，因為必須透過大量且複雜的 Array 來建立匯出資料。這是 <a href="https://www.kancloud.cn/sstd521/refactor/194265" target="_blank" rel="noopener">Primitive Obsession</a>（基本型別偏執）的壞味道，大量使用基本型別（如 Array）來組織一個有意義的結構。但是大量的基本型別閱讀起來跟大泥團沒什麼兩樣，因此做了 Replace Array with Object 重構：</p>
-<p><img src="/blog/images/pasted-23.png" alt="利用 Factory 簡化建立 Excel 資料複雜度"></p>
+<h2 id="持續重構，利用設計模式”擁抱變化“"><a href="#持續重構，利用設計模式”擁抱變化“" class="headerlink" title="持續重構，利用設計模式”擁抱變化“"></a>持續重構，利用設計模式”擁抱變化“</h2><h3 id="基本型別偏執-Primitive-Obsession"><a href="#基本型別偏執-Primitive-Obsession" class="headerlink" title="基本型別偏執(Primitive Obsession)"></a>基本型別偏執(Primitive Obsession)</h3><p>手頭上的專案每次遇到要匯出 Excel 的需求都會很頭痛，因為必須透過大量且複雜的 Array 來建立匯出資料。這是 <a href="https://www.kancloud.cn/sstd521/refactor/194265" target="_blank" rel="noopener">Primitive Obsession</a>（基本型別偏執）的壞味道，大量使用基本型別（如 Array）來組織一個有意義的結構。但是大量的基本型別閱讀起來跟大泥團沒什麼兩樣，因此做了 Replace Array with Object 重構：</p>
+<p><img src="/blog/images/pasted-23.png" alt="引入物件，簡化建立 Excel 資料複雜度"></p>
 <p>這次重構簡直是一勞永逸，之後遇到匯出 Excel 都是小菜一碟！其他開發人員也用得開心^^。</p>
-<h3 id="Flyweight-享元模式"><a href="#Flyweight-享元模式" class="headerlink" title="Flyweight 享元模式"></a>Flyweight 享元模式</h3><p>在 Excel 模式</p>
+<h3 id="Flyweight-享元模式"><a href="#Flyweight-享元模式" class="headerlink" title="Flyweight 享元模式"></a>Flyweight 享元模式</h3><p>在 Excel 解決了 <strong>基本型別偏執</strong> 臭味道後，又引入了新的問題：記憶體耗盡（memory exhausted）。為什麼會發生記憶體耗盡呢？因為對 Excel 物件來說，一欄一列都需要產生一個 Row 或 Cell 物件來乘載資料。一旦要匯出資料量很大，就有可能發生記憶體耗盡的問題：</p>
+<p><img src="/blog/images/pasted-24.png" alt="建立太多 Row 與 Cell 物件造成記憶體耗盡"></p>
+<p>為了避免記憶體耗盡的問題，導入了享元模式。享元模式的核心思想其實就是建立快取(Cache)。所有要匯出的資料只需通過快取的 Row 或 Cell 物件來渲染資料即可，不必再為每個 Row 與 Cell 建立獨立的物件。</p>
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Excel</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * Excel Row 物件</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * 使用享元模式，避免 new 太多列物件</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@var</span> Row $row</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> $row;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 新增一列</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> Cell|string|array $cells 欄位內容（可複數）</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> array $styles</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">addRow</span><span class="hljs-params">(array $cells, $styles = array<span class="hljs-params">()</span>)</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;flyweightRow();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;row-&gt;clearCells();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">foreach</span> ($cells <span class="hljs-keyword">as</span> $cell) &#123;</span><br><span class="line">            <span class="hljs-keyword">$this</span>-&gt;row-&gt;addCell($cell, $styles);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;stack(<span class="hljs-keyword">$this</span>-&gt;row);</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 建立享元 Row 物件</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> Row;</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">flyweightRow</span><span class="hljs-params">()</span>: <span class="hljs-title">void</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">if</span> (!<span class="hljs-keyword">$this</span>-&gt;row) &#123;</span><br><span class="line">            <span class="hljs-keyword">$this</span>-&gt;row = <span class="hljs-keyword">new</span> Row();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>加入快取機制後，即使要建立一個上萬筆資料的 Excel 活頁，也只需要一個 Row 與 Cell 物件就好了！</p>
+<p><img src="/blog/images/pasted-25.png" alt="引入享元模式後，建立一個 Excel 活頁只需要一個 Row 與 Cell 物件即可。"></p>
+<p>（雖然後來發現其實是迴圈邏輯寫錯才造成記憶體耗盡，但享元模式仍被保留下來了。）</p>
+<h3 id="State-狀態模式"><a href="#State-狀態模式" class="headerlink" title="State 狀態模式"></a>State 狀態模式</h3><p>某天突然來一個「切換帳號功能」，使用者希望可以直接切換同一設備上曾經登入過的帳號，不必登出重打帳號密碼來切換帳號。</p>
+<p>這個需求原先的設計是建立一個 <code>Switcher</code> 類別，讓每個設備產生一個獨立的 Token 並儲存在 Cookie 裡面，系統再由 Cookie 的 Token 撈取設備曾經登入過哪些帳號。</p>
+<p>但是過沒多久，另一個客戶希望可以藉由 user_id 從舊系統的人事資料庫撈取多個可切換的帳號，但這個切換帳號的需求較適合用 Session 來實現。</p>
+<p>為了讓系統可以同時使用 Cookie 與 Session 來切換帳號，我在 <code>Switcher</code> 類別中引入 <code>Switchable_state</code> 介面，並把原本 Cookie 的邏輯全部搬移至新類別 <code>Cookie_storage</code>：</p>
+<p><img src="/blog/images/pasted-27.png" alt="重構 Switcher 類別，引入 Switchable_state 介面以便操作多種資料來源的需求。"></p>
+<p>現在 <code>Switcher</code> 是透過 <code>Switchable_state</code> 介面來存取資料來源，因此我只需新增一個實作 <code>Switchable_state</code> 介面的類別來實現 Session 版本的切換帳號功能，即可無縫接軌地讓系統多出 Session 切換帳號功能。</p>
+<p><img src="/blog/images/pasted-28.png" alt="系統可以同時保有 Cookie 與 Session 版本的切換帳號功能"></p>
 <hr>
 <p>　　</p>
 <h2 id="導入-Event-Sourcing-概念紀錄系統日誌"><a href="#導入-Event-Sourcing-概念紀錄系統日誌" class="headerlink" title="導入 Event Sourcing 概念紀錄系統日誌"></a>導入 Event Sourcing 概念紀錄系統日誌</h2><h1 id="其他經驗"><a href="#其他經驗" class="headerlink" title="其他經驗"></a>其他經驗</h1><h2 id="高雄科技大學講授-PHP-程式設計課程"><a href="#高雄科技大學講授-PHP-程式設計課程" class="headerlink" title="高雄科技大學講授 PHP 程式設計課程"></a>高雄科技大學講授 PHP 程式設計課程</h2><p>技術顧問對 1 月份提出的 <strong>系統重構流程</strong> 相當有興趣，故將重構計畫整合至校外課堂中，帶領一批學生一起參與重構計畫，希望透過讓學生閱讀企業級的程式碼，栽培學生寫出「成熟」的程式。在這個計畫中，公司由經理和我每個禮拜中抽出兩天的時間到高雄科技大學替學生上課，上課的主題是網站系統開發，包含：</p>
@@ -445,13 +459,17 @@
         <span class="has-mr-6">3.4</span>
         <span>持續重構，利用設計模式”擁抱變化“</span>
         </a><ul class="menu-list"><li>
-        <a class="is-flex" href="#Factory">
+        <a class="is-flex" href="#基本型別偏執-Primitive-Obsession">
         <span class="has-mr-6">3.4.1</span>
-        <span>Factory</span>
+        <span>基本型別偏執(Primitive Obsession)</span>
         </a></li><li>
         <a class="is-flex" href="#Flyweight-享元模式">
         <span class="has-mr-6">3.4.2</span>
         <span>Flyweight 享元模式</span>
+        </a></li><li>
+        <a class="is-flex" href="#State-狀態模式">
+        <span class="has-mr-6">3.4.3</span>
+        <span>State 狀態模式</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#導入-Event-Sourcing-概念紀錄系統日誌">
         <span class="has-mr-6">3.5</span>
