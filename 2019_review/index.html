@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-26T09:30:44.292Z">
+<meta property="og:updated_time" content="2019-12-26T14:24:42.265Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小時 閱讀文 (大約 8322 個字)
+                    1 小時 閱讀文 (大約 8384 個字)
                 </span>
                 
                 
@@ -237,11 +237,11 @@
 </a>」 文章中。</p>
 <h3 id="實際案例"><a href="#實際案例" class="headerlink" title="實際案例"></a>實際案例</h3><p><strong>1. 同仁導入規範前的 Commit Message：</strong><br><img src="/blog/images/pasted-16.png" alt></p>
 <p><strong>2. 導入規範後，開始會紀錄異動原因與內容：</strong><br><img src="/blog/images/pasted-17.png" alt></p>
-<p>雖然過了好幾個月才讓大部分的開發人員確實按規範撰寫 Commit Message，但是<strong>開發團隊中已經養成一個優良的文化！當良好 Commit Message 持續被 Commit 進程式庫，新進人員將自然而然地遵循前人的格式撰寫 Commit Message</strong>。</p>
+<p>雖然過了好幾個月才讓大部分的開發人員確實按規範撰寫 Commit Message，但是<strong>開發團隊中已經養成一個優良的文化！當良好 Commit Message 持續被 Commit 進程式庫，新進人員也會乖乖遵循前人的格式撰寫 Commit Message</strong>。</p>
 <hr>
 <p>　　</p>
 <h2 id="替專案導入單元測試"><a href="#替專案導入單元測試" class="headerlink" title="替專案導入單元測試"></a>替專案導入單元測試</h2><p>時間拉回到剛搬到高雄的 2018 末。當時我才剛學會重構和單元測試。面試時，公司的技術顧問說公司想要導入單元測試和重構，希望我一定要進公司幫忙。我也答應了！真的很感謝有這個機會可以實踐導入重構與單元測試（讓我成長很多）。</p>
-<p>這間公司的專案使用 CodeIgniter 3 框架（後面簡稱 CI3)，CI3 本身並不是倡導物件導向開發風格的框架，專案的程式碼自然而然也是偏向義大利麵風格。加上專案是維護多年的大系統，在這樣的環境下導入單元測試變得很困難！  </p>
+<p>這間公司的專案使用 CodeIgniter 3 框架（後面簡稱 CI3)，CI3 本身並不是倡導物件導向開發風格的框架，專案的程式碼自然也是偏向義大利麵風格。加上專案是維護多年的大系統，在這樣的環境下導入單元測試變得很困難！  </p>
 <p>雖然說導入單元測試很困難，但說真的，除非專案使用物件導向風格開發以及有持續重構的習慣，不然不可能輕易導入單元測試吧！而且從身邊碼農朋友的經驗看來，幾乎 100% 的專案沒辦法輕易導入單元測試。所以我<strong>把這次的困難當作挑戰，練習如何讓單元測試在一個 Legacy Application 落地</strong>。</p>
 <h3 id="建立測試框架"><a href="#建立測試框架" class="headerlink" title="建立測試框架"></a>建立測試框架</h3><p>由於 CI3 架構內建的單元測試功能很少，所以我選用整合了 PHPUnit 的 <a href="https://github.com/kenjis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 來當作專案的測試框架。建立測試框架其實是導入單元測試最快最簡單的步驟，因為其他開發人員並不懂單元測試的相關知識，所以一定要盡可能地簡化撰寫單元測試的複雜度，才能讓單元測試“較有機會”導入開發團隊…</p>
 <h3 id="隔離測試環境對-DB-的副作用"><a href="#隔離測試環境對-DB-的副作用" class="headerlink" title="隔離測試環境對 DB 的副作用"></a>隔離測試環境對 DB 的副作用</h3><p>為了避免測試環境的行為污染 DB 的資料，因此要隔離單元測試與 DB。當時第一個想法是：”在測試環境下一律使用 SQLite”，因為 SQLite 可開啟 In Memory 模式，在記憶體中操作資料庫。當程式關閉後，記憶體內的 SQLite 資料庫也會清空，相當適合測試環境使用（無副作用）。</p>
@@ -342,9 +342,10 @@
 <li>CodeIgniter 3</li>
 <li>如何閱讀程式碼</li>
 </ul>
+<p>另外也可以看當時設計給學生的 <a href="https://hackmd.io/@_dxkxoF6Rj6AsQkVNWRsuA/SkdYxHGJL" target="_blank" rel="noopener">訓練菜單</a>，我認為這份也很適合給較沒開發經驗的新進人員當做教材學習。</p>
 <h3 id="翻轉教室"><a href="#翻轉教室" class="headerlink" title="翻轉教室"></a>翻轉教室</h3><p>每週兩天的上課時間，對網站開發沒概念的學生來說實在是太少了，因此必須設計一套適合的課程來解決時間太少的問題。最後遵循一套名為「翻轉教室」的教學方式，設計出讓學生在非上課時間也能夠自主學習的課程。</p>
 <p><img src="/blog/images/pasted-19.png" alt="安排目標與練習，讓學生主動找時間學習"></p>
-<p>翻轉教育的課程必須事先幫學生定製一系列的主題與範圍（如 HTML、JavaScript)，再給予每個主題的學習資源，讓學生以概括的方式快速了解主題。最後每個主搭配一些題目或情境，讓學生以解決問題導向的方式進行學習。另外，為了因應學生素質不一致的問題，教學資源和題目包含淺至深的議題，讓進度較快的學生不必等其他同學的進度，就能持續往下練習。</p>
+<p>翻轉教育的課程必須事先幫學生定製一系列的主題與範圍（詳情可見：<a href="https://hackmd.io/@_dxkxoF6Rj6AsQkVNWRsuA/SkdYxHGJL" target="_blank" rel="noopener">訓練菜單</a>)，再給予每個主題的學習資源，讓學生以概括的方式快速了解主題。最後每個主搭配一些題目或情境，讓學生以解決問題導向的方式進行學習。另外，為了因應學生素質不一致的問題，教學資源和題目包含淺至深的議題，讓進度較快的學生不必等其他同學的進度，就能持續往下練習。</p>
 <p>開始上課前幾週，只需要幫學生起個頭，簡介一下主題的內容與主題之間的關聯，並且指派每週作業。下課後學生就會自行找出實踐作業的相關知識，從中學習知識並且得到解決問題的成就感。</p>
 <p>當學生熟悉翻轉教室的形式後，每次到學校上課都是與學生探討在作業中遇到常見錯誤、困難，並且提出良好的解決方案或學習方向。</p>
 <h3 id="Gitlab-當作回饋機制"><a href="#Gitlab-當作回饋機制" class="headerlink" title="Gitlab 當作回饋機制"></a>Gitlab 當作回饋機制</h3><p><strong>翻轉教室主要是讓學生透過自主學習的方式進行學習，因此必須有個回饋機制讓學生知道自己學得正不正確</strong>。原本翻轉教室是利用每次上課時間，讓學生分享作業；以及講師帶領學生探討寫作業過程中遇到的問題來當作回饋。</p>
