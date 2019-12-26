@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-26T02:19:45.082Z">
+<meta property="og:updated_time" content="2019-12-26T02:22:09.052Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -223,7 +223,7 @@
 <p>這一個步驟的核心觀念是 <strong>策略必須開放擴充點，讓機制從外部擴充策略的邏輯</strong>，只有這麼做才能讓策略應對千變萬化的需求。</p>
 <p>開放擴充點後，只需要依照「簽核歷史紀錄」的需求，並新增 <code>實作 Decorator 的類別</code> 來擴充 <code>Workflow</code> 的邏輯就好了：</p>
 <p><img src="/blog/images/pasted-22.png" alt="由 Controller 注入 UI 所需的機制，擴充策略的邏輯"></p>
-<p>從上圖可以發現，<code>Workflow</code> 只能透過抽象介面來使用 <strong>機制</strong>，換句話說 <code>Workflow</code> 根本不知道 <code>Hide_anonymous_user_name.php</code> 和 <code>Mark_error_process.php</code> 的存在！這正是「相依性規則」所謂的“內圈不能知道外圈的存在”。抽象介面就像一道邊界，隔離了策略與機制。而邊界的兩邊將以不同的速率和原因被改變。</p>
+<p>從上圖可以發現，<code>Workflow</code> 只能透過抽象介面來使用 <strong>機制</strong>，換句話說 <code>Workflow</code> 根本不知道 <code>Hide_anonymous_user_name.php</code> 和 <code>Mark_error_process.php</code> 的存在！這正是「相依性規則」所謂的“<strong>內圈不能知道外圈的存在</strong>”。抽象介面就像一道邊界，隔離了策略與機制。而邊界的兩邊將以不同的速率和原因被改變。</p>
 <h3 id="一直都是開放封閉原則"><a href="#一直都是開放封閉原則" class="headerlink" title="一直都是開放封閉原則"></a>一直都是開放封閉原則</h3><p><img src="/blog/images/pasted-8.png?400x" alt="策略與機制只能透過抽象介面存取彼此"></p>
 <p>較有經驗的開發人員應該會發現這不正是 <strong>開放封閉原則</strong> 嗎？沒錯，Uncle bob 在書中也說了：</p>
 <blockquote>
