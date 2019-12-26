@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-26T01:56:03.027Z">
+<meta property="og:updated_time" content="2019-12-26T02:06:22.570Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小時 閱讀文 (大約 7009 個字)
+                    1 小時 閱讀文 (大約 7005 個字)
                 </span>
                 
                 
@@ -178,18 +178,18 @@
 <p>　　
 　　</p>
 <h2 id="《Clean-Architecture》"><a href="#《Clean-Architecture》" class="headerlink" title="《Clean Architecture》"></a>《Clean Architecture》</h2><p>《<a href="https://www.tenlong.com.tw/products/9789864342945" target="_blank" rel="noopener">Clean Architechure</a>》本來並不在我 2019 的書單裡面，但是在學習 DDD 的過程中發現不斷有人拿 Clean Architechure 的架構來跟 DDDLite 架構做比較，這才引起我對 Clean Architechure 的興趣，想說是 Uncle Bob 的著作就安心訂購。</p>
-<p>很幸運的，這又是一本可以讓程式設計思維提升好幾個層次的好書！Clean Architechure 可以說是物件導向設計 SOLID 原則的延伸，如果說 SOLID 是指導開發人員如何設計物件，那麼 Clean Architechure 就是指導開發人員如何將多個物件組織起來，並且讓利用一套清晰易懂的規則讓物件與物件彼此協作，完成系統需求所需的功能。</p>
+<p>很幸運的，這又是一本可以讓程式設計思維提升好幾個層次的好書！Clean Architechure 可以說是物件導向設計 SOLID 原則的延伸，如果說 SOLID 是指導開發人員如何設計物件，那麼 Clean Architechure 就是指導開發人員如何將多個物件組織起來，並且用一套清晰易懂的規則讓物件與物件彼此協作，完成系統需求所需的功能。</p>
 <p><img src="/blog/images/pasted-20.png?500x" alt="Clean-Architecture-graph"></p>
 <p>整潔架構中，依照程式的重要程度來劃分層級：</p>
 <blockquote>
 <p>越核心的邏輯越往內圈靠，容易變化的附加邏輯則越往外層靠。</p>
 </blockquote>
-<p>整潔架構中，越內圈的邏輯層次就越高，最內圈屬於業務規則的<strong>核心策略</strong>，外圈則是圍繞著核心業務規則並隨著需求不斷變化的 <strong>機制</strong>。這樣劃分的原因是，系統必須保持核心業務邏輯的彈性，以便因應多種不同的需求。所以越內圈的程式碼彈為了保持彈性，也會引入較多的抽象；外圈的程式碼則是按需求所需，透過內圈公開的抽象來存取或擴充核心業務規則，以完成需求所需的功能。</p>
+<p>越內圈的邏輯層次就越高（層次高表示彈性高），最內圈屬於業務規則的<strong>核心策略</strong>；外圈則是圍繞著核心業務規則並隨著需求不斷變化的 <strong>機制</strong>。這樣劃分的原因是，系統必須保持核心業務邏輯的彈性來因應多變的需求。圈的程式碼彈為了保持彈性，也會引入較多的抽象；外圈的程式碼則是按需求所需，透過實作內圈公開的抽象來存取或擴充核心業務規則，以完成需求所需的功能。</p>
 <p>除了分層以外，還需要遵循「相依性規則」：</p>
 <blockquote>
 <p>原始碼依賴關係只能指向內部，朝向更高層級的策略。</p>
 </blockquote>
-<p>這裏指的是，內圈不能知道外圈的存在，包含外圈的變數、類別、函式。只要在內圈看到 <code>import</code> 或是 <code>using</code> 引入外圈的東西就代表違反了規定。這樣的好處是可以將 <strong>策略</strong> 與 <strong>機制</strong> 隔離開來。身為一個開發人員必須意識到，將 <strong>策略</strong> 和 <strong>機制</strong> 寫在一起是很致命的錯誤！因為 <strong>機制</strong>（如 UI 介面）的需求變動頻率很大，而且有很大的機率修改到 <strong>策略</strong>（核心業務邏輯）的程式碼。為了避免 <strong>策略</strong> 被影響，應該隔離 <strong>策略</strong> 與 <strong>機制</strong>，這麼一來被隔離開的程式碼會以不同的速率和原因被修改，並且不會影響到彼此的程式碼。</p>
+<p>這裏指的是，<strong>內圈不能知道外圈的存在</strong>。包含外圈的變數、類別、函式。只要在內圈看到 <code>import</code> 或是 <code>using</code> 引入外圈的東西就代表違反了規定。這樣的好處是可以將 <strong>策略</strong> 與 <strong>機制</strong> 隔離開來。身為一個開發人員必須意識到，將 <strong>策略</strong> 和 <strong>機制</strong> 寫在一起是很致命的錯誤！因為 <strong>機制</strong>（如 UI 介面）的需求變動頻率很大，而且有很大的機率修改到 <strong>策略</strong>（核心業務邏輯）的程式碼。為了避免 <strong>策略</strong> 被影響，應該隔離 <strong>策略</strong> 與 <strong>機制</strong>，這麼一來被隔離開的程式碼會以不同的速率和原因被修改，並且不會影響到彼此的程式碼。</p>
 <p>另外，Clean Architechure 架構的同心圓並不一定要是 4 圈，4 圈只是作者為了方便講解層次而已。</p>
 <blockquote>
 <p>最重要的是要做到「隔離策略與機制」和「遵循相依性規則」!</p>
