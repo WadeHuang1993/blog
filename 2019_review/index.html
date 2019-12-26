@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-26T04:53:12.455Z">
+<meta property="og:updated_time" content="2019-12-26T07:37:20.470Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小時 閱讀文 (大約 6978 個字)
+                    1 小時 閱讀文 (大約 7159 個字)
                 </span>
                 
                 
@@ -285,10 +285,11 @@
 <li>如何撰寫領域模型的單元測試。</li>
 </ol>
 <p>這份簡報的原意只是想用來討論 SOP，不過技術顧問看完後就開始調動人員準備執行了！</p>
+<h2 id="持續重構，利用設計模式”擁抱變化“"><a href="#持續重構，利用設計模式”擁抱變化“" class="headerlink" title="持續重構，利用設計模式”擁抱變化“"></a>持續重構，利用設計模式”擁抱變化“</h2><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><p>手頭上的專案每次遇到要匯出 Excel 的需求都會很頭痛，因為必須透過大量且複雜的 Array 來建立匯出資料。這是 <a href="https://www.kancloud.cn/sstd521/refactor/194265" target="_blank" rel="noopener">Primitive Obsession</a>（基本型別偏執）的壞味道，大量使用基本型別（如 Array）來組織一個有意義的結構。但是大量的基本型別閱讀起來跟大泥團沒什麼兩樣，因此做了 Replace Array with Object 重構：</p>
+<p><img src="/blog/images/pasted-23.png" alt="利用 Factory 簡化建立 Excel 資料複雜度"></p>
+<p>這次重構簡直是一勞永逸，之後遇到匯出 Excel 都是小菜一碟！其他開發人員也用得開心^^。</p>
+<h3 id="Flyweight-享元模式"><a href="#Flyweight-享元模式" class="headerlink" title="Flyweight 享元模式"></a>Flyweight 享元模式</h3><p>在 Excel 模式</p>
 <hr>
-<p>　　</p>
-<p>　　</p>
-<h2 id="持續重構：使用設計模式”擁抱變化”"><a href="#持續重構：使用設計模式”擁抱變化”" class="headerlink" title="持續重構：使用設計模式”擁抱變化”"></a>持續重構：使用設計模式”擁抱變化”</h2><h3 id="Factory"><a href="#Factory" class="headerlink" title="Factory"></a>Factory</h3><h3 id="Police"><a href="#Police" class="headerlink" title="Police"></a>Police</h3><h3 id="Flyweight"><a href="#Flyweight" class="headerlink" title="Flyweight"></a>Flyweight</h3><h3 id="State"><a href="#State" class="headerlink" title="State"></a>State</h3><h3 id="Pipeline"><a href="#Pipeline" class="headerlink" title="Pipeline"></a>Pipeline</h3><h3 id="Middleware"><a href="#Middleware" class="headerlink" title="Middleware"></a>Middleware</h3><h3 id="Obersever"><a href="#Obersever" class="headerlink" title="Obersever"></a>Obersever</h3><hr>
 <p>　　</p>
 <h2 id="導入-Event-Sourcing-概念紀錄系統日誌"><a href="#導入-Event-Sourcing-概念紀錄系統日誌" class="headerlink" title="導入 Event Sourcing 概念紀錄系統日誌"></a>導入 Event Sourcing 概念紀錄系統日誌</h2><h1 id="其他經驗"><a href="#其他經驗" class="headerlink" title="其他經驗"></a>其他經驗</h1><h2 id="高雄科技大學講授-PHP-程式設計課程"><a href="#高雄科技大學講授-PHP-程式設計課程" class="headerlink" title="高雄科技大學講授 PHP 程式設計課程"></a>高雄科技大學講授 PHP 程式設計課程</h2><p>技術顧問對 1 月份提出的 <strong>系統重構流程</strong> 相當有興趣，故將重構計畫整合至校外課堂中，帶領一批學生一起參與重構計畫，希望透過讓學生閱讀企業級的程式碼，栽培學生寫出「成熟」的程式。在這個計畫中，公司由經理和我每個禮拜中抽出兩天的時間到高雄科技大學替學生上課，上課的主題是網站系統開發，包含：</p>
 <ul>
@@ -440,37 +441,17 @@
         <span class="has-mr-6">3.3.1</span>
         <span>簡報大綱</span>
         </a></li></ul></li><li>
-        <a class="is-flex" href="#持續重構：使用設計模式”擁抱變化”">
+        <a class="is-flex" href="#持續重構，利用設計模式”擁抱變化“">
         <span class="has-mr-6">3.4</span>
-        <span>持續重構：使用設計模式”擁抱變化”</span>
+        <span>持續重構，利用設計模式”擁抱變化“</span>
         </a><ul class="menu-list"><li>
         <a class="is-flex" href="#Factory">
         <span class="has-mr-6">3.4.1</span>
         <span>Factory</span>
         </a></li><li>
-        <a class="is-flex" href="#Police">
+        <a class="is-flex" href="#Flyweight-享元模式">
         <span class="has-mr-6">3.4.2</span>
-        <span>Police</span>
-        </a></li><li>
-        <a class="is-flex" href="#Flyweight">
-        <span class="has-mr-6">3.4.3</span>
-        <span>Flyweight</span>
-        </a></li><li>
-        <a class="is-flex" href="#State">
-        <span class="has-mr-6">3.4.4</span>
-        <span>State</span>
-        </a></li><li>
-        <a class="is-flex" href="#Pipeline">
-        <span class="has-mr-6">3.4.5</span>
-        <span>Pipeline</span>
-        </a></li><li>
-        <a class="is-flex" href="#Middleware">
-        <span class="has-mr-6">3.4.6</span>
-        <span>Middleware</span>
-        </a></li><li>
-        <a class="is-flex" href="#Obersever">
-        <span class="has-mr-6">3.4.7</span>
-        <span>Obersever</span>
+        <span>Flyweight 享元模式</span>
         </a></li></ul></li><li>
         <a class="is-flex" href="#導入-Event-Sourcing-概念紀錄系統日誌">
         <span class="has-mr-6">3.5</span>
