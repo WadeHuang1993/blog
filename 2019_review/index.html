@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-26T02:06:22.570Z">
+<meta property="og:updated_time" content="2019-12-26T02:19:45.082Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    1 小時 閱讀文 (大約 7005 個字)
+                    1 小時 閱讀文 (大約 7002 個字)
                 </span>
                 
                 
@@ -172,7 +172,7 @@
 <p>　　</p>
 <h1 id="自學主題"><a href="#自學主題" class="headerlink" title="自學主題"></a>自學主題</h1><h2 id="DDD《領域驅動設計》"><a href="#DDD《領域驅動設計》" class="headerlink" title="DDD《領域驅動設計》"></a>DDD《領域驅動設計》</h2><p>在 1 月準備系統重構流程的過程中，覺得自己對於「領域模型」不夠瞭解，因此決定拜讀一下《領域驅動設計》，增進自己對領域模型的認知。</p>
 <p>DDD 是一個開發論，涵蓋的領域很多，可以說是納入各個程式設計層次的最佳實踐，包含：設計模式、DDD 四層架構（戰術設計）到多個系統間如何劃分邊界（戰略設計）。也因為 DDD 以多種層次來探討程式應該如何「設計」，讓我的思維直接上升好幾個層次，看待程式碼的視角變得更廣、更高階。</p>
-<p><img src="/blog/images/pasted-18.png?600x" alt="DDD 四層架構，透過隔離每一層讓程式碼可以適應變化"></p>
+<p><img src="/blog/images/pasted-18.png?600px" alt="DDD 四層架構，透過隔離每一層讓程式碼可以適應變化"></p>
 <p>DDD 可以說是繼 SOLID 原則後影響我很深的知識，以前我的思維只停留在物件與物件之間， DDD 讓我見識到系統架構如何應用「良好的程式設計」來應對變化，打開了我對系統架構的興趣。不過 DDD 對當時的我來說仍然有很多看不懂的部分（尤其是戰略設計），目前規劃 2020 年會再回來鑽研一次！</p>
 <hr>
 <p>　　
@@ -224,12 +224,12 @@
 <p>開放擴充點後，只需要依照「簽核歷史紀錄」的需求，並新增 <code>實作 Decorator 的類別</code> 來擴充 <code>Workflow</code> 的邏輯就好了：</p>
 <p><img src="/blog/images/pasted-22.png" alt="由 Controller 注入 UI 所需的機制，擴充策略的邏輯"></p>
 <p>從上圖可以發現，<code>Workflow</code> 只能透過抽象介面來使用 <strong>機制</strong>，換句話說 <code>Workflow</code> 根本不知道 <code>Hide_anonymous_user_name.php</code> 和 <code>Mark_error_process.php</code> 的存在！這正是「相依性規則」所謂的“內圈不能知道外圈的存在”。抽象介面就像一道邊界，隔離了策略與機制。而邊界的兩邊將以不同的速率和原因被改變。</p>
-<h3 id="其實一直都是開放封閉原則"><a href="#其實一直都是開放封閉原則" class="headerlink" title="其實一直都是開放封閉原則"></a>其實一直都是開放封閉原則</h3><p><img src="/blog/images/pasted-8.png?400x" alt="策略與機制只能透過抽象介面存取彼此"></p>
+<h3 id="一直都是開放封閉原則"><a href="#一直都是開放封閉原則" class="headerlink" title="一直都是開放封閉原則"></a>一直都是開放封閉原則</h3><p><img src="/blog/images/pasted-8.png?400x" alt="策略與機制只能透過抽象介面存取彼此"></p>
 <p>較有經驗的開發人員應該會發現這不正是 <strong>開放封閉原則</strong> 嗎？沒錯，Uncle bob 在書中也說了：</p>
 <blockquote>
-<p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob. 《Clean Architecture》</p>
+<p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 -《Clean Architecture》</p>
 </blockquote>
-<p>《Clean Architecture》一書揭露了軟體開發從設計物件到組織架構，其實都是應用「隔離策略與機制」的思維來控制軟體複雜度，至於如何做到隔離策略和機制則是按照不同的情境有不同的作法。</p>
+<p>《Clean Architecture》一書揭露了軟體開發從設計物件到組織架構，其實都是應用「隔離策略與機制」的思維來控制軟體複雜度，至於如何做到隔w離策略和機制則是按照不同的情境有不同的作法。</p>
 <hr>
 <p>　　</p>
 <h1 id="工作實踐經驗"><a href="#工作實踐經驗" class="headerlink" title="工作實踐經驗"></a>工作實踐經驗</h1><h2 id="替專案導入-Commit-Message-規範"><a href="#替專案導入-Commit-Message-規範" class="headerlink" title="替專案導入 Commit Message 規範"></a>替專案導入 Commit Message 規範</h2><p>打開新公司的程式碼，發現這裡的開發人員沒有統一撰寫 Git Commit Message 的格式，這對一個長期維護的系統來說並不是一件好事！打開 Git History 幾乎找不出;對程式碼異動的意圖與原因，往往只有原作者知道自己的程式碼在做什麼…。</p>
@@ -392,9 +392,9 @@
         <span class="has-mr-6">2.2.2</span>
         <span>隔離策略與機制，防止程式碼腐敗</span>
         </a></li><li>
-        <a class="is-flex" href="#其實一直都是開放封閉原則">
+        <a class="is-flex" href="#一直都是開放封閉原則">
         <span class="has-mr-6">2.2.3</span>
-        <span>其實一直都是開放封閉原則</span>
+        <span>一直都是開放封閉原則</span>
         </a></li></ul></li></ul></li><li>
         <a class="is-flex" href="#工作實踐經驗">
         <span class="has-mr-6">3</span>
