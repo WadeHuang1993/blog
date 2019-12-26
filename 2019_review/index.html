@@ -20,7 +20,7 @@
 <meta property="og:description" content="2019 回顧前言2019 年可以說是既充實又偷懶的一年。為什麼呢？因為花了很多時間在學習理論知識，包含：重構、整潔架構、單元測試、領域驅動開發、行為驅動開發 …等等。雖然每個知識看起來像是完全獨立的領域，但對 2019 的我來說，它們都是應付 Legacy Application 的利器。 為什麼又說偷懶？部落格和作品幾乎停擺！學習知識理論不像學習新技術，能把應用新技術的步驟分享到部落格上。因為">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
-<meta property="og:updated_time" content="2019-12-25T07:56:44.017Z">
+<meta property="og:updated_time" content="2019-12-26T01:56:03.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;2019_reviews.png">
 
@@ -151,7 +151,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    42 分鐘 閱讀文 (大約 6237 個字)
+                    1 小時 閱讀文 (大約 7009 個字)
                 </span>
                 
                 
@@ -211,11 +211,31 @@
 </ol>
 <p>到目前為止可以看到，「簽核歷史紀錄」是屬於與 UI 相關的新需求。在 Clean Architecture 架構的同心圓中，UI 被分類在外圈，也就是 <strong>機制</strong>。Workflow 類別則是系統的核心功能，故屬於同心圓的內圈，也就是 <strong>策略</strong>。</p>
 <p>如果開發人員直接擴充 <code>Workflow-&gt;process()</code> 的程式碼來完成「簽核歷史紀錄」的功能，等同於“把機制的程式碼寫進策略中”，不但使程式碼變得不易維護，還讓系統中其他調用 <code>Workflow-&gt;process()</code> 的功能都被迫執行「簽核歷史紀錄」的程式碼！</p>
-<p>因此應該遵循 Clean Architecture 的「隔離策略與機制」原則，我們必須隔離<code>Workflow-&gt;process()</code> 與「簽核歷史紀錄」的程式碼。</p>
+<p>因此應該遵循 Clean Architecture 的「隔離策略與機制」原則，我們必須隔離 <code>Workflow-&gt;process()</code> 與「簽核歷史紀錄」的程式碼。做法很簡單，只需要讓 <code>Workflow</code> 引入一個抽象介面，讓外部可以注入 <strong>機制</strong> 的程式碼，就是做到隔離 <strong>機制</strong> 和 <strong>策略</strong>：</p>
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Interface Decorator</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * 用於擴充領域模型撈取資料邏輯 for UI 介面</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Decorator</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 擴充領域模型的資料</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * 先利用領域模型取得資料，</span></span><br><span class="line"><span class="hljs-comment">     * 再取得 UI 層的所需資料</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> $domain_object</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> mixed</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">decorator</span><span class="hljs-params">($domain_object)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Workflow</span></span></span><br><span class="line"><span class="hljs-class"></span>&#123;</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Decorator[] 資料裝飾器 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> $decorators = [];</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> array 所有簽核 */</span></span><br><span class="line">    <span class="hljs-keyword">protected</span> $process = <span class="hljs-keyword">array</span>();</span><br><span class="line">    <span class="hljs-comment">/** <span class="hljs-doctag">@var</span> Workflow_repository 資料庫操作層 */</span></span><br><span class="line">    <span class="hljs-keyword">private</span> $repo;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 引入資料裝飾器，讓資料可以隨著需求擴充</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@param</span> Decorator $decorator 資料裝飾器</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">add_decorator</span><span class="hljs-params">(Decorator $decorator)</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;decorators[] = $decorator;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">     * 取得 簽核流程</span></span><br><span class="line"><span class="hljs-comment">     *</span></span><br><span class="line"><span class="hljs-comment">     * <span class="hljs-doctag">@return</span> array</span></span><br><span class="line"><span class="hljs-comment">     */</span></span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">process</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>&#123;</span><br><span class="line">        <span class="hljs-keyword">$this</span>-&gt;process = <span class="hljs-keyword">$this</span>-&gt;repo-&gt;get_process(<span class="hljs-keyword">$this</span>-&gt;workflow_id);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// 如果有配置裝飾器，則執行裝飾器擴充資料邏輯</span></span><br><span class="line">        <span class="hljs-keyword">foreach</span> (<span class="hljs-keyword">$this</span>-&gt;decorators <span class="hljs-keyword">as</span> $decorator) &#123;</span><br><span class="line">            <span class="hljs-keyword">$this</span>-&gt;process = $decorator-&gt;decorator(<span class="hljs-keyword">$this</span>-&gt;process);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">$this</span>-&gt;process;</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+
+<p>上面這段範例程式碼，已經完全將策略和機制隔離了：</p>
+<ol>
+<li>新增了一個用來擴充資料的抽象介面 <code>Decorator</code></li>
+<li>在 <code>Workflow</code> 新增一個公開的 <code>add_decorator()</code> 函式，提供外部將實作 <code>Decorator</code> 抽象介面的實體物件注入 <code>Workflow</code>。</li>
+<li>調整 <code>Workflow-&gt;process()</code> 函式，調用被注入的 <code>Decorator</code> 實體物件來擴充資料。</li>
+</ol>
+<p>這一個步驟的核心觀念是 <strong>策略必須開放擴充點，讓機制從外部擴充策略的邏輯</strong>，只有這麼做才能讓策略應對千變萬化的需求。</p>
+<p>開放擴充點後，只需要依照「簽核歷史紀錄」的需求，並新增 <code>實作 Decorator 的類別</code> 來擴充 <code>Workflow</code> 的邏輯就好了：</p>
+<p><img src="/blog/images/pasted-22.png" alt="由 Controller 注入 UI 所需的機制，擴充策略的邏輯"></p>
+<p>從上圖可以發現，<code>Workflow</code> 只能透過抽象介面來使用 <strong>機制</strong>，換句話說 <code>Workflow</code> 根本不知道 <code>Hide_anonymous_user_name.php</code> 和 <code>Mark_error_process.php</code> 的存在！這正是「相依性規則」所謂的“內圈不能知道外圈的存在”。抽象介面就像一道邊界，隔離了策略與機制。而邊界的兩邊將以不同的速率和原因被改變。</p>
+<h3 id="其實一直都是開放封閉原則"><a href="#其實一直都是開放封閉原則" class="headerlink" title="其實一直都是開放封閉原則"></a>其實一直都是開放封閉原則</h3><p><img src="/blog/images/pasted-8.png?400x" alt="策略與機制只能透過抽象介面存取彼此"></p>
+<p>較有經驗的開發人員應該會發現這不正是 <strong>開放封閉原則</strong> 嗎？沒錯，Uncle bob 在書中也說了：</p>
+<blockquote>
+<p>事實上，軟體開發技術的歷史就是「如何方便地建立 Plugin 來奠定可擴展和可維護的系統架構」的故事 - Uncle Bob. 《Clean Architecture》</p>
+</blockquote>
+<p>《Clean Architecture》一書揭露了軟體開發從設計物件到組織架構，其實都是應用「隔離策略與機制」的思維來控制軟體複雜度，至於如何做到隔離策略和機制則是按照不同的情境有不同的作法。</p>
+<hr>
+<p>　　</p>
 <h1 id="工作實踐經驗"><a href="#工作實踐經驗" class="headerlink" title="工作實踐經驗"></a>工作實踐經驗</h1><h2 id="替專案導入-Commit-Message-規範"><a href="#替專案導入-Commit-Message-規範" class="headerlink" title="替專案導入 Commit Message 規範"></a>替專案導入 Commit Message 規範</h2><p>打開新公司的程式碼，發現這裡的開發人員沒有統一撰寫 Git Commit Message 的格式，這對一個長期維護的系統來說並不是一件好事！打開 Git History 幾乎找不出;對程式碼異動的意圖與原因，往往只有原作者知道自己的程式碼在做什麼…。</p>
 <p>為了解決這個問題，我向眾開發人員提議可以導入 Commit Message 規範，規範的詳細內容已經被記錄在「<a href="http://localhost:4000/blog/git_commit_message_best_practice/" target="_blank" rel="noopener">Git Commit Message 這樣寫會更好，替專案引入規範與範例
 </a>」 文章中。</p>
-<h3 id="實際案例"><a href="#實際案例" class="headerlink" title="實際案例"></a>實際案例</h3><p><strong>1. 同事一年前的 Commit Message：</strong><br><img src="/blog/images/pasted-16.png" alt></p>
+<h3 id="實際案例"><a href="#實際案例" class="headerlink" title="實際案例"></a>實際案例</h3><p><strong>1. 同仁導入規範前的 Commit Message：</strong><br><img src="/blog/images/pasted-16.png" alt></p>
 <p><strong>2. 導入規範後，開始會紀錄異動原因與內容：</strong><br><img src="/blog/images/pasted-17.png" alt></p>
 <p>雖然過了好幾個月才讓大部分的開發人員確實按規範撰寫 Commit Message，但是<strong>開發團隊中已經養成一個優良的文化！當良好 Commit Message 持續被 Commit 進程式庫，新進人員將自然而然地遵循前人的格式撰寫 Commit Message</strong>。</p>
 <hr>
@@ -371,6 +391,10 @@
         <a class="is-flex" href="#隔離策略與機制，防止程式碼腐敗">
         <span class="has-mr-6">2.2.2</span>
         <span>隔離策略與機制，防止程式碼腐敗</span>
+        </a></li><li>
+        <a class="is-flex" href="#其實一直都是開放封閉原則">
+        <span class="has-mr-6">2.2.3</span>
+        <span>其實一直都是開放封閉原則</span>
         </a></li></ul></li></ul></li><li>
         <a class="is-flex" href="#工作實踐經驗">
         <span class="has-mr-6">3</span>
