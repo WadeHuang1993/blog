@@ -20,7 +20,7 @@
 <meta property="og:description" content="里氏替換原則（Liskov Substitution Principle） 定義 Subtypes must be substitutable for their base types.-子類別必須能取代父類別  里式替換原則是從 開放封閉原則 延伸出來的原則，若對開放封閉原則還不了解，建議先去瞭解開放封閉原則如何透過引入抽象來擴充程式碼的行為，再來學習里氏替換原則！">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
-<meta property="og:updated_time" content="2019-12-31T20:15:37.945Z">
+<meta property="og:updated_time" content="2019-12-31T20:21:03.921Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    13 分鐘 閱讀文 (大約 1887 個字)
+                    13 分鐘 閱讀文 (大約 1890 個字)
                 </span>
                 
                 
@@ -190,7 +190,7 @@
 <h2 id="物件跟「抽象」與「介面」息息相關"><a href="#物件跟「抽象」與「介面」息息相關" class="headerlink" title="物件跟「抽象」與「介面」息息相關"></a>物件跟「抽象」與「介面」息息相關</h2><blockquote>
 <p>「抽象」是人類處理複雜事物的方式。</p>
 </blockquote>
-<p>人的大腦可以接收的訊息有限，因此在現實生活中，人類往往會對複雜的事物進行簡化，或將類似的事物歸納成同一類。<strong>對事物進行「抽象」雖然會忽略某些細節，但也讓人類更易於溝通與學習。</strong><br>舉例來說，在餐廳向大廚點一份炒高麗菜就利用「簡化」進行抽象，我們不會告訴大廚怎麼切菜、火要多大以及料理的順序；學校常見的告示牌“教室內不能喝飲料”也是「歸納」進行抽象，不可能將綠茶、奶茶、果汁、啤酒 …等等全部寫到告示牌上。</p>
+<p>人的大腦可以接收的訊息有限，因此在現實生活中，人類往往會對複雜的事物進行簡化，或將類似的事物歸納成同一類。<strong>對事物進行「抽象」雖然會忽略某些細節，但也讓人類更易於溝通、學習與管理。</strong><br>舉例來說，在餐廳向大廚點一份炒高麗菜就利用「簡化」進行抽象，我們不會告訴大廚怎麼切菜、火要多大以及料理的順序；學校常見的告示牌“教室內不能喝飲料”也是「歸納」進行抽象，不可能將綠茶、奶茶、果汁、啤酒 …等等全部寫到告示牌上。</p>
 <p>開發人員也會透過物件「封裝」的功能對程式碼進行抽象，把複雜的流程或業務規則隱藏到物件的內部。當程式碼被抽象成為物件後，就可以透過「外部視角」和「內部視角」來觀察一個物件：從「外部視角」觀察物件時，只能看見程式碼被簡化成一系列的 <strong>抽象行為</strong>。從內部觀察物件時，則可以看見每個行為的實作內容。</p>
 <p><img src="/blog/images/pasted-34.png" alt="抽象描述了一個物件的基本特徵。"></p>
 <p>在外部視角中，只能得到物件公開（Public）的資訊，包含：公開屬性、常數、方法簽名（Signature，指方法名稱與其參數）。我們會將這些物件公開的資訊統稱為「介面」，所以很多物件導向設計（OOAD）的書籍提到介面時，可能同時是在講 <strong>Interface</strong>、<strong>類別</strong> 和 <strong>抽象類別</strong>。</p>
