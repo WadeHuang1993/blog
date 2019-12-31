@@ -20,7 +20,7 @@
 <meta property="og:description" content="里氏替換原則（Liskov Substitution Principle） 定義 Subtypes must be substitutable for their base types.-子類別必須能取代父類別  里式替換原則是從 開放封閉原則 延伸出來的原則，若對開放封閉原則還不了解，建議先去瞭解開放封閉原則如何透過引入抽象來擴充程式碼的行為，再來學習里氏替換原則！ 目的 讓開發人員確實地按照「">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
-<meta property="og:updated_time" content="2019-12-31T20:03:44.123Z">
+<meta property="og:updated_time" content="2019-12-31T20:06:33.070Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
 
@@ -199,10 +199,8 @@
 <h2 id="「繼承」不是共用父類別的程式碼"><a href="#「繼承」不是共用父類別的程式碼" class="headerlink" title="「繼承」不是共用父類別的程式碼"></a>「繼承」不是共用父類別的程式碼</h2><p>若只是想要共用父類別的邏輯，應該使用組合，而不是使用繼承。雖然沒有人會限制開發人員隨意地使用繼承，但如果使用繼承的目的不是為了「多型」，不但沒有讓繼承功能派上用場，還會迫使子類別公開父類別的「介面」。</p>
 <h1 id="契約式設計（Design-by-Contract）"><a href="#契約式設計（Design-by-Contract）" class="headerlink" title="契約式設計（Design by Contract）"></a>契約式設計（Design by Contract）</h1><p>里氏替換原則延伸出契約式設計，契約式設計用了三個條件來規範開發人員應該如何遵循「介面」的實作：</p>
 <ol>
-<li>前置條件（pre-conditions）</li>
-</ol>
-<p>實作「介面」的實體物件，必須包含並保留所有「介面」的公開資訊。確保依賴「介面」的程式可以調用「介面」提供的功能。只有前置條件達成時，程式碼才會執行後置條件的邏輯。</p>
-<ol start="2">
+<li><p>前置條件（pre-conditions）<br>實作「介面」的實體物件，必須包含並保留所有「介面」的公開資訊。確保依賴「介面」的程式可以調用「介面」提供的功能。只有前置條件達成時，程式碼才會執行後置條件的邏輯。</p>
+</li>
 <li><p>後置條件（post-conditions）<br>實作「介面」的實體物件，在執行完「介面」提供的功能後，必須回傳「介面」指定的回傳型別（Return Type）。約束開發人員要按照介面的定義實作功能。</p>
 </li>
 <li><p>不變性（invariants）<br>若 <strong>前置條件</strong> 或 <strong>後置條件</strong> 任一項條件沒有達成，程式碼就會報錯。</p>
