@@ -8,18 +8,21 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
 
 <meta name="google-site-verification" content="5JWyXG4mx6i5avE6xJfXIRHu_YCofrhDQRCEgbm_5ak" />
-<title>彙整: 2018/10 - WadeHuang1993&#39;s Blog</title>
+<title>物件導向設計原則：里氏替換原則，定義、解析 - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="keywords" content="PHP, OOP, JavaScript, Web development">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WadeHuang1993&#39;s Blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;archives&#x2F;2018&#x2F;10&#x2F;index.html">
+    <meta name="description" content="定義 Subtypes must be substitutable for their base types.-子類別必須能取代父類別  在開始講解之前，必須先引用 Uncle Bob 在 2017 年《Clean Architecture》對里氏替換原則的補充：  里氏替換原則一開始確實是在講繼承，但是隨著「多用組合，少用繼承」的文化出現後，里氏替換原則也變得適用於介面上。  引用這段話，是為了">
+<meta name="keywords" content="Clean Code,自學技巧,SOLID 原則">
+<meta property="og:type" content="article">
+<meta property="og:title" content="物件導向設計原則：里氏替換原則，定義、解析">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;solid_lsp_definition_and_practices&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
+<meta property="og:description" content="定義 Subtypes must be substitutable for their base types.-子類別必須能取代父類別  在開始講解之前，必須先引用 Uncle Bob 在 2017 年《Clean Architecture》對里氏替換原則的補充：  里氏替換原則一開始確實是在講繼承，但是隨著「多用組合，少用繼承」的文化出現後，里氏替換原則也變得適用於介面上。  引用這段話，是為了">
 <meta property="og:locale" content="zh-TW">
-<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;og_image.png">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
+<meta property="og:updated_time" content="2019-12-31T10:05:13.606Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;og_image.png">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
 
 
 
@@ -80,14 +83,14 @@
 <link rel="stylesheet" href="/blog/css/style.css">
 
 </head>
-<!-- <body class="is-3-column"> -->
+<!-- <body class="is-2-column"> -->
 <body class="is-3-column">
     <nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/blog/">
             
-                <img src="/blog/images/mylogo.png" alt="WadeHuang1993&#39;s Blog" height="28">
+                <img src="/blog/images/mylogo.png" alt="物件導向設計原則：里氏替換原則，定義、解析" height="28">
             
             </a>
         </div>
@@ -112,6 +115,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜尋" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -125,66 +132,94 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        十月 2018
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：里氏替換原則，定義、解析">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-31T01:08:36.000Z">2019-12-31</time>
                 
-                <a href="/blog/git_commit_message_best_practice/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/blog/images/thumbnail/GIT.png" alt="Git Commit Message 這樣寫會更好，替專案引入規範與範例">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-10-11T06:20:00.000Z">2018-10-11</time>
-                        <a href="/blog/git_commit_message_best_practice/" class="title has-link-black-ter is-size-6 has-text-weight-normal">Git Commit Message 這樣寫會更好，替專案引入規範與範例</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
                 </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/blog/refactoring_definition_and_purpose/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/blog/images/thumbnail/REFACTORING.jpg" alt="重構的定義與目的">
-                    </p>
-                </a>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2018-10-05T12:57:00.000Z">2018-10-05</time>
-                        <a href="/blog/refactoring_definition_and_purpose/" class="title has-link-black-ter is-size-6 has-text-weight-normal">重構的定義與目的</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a> / <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">重構</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分鐘 閱讀文 (大約 830 個字)
+                </span>
+                
+                
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                物件導向設計原則：里氏替換原則，定義、解析
+            
+        </h1>
+        <div class="content">
+            <h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><blockquote>
+<p>Subtypes must be substitutable for their base types.<br>-<br>子類別必須能取代父類別</p>
+</blockquote>
+<p>在開始講解之前，必須先引用 Uncle Bob 在 2017 年《Clean Architecture》對里氏替換原則的補充：</p>
+<blockquote>
+<p>里氏替換原則一開始確實是在講繼承，但是隨著「多用組合，少用繼承」的文化出現後，里氏替換原則也變得適用於介面上。</p>
+</blockquote>
+<p>引用這段話，是為了讓讀者知道里氏替換原則不只適用於 <strong>繼承</strong>，也適用於 <strong>介面實作</strong>。</p>
+<p>接下來將會講解為什麼里氏替換原則可以同時套用到 <strong>繼承</strong> 與 <strong>介面實作</strong>，以及里氏替換原則對物件導向開發的影響。</p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="只要是物件，就會跟「抽象」息息相關"><a href="#只要是物件，就會跟「抽象」息息相關" class="headerlink" title="只要是物件，就會跟「抽象」息息相關"></a>只要是物件，就會跟「抽象」息息相關</h2><blockquote>
+<p>「抽象」是人類處理複雜事物的方式。</p>
+</blockquote>
+<p>人的大腦可以接收的訊息有限，因此在現實生活中，人類往往會對複雜的事物進行簡化，或將類似的事物歸納成同一類。<strong>對事物進行「抽象」雖然會忽略某些細節，但也讓人類更易於溝通與學習。</strong><br>舉例來說，在餐廳向大廚點一份炒高麗菜就利用「簡化」進行抽象，我們不會告訴大廚怎麼切菜、火要多大以及料理的順序；學校常見的告示牌“教室內不能喝飲料”也是「歸納」進行抽象，不可能將綠茶、奶茶、果汁、啤酒 …等等全部寫到告示牌上。</p>
+<p>開發人員也會透過物件「封裝」的功能對程式碼進行抽象，把複雜的流程或業務規則隱藏到物件的內部。當程式碼被抽象成為物件後，就可以透過「外部視角」和「內部視角」來觀察一個物件：從「外部視角」觀察物件時，只能看見程式碼被簡化成一系列的 <strong>抽象行為</strong>。從內部觀察物件時，則可以看見每個行為的實作內容。</p>
+<p><img src="/blog/images/pasted-34.png" alt="抽象描述了一個物件的基本特徵。"></p>
+<p>在外部視角中，只能得到物件公開（Public）的資訊，包含：公開屬性、常數、方法簽名（Signature，指方法名稱與其參數）。我們會將這些物件公開的資訊統稱為「介面」，所以很多物件導向設計（OOAD）的書籍提到介面時，可能是包含 <strong>Interface</strong>、<strong>類別</strong> 和 <strong>抽象類別</strong> 的公開資訊。</p>
+<blockquote>
+<p>開發人員常常透過「介面」描述一個物件的基本特徵，包含要實現的功能目標與涉及範圍。</p>
+</blockquote>
+<h2 id="「繼承」是共用父類別的介面"><a href="#「繼承」是共用父類別的介面" class="headerlink" title="「繼承」是共用父類別的介面"></a>「繼承」是共用父類別的介面</h2><p>物件導向繼承的技術，主要目的是藉由繼承父類別的「介面」達到「多型」的效果。</p>
+<h2 id="面向介面開發，而不是實作"><a href="#面向介面開發，而不是實作" class="headerlink" title="面向介面開發，而不是實作"></a>面向介面開發，而不是實作</h2><h2 id="契約式設計"><a href="#契約式設計" class="headerlink" title="契約式設計"></a>契約式設計</h2><h3 id="前置條件，後置條件"><a href="#前置條件，後置條件" class="headerlink" title="前置條件，後置條件"></a>前置條件，後置條件</h3><h2 id="確保開放擴充點被正確使用"><a href="#確保開放擴充點被正確使用" class="headerlink" title="確保開放擴充點被正確使用"></a>確保開放擴充點被正確使用</h2>
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/blog/tags/Clean-Code/" rel="tag">Clean Code</a>, <a class="has-link-grey -link" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/" rel="tag">SOLID 原則</a>, <a class="has-link-grey -link" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/" rel="tag">自學技巧</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/blog/2019_review/">
+                <span class="level-item">2019 回顧工作與學習歷程</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -198,6 +233,50 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    文章目錄
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#定義">
+        <span class="has-mr-6">1</span>
+        <span>定義</span>
+        </a></li><li>
+        <a class="is-flex" href="#解析">
+        <span class="has-mr-6">2</span>
+        <span>解析</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#只要是物件，就會跟「抽象」息息相關">
+        <span class="has-mr-6">2.1</span>
+        <span>只要是物件，就會跟「抽象」息息相關</span>
+        </a></li><li>
+        <a class="is-flex" href="#「繼承」是共用父類別的介面">
+        <span class="has-mr-6">2.2</span>
+        <span>「繼承」是共用父類別的介面</span>
+        </a></li><li>
+        <a class="is-flex" href="#面向介面開發，而不是實作">
+        <span class="has-mr-6">2.3</span>
+        <span>面向介面開發，而不是實作</span>
+        </a></li><li>
+        <a class="is-flex" href="#契約式設計">
+        <span class="has-mr-6">2.4</span>
+        <span>契約式設計</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#前置條件，後置條件">
+        <span class="has-mr-6">2.4.1</span>
+        <span>前置條件，後置條件</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#確保開放擴充點被正確使用">
+        <span class="has-mr-6">2.5</span>
+        <span>確保開放擴充點被正確使用</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -459,306 +538,11 @@
     
         <div class="column-right-shadow is-hidden-widescreen ">
         
-            
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="/blog/images/avatar.jpg" alt="WadeHuangtw1993">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        WadeHuangtw1993
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        來自南部的菜鳥 RD
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Kaohsiung City, Taiwan</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/blog/archives">
-                        <p class="title has-text-weight-normal">
-                            11
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分類
-                    </p>
-                    <a href="/blog/categories">
-                        <p class="title has-text-weight-normal">
-                            2
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        標籤
-                    </p>
-                    <a href="/blog/tags">
-                        <p class="title has-text-weight-normal">
-                            6
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="mailto:a2335825@gmail.com" target="_blank">
-                聯絡我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/WadeHuang1993">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Mail" href="mailto:a2335825@gmail.com">
-                
-                <i class="far fa-envelope"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            連結
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://trello.com/b/lsamRb8y/%E6%9B%B8%E5%96%AE" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">我的書單</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">trello.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://wadehuanglearning.blogspot.com/search?updated-max=2019-01-11T21:19:00-08:00&max-results=48" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">舊部落格</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">wadehuanglearning.blogspot.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">hexo-theme-icarus</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
-        
         </div>
     
 </div>
 
                 
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="/blog/images/avatar.jpg" alt="WadeHuangtw1993">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        WadeHuangtw1993
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        來自南部的菜鳥 RD
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Kaohsiung City, Taiwan</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/blog/archives">
-                        <p class="title has-text-weight-normal">
-                            11
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分類
-                    </p>
-                    <a href="/blog/categories">
-                        <p class="title has-text-weight-normal">
-                            2
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        標籤
-                    </p>
-                    <a href="/blog/tags">
-                        <p class="title has-text-weight-normal">
-                            6
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="mailto:a2335825@gmail.com" target="_blank">
-                聯絡我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/WadeHuang1993">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Mail" href="mailto:a2335825@gmail.com">
-                
-                <i class="far fa-envelope"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            連結
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://trello.com/b/lsamRb8y/%E6%9B%B8%E5%96%AE" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">我的書單</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">trello.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://wadehuanglearning.blogspot.com/search?updated-max=2019-01-11T21:19:00-08:00&max-results=48" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">舊部落格</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">wadehuanglearning.blogspot.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">hexo-theme-icarus</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
-    
-    
-</div>
-
             </div>
         </div>
     </section>
@@ -768,7 +552,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/blog/">
                 
-                    <img src="/blog/images/mylogo.png" alt="WadeHuang1993&#39;s Blog" height="28">
+                    <img src="/blog/images/mylogo.png" alt="物件導向設計原則：里氏替換原則，定義、解析" height="28">
                 
                 </a>
                 <p class="is-size-7">

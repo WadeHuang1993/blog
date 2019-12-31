@@ -130,6 +130,77 @@
 <div class="card">
     
     <div class="card-image">
+        <a href="/blog/solid_lsp_definition_and_practices/" class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：里氏替換原則，定義、解析">
+        </a>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2019-12-31T01:08:36.000Z">2019-12-31</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    6 分鐘 閱讀文 (大約 830 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                <a class="has-link-black-ter" href="/blog/solid_lsp_definition_and_practices/">物件導向設計原則：里氏替換原則，定義、解析</a>
+            
+        </h1>
+        <div class="content">
+            <h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><blockquote>
+<p>Subtypes must be substitutable for their base types.<br>-<br>子類別必須能取代父類別</p>
+</blockquote>
+<p>在開始講解之前，必須先引用 Uncle Bob 在 2017 年《Clean Architecture》對里氏替換原則的補充：</p>
+<blockquote>
+<p>里氏替換原則一開始確實是在講繼承，但是隨著「多用組合，少用繼承」的文化出現後，里氏替換原則也變得適用於介面上。</p>
+</blockquote>
+<p>引用這段話，是為了讓讀者知道里氏替換原則不只適用於 <strong>繼承</strong>，也適用於 <strong>介面實作</strong>。</p>
+<p>接下來將會講解為什麼里氏替換原則可以同時套用到 <strong>繼承</strong> 與 <strong>介面實作</strong>，以及里氏替換原則對物件導向開發的影響。</p>
+<h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><h2 id="只要是物件，就會跟「抽象」息息相關"><a href="#只要是物件，就會跟「抽象」息息相關" class="headerlink" title="只要是物件，就會跟「抽象」息息相關"></a>只要是物件，就會跟「抽象」息息相關</h2><blockquote>
+<p>「抽象」是人類處理複雜事物的方式。</p>
+</blockquote>
+<p>人的大腦可以接收的訊息有限，因此在現實生活中，人類往往會對複雜的事物進行簡化，或將類似的事物歸納成同一類。<strong>對事物進行「抽象」雖然會忽略某些細節，但也讓人類更易於溝通與學習。</strong><br>舉例來說，在餐廳向大廚點一份炒高麗菜就利用「簡化」進行抽象，我們不會告訴大廚怎麼切菜、火要多大以及料理的順序；學校常見的告示牌“教室內不能喝飲料”也是「歸納」進行抽象，不可能將綠茶、奶茶、果汁、啤酒 …等等全部寫到告示牌上。</p>
+<p>開發人員也會透過物件「封裝」的功能對程式碼進行抽象，把複雜的流程或業務規則隱藏到物件的內部。當程式碼被抽象成為物件後，就可以透過「外部視角」和「內部視角」來觀察一個物件：從「外部視角」觀察物件時，只能看見程式碼被簡化成一系列的 <strong>抽象行為</strong>。從內部觀察物件時，則可以看見每個行為的實作內容。</p>
+<p><img src="/blog/images/pasted-34.png" alt="抽象描述了一個物件的基本特徵。"></p>
+<p>在外部視角中，只能得到物件公開（Public）的資訊，包含：公開屬性、常數、方法簽名（Signature，指方法名稱與其參數）。我們會將這些物件公開的資訊統稱為「介面」，所以很多物件導向設計（OOAD）的書籍提到介面時，可能是包含 <strong>Interface</strong>、<strong>類別</strong> 和 <strong>抽象類別</strong> 的公開資訊。</p>
+<blockquote>
+<p>開發人員常常透過「介面」描述一個物件的基本特徵，包含要實現的功能目標與涉及範圍。</p>
+</blockquote>
+<h2 id="「繼承」是共用父類別的介面"><a href="#「繼承」是共用父類別的介面" class="headerlink" title="「繼承」是共用父類別的介面"></a>「繼承」是共用父類別的介面</h2><p>物件導向繼承的技術，主要目的是藉由繼承父類別的「介面」達到「多型」的效果。</p>
+<h2 id="面向介面開發，而不是實作"><a href="#面向介面開發，而不是實作" class="headerlink" title="面向介面開發，而不是實作"></a>面向介面開發，而不是實作</h2><h2 id="契約式設計"><a href="#契約式設計" class="headerlink" title="契約式設計"></a>契約式設計</h2><h3 id="前置條件，後置條件"><a href="#前置條件，後置條件" class="headerlink" title="前置條件，後置條件"></a>前置條件，後置條件</h3><h2 id="確保開放擴充點被正確使用"><a href="#確保開放擴充點被正確使用" class="headerlink" title="確保開放擴充點被正確使用"></a>確保開放擴充點被正確使用</h2>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+
+
+
+    
+<div class="card">
+    
+    <div class="card-image">
         <a href="/blog/2019_review/" class="image is-7by1">
             <img class="thumbnail" src="/blog/images/thumbnail/2019_reviews.png" alt="2019 回顧工作與學習歷程">
         </a>
@@ -678,68 +749,25 @@
 
 
 
+
     
-<div class="card">
-    
-    <div class="card-image">
-        <a href="/blog/refactoring_definition_and_purpose/" class="image is-7by1">
-            <img class="thumbnail" src="/blog/images/thumbnail/REFACTORING.jpg" alt="重構的定義與目的">
-        </a>
-    </div>
-    
-    <div class="card-content article ">
-        
-        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
-            <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2018-10-05T12:57:00.000Z">2018-10-05</time>
-                
-                <div class="level-item">
-                <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">重構</a>
-                </div>
-                
-                
-                <span class="level-item has-text-grey">
-                    
-                    
-                    7 分鐘 閱讀文 (大約 1027 個字)
-                </span>
-                
-                
-            </div>
+<div class="card card-transparent">
+    <nav class="pagination is-centered" role="navigation" aria-label="pagination">
+        <div class="pagination-previous is-invisible is-hidden-mobile">
+            <a class="is-flex-grow has-text-black-ter" href="/blog/page/0/">上一頁</a>
         </div>
-        
-        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+        <div class="pagination-next">
+            <a class="is-flex-grow has-text-black-ter" href="/blog/page/2/">下一頁</a>
+        </div>
+        <ul class="pagination-list is-hidden-mobile">
             
-                <a class="has-link-black-ter" href="/blog/refactoring_definition_and_purpose/">重構的定義與目的</a>
+            <li><a class="pagination-link is-current" href="/blog/">1</a></li>
             
-        </h1>
-        <div class="content">
-            <h3 id="重構定義："><a href="#重構定義：" class="headerlink" title="重構定義："></a>重構定義：</h3><blockquote>
-<p>在不改變軟體外部行為的前提下，改變其內部結構，使其更容易理解且易於修改。</p>
-</blockquote>
-<h3 id="目的："><a href="#目的：" class="headerlink" title="目的："></a>目的：</h3><p>重構的主要目的就是為了提升程式碼品質、<strong>提升程式碼的可讀性</strong>，以及為了日後有新需求的變化時，程式碼可以 <strong>更容易修改或是擴充</strong>（提高可維護性）。</p>
-        </div>
-        
-        
-        <div class="level is-mobile">
-            <div class="level-start">
-                <div class="level-item">
-                <a class="button is-size-7 is-light" href="/blog/refactoring_definition_and_purpose/#more">繼續閱讀</a>
-                </div>
-            </div>
-        </div>
-        
-        
-    </div>
+            <li><a class="pagination-link has-text-black-ter" href="/blog/page/2/">2</a></li>
+            
+        </ul>
+    </nav>
 </div>
-
-
-
-
-
-
-
-
 </div>
                 
 
@@ -755,6 +783,25 @@
         <h3 class="menu-label">
             最新文章
         </h3>
+        
+        <article class="media">
+            
+            <a href="/blog/solid_lsp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：里氏替換原則，定義、解析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T01:08:36.000Z">2019-12-31</time></div>
+                    <a href="/blog/solid_lsp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：里氏替換原則，定義、解析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
         
         <article class="media">
             
@@ -832,25 +879,6 @@
             </div>
         </article>
         
-        <article class="media">
-            
-            <a href="/blog/Cluelessness/" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="軟體開發中的“無緒”">
-                </p>
-            </a>
-            
-            <div class="media-content">
-                <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-11-21T09:41:00.000Z">2019-11-21</time></div>
-                    <a href="/blog/Cluelessness/" class="title has-link-black-ter is-size-6 has-text-weight-normal">軟體開發中的“無緒”</a>
-                    <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
-                    </p>
-                </div>
-            </div>
-        </article>
-        
     </div>
 </div>
     
@@ -868,7 +896,7 @@
                 <span class="level-item">軟體開發思維</span>
             </span>
             <span class="level-end">
-                <span class="level-item tag">9</span>
+                <span class="level-item tag">10</span>
             </span>
         </a><ul><li>
         <a class="level is-marginless" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">
@@ -898,7 +926,7 @@
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">3</span>
+                    <span class="level-item tag">4</span>
                 </span>
             </a>
         </li>
@@ -963,14 +991,14 @@
                 <div class="control">
                     <a class="tags has-addons" href="/blog/tags/Clean-Code/">
                         <span class="tag">Clean Code</span>
-                        <span class="tag is-grey">7</span>
+                        <span class="tag is-grey">8</span>
                     </a>
                 </div>
                 
                 <div class="control">
                     <a class="tags has-addons" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/">
                         <span class="tag">SOLID 原則</span>
-                        <span class="tag is-grey">4</span>
+                        <span class="tag is-grey">5</span>
                     </a>
                 </div>
                 
@@ -991,7 +1019,7 @@
                 <div class="control">
                     <a class="tags has-addons" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/">
                         <span class="tag">自學技巧</span>
-                        <span class="tag is-grey">2</span>
+                        <span class="tag is-grey">3</span>
                     </a>
                 </div>
                 
@@ -1047,7 +1075,7 @@
                     </p>
                     <a href="/blog/archives">
                         <p class="title has-text-weight-normal">
-                            10
+                            11
                         </p>
                     </a>
                 </div>
@@ -1201,7 +1229,7 @@
                     </p>
                     <a href="/blog/archives">
                         <p class="title has-text-weight-normal">
-                            10
+                            11
                         </p>
                     </a>
                 </div>
