@@ -139,7 +139,7 @@
         
         <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
             <div class="level-left">
-                <time class="level-item has-text-grey" datetime="2019-12-31T01:08:36.000Z">2019-12-31</time>
+                <time class="level-item has-text-grey" datetime="2019-12-31T20:08:36.000Z">2020-01-01</time>
                 
                 <div class="level-item">
                 <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
@@ -149,7 +149,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分鐘 閱讀文 (大約 1229 個字)
+                    12 分鐘 閱讀文 (大約 1747 個字)
                 </span>
                 
                 
@@ -166,12 +166,12 @@
 <h1 id="定義"><a href="#定義" class="headerlink" title="定義"></a>定義</h1><blockquote>
 <p>Subtypes must be substitutable for their base types.<br>-<br>子類別必須能取代父類別</p>
 </blockquote>
-<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><p>里式替換原則是從 <a href="/blog/solid_ocp_definition_and_practices/">開放封閉原則</a> 延伸出來的原則，目的是：</p>
-<blockquote>
-<p>確保程式碼按照「介面」的定義進行實作，讓程式碼名符其實，避免發生無法預料的事情。</p>
+<p>里式替換原則是從 <a href="/blog/solid_ocp_definition_and_practices/">開放封閉原則</a> 延伸出來的原則，若對開放封閉原則還不了解，建議先去瞭解開放封閉原則如何透過引入抽象來擴充程式碼的行為，再來學習里氏替換原則！</p>
+<h2 id="目的"><a href="#目的" class="headerlink" title="目的"></a>目的</h2><blockquote>
+<p>讓開發人員確實地按照「介面」的定義進行實作，確保程式碼名符其實，避免發生無法預料的事情。</p>
 </blockquote>
 <p>程式碼在編譯階段可以檢查出型別錯誤，卻不能檢查出開發人員犯傻。</p>
-<p>因此里式替換原則要求開發人員確實地按照「介面」的定義進行實作，否則程式的行為將變得「不可預測」。換句話說，程式碼雖然可以編譯成功，但有可能產生不可預知且不容易察覺的 Bugs。</p>
+<p>因此里式替換原則要求開發人員確實地按照「介面」的定義進行實作，否則程式的行為將變得「不可預測」。換句話說，程式碼雖然可以“繞過”型別檢查使編譯成功，但有可能產生不可預知且不容易察覺的 Bugs。</p>
 <h1 id="解析"><a href="#解析" class="headerlink" title="解析"></a>解析</h1><p>在開始講解之前，必須先引用 Uncle Bob 在 2017 年《Clean Architecture》對里氏替換原則的補充：</p>
 <blockquote>
 <p>物件導向革命的最初幾年，里氏替換原則被用來指導「繼承的使用」。然而，多年以來里氏替換原則已經涉及到介面與實作，演變成了更廣泛的軟體設計原則。</p>
@@ -184,14 +184,27 @@
 <p>人的大腦可以接收的訊息有限，因此在現實生活中，人類往往會對複雜的事物進行簡化，或將類似的事物歸納成同一類。<strong>對事物進行「抽象」雖然會忽略某些細節，但也讓人類更易於溝通與學習。</strong><br>舉例來說，在餐廳向大廚點一份炒高麗菜就利用「簡化」進行抽象，我們不會告訴大廚怎麼切菜、火要多大以及料理的順序；學校常見的告示牌“教室內不能喝飲料”也是「歸納」進行抽象，不可能將綠茶、奶茶、果汁、啤酒 …等等全部寫到告示牌上。</p>
 <p>開發人員也會透過物件「封裝」的功能對程式碼進行抽象，把複雜的流程或業務規則隱藏到物件的內部。當程式碼被抽象成為物件後，就可以透過「外部視角」和「內部視角」來觀察一個物件：從「外部視角」觀察物件時，只能看見程式碼被簡化成一系列的 <strong>抽象行為</strong>。從內部觀察物件時，則可以看見每個行為的實作內容。</p>
 <p><img src="/blog/images/pasted-34.png" alt="抽象描述了一個物件的基本特徵。"></p>
-<p>在外部視角中，只能得到物件公開（Public）的資訊，包含：公開屬性、常數、方法簽名（Signature，指方法名稱與其參數）。我們會將這些物件公開的資訊統稱為「介面」，所以很多物件導向設計（OOAD）的書籍提到介面時，可能是包含 <strong>Interface</strong>、<strong>類別</strong> 和 <strong>抽象類別</strong> 的公開資訊。</p>
+<p>在外部視角中，只能得到物件公開（Public）的資訊，包含：公開屬性、常數、方法簽名（Signature，指方法名稱與其參數）。我們會將這些物件公開的資訊統稱為「介面」，所以很多物件導向設計（OOAD）的書籍提到介面時，可能同時是在講 <strong>Interface</strong>、<strong>類別</strong> 和 <strong>抽象類別</strong>。</p>
 <blockquote>
-<p>開發人員常常透過「介面」描述一個物件的基本特徵，包含要實現的功能目標與涉及範圍。</p>
+<p>開發人員常常透過「介面」描述一個業務邏輯的基本特徵，包含要實現的功能目標與涉及範圍。並忽略介面的實際結構與行為實作內容。</p>
 </blockquote>
-<h2 id="「繼承」是共用父類別的介面"><a href="#「繼承」是共用父類別的介面" class="headerlink" title="「繼承」是共用父類別的介面"></a>「繼承」是共用父類別的介面</h2><p>為了促使 <a href="/blog/solid_ocp_definition_and_practices/">開放封閉原則</a>，開發人員可以透過物件導向的繼承技術，繼承父類別的「介面」來擴充業務規則的邏輯。</p>
-<p>不論是繼承或是介面，目的都是利用多型的特性來擴充業務規則的邏輯。這也是為什麼里氏替換原則可以同時適用於繼承與介面實作。</p>
-<h3 id="繼承常常被被誤用"><a href="#繼承常常被被誤用" class="headerlink" title="繼承常常被被誤用"></a>繼承常常被被誤用</h3><p>若只是想要共用父類別的邏輯，應該使用組合，而不是使用繼承。雖然沒有人會限制開發人員隨意地使用繼承，但如果使用繼承的目的不是為了「多型」，不但沒有讓繼承功能派上用場，還會迫使子類別公開父類別的「介面」。</p>
-<h2 id="面向介面開發，而不是實作"><a href="#面向介面開發，而不是實作" class="headerlink" title="面向介面開發，而不是實作"></a>面向介面開發，而不是實作</h2><h2 id="契約式設計"><a href="#契約式設計" class="headerlink" title="契約式設計"></a>契約式設計</h2><h3 id="前置條件，後置條件"><a href="#前置條件，後置條件" class="headerlink" title="前置條件，後置條件"></a>前置條件，後置條件</h3><h2 id="確保開放擴充點被正確使用"><a href="#確保開放擴充點被正確使用" class="headerlink" title="確保開放擴充點被正確使用"></a>確保開放擴充點被正確使用</h2>
+<h2 id="「繼承」是共用父類別的介面"><a href="#「繼承」是共用父類別的介面" class="headerlink" title="「繼承」是共用父類別的介面"></a>「繼承」是共用父類別的介面</h2><p>為了促使程式碼遵循 <a href="/blog/solid_ocp_definition_and_practices/">開放封閉原則</a>，開發人員可以透過物件導向的繼承技術，繼承父類別的「介面」來擴充業務規則的邏輯。</p>
+<p><strong>不論是繼承或是介面，目的都是利用多型的特性來擴充業務規則的邏輯</strong>。這也是為什麼里氏替換原則可以同時適用於繼承與介面實作。</p>
+<h2 id="「繼承」不是共用父類別的程式碼"><a href="#「繼承」不是共用父類別的程式碼" class="headerlink" title="「繼承」不是共用父類別的程式碼"></a>「繼承」不是共用父類別的程式碼</h2><p>若只是想要共用父類別的邏輯，應該使用組合，而不是使用繼承。雖然沒有人會限制開發人員隨意地使用繼承，但如果使用繼承的目的不是為了「多型」，不但沒有讓繼承功能派上用場，還會迫使子類別公開父類別的「介面」。</p>
+<h1 id="契約式設計（Design-by-Contract）"><a href="#契約式設計（Design-by-Contract）" class="headerlink" title="契約式設計（Design by Contract）"></a>契約式設計（Design by Contract）</h1><p>里氏替換原則延伸出契約式設計，契約式設計用了三個條件來規範開發人員應該如何遵循「介面」的實作：</p>
+<ol>
+<li>前置條件（pre-conditions）</li>
+</ol>
+<p>實作「介面」的實體物件，必須包含並保留所有「介面」的公開資訊。確保依賴「介面」的程式可以調用「介面」提供的功能。只有前置條件達成時，程式碼才會執行後置條件的邏輯。</p>
+<ol start="2">
+<li><p>後置條件（post-conditions）<br>實作「介面」的實體物件，在執行完「介面」提供的功能後，必須回傳「介面」指定的回傳型別（Return Type）。約束開發人員要按照介面的定義實作功能。</p>
+</li>
+<li><p>不變性（invariants）<br>若 <strong>前置條件</strong> 或 <strong>後置條件</strong> 任一項條件沒有達成，程式碼就會報錯。</p>
+</li>
+</ol>
+<p>這三個條件就是物件導向語言中的 Interface 的限制條件，因此 Interface 也經常被稱作契約（Contract）。</p>
+<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>開放封閉原則中，必須透過 <strong>統一的抽象介面</strong> 來擴充核心業務規則的邏輯，因此在設計模式中作者們提出 “Program to an interface, not an implementation.”，將需求的問題域定義成抽象介面，系統才能安全地的擴展程式碼。搭配里氏替換原則對開發人員的限制，確保程式碼的行為符合「介面」的定義與預期。開放封閉原則也因此可以信任實作「介面」的程式碼，最終讓系統可以用「增量式開發」的方式進行迭代釋出。</p>
+
         </div>
         
         
@@ -803,7 +816,7 @@
             
             <div class="media-content">
                 <div class="content">
-                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T01:08:36.000Z">2019-12-31</time></div>
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T20:08:36.000Z">2020-01-01</time></div>
                     <a href="/blog/solid_lsp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：里氏替換原則，定義、解析</a>
                     <p class="is-size-7 is-uppercase">
                         <a class="has-link-grey -link" href="/blog/categories/%E8%BB%9F%E9%AB%94%E9%96%8B%E7%99%BC%E6%80%9D%E7%B6%AD/">軟體開發思維</a>
@@ -930,12 +943,23 @@
         <ul class="menu-list">
         
         <li>
+            <a class="level is-marginless" href="/blog/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
             <a class="level is-marginless" href="/blog/archives/2019/12/">
                 <span class="level-start">
                     <span class="level-item">十二月 2019</span>
                 </span>
                 <span class="level-end">
-                    <span class="level-item tag">4</span>
+                    <span class="level-item tag">3</span>
                 </span>
             </a>
         </li>
