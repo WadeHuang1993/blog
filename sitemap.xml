@@ -2,79 +2,79 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>https://wadehuang1993.github.io/blog/2019_review/</loc>
-    
-    <lastmod>2020-01-02T08:00:25.945Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/solid_lsp_definition_and_practices/</loc>
-    
-    <lastmod>2020-01-02T05:51:12.652Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
-    
-    <lastmod>2019-12-31T20:10:21.712Z</lastmod>
-    
-  </url>
-  
-  <url>
     <loc>https://wadehuang1993.github.io/blog/solid_srp_definition_and_practices/</loc>
     
-    <lastmod>2019-12-31T20:10:10.120Z</lastmod>
+    <lastmod>2020-01-02T08:06:10.429Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://wadehuang1993.github.io/blog/why_we_need_SOLID_principles/</loc>
     
-    <lastmod>2019-12-31T20:09:57.649Z</lastmod>
+    <lastmod>2020-01-02T08:06:10.230Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://wadehuang1993.github.io/blog/why_SOLID_principles_matter_to_you/</loc>
     
-    <lastmod>2019-12-31T20:09:48.598Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/git_commit_message_best_practice/</loc>
-    
-    <lastmod>2019-12-20T01:39:38.765Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/codeigniter_3_hmvc/</loc>
-    
-    <lastmod>2019-12-18T14:44:10.143Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/refactoring_definition_and_purpose/</loc>
-    
-    <lastmod>2019-12-18T14:33:22.309Z</lastmod>
+    <lastmod>2020-01-02T08:06:10.049Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://wadehuang1993.github.io/blog/Cluelessness/</loc>
     
-    <lastmod>2019-12-18T14:32:51.697Z</lastmod>
+    <lastmod>2020-01-02T08:06:09.966Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/codeigniter_3_hmvc/</loc>
+    
+    <lastmod>2020-01-02T08:06:09.948Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/refactoring_definition_and_purpose/</loc>
+    
+    <lastmod>2020-01-02T08:06:09.934Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/solid_lsp_definition_and_practices/</loc>
+    
+    <lastmod>2020-01-02T08:06:09.917Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/git_commit_message_best_practice/</loc>
+    
+    <lastmod>2020-01-02T08:06:09.912Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
+    
+    <lastmod>2020-01-02T08:06:09.906Z</lastmod>
     
   </url>
   
   <url>
     <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
     
-    <lastmod>2019-12-16T09:31:47.511Z</lastmod>
+    <lastmod>2020-01-02T08:06:09.887Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/2019_review/</loc>
+    
+    <lastmod>2020-01-02T08:00:25.945Z</lastmod>
     
   </url>
   
