@@ -20,7 +20,7 @@
 <meta property="og:description" content="本文將帶領讀者建立 CodeIgniter 3 框架的單元測試環境，給 CodeIgniter 3 一個現代化的機會！">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
-<meta property="og:updated_time" content="2020-01-07T15:29:35.481Z">
+<meta property="og:updated_time" content="2020-01-07T15:41:55.438Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
 
@@ -221,13 +221,13 @@
 <p>我也會陸續新增幾篇 CodeIgniter 撰寫整合測試、單元測試的文章供大家參考。</p>
 <h1 id="CI3-HMVC-測試環境配置"><a href="#CI3-HMVC-測試環境配置" class="headerlink" title="CI3 + HMVC 測試環境配置"></a>CI3 + HMVC 測試環境配置</h1><p>因為 CodeIgniter + <a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" target="_blank" rel="noopener">HMVC</a> 的結構較為特殊，安裝 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 之後還需手動做一些修改，才能在 HMVC 的環境中執行ci-phpunit-test 測試框架。</p>
 <p>接下來的修改是參考 ci-phpunit-test 作者針對 <a href="https://github.com/kenjis/ci-phpunit-test/issues/34" target="_blank" rel="noopener">Github issue 34</a> 的回應，對 CI3 做調整。這些調整的目的是改變 CI3 載入 HMVC 套件的順序，讓測試環境取得 HMVC 的物件，而不是原生 CI 的物件。</p>
-<h5 id="步驟一：修改-Modules-php"><a href="#步驟一：修改-Modules-php" class="headerlink" title="步驟一：修改 Modules.php"></a>步驟一：修改 Modules.php</h5><p>編輯 ci/application/third_party/MX/Modules.php：</p>
+<h2 id="步驟一：修改-Modules-php"><a href="#步驟一：修改-Modules-php" class="headerlink" title="步驟一：修改 Modules.php"></a>步驟一：修改 Modules.php</h2><p>編輯 ci/application/third_party/MX/Modules.php：</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php (defined('BASEPATH')) OR exit('No direct script access allowed');</span><br><span class="line"></span><br><span class="line">(defined('EXT')) OR define('EXT', '.php');</span><br><span class="line"></span><br><span class="line">global $CFG;</span><br><span class="line"></span><br><span class="line"><span class="hljs-addition">+if (ENVIRONMENT === 'testing')</span></span><br><span class="line"><span class="hljs-addition">+&#123;</span></span><br><span class="line"><span class="hljs-addition">+   $CFG =&amp; load_class('Config');</span></span><br><span class="line"><span class="hljs-addition">+&#125;</span></span><br></pre></td></tr></table></figure>
 
-<h5 id="步驟二：修改-Loader-php"><a href="#步驟二：修改-Loader-php" class="headerlink" title="步驟二：修改 Loader.php"></a>步驟二：修改 Loader.php</h5><p>編輯 ci/application/third_party/MX/Loader.php：</p>
+<h2 id="步驟二：修改-Loader-php"><a href="#步驟二：修改-Loader-php" class="headerlink" title="步驟二：修改 Loader.php"></a>步驟二：修改 Loader.php</h2><p>編輯 ci/application/third_party/MX/Loader.php：</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public function initialize($controller = NULL)</span><br><span class="line">&#123;</span><br><span class="line"><span class="hljs-addition">+    if (ENVIRONMENT === 'testing')</span></span><br><span class="line"><span class="hljs-addition">+    &#123;</span></span><br><span class="line"><span class="hljs-addition">+        // Rest CI::$APP</span></span><br><span class="line"><span class="hljs-addition">+        CI::$APP = CI_Controller::get_instance();</span></span><br><span class="line"><span class="hljs-addition">+        if ( ! CI::$APP-&gt;lang instanceof MX_Lang) CI::$APP-&gt;lang = new MX_Lang;</span></span><br><span class="line"><span class="hljs-addition">+    &#125;</span></span><br><span class="line"></span><br><span class="line">    /* set the module name */</span><br><span class="line">    $this-&gt;_module = CI::$APP-&gt;router-&gt;fetch_module();</span><br></pre></td></tr></table></figure>
 
-<h5 id="步驟三：設定-PHPUnit-預設設定檔案"><a href="#步驟三：設定-PHPUnit-預設設定檔案" class="headerlink" title="步驟三：設定 PHPUnit 預設設定檔案"></a>步驟三：設定 PHPUnit 預設設定檔案</h5><p>在執行 ci-phpunit-test 之前，記得要將 PHPUnit 的設定檔案預設為：</p>
+<h2 id="步驟三：設定-PHPUnit-預設設定檔案"><a href="#步驟三：設定-PHPUnit-預設設定檔案" class="headerlink" title="步驟三：設定 PHPUnit 預設設定檔案"></a>步驟三：設定 PHPUnit 預設設定檔案</h2><p>在執行 ci-phpunit-test 之前，記得要將 PHPUnit 的設定檔案預設為：</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ci/application/tests/phpunit.xml</span><br></pre></td></tr></table></figure>
 
 <p>否則 ci-phpunit-test 會因為沒載入 Autoload 而無法順利執行。</p>
@@ -327,19 +327,19 @@
         <a class="is-flex" href="#CI3-HMVC-測試環境配置">
         <span class="has-mr-6">4</span>
         <span>CI3 + HMVC 測試環境配置</span>
-        </a><ul class="menu-list"><ul class="menu-list"><li>
+        </a><ul class="menu-list"><li>
         <a class="is-flex" href="#步驟一：修改-Modules-php">
-        <span class="has-mr-6">4.1.1</span>
+        <span class="has-mr-6">4.1</span>
         <span>步驟一：修改 Modules.php</span>
         </a></li><li>
         <a class="is-flex" href="#步驟二：修改-Loader-php">
-        <span class="has-mr-6">4.1.2</span>
+        <span class="has-mr-6">4.2</span>
         <span>步驟二：修改 Loader.php</span>
         </a></li><li>
         <a class="is-flex" href="#步驟三：設定-PHPUnit-預設設定檔案">
-        <span class="has-mr-6">4.1.3</span>
+        <span class="has-mr-6">4.3</span>
         <span>步驟三：設定 PHPUnit 預設設定檔案</span>
-        </a></li></ul></ul></li><li>
+        </a></li></ul></li><li>
         <a class="is-flex" href="#注意事項">
         <span class="has-mr-6">5</span>
         <span>注意事項</span>
