@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
+    
+    <lastmod>2020-01-07T05:35:05.212Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wadehuang1993.github.io/blog/solid_lsp_definition_and_practices/</loc>
     
     <lastmod>2020-01-03T02:08:40.108Z</lastmod>
@@ -61,13 +68,6 @@
     <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
     
     <lastmod>2020-01-02T08:06:09.906Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
-    
-    <lastmod>2020-01-02T08:06:09.887Z</lastmod>
     
   </url>
   
