@@ -20,7 +20,7 @@
 <meta property="og:description" content="本文將帶領讀者建立 CodeIgniter 3 框架的單元測試環境，給 CodeIgniter 3 一個現代化的機會！">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
-<meta property="og:updated_time" content="2020-01-07T15:14:31.777Z">
+<meta property="og:updated_time" content="2020-01-07T15:29:35.481Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
 
@@ -148,14 +148,14 @@
                 <time class="level-item has-text-grey" datetime="2020-01-07T05:40:00.000Z">2020-01-07</time>
                 
                 <div class="level-item">
-                <a class="has-link-grey -link" href="/blog/categories/CodeIgniter3-%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%8B%95%E5%8C%96%E7%B3%BB%E5%88%97/">CodeIgniter3 測試自動化系列</a>
+                <a class="has-link-grey -link" href="/blog/categories/CodeIgniter-3-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E6%97%A5%E5%B8%B8/">CodeIgniter 3 單元測試日常</a>
                 </div>
                 
                 
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分鐘 閱讀文 (大約 2196 個字)
+                    15 分鐘 閱讀文 (大約 2205 個字)
                 </span>
                 
                 
@@ -171,7 +171,7 @@
             <p>本文將帶領讀者建立 CodeIgniter 3 框架的單元測試環境，給 CodeIgniter 3 一個現代化的機會！</p>
 <a id="more"></a>
 
-<p>本文假設您已經具備單元測試相關知識且了解如何撰寫測試案例，以及具備 PHPUnit 相關知識。若您尚未了解單元測試或軟體測試自動化，這裡提供一些不錯的資源讓您初步了解：</p>
+<p>本文假設您已經具備單元測試相關知識，以及具備 PHPUnit 相關知識且了解如何撰寫測試案例。若您尚未了解單元測試或軟體測試自動化，這裡提供一些不錯的資源讓您初步了解：</p>
 <ul>
 <li><a href="http://otischou.tw/2019/08/02/unit-test.html" target="_blank" rel="noopener">otischou.tw：瞭解單元測試</a></li>
 <li><a href="http://blog.turn.tw/?p=2821" target="_blank" rel="noopener">阿川先生：先寫單元測試的12個好處！</a></li>
@@ -182,9 +182,9 @@
 <li><a href="https://phpunit.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">PHPUnit 官方中文文件</a></li>
 <li><a href="https://www.slideshare.net/jaceju/phpunit" target="_blank" rel="noopener">Jace Ju：PHPUnit 入門介紹</a></li>
 </ul>
-<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2020 年對於 PHP 界風靡一時的 MVC 框架「CodeIgniter」來說，光環已經被新星 Laravel 搶去。雖然 CodeIgniter 的討論熱度已經消退了，但市佔率仍然相當高，至今仍有許多 PHPer 與 CodeIgniter 一起奮鬥和成長（包括我）。</p>
-<p>由於 CI3 框架沒有使用 Namespace 的特性，加上 CI3 統一透過框架內建的 <code>Loader</code> 類別實現 Autoload 機制，造成很多 PHPer 沒辦法在 CI3 框架中使用現代 PHP 的特性來開發系統。若不做點手腳的話，PHPer 的開發思維很容易就會被 CI3 框架綁架，一不小心就將所有業務邏輯全部寫在 CI3 框架中。換句話說所有的程式碼都依賴於框架，物件導向 SOLID 的實現、設計模式、單元測試都不用談了！</p>
-<p>為了讓還在與 CI3 奮鬥的同袍們能夠使用現代 PHP 的特性來開發系統，本文將介紹如何在 CI3 框架中建立測試單元測試的環境，讓 CI3 也能測試現代 PHP 的程式碼，確保 PHPer 安心地實現各種開發思維。</p>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2020 年對於 PHP 界風靡一時的 MVC 框架「CodeIgniter」來說，光環已經被新星 Laravel 搶去。雖然 CodeIgniter 的討論熱度已經消退了，但市佔率仍然相當高，至今仍有許多 PHPer 還在與 CodeIgniter 奮鬥和成長（包括我）。</p>
+<p>由於 CodeIgniter 3 框架（以下簡稱 CI3）沒有使用 Namespace 的特性，加上 CI3 統一透過框架內建的 <code>Loader</code> 類別實現 Autoload 機制，造成很多 PHPer 沒辦法在 CI3 框架中使用現代 PHP 的特性來開發系統。若不做點手腳的話，PHPer 的開發思維很容易就會被 CI3 框架綁架，一不小心就將所有業務邏輯全部寫在 CI3 框架中。換句話說所有的程式碼都依賴於框架，物件導向 SOLID 的實現、設計模式、單元測試都不用談了！</p>
+<p>為了讓還在與 CI3 奮鬥的同袍們能夠使用現代 PHP 的特性來開發系統，本文將介紹如何在 CI3 框架中建立單元測試的環境，讓 CI3 也能使用並測試現代 PHP 的程式碼，確保 PHPer 能安心地實現各種開發策略和思維。</p>
 <h1 id="導入-Composer-擁抱現代-PHP-特性"><a href="#導入-Composer-擁抱現代-PHP-特性" class="headerlink" title="導入 Composer 擁抱現代 PHP 特性"></a>導入 Composer 擁抱現代 PHP 特性</h1><p>其實 CI3 跟現代 PHP 只差臨門一腳，你可以在 config/Config.php 中找到一個設定為 <code>composer_autoload</code>，只要替 <code>composer_autoload</code> 設定 Composer 目錄底下的 autoload.php 路徑，你的 CI3 框架就可以開始使用 Namespace 搭配 PSR-4 Autoload 機制來開發現代 PHP 特性的程式碼！</p>
 <p>編輯 application/config/config.php： </p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Composer auto-loading</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Enabling this setting will tell CodeIgniter to look for a Composer</span><br><span class="line">| package auto-loader script in application/vendor/autoload.php.</span><br><span class="line">|</span><br><span class="line">|	$config['composer_autoload'] = TRUE;</span><br><span class="line">|</span><br><span class="line">| Or if you have your vendor/ directory located somewhere else, you</span><br><span class="line">| can opt to set a specific path as well:</span><br><span class="line">|</span><br><span class="line">|	$config['composer_autoload'] = '/path/to/vendor/autoload.php';</span><br><span class="line">|</span><br><span class="line">| For more information about Composer, please visit http://getcomposer.org/</span><br><span class="line">|</span><br><span class="line">| Note: This will NOT disable or override the CodeIgniter-specific</span><br><span class="line">|	autoloading (application/config/autoload.php)</span><br><span class="line">*/</span><br><span class="line"><span class="hljs-deletion">- $config['composer_autoload'] = FALSE;</span></span><br><span class="line"><span class="hljs-addition">+ $config['composer_autoload'] = __DIR__ . '/../../vendor/autoload.php'; // Composer 的 autoload.php 路徑</span></span><br></pre></td></tr></table></figure>
@@ -231,7 +231,7 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ci/application/tests/phpunit.xml</span><br></pre></td></tr></table></figure>
 
 <p>否則 ci-phpunit-test 會因為沒載入 Autoload 而無法順利執行。</p>
-<h1 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h1><h2 id="禁止使用-header-跳頁"><a href="#禁止使用-header-跳頁" class="headerlink" title="禁止使用 header() 跳頁"></a>禁止使用 header() 跳頁</h2><p>整合測試中，ci-phpunit-test 只接受 CI3 的 Output 類別輸出結果，若在城市運行中途對 header 設定做任何修改，測試框架會沒辦法正常運行。為了讓測試案例可以運作，盡量在系統中使用 CI3 內建的 redirect 進行轉址，若沒辦法避免 <code>header()</code> 邏輯，也可以用 ENVIRONMENT 環境變數進行跳脫。</p>
+<h1 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h1><h2 id="禁止使用-header-跳頁"><a href="#禁止使用-header-跳頁" class="headerlink" title="禁止使用 header() 跳頁"></a>禁止使用 header() 跳頁</h2><p>整合測試中，ci-phpunit-test 只接受 CI3 的 Output 類別輸出結果，若在程式運行中途對 header 設定做任何修改，測試框架將會出現錯誤訊息。為了讓測試案例可以運作，應盡量在系統中使用 CI3 內建的 redirect 進行轉址，若沒辦法避免使用 <code>header()</code>，也可以用 ENVIRONMENT 環境變數進行跳脫。</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-deletion">-header('Location: ' . base_url(). 'admin');</span></span><br><span class="line"><span class="hljs-addition">+if (ENVIRONMENT === 'testing') &#123;</span></span><br><span class="line"><span class="hljs-addition">+    redirect(base_url(). 'admin');</span></span><br><span class="line"><span class="hljs-addition">+&#125; else &#123;</span></span><br><span class="line"><span class="hljs-addition">+    header('Location: ' . base_url(). 'admin');</span></span><br><span class="line"><span class="hljs-addition">+&#125;</span></span><br></pre></td></tr></table></figure>
 
 <h1 id="推薦安裝：Codeception-Specify"><a href="#推薦安裝：Codeception-Specify" class="headerlink" title="推薦安裝：Codeception\Specify"></a>推薦安裝：Codeception\Specify</h1><p><a href="https://github.com/Codeception/Specify" target="_blank" rel="noopener">Codeception\Specify</a> 供測試環境使用 BDD 語法。<br>Codeception\Specify 可以在測試案例中隔離測試情境，減少很多因為情境產生的測試 function。</p>
@@ -242,7 +242,7 @@
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class UserTest extends PHPUnit\Framework\TestCase </span><br><span class="line">&#123;</span><br><span class="line"><span class="hljs-addition">+    use Codeception\Specify;</span></span><br></pre></td></tr></table></figure>
 
 <p>使用範例：簡化多個測試案例情境<br><img src="/blog/images/pasted-35.png" alt="簡化多個測試案例情境，並以中文描述情境"></p>
-<h1 id="結尾"><a href="#結尾" class="headerlink" title="結尾"></a>結尾</h1><p>這篇文章其實「CodeIgniter 3 單元測試導入歷程」系列文的揭幕，這系列文的目的除了分享經驗以外，也想讓更多仍在維護 CodeIgniter 框架（或非現代 PHP 框架）的開發人員知道，原來手頭上的框架也可以變得現代化！希望本系列文可以給維護舊框架的開發人員一絲希望，不要被舊框架或專案嚇跑了！</p>
+<h1 id="結尾"><a href="#結尾" class="headerlink" title="結尾"></a>結尾</h1><p>這篇文章其實「CodeIgniter 3 單元測試日常」系列文的揭幕，這系列文的目的除了分享經驗以外，也想讓更多仍在維護 CodeIgniter 框架（或非現代 PHP 框架）的開發人員知道，原來手頭上的框架也可以變得現代化！希望可以給維護舊框架的開發人員帶來一絲希望，不要被舊框架或專案嚇跑了！</p>
 
         </div>
         
@@ -380,7 +380,7 @@
                     <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-07T05:40:00.000Z">2020-01-07</time></div>
                     <a href="/blog/codeigniter_3_unit_test_installation/" class="title has-link-black-ter is-size-6 has-text-weight-normal">PHP CodeIgniter 3 單元測試日常：建立單元測試環境</a>
                     <p class="is-size-7 is-uppercase">
-                        <a class="has-link-grey -link" href="/blog/categories/CodeIgniter3-%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%8B%95%E5%8C%96%E7%B3%BB%E5%88%97/">CodeIgniter3 測試自動化系列</a>
+                        <a class="has-link-grey -link" href="/blog/categories/CodeIgniter-3-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E6%97%A5%E5%B8%B8/">CodeIgniter 3 單元測試日常</a>
                     </p>
                 </div>
             </div>
@@ -474,9 +474,9 @@
             </h3>
             <ul class="menu-list">
             <li>
-        <a class="level is-marginless" href="/blog/categories/CodeIgniter3-%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%8B%95%E5%8C%96%E7%B3%BB%E5%88%97/">
+        <a class="level is-marginless" href="/blog/categories/CodeIgniter-3-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E6%97%A5%E5%B8%B8/">
             <span class="level-start">
-                <span class="level-item">CodeIgniter3 測試自動化系列</span>
+                <span class="level-item">CodeIgniter 3 單元測試日常</span>
             </span>
             <span class="level-end">
                 <span class="level-item tag">1</span>
