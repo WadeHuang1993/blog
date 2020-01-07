@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1" />
+
+<meta name="google-site-verification" content="5JWyXG4mx6i5avE6xJfXIRHu_YCofrhDQRCEgbm_5ak" />
+<title>PHP CodeIgniter 3 單元測試日常：建立單元測試環境 - WadeHuang1993&#39;s Blog</title>
+
+
+    <meta name="description" content="本文將帶領讀者建立 CodeIgniter 3 框架的單元測試環境，給 CodeIgniter 3 一個現代化的機會！">
+<meta name="keywords" content="PHP,CodeIgniter3,單元測試">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHP CodeIgniter 3 單元測試日常：建立單元測試環境">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;codeigniter_3_unit_test_installation&#x2F;index.html">
+<meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
+<meta property="og:description" content="本文將帶領讀者建立 CodeIgniter 3 框架的單元測試環境，給 CodeIgniter 3 一個現代化的機會！">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
+<meta property="og:updated_time" content="2020-01-07T15:14:31.777Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/blog/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/atom-one-dark.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154595924-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154595924-1');
+</script>
+
+    
+    
+    
+    
+    
+    <link rel="stylesheet" href="/blog/css/progressbar.css">
+<script src="https://cdn.jsdelivr.net/npm/pace-js@1.0.2/pace.min.js"></script>
+    
+    
+    
+
+
+<link rel="stylesheet" href="/blog/css/style.css">
+
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/blog/">
+            
+                <img src="/blog/images/mylogo.png" alt="PHP CodeIgniter 3 單元測試日常：建立單元測試環境" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/blog/">首頁</a>
+                
+                <a class="navbar-item"
+                href="/blog/archives">文章時間軸</a>
+                
+                <a class="navbar-item"
+                href="/blog/categories">分類檢索</a>
+                
+                <a class="navbar-item"
+                href="/blog/tags">標籤</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜尋" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/PHPUnitCodeIgniter3.png" alt="PHP CodeIgniter 3 單元測試日常：建立單元測試環境">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-07T05:40:00.000Z">2020-01-07</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/blog/categories/CodeIgniter3-%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%8B%95%E5%8C%96%E7%B3%BB%E5%88%97/">CodeIgniter3 測試自動化系列</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    15 分鐘 閱讀文 (大約 2196 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                PHP CodeIgniter 3 單元測試日常：建立單元測試環境
+            
+        </h1>
+        <div class="content">
+            <p>本文將帶領讀者建立 CodeIgniter 3 框架的單元測試環境，給 CodeIgniter 3 一個現代化的機會！</p>
+<a id="more"></a>
+
+<p>本文假設您已經具備單元測試相關知識且了解如何撰寫測試案例，以及具備 PHPUnit 相關知識。若您尚未了解單元測試或軟體測試自動化，這裡提供一些不錯的資源讓您初步了解：</p>
+<ul>
+<li><a href="http://otischou.tw/2019/08/02/unit-test.html" target="_blank" rel="noopener">otischou.tw：瞭解單元測試</a></li>
+<li><a href="http://blog.turn.tw/?p=2821" target="_blank" rel="noopener">阿川先生：先寫單元測試的12個好處！</a></li>
+</ul>
+<p>除了上面兩個資源外，請您務必花時間認識並學習軟體測試，這可以說是軟體開發技術的核心技能之一。</p>
+<p>若您尚未了解 PHPUnit 這裡也有些簡單的文件供您參考：</p>
+<ul>
+<li><a href="https://phpunit.readthedocs.io/zh_CN/latest/" target="_blank" rel="noopener">PHPUnit 官方中文文件</a></li>
+<li><a href="https://www.slideshare.net/jaceju/phpunit" target="_blank" rel="noopener">Jace Ju：PHPUnit 入門介紹</a></li>
+</ul>
+<h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>2020 年對於 PHP 界風靡一時的 MVC 框架「CodeIgniter」來說，光環已經被新星 Laravel 搶去。雖然 CodeIgniter 的討論熱度已經消退了，但市佔率仍然相當高，至今仍有許多 PHPer 與 CodeIgniter 一起奮鬥和成長（包括我）。</p>
+<p>由於 CI3 框架沒有使用 Namespace 的特性，加上 CI3 統一透過框架內建的 <code>Loader</code> 類別實現 Autoload 機制，造成很多 PHPer 沒辦法在 CI3 框架中使用現代 PHP 的特性來開發系統。若不做點手腳的話，PHPer 的開發思維很容易就會被 CI3 框架綁架，一不小心就將所有業務邏輯全部寫在 CI3 框架中。換句話說所有的程式碼都依賴於框架，物件導向 SOLID 的實現、設計模式、單元測試都不用談了！</p>
+<p>為了讓還在與 CI3 奮鬥的同袍們能夠使用現代 PHP 的特性來開發系統，本文將介紹如何在 CI3 框架中建立測試單元測試的環境，讓 CI3 也能測試現代 PHP 的程式碼，確保 PHPer 安心地實現各種開發思維。</p>
+<h1 id="導入-Composer-擁抱現代-PHP-特性"><a href="#導入-Composer-擁抱現代-PHP-特性" class="headerlink" title="導入 Composer 擁抱現代 PHP 特性"></a>導入 Composer 擁抱現代 PHP 特性</h1><p>其實 CI3 跟現代 PHP 只差臨門一腳，你可以在 config/Config.php 中找到一個設定為 <code>composer_autoload</code>，只要替 <code>composer_autoload</code> 設定 Composer 目錄底下的 autoload.php 路徑，你的 CI3 框架就可以開始使用 Namespace 搭配 PSR-4 Autoload 機制來開發現代 PHP 特性的程式碼！</p>
+<p>編輯 application/config/config.php： </p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">/*</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">| Composer auto-loading</span><br><span class="line">|--------------------------------------------------------------------------</span><br><span class="line">|</span><br><span class="line">| Enabling this setting will tell CodeIgniter to look for a Composer</span><br><span class="line">| package auto-loader script in application/vendor/autoload.php.</span><br><span class="line">|</span><br><span class="line">|	$config['composer_autoload'] = TRUE;</span><br><span class="line">|</span><br><span class="line">| Or if you have your vendor/ directory located somewhere else, you</span><br><span class="line">| can opt to set a specific path as well:</span><br><span class="line">|</span><br><span class="line">|	$config['composer_autoload'] = '/path/to/vendor/autoload.php';</span><br><span class="line">|</span><br><span class="line">| For more information about Composer, please visit http://getcomposer.org/</span><br><span class="line">|</span><br><span class="line">| Note: This will NOT disable or override the CodeIgniter-specific</span><br><span class="line">|	autoloading (application/config/autoload.php)</span><br><span class="line">*/</span><br><span class="line"><span class="hljs-deletion">- $config['composer_autoload'] = FALSE;</span></span><br><span class="line"><span class="hljs-addition">+ $config['composer_autoload'] = __DIR__ . '/../../vendor/autoload.php'; // Composer 的 autoload.php 路徑</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="安裝-ci-phpunit-test"><a href="#安裝-ci-phpunit-test" class="headerlink" title="安裝 ci-phpunit-test"></a>安裝 ci-phpunit-test</h1><p>由於 CI3 架構內建的單元測試功能很少，所以我選用整合了 PHPUnit 的 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 來當作專案的測試框架。</p>
+<p>不過使用這個套件之前，有一些必要條件：</p>
+<ul>
+<li>PHP 版本至少高於 5.4.0</li>
+<li>CodeIgniter 至少要有 3.0</li>
+<li>至少要安裝 PHPUnit 4.3 以上的版本</li>
+</ul>
+<h2 id="透過-Composer-下載-ci-phpunit-test"><a href="#透過-Composer-下載-ci-phpunit-test" class="headerlink" title="透過 Composer 下載 ci-phpunit-test"></a>透過 Composer 下載 ci-phpunit-test</h2><p>到你的專案目錄下使用 Composer 下載 ci-phpunit-test</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="hljs-built_in">cd</span> /path/to/codeigniter/</span><br><span class="line">$ composer require kenjis/ci-phpunit-test --dev</span><br></pre></td></tr></table></figure>
+
+<h2 id="透過-install-php-安裝-ci-phpunit-test"><a href="#透過-install-php-安裝-ci-phpunit-test" class="headerlink" title="透過 install.php 安裝 ci-phpunit-test"></a>透過 install.php 安裝 ci-phpunit-test</h2><p>下載完成後，需要執行一次 install.php</p>
+<p>注意，必須要在專案的根目錄執行安裝指令<br>安裝指令每次都會建立並覆蓋整個 application/tests 目錄</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="hljs-built_in">cd</span> /path/to/codeigniter/</span><br><span class="line">$ php vendor/kenjis/ci-phpunit-test/install.php</span><br></pre></td></tr></table></figure>
+
+<p>安裝完成後，application 目錄下會出現 tests 目錄，以後測試程式都要放在這個 tests 目錄底下：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">codeigniter/</span><br><span class="line">├── application/</span><br><span class="line">│   └── tests/</span><br><span class="line">│        ├── _ci_phpunit_test/ ... 裡面是 ci-phpunit-test 框架的原始碼</span><br><span class="line">│        ├── Bootstrap.php     ... PHPUnit 的 Bootstrap 設定檔</span><br><span class="line">│        ├── DbTestCase.php    ... </span><br><span class="line">│        ├── TestCase.php      ... 測試案例的基底類別</span><br><span class="line">│        ├── controllers/      ... 把你的 Controller 測試程式放進來（整合測試）</span><br><span class="line">│        ├── libraries/        ... 把你的 Library 測試程式放進來（整合測試或單元測試）</span><br><span class="line">│        ├── mocks/</span><br><span class="line">│        │   └── libraries/    ... 把 Mock 模擬物件放進來</span><br><span class="line">│        ├── models/           ... 把你的 Model 層測試程式放進來</span><br><span class="line">│        └── phpunit.xml       ... PHPUnit 的設定檔</span><br><span class="line">└── vendor/</span><br></pre></td></tr></table></figure>
+
+<h2 id="第一次執行-ci-phpunit-test"><a href="#第一次執行-ci-phpunit-test" class="headerlink" title="第一次執行 ci-phpunit-test"></a>第一次執行 ci-phpunit-test</h2><p>在執行 ci-phpunit-test 之前，一定要確保兩件事：</p>
+<ul>
+<li>你已經安裝 <a href="https://phpunit.readthedocs.io/zh_CN/latest/installation.html" target="_blank" rel="noopener">PHPUnit</a>。</li>
+<li>讓 PHPUnit 可以在系統任一地方使用，可直接參考<a href="https://phpunit.readthedocs.io/zh_CN/latest/installation.html" target="_blank" rel="noopener">全局安裝教學</a>。</li>
+</ul>
+<p>(以下為 OSX 系統安裝 PHPUnit 步驟)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">$  wget https://phar.phpunit.de/phpunit-7.0.phar</span><br><span class="line">$  chmod +x phpunit-7.0.phar</span><br><span class="line">$  sudo mv phpunit-7.0.phar /usr/local/bin/phpunit</span><br><span class="line">$  phpunit --version</span><br><span class="line">PHPUnit x.y.z by Sebastian Bergmann and contributors.</span><br></pre></td></tr></table></figure>
+
+<p>這麼做是因為 ci-phpunit-test 要求一定要在 <code>application/tests</code> 目錄執行 <code>phpunit</code>：</p>
+<figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">$ cd /path/to/codeigniter/</span><br><span class="line">$ cd application/tests/</span><br><span class="line">$ phpunit</span><br><span class="line">PHPUnit <span class="hljs-number">7.5</span><span class="hljs-number">.18</span> by Sebastian Bergmann <span class="hljs-keyword">and</span> contributors.</span><br><span class="line"></span><br><span class="line">...</span><br><span class="line">Time: <span class="hljs-number">341</span> ms, Memory: <span class="hljs-number">5.50</span>Mb</span><br></pre></td></tr></table></figure>
+
+<h2 id="撰寫測試案例："><a href="#撰寫測試案例：" class="headerlink" title="撰寫測試案例："></a>撰寫測試案例：</h2><p>到目前為止，你的 CI3 框架已經完全整合了 PHPUnit，並且可以利用 Composer 的 Autoload 機制引入使用現代 PHP 特性的受測程式碼。但是本篇主題是建立測試環境，若還想知道更多測試案例的寫法，可以直接參考 ci-phpunit-test 作者提供的線上手冊：<a href="https://github.com/kenjis/ci-phpunit-test#how-to-write-tests" target="_blank" rel="noopener">How to Write Tests</a> 和電子書 <a href="https://leanpub.com/codeigniter-testing-guide" target="_blank" rel="noopener">CodeIgniter Testing Guide</a>。</p>
+<p>我也會陸續新增幾篇 CodeIgniter 撰寫整合測試、單元測試的文章供大家參考。</p>
+<h1 id="CI3-HMVC-測試環境配置"><a href="#CI3-HMVC-測試環境配置" class="headerlink" title="CI3 + HMVC 測試環境配置"></a>CI3 + HMVC 測試環境配置</h1><p>因為 CodeIgniter + <a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" target="_blank" rel="noopener">HMVC</a> 的結構較為特殊，安裝 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 之後還需手動做一些修改，才能在 HMVC 的環境中執行ci-phpunit-test 測試框架。</p>
+<p>接下來的修改是參考 ci-phpunit-test 作者針對 <a href="https://github.com/kenjis/ci-phpunit-test/issues/34" target="_blank" rel="noopener">Github issue 34</a> 的回應，對 CI3 做調整。這些調整的目的是改變 CI3 載入 HMVC 套件的順序，讓測試環境取得 HMVC 的物件，而不是原生 CI 的物件。</p>
+<h5 id="步驟一：修改-Modules-php"><a href="#步驟一：修改-Modules-php" class="headerlink" title="步驟一：修改 Modules.php"></a>步驟一：修改 Modules.php</h5><p>編輯 ci/application/third_party/MX/Modules.php：</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php (defined('BASEPATH')) OR exit('No direct script access allowed');</span><br><span class="line"></span><br><span class="line">(defined('EXT')) OR define('EXT', '.php');</span><br><span class="line"></span><br><span class="line">global $CFG;</span><br><span class="line"></span><br><span class="line"><span class="hljs-addition">+if (ENVIRONMENT === 'testing')</span></span><br><span class="line"><span class="hljs-addition">+&#123;</span></span><br><span class="line"><span class="hljs-addition">+   $CFG =&amp; load_class('Config');</span></span><br><span class="line"><span class="hljs-addition">+&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h5 id="步驟二：修改-Loader-php"><a href="#步驟二：修改-Loader-php" class="headerlink" title="步驟二：修改 Loader.php"></a>步驟二：修改 Loader.php</h5><p>編輯 ci/application/third_party/MX/Loader.php：</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public function initialize($controller = NULL)</span><br><span class="line">&#123;</span><br><span class="line"><span class="hljs-addition">+    if (ENVIRONMENT === 'testing')</span></span><br><span class="line"><span class="hljs-addition">+    &#123;</span></span><br><span class="line"><span class="hljs-addition">+        // Rest CI::$APP</span></span><br><span class="line"><span class="hljs-addition">+        CI::$APP = CI_Controller::get_instance();</span></span><br><span class="line"><span class="hljs-addition">+        if ( ! CI::$APP-&gt;lang instanceof MX_Lang) CI::$APP-&gt;lang = new MX_Lang;</span></span><br><span class="line"><span class="hljs-addition">+    &#125;</span></span><br><span class="line"></span><br><span class="line">    /* set the module name */</span><br><span class="line">    $this-&gt;_module = CI::$APP-&gt;router-&gt;fetch_module();</span><br></pre></td></tr></table></figure>
+
+<h5 id="步驟三：設定-PHPUnit-預設設定檔案"><a href="#步驟三：設定-PHPUnit-預設設定檔案" class="headerlink" title="步驟三：設定 PHPUnit 預設設定檔案"></a>步驟三：設定 PHPUnit 預設設定檔案</h5><p>在執行 ci-phpunit-test 之前，記得要將 PHPUnit 的設定檔案預設為：</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ci/application/tests/phpunit.xml</span><br></pre></td></tr></table></figure>
+
+<p>否則 ci-phpunit-test 會因為沒載入 Autoload 而無法順利執行。</p>
+<h1 id="注意事項"><a href="#注意事項" class="headerlink" title="注意事項"></a>注意事項</h1><h2 id="禁止使用-header-跳頁"><a href="#禁止使用-header-跳頁" class="headerlink" title="禁止使用 header() 跳頁"></a>禁止使用 header() 跳頁</h2><p>整合測試中，ci-phpunit-test 只接受 CI3 的 Output 類別輸出結果，若在城市運行中途對 header 設定做任何修改，測試框架會沒辦法正常運行。為了讓測試案例可以運作，盡量在系統中使用 CI3 內建的 redirect 進行轉址，若沒辦法避免 <code>header()</code> 邏輯，也可以用 ENVIRONMENT 環境變數進行跳脫。</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-deletion">-header('Location: ' . base_url(). 'admin');</span></span><br><span class="line"><span class="hljs-addition">+if (ENVIRONMENT === 'testing') &#123;</span></span><br><span class="line"><span class="hljs-addition">+    redirect(base_url(). 'admin');</span></span><br><span class="line"><span class="hljs-addition">+&#125; else &#123;</span></span><br><span class="line"><span class="hljs-addition">+    header('Location: ' . base_url(). 'admin');</span></span><br><span class="line"><span class="hljs-addition">+&#125;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="推薦安裝：Codeception-Specify"><a href="#推薦安裝：Codeception-Specify" class="headerlink" title="推薦安裝：Codeception\Specify"></a>推薦安裝：Codeception\Specify</h1><p><a href="https://github.com/Codeception/Specify" target="_blank" rel="noopener">Codeception\Specify</a> 供測試環境使用 BDD 語法。<br>Codeception\Specify 可以在測試案例中隔離測試情境，減少很多因為情境產生的測試 function。</p>
+<p>透過 Composer 安裝 Codeception\Specify</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ composer require codeception/specify</span><br></pre></td></tr></table></figure>
+
+<p>使用方法：直接在測試程式中引入 <code>Codeception\Specify</code> Trait：</p>
+<figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">class UserTest extends PHPUnit\Framework\TestCase </span><br><span class="line">&#123;</span><br><span class="line"><span class="hljs-addition">+    use Codeception\Specify;</span></span><br></pre></td></tr></table></figure>
+
+<p>使用範例：簡化多個測試案例情境<br><img src="/blog/images/pasted-35.png" alt="簡化多個測試案例情境，並以中文描述情境"></p>
+<h1 id="結尾"><a href="#結尾" class="headerlink" title="結尾"></a>結尾</h1><p>這篇文章其實「CodeIgniter 3 單元測試導入歷程」系列文的揭幕，這系列文的目的除了分享經驗以外，也想讓更多仍在維護 CodeIgniter 框架（或非現代 PHP 框架）的開發人員知道，原來手頭上的框架也可以變得現代化！希望本系列文可以給維護舊框架的開發人員一絲希望，不要被舊框架或專案嚇跑了！</p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/blog/tags/CodeIgniter3/" rel="tag">CodeIgniter3</a>, <a class="has-link-grey -link" href="/blog/tags/PHP/" rel="tag">PHP</a>, <a class="has-link-grey -link" href="/blog/tags/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6/" rel="tag">單元測試</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/blog/solid_lsp_definition_and_practices/">
+                <span class="level-item">物件導向設計原則：里氏替換原則，定義、解析</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    文章目錄
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#前言">
+        <span class="has-mr-6">1</span>
+        <span>前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#導入-Composer-擁抱現代-PHP-特性">
+        <span class="has-mr-6">2</span>
+        <span>導入 Composer 擁抱現代 PHP 特性</span>
+        </a></li><li>
+        <a class="is-flex" href="#安裝-ci-phpunit-test">
+        <span class="has-mr-6">3</span>
+        <span>安裝 ci-phpunit-test</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#透過-Composer-下載-ci-phpunit-test">
+        <span class="has-mr-6">3.1</span>
+        <span>透過 Composer 下載 ci-phpunit-test</span>
+        </a></li><li>
+        <a class="is-flex" href="#透過-install-php-安裝-ci-phpunit-test">
+        <span class="has-mr-6">3.2</span>
+        <span>透過 install.php 安裝 ci-phpunit-test</span>
+        </a></li><li>
+        <a class="is-flex" href="#第一次執行-ci-phpunit-test">
+        <span class="has-mr-6">3.3</span>
+        <span>第一次執行 ci-phpunit-test</span>
+        </a></li><li>
+        <a class="is-flex" href="#撰寫測試案例：">
+        <span class="has-mr-6">3.4</span>
+        <span>撰寫測試案例：</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#CI3-HMVC-測試環境配置">
+        <span class="has-mr-6">4</span>
+        <span>CI3 + HMVC 測試環境配置</span>
+        </a><ul class="menu-list"><ul class="menu-list"><li>
+        <a class="is-flex" href="#步驟一：修改-Modules-php">
+        <span class="has-mr-6">4.1.1</span>
+        <span>步驟一：修改 Modules.php</span>
+        </a></li><li>
+        <a class="is-flex" href="#步驟二：修改-Loader-php">
+        <span class="has-mr-6">4.1.2</span>
+        <span>步驟二：修改 Loader.php</span>
+        </a></li><li>
+        <a class="is-flex" href="#步驟三：設定-PHPUnit-預設設定檔案">
+        <span class="has-mr-6">4.1.3</span>
+        <span>步驟三：設定 PHPUnit 預設設定檔案</span>
+        </a></li></ul></ul></li><li>
+        <a class="is-flex" href="#注意事項">
+        <span class="has-mr-6">5</span>
+        <span>注意事項</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#禁止使用-header-跳頁">
+        <span class="has-mr-6">5.1</span>
+        <span>禁止使用 header() 跳頁</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#推薦安裝：Codeception-Specify">
+        <span class="has-mr-6">6</span>
+        <span>推薦安裝：Codeception\Specify</span>
+        </a></li><li>
+        <a class="is-flex" href="#結尾">
+        <span class="has-mr-6">7</span>
+        <span>結尾</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+        <div class="card widget">
+    <div class="card-content">
+        <h3 class="menu-label">
+            最新文章
+        </h3>
+        
+        <article class="media">
+            
+            <a href="/blog/codeigniter_3_unit_test_installation/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/PHPUnitCodeIgniter3.png" alt="PHP CodeIgniter 3 單元測試日常：建立單元測試環境">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2020-01-07T05:40:00.000Z">2020-01-07</time></div>
+                    <a href="/blog/codeigniter_3_unit_test_installation/" class="title has-link-black-ter is-size-6 has-text-weight-normal">PHP CodeIgniter 3 單元測試日常：建立單元測試環境</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/CodeIgniter3-%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%8B%95%E5%8C%96%E7%B3%BB%E5%88%97/">CodeIgniter3 測試自動化系列</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/solid_lsp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：里氏替換原則，定義、解析">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-31T20:08:36.000Z">2020-01-01</time></div>
+                    <a href="/blog/solid_lsp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：里氏替換原則，定義、解析</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">程式設計思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/2019_review/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/2019_reviews.png" alt="2019 回顧工作與學習歷程">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-19T06:48:16.000Z">2019-12-19</time></div>
+                    <a href="/blog/2019_review/" class="title has-link-black-ter is-size-6 has-text-weight-normal">2019 回顧工作與學習歷程</a>
+                    <p class="is-size-7 is-uppercase">
+                        
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/solid_ocp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：開放封閉原則，定義、解析與實踐">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-09T06:11:00.000Z">2019-12-09</time></div>
+                    <a href="/blog/solid_ocp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：開放封閉原則，定義、解析與實踐</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">程式設計思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+        <article class="media">
+            
+            <a href="/blog/solid_srp_definition_and_practices/" class="media-left">
+                <p class="image is-64x64">
+                    <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：單一職責原則，定義、解析與實踐">
+                </p>
+            </a>
+            
+            <div class="media-content">
+                <div class="content">
+                    <div><time class="has-text-grey is-size-7 is-uppercase" datetime="2019-12-03T03:04:00.000Z">2019-12-03</time></div>
+                    <a href="/blog/solid_srp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：單一職責原則，定義、解析與實踐</a>
+                    <p class="is-size-7 is-uppercase">
+                        <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">程式設計思維</a>
+                    </p>
+                </div>
+            </div>
+        </article>
+        
+    </div>
+</div>
+    
+        
+<div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                分類
+            </h3>
+            <ul class="menu-list">
+            <li>
+        <a class="level is-marginless" href="/blog/categories/CodeIgniter3-%E6%B8%AC%E8%A9%A6%E8%87%AA%E5%8B%95%E5%8C%96%E7%B3%BB%E5%88%97/">
+            <span class="level-start">
+                <span class="level-item">CodeIgniter3 測試自動化系列</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li><li>
+        <a class="level is-marginless" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">
+            <span class="level-start">
+                <span class="level-item">程式設計思維</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">10</span>
+            </span>
+        </a><ul><li>
+        <a class="level is-marginless" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/%E9%87%8D%E6%A7%8B/">
+            <span class="level-start">
+                <span class="level-item">重構</span>
+            </span>
+            <span class="level-end">
+                <span class="level-item tag">1</span>
+            </span>
+        </a></li></ul></li>
+            </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+        <h3 class="menu-label">
+            彙整
+        </h3>
+        <ul class="menu-list">
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2020/01/">
+                <span class="level-start">
+                    <span class="level-item">一月 2020</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/12/">
+                <span class="level-start">
+                    <span class="level-item">十二月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/11/">
+                <span class="level-start">
+                    <span class="level-item">十一月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">3</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2019/05/">
+                <span class="level-start">
+                    <span class="level-item">五月 2019</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">1</span>
+                </span>
+            </a>
+        </li>
+        
+        <li>
+            <a class="level is-marginless" href="/blog/archives/2018/10/">
+                <span class="level-start">
+                    <span class="level-item">十月 2018</span>
+                </span>
+                <span class="level-end">
+                    <span class="level-item tag">2</span>
+                </span>
+            </a>
+        </li>
+        
+        </ul>
+        </div>
+    </div>
+</div>
+    
+        <div class="card widget">
+    <div class="card-content">
+        <div class="menu">
+            <h3 class="menu-label">
+                標籤
+            </h3>
+            <div class="field is-grouped is-grouped-multiline">
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/Clean-Code/">
+                        <span class="tag">Clean Code</span>
+                        <span class="tag is-grey">8</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/CodeIgniter3/">
+                        <span class="tag">CodeIgniter3</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/PHP/">
+                        <span class="tag">PHP</span>
+                        <span class="tag is-grey">2</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/SOLID-%E5%8E%9F%E5%89%87/">
+                        <span class="tag">SOLID 原則</span>
+                        <span class="tag is-grey">5</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6/">
+                        <span class="tag">單元測試</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/%E8%87%AA%E5%AD%B8%E6%8A%80%E5%B7%A7/">
+                        <span class="tag">自學技巧</span>
+                        <span class="tag is-grey">3</span>
+                    </a>
+                </div>
+                
+                <div class="control">
+                    <a class="tags has-addons" href="/blog/tags/%E9%87%8D%E6%A7%8B/">
+                        <span class="tag">重構</span>
+                        <span class="tag is-grey">1</span>
+                    </a>
+                </div>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/blog/">
+                
+                    <img src="/blog/images/mylogo.png" alt="PHP CodeIgniter 3 單元測試日常：建立單元測試環境" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 WadeHuangTW1993&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-TW");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/blog/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/blog/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到頁首" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/blog/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/blog/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/blog/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/blog/js/insight.js" defer></script>
+<link rel="stylesheet" href="/blog/css/search.css">
+<link rel="stylesheet" href="/blog/css/insight.css">
+    
+
+    <script src="/blog/js/hexo_resize_image.js"></script>
+</body>
+</html>
