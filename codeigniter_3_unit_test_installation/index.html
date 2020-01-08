@@ -20,7 +20,7 @@
 <meta property="og:description" content="本文將帶領讀者建立 CodeIgniter 3 框架的 PHPUnit 測試環境，給 CodeIgniter 3 一個現代化的機會！">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
-<meta property="og:updated_time" content="2020-01-08T01:37:31.422Z">
+<meta property="og:updated_time" content="2020-01-08T01:47:56.931Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;PHPUnitCodeIgniter3.png">
 
@@ -155,7 +155,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    15 分鐘 閱讀文 (大約 2258 個字)
+                    15 分鐘 閱讀文 (大約 2262 個字)
                 </span>
                 
                 
@@ -171,7 +171,7 @@
             <p>本文將帶領讀者建立 CodeIgniter 3 框架的 PHPUnit 測試環境，給 CodeIgniter 3 一個現代化的機會！</p>
 <a id="more"></a>
 
-<p>本文假設您已經具備軟體測試自動化相關知識，以及具備 PHPUnit 相關知識且了解如何撰寫測試案例。若您尚未了解單元測試或軟體測試自動化，這裡提供一些不錯的資源讓您初步了解：</p>
+<p>本文假設您已經具備 <strong>軟體測試自動化</strong> 以及 <strong>PHPUnit</strong> 相關知識，且了解如何撰寫測試案例。若您尚未了解單元測試或軟體測試自動化，這裡提供一些不錯的資源讓您初步了解：</p>
 <ul>
 <li><a href="http://otischou.tw/2019/08/02/unit-test.html" target="_blank" rel="noopener">otischou.tw：瞭解單元測試</a></li>
 <li><a href="http://blog.turn.tw/?p=2821" target="_blank" rel="noopener">阿川先生：先寫單元測試的12個好處！</a></li>
@@ -220,7 +220,7 @@
 <h2 id="撰寫測試案例："><a href="#撰寫測試案例：" class="headerlink" title="撰寫測試案例："></a>撰寫測試案例：</h2><p>到目前為止，你的 CI3 框架已經完全整合了 PHPUnit，並且可以利用 Composer 的 Autoload 機制引入使用現代 PHP 特性的受測程式碼。但是本篇主題是建立測試環境，若還想知道更多測試案例的寫法，可以直接參考 ci-phpunit-test 作者提供的線上手冊：<a href="https://github.com/kenjis/ci-phpunit-test#how-to-write-tests" target="_blank" rel="noopener">How to Write Tests</a> 和電子書 <a href="https://leanpub.com/codeigniter-testing-guide" target="_blank" rel="noopener">CodeIgniter Testing Guide</a>。</p>
 <p>我也會陸續新增幾篇 CodeIgniter 撰寫整合測試、單元測試的文章供大家參考。</p>
 <h1 id="CI3-HMVC-測試環境配置"><a href="#CI3-HMVC-測試環境配置" class="headerlink" title="CI3 + HMVC 測試環境配置"></a>CI3 + HMVC 測試環境配置</h1><p>因為 CodeIgniter + <a href="https://bitbucket.org/wiredesignz/codeigniter-modular-extensions-hmvc" target="_blank" rel="noopener">HMVC</a> 的結構較為特殊，安裝 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/ci-phpunit-test" target="_blank" rel="noopener">ci-phpunit-test</a> 之後還需手動做一些修改，才能在 HMVC 的環境中執行ci-phpunit-test 測試框架。</p>
-<p>接下來的修改是參考 ci-phpunit-test 作者針對 <a href="https://github.com/kenjis/ci-phpunit-test/issues/34" target="_blank" rel="noopener">Github issue 34</a> 的回應，對 CI3 做調整。這些調整的目的是改變 CI3 載入 HMVC 套件的順序，讓測試環境取得 HMVC 的物件，而不是原生 CI 的物件。</p>
+<p>接下來的修改是參考 ci-phpunit-test 作者針對 <a href="https://github.com/kenjis/ci-phpunit-test/issues/34" target="_blank" rel="noopener">Github issue 34：Any luck with ci-phpunit-test working with HMVC?</a> 的回應，對 CI3 做調整。這些調整的目的是改變 CI3 載入 HMVC 套件的順序，讓測試環境取得 HMVC 的物件，而不是原生 CI 的物件。</p>
 <h2 id="步驟一：修改-Modules-php"><a href="#步驟一：修改-Modules-php" class="headerlink" title="步驟一：修改 Modules.php"></a>步驟一：修改 Modules.php</h2><p>編輯 ci/application/third_party/MX/Modules.php：</p>
 <figure class="highlight diff hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php (defined('BASEPATH')) OR exit('No direct script access allowed');</span><br><span class="line"></span><br><span class="line">(defined('EXT')) OR define('EXT', '.php');</span><br><span class="line"></span><br><span class="line">global $CFG;</span><br><span class="line"></span><br><span class="line"><span class="hljs-addition">+if (ENVIRONMENT === 'testing')</span></span><br><span class="line"><span class="hljs-addition">+&#123;</span></span><br><span class="line"><span class="hljs-addition">+   $CFG =&amp; load_class('Config');</span></span><br><span class="line"><span class="hljs-addition">+&#125;</span></span><br></pre></td></tr></table></figure>
 
