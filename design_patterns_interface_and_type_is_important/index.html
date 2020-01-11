@@ -20,7 +20,7 @@
 <meta property="og:description" content="在閱讀經典書籍《設計模式 Design Patterns》中，如果你跳過第 1 章引言，那你可能就錯過了設計模式的核心概念了！作者在引言中花了大篇幅講解 介面 在物件導向設計中的定位，以及設計模式如何透過 介面 來解決問題。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;DESIGN_PATTERN.png">
-<meta property="og:updated_time" content="2020-01-11T03:14:50.530Z">
+<meta property="og:updated_time" content="2020-01-11T03:24:41.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;DESIGN_PATTERN.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分鐘 閱讀文 (大約 1240 個字)
+                    8 分鐘 閱讀文 (大約 1256 個字)
                 </span>
                 
                 
@@ -176,12 +176,12 @@
 <h2 id="利用介面達到多型（Polymorphism）"><a href="#利用介面達到多型（Polymorphism）" class="headerlink" title="利用介面達到多型（Polymorphism）"></a>利用介面達到多型（Polymorphism）</h2><p>雖然說介面與實現內容是分離的，但程式碼運行中，<strong>介面的行為由具體的實現內容組成</strong>。向一個介面調用同一個方法，會因為不同的具體實現而有不同的行為。程式碼有辦法在調用介面的瞬間，連接到介面當下的具體實現，這個能力被稱為<strong>動態綁定（Dynamic binding）</strong>。</p>
 <p>動態綁定讓程式碼能在調用介面的瞬間才受到具體實現的影響，這種彈性讓開發人員有辦法在系統運行的過程中，動態替換相同介面的具體實現。這種可替換性就被稱為 <strong>多型（Polymorphism）</strong>。</p>
 <p><img src="/blog/images/pasted-38.png" alt="程式碼能在調用介面的瞬間，連接到當下的具體實作"></p>
-<h2 id="設計要適應變化"><a href="#設計要適應變化" class="headerlink" title="設計要適應變化"></a>設計要適應變化</h2><p>以上面的購物車線上付費功能（Pay）為例，若不使用多型來實踐，則所有付款商的連線（connect）、購物（purchase）與付款（send）的實現細節，都將暴露在購物車的付費程式碼中。屆時，程式碼不但變得很長，還會充滿一堆 switch case 或 if else，最慘的是付款商之間的程式碼互相耦合了！一但程式碼依賴實現內容就會出現很多問題，維護成本大幅提升。這也是為什麼，設計模式的作者呼籲開發人員應該要：</p>
+<h2 id="設計要能適應變化"><a href="#設計要能適應變化" class="headerlink" title="設計要能適應變化"></a>設計要能適應變化</h2><p>以上面的購物車線上付費功能（Pay）為例，若不使用多型來實踐，則所有付款商的連線（connect）、購物（purchase）與付款（send）的實現細節，都將暴露在購物車的付費程式碼中。屆時，程式碼不但變得很長，還會充滿一堆 switch case 或 if else，最慘的是付款商之間的程式碼互相耦合了！一但程式碼依賴實現內容就會出現很多問題，維護成本大幅提升。這也是為什麼，設計模式的作者呼籲開發人員應該要：</p>
 <blockquote>
 <p>Program to an interface, not an implementation.<br>讓程式碼關注於介面，而不是實現內容。</p>
 </blockquote>
 <p>開發人員應該要利用介面來對實現細節進行抽象簡化，將實作細節隱藏在類別的內部。並且利用介面可以動態替換具體實現機制（多型），讓程式碼變得容易擴充與適應變化。</p>
-<p>當然，需求在一開始的分析階段並不知道會有這麼多種細節，但需求會隨著時間不斷變化和增長。因此程式碼的設計必須隨著需求異動而改變。這也是《設計模式》的目的，提供重構一系列的良好的「設計」目標。當系統變得越來越複雜時，開發人員可以不斷地透過重構調整程式碼的「設計」，讓程式碼適應變化！</p>
+<p>當然，需求在一開始的分析階段並不知道會有這麼多種細節，但需求會隨著時間不斷變化和增長。因此程式碼的設計必須隨著需求異動而改變。這也是《設計模式》的目的，提供一系列的良好的「設計」，使程式碼易於管理，亦是系統重構的目標。當系統變得越來越複雜時，開發人員可以不斷地透過重構調整程式碼的「設計」，讓程式碼適應變化！</p>
 <p>註：上面購物車付費功能是引入 <a href="https://learnku.com/docs/php-design-patterns/2018/State/1515" target="_blank" rel="noopener">State 模式</a> 來管理程式碼。</p>
 <h2 id="延伸閱讀"><a href="#延伸閱讀" class="headerlink" title="延伸閱讀"></a>延伸閱讀</h2><ul>
 <li><a href="/blog/solid_ocp_definition_and_practices/">物件導向設計原則：開放封閉原則</a></li>
@@ -252,9 +252,9 @@
         <span class="has-mr-6">3</span>
         <span>利用介面達到多型（Polymorphism）</span>
         </a></li><li>
-        <a class="is-flex" href="#設計要適應變化">
+        <a class="is-flex" href="#設計要能適應變化">
         <span class="has-mr-6">4</span>
-        <span>設計要適應變化</span>
+        <span>設計要能適應變化</span>
         </a></li><li>
         <a class="is-flex" href="#延伸閱讀">
         <span class="has-mr-6">5</span>
