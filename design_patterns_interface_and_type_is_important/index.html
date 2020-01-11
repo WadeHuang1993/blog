@@ -20,7 +20,7 @@
 <meta property="og:description" content="在閱讀經典書籍《設計模式 Design Patterns》中，如果你跳過第 1 章引言，那你可能就錯過了設計模式的核心概念了！作者在引言中花了大篇幅講解 介面 在物件導向設計中的定位，以及設計模式如何透過 介面 來解決問題。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;DESIGN_PATTERN.png">
-<meta property="og:updated_time" content="2020-01-11T03:28:47.223Z">
+<meta property="og:updated_time" content="2020-01-11T03:33:34.725Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;DESIGN_PATTERN.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    8 分鐘 閱讀文 (大約 1257 個字)
+                    8 分鐘 閱讀文 (大約 1258 個字)
                 </span>
                 
                 
@@ -173,7 +173,7 @@
 <p>介面是物件導向的基本元素，外部環境只能透過介面向類別請求執行功能或存取類別內部的資源。若沒有介面，類別將沒辦法與外部環境互動，外部環境也沒辦法得知類別的內容。</p>
 <h2 id="介面可以和實作分離"><a href="#介面可以和實作分離" class="headerlink" title="介面可以和實作分離"></a>介面可以和實作分離</h2><p>介面的存在，造就了 <strong>外部視角與內部視角</strong>。介面暴露了類別的對外公開資訊形成外部視角。外部環境只能從外部視角觀察一個類別的基本行為，無法得知類別內部（內部視角）是如何實現介面的行為。<strong>外部環境只關注介面的特性，使得介面可以和實現內容分離</strong>。因此，一個介面可以被多個不同的類別實現；實現相同介面的兩個類別，可以對介面實現完全不同的行為。</p>
 <p><img src="/blog/images/pasted-36.png" alt="外部環境只能與介面互動，且介面可以與實現內容分離。"></p>
-<h2 id="利用介面達到多型（Polymorphism）"><a href="#利用介面達到多型（Polymorphism）" class="headerlink" title="利用介面達到多型（Polymorphism）"></a>利用介面達到多型（Polymorphism）</h2><p>雖然說介面與實現內容是分離的，但程式碼運行中，<strong>介面的行為由具體的實現內容組成</strong>。向一個介面調用同一個方法，會因為不同的具體實現而有不同的行為。程式碼有辦法在調用介面的瞬間，連接到介面當下的具體實現，這個能力被稱為<strong>動態綁定（Dynamic binding）</strong>。</p>
+<h2 id="利用介面達到多型（Polymorphism）"><a href="#利用介面達到多型（Polymorphism）" class="headerlink" title="利用介面達到多型（Polymorphism）"></a>利用介面達到多型（Polymorphism）</h2><p>雖然說介面與實現內容是分離的，但程式碼運行中，<strong>介面的行為是由具體的實現內容組成</strong>。向一個介面調用同一個方法，會因為不同的具體實現而有不同的行為。程式碼有辦法在調用介面的瞬間，連接到介面當下的具體實現，這個能力被稱為<strong>動態綁定（Dynamic binding）</strong>。</p>
 <p>動態綁定讓程式碼能在調用介面的瞬間才受到具體實現的影響，這種彈性讓開發人員有辦法在系統運行的過程中，動態替換相同介面的具體實現。這種可替換性就被稱為 <strong>多型（Polymorphism）</strong>。</p>
 <p><img src="/blog/images/pasted-38.png" alt="程式碼能在調用介面的瞬間，連接到當下的具體實作"></p>
 <h2 id="設計要能適應變化"><a href="#設計要能適應變化" class="headerlink" title="設計要能適應變化"></a>設計要能適應變化</h2><p>以上面的購物車線上付費功能（Pay）為例，若不使用多型來實踐，則所有付款商的連線（connect）、購物（purchase）與付款（send）的實現細節，都將暴露在購物車的付費程式碼中。屆時，程式碼不但變得很長，還會充滿一堆 switch case 或 if else，最慘的是付款商之間的程式碼互相耦合了！一但程式碼依賴實現內容就會出現很多問題，維護成本大幅提升。這也是為什麼，設計模式的作者呼籲開發人員應該要：</p>
