@@ -11,16 +11,16 @@
 <title>探討單元測試和整合測試的涵蓋範圍 - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="description" content="前言本篇文章紀錄導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
+    <meta name="description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta name="keywords" content="測試驅動開發">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探討單元測試和整合測試的涵蓋範圍">
 <meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;unit_test_and_integrate_test_definition&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
-<meta property="og:description" content="前言本篇文章紀錄導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
+<meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-01-15T07:15:00.988Z">
+<meta property="og:updated_time" content="2020-01-15T07:19:21.582Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分鐘 閱讀文 (大約 2056 個字)
+                    14 分鐘 閱讀文 (大約 2058 個字)
                 </span>
                 
                 
@@ -167,7 +167,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇文章紀錄導入 <strong>測試驅動開發（Test Driven Design）</strong> 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。<a id="more"></a>為了方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇文章紀錄自己導入 <strong>測試驅動開發（Test Driven Design）</strong> 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。<a id="more"></a>為了方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。</p>
 <h1 id="單元測試的涵蓋範圍很模糊？"><a href="#單元測試的涵蓋範圍很模糊？" class="headerlink" title="單元測試的涵蓋範圍很模糊？"></a>單元測試的涵蓋範圍很模糊？</h1><p>單元測試（Unit Test）是軟體開發中很重要的環節，替 TDD 提供重構的保護網，也是軟體測試（Software Testing）中測試金字塔（Test Pyramid）的最低測試層級。</p>
 <p>但是，一個「單元測試」所涵蓋的範圍到底有哪些？卻讓國外網友議論紛！相信大家在初學單元測試的過程中，一定會看到單元測試的定義如下：</p>
 <blockquote>
