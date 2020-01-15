@@ -8,16 +8,19 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=1">
 
 <meta name="google-site-verification" content="5JWyXG4mx6i5avE6xJfXIRHu_YCofrhDQRCEgbm_5ak" />
-<title>彙整: 2020/1 - WadeHuang1993&#39;s Blog</title>
+<title>探討單元測試和整合測試的涵蓋範圍 - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="keywords" content="PHP, OOP, JavaScript, Web development">
-<meta property="og:type" content="website">
-<meta property="og:title" content="WadeHuang1993&#39;s Blog">
-<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;archives&#x2F;2020&#x2F;01&#x2F;index.html">
+    <meta name="description" content="前言本篇文章紀錄導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。為了方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。 單元測試的涵蓋範圍很模糊？單元測試（Unit Test）是軟體開發中很重要的環節，替 TDD 提供">
+<meta name="keywords" content="PHP, OOP, JavaScript, Web development">
+<meta property="og:type" content="article">
+<meta property="og:title" content="探討單元測試和整合測試的涵蓋範圍">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;unit_test_and_integrate_test_definition&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
+<meta property="og:description" content="前言本篇文章紀錄導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。為了方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。 單元測試的涵蓋範圍很模糊？單元測試（Unit Test）是軟體開發中很重要的環節，替 TDD 提供">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;og_image.png">
+<meta property="og:updated_time" content="2020-01-15T06:52:03.146Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;images&#x2F;og_image.png">
 
@@ -79,14 +82,14 @@
 <link rel="stylesheet" href="/blog/css/style.css">
 
 </head>
-<!-- <body class="is-3-column"> -->
+<!-- <body class="is-2-column"> -->
 <body class="is-3-column">
     <nav class="navbar navbar-main">
     <div class="container">
         <div class="navbar-brand is-flex-center">
             <a class="navbar-item navbar-logo" href="/blog/">
             
-                <img src="/blog/images/mylogo.png" alt="WadeHuang1993&#39;s Blog" height="28">
+                <img src="/blog/images/mylogo.png" alt="探討單元測試和整合測試的涵蓋範圍" height="28">
             
             </a>
         </div>
@@ -111,6 +114,10 @@
             <div class="navbar-end">
                 
                 
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
                 
                 <a class="navbar-item search" title="搜尋" href="javascript:;">
                     <i class="fas fa-search"></i>
@@ -124,106 +131,101 @@
     <section class="section">
         <div class="container">
             <div class="columns">
-                <div class="column is-8-tablet is-8-desktop is-6-widescreen has-order-2 column-main">
-
-<div class="card widget">
-    <div class="card-content">
-        <h3 class="tag is-link">
-        一月 2020
-        </h3>
-        <div class="timeline">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-content article ">
         
-            <article class="media">
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-01-14T15:11:27.000Z">2020-01-14</time>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-01-14T15:11:27.000Z">2020-01-14</time>
-                        <a href="/blog/unit_test_and_integrate_test_definition/" class="title has-link-black-ter is-size-6 has-text-weight-normal">探討單元測試和整合測試的涵蓋範圍</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/blog/design_patterns_interface_and_type_is_important/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/blog/images/thumbnail/DESIGN_PATTERN.png" alt="設計模式起手式：介面（Interface）">
-                    </p>
-                </a>
+                <span class="level-item has-text-grey">
+                    
+                    
+                    14 分鐘 閱讀文 (大約 2055 個字)
+                </span>
                 
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-01-10T17:31:00.000Z">2020-01-11</time>
-                        <a href="/blog/design_patterns_interface_and_type_is_important/" class="title has-link-black-ter is-size-6 has-text-weight-normal">設計模式起手式：介面（Interface）</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">程式設計思維</a> / <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/%E8%A8%AD%E8%A8%88%E6%A8%A1%E5%BC%8F%EF%BC%88Design-Patterns%EF%BC%89/">設計模式（Design Patterns）</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
                 
-                <a href="/blog/codeigniter_3_unit_test_installation/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/blog/images/thumbnail/PHPUnitCodeIgniter3.png" alt="PHP CodeIgniter 3 單元測試日常：建立 PHPUnit 測試環境">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2020-01-07T05:40:00.000Z">2020-01-07</time>
-                        <a href="/blog/codeigniter_3_unit_test_installation/" class="title has-link-black-ter is-size-6 has-text-weight-normal">PHP CodeIgniter 3 單元測試日常：建立 PHPUnit 測試環境</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/blog/categories/CodeIgniter-3-%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6%E6%97%A5%E5%B8%B8/">CodeIgniter 3 單元測試日常</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
-            <article class="media">
-                
-                <a href="/blog/solid_lsp_definition_and_practices/" class="media-left">
-                    <p class="image is-64x64">
-                        <img class="thumbnail" src="/blog/images/thumbnail/CLEAN_CODE.jpg" alt="物件導向設計原則：里氏替換原則，定義、解析">
-                    </p>
-                </a>
-                
-                <div class="media-content">
-                    <div class="content">
-                        <time class="has-text-grey is-size-7 is-block is-uppercase" datetime="2019-12-31T20:08:36.000Z">2020-01-01</time>
-                        <a href="/blog/solid_lsp_definition_and_practices/" class="title has-link-black-ter is-size-6 has-text-weight-normal">物件導向設計原則：里氏替換原則，定義、解析</a>
-                        <div class="level article-meta is-mobile">
-                            <div class="level-left">
-                                
-                                <div class="level-item is-size-7 is-uppercase">
-                                <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">程式設計思維</a>
-                                </div>
-                                
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </article>
-        
+            </div>
         </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile has-text-weight-normal">
+            
+                探討單元測試和整合測試的涵蓋範圍
+            
+        </h1>
+        <div class="content">
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇文章紀錄導入 <strong>測試驅動開發（Test Driven Design）</strong> 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。為了方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。</p>
+<h1 id="單元測試的涵蓋範圍很模糊？"><a href="#單元測試的涵蓋範圍很模糊？" class="headerlink" title="單元測試的涵蓋範圍很模糊？"></a>單元測試的涵蓋範圍很模糊？</h1><p>單元測試（Unit Test）是軟體開發中很重要的環節，替 TDD 提供重構的保護網，也是軟體測試（Software Testing）中測試金字塔（Test Pyramid）的最低測試層級。</p>
+<p>但是，一個「單元測試」所涵蓋的範圍到底有哪些？卻讓國外網友議論紛！相信大家在初學單元測試的過程中，一定會看到單元測試的定義如下：</p>
+<blockquote>
+<p>以程式碼的最小單位來進行正確性檢驗的測試工作，最小單位包括「類別與方法」。</p>
+</blockquote>
+<p>若按此定義來寫測試案例，一個單元測試只能包含一個類別。且受測類別的依賴都必須透過測試替身或 Mock 技術進行隔離，才能確保測試的目標是最小且不可分割的邏輯。</p>
+<p>但是隨著 Mock 的詬病被發掘（參考：<a href="https://cloud.tencent.com/developer/article/1104714" target="_blank" rel="noopener">Mock 不是測試的銀彈</a>），為了避免 Mock 使測試案例變成開發人員的快樂表（測試通過，正式環境卻出現錯誤），開始有人提倡使用 Spy 來替代 Mock，以及依賴若是自己的開發團隊所寫，而非第三方函式庫，則可直接使用依賴。</p>
+<p>這時，一個單元測試會執行的範圍已經從一個類別，變成一個類別加上該類別的依賴。換句話說，一個單元測試除了受測程式外，也會執行到其他類別的程式碼：</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="hljs-string">'AddGroupToRange'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'空的統計範圍, 將題組「questionGroups1」新增至空的統計範圍中, 統計範圍包含題組「questionGroups1」'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// @given 空的統計範圍</span></span><br><span class="line">        <span class="hljs-keyword">var</span> range = <span class="hljs-keyword">new</span> StatisticsRange();</span><br><span class="line">        <span class="hljs-keyword">var</span> pipeline = <span class="hljs-keyword">new</span> Pipeline(range);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @when 將題組「questionGroups1」新增至空的統計範圍中</span></span><br><span class="line">        pipeline.setRange(range);</span><br><span class="line">        pipeline.addCommand(<span class="hljs-keyword">new</span> AddGroupToRange(<span class="hljs-string">'questionGroups1'</span>));</span><br><span class="line">        pipeline.run();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @then 統計範圍包含題組「questionGroups1」</span></span><br><span class="line">        expect(range.questionGroups).toEqual([<span class="hljs-string">'questionGroups1'</span>]);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p>如上範例所見，一個測試案例已經包含了多個類別的邏輯。但是，按照一開始所學的單元測試定義，我開始懷疑自己寫的測試案例到底算不算單元測試呢？</p>
+<h1 id="原來單元測試涵蓋範圍有兩派？"><a href="#原來單元測試涵蓋範圍有兩派？" class="headerlink" title="原來單元測試涵蓋範圍有兩派？"></a>原來單元測試涵蓋範圍有兩派？</h1><p>為了解決疑慮，我到處找人討論、爬文試圖找出單元測試的涵蓋範圍。最後在 Martin Fowler 的文章 <a href="https://martinfowler.com/bliki/UnitTest.html" target="_blank" rel="noopener">UnitTest</a> 找到答案，原來單元測試的涵蓋範圍有兩派！</p>
+<h2 id="孤立型（Solitary）or-社交型（Sociable）"><a href="#孤立型（Solitary）or-社交型（Sociable）" class="headerlink" title="孤立型（Solitary）or 社交型（Sociable）"></a>孤立型（Solitary）or 社交型（Sociable）</h2><p><img src="https://martinfowler.com/bliki/images/unitTest/isolate.png" alt="圖一：Martin Fowler：Unit Test"></p>
+<p>Martin Fowler<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 認為，在撰寫單元測試中，搞清楚自己的測試案例屬於 <strong>孤立型（Solitiary）</strong> 還是 <strong>社交型（Sociable）</strong> 很重要！</p>
+<p>如果你喜歡使用 <strong>孤立型的單元測試</strong>，那麼你的受測物件將不會直接跟真實的依賴類別或客戶端類別交互。因為依賴類別或客戶端發生錯誤，也會造成你的單元測試無法通過！因此 <strong>孤立型的單元測試</strong> 為了保持受測程式不被影響，會利用測試替身（Test Doubles）來模擬並隔離依賴和客戶端程式碼（如圖一右方）。</p>
+<p>如果你喜歡 <strong>社交型的單元測試</strong>，則會讓受測物件直接使用真實的依賴類別，讓測試案例真實地執行一個完整的行為。</p>
+<p>Martin Folwer 也提及，社交型單元測試的作法可能會因為「單元測試的定義」而被抨擊。但他覺得這並不是什麼問題，他認為：</p>
+<blockquote>
+<p> because these tests are tests of the behavior of a single unit.<br> 單元測試是對一個行為的測試。</p>
+</blockquote>
+<p>因為我們在測試某個行為時，也會假設受測行為以外的功能都是正常的。這種假定在本質上其實與 <strong>孤立型的單元測試</strong> 是一樣的！</p>
+<p>（題外話：Martin Fowler 在文章中表明自己偏好社交型的單元測試）</p>
+<h2 id="TDD-BDD-是社交型單元測試嗎？"><a href="#TDD-BDD-是社交型單元測試嗎？" class="headerlink" title="TDD/BDD 是社交型單元測試嗎？"></a>TDD/BDD 是社交型單元測試嗎？</h2><p>在《<a href="https://www.books.com.tw/products/CN11484154" target="_blank" rel="noopener">修改軟件的藝術</a>》第 10 章測試先行，作者提及 TDD 的單元測試與狹義的單元測試不同。TDD 是以一個行為作為單元：</p>
+<blockquote>
+<p>一個獨立、可驗證的行為。這個行為會對系統產生可觀察的影響，且不和系統的其他行為耦合。</p>
+</blockquote>
+<p>這個單元測試的定義意味著：<strong>每個可觀察到的行為都應該要有一個相對應的測試。</strong></p>
+<p>另外在《<a href="https://www.books.com.tw/products/F011525012" target="_blank" rel="noopener">Growing Object-Oriented Software, Guided by Tests</a>》第五章節也指出，應該針對行為進行單元測試，而非針對方法。</p>
+<p>這下真相大白了！如果你也是 BDD 或 TDD 的實踐者，那麼你的單元測試就可能會是跨多個類別的 <strong>社交型單元測試</strong>，因為測試的對象是一個行為，而非一個類別。</p>
+<h2 id="TDD-並不能取代品質保證"><a href="#TDD-並不能取代品質保證" class="headerlink" title="TDD 並不能取代品質保證"></a>TDD 並不能取代品質保證</h2><p>TDD 所編寫的測試，目的是為系統重構提供支持。本質上與 QA 團隊做的軟體品質測試並不相同，因此狹義的單元測試仍然有其存在的價值。</p>
+<h1 id="社交型單元測試也算整合測試嗎？"><a href="#社交型單元測試也算整合測試嗎？" class="headerlink" title="社交型單元測試也算整合測試嗎？"></a>社交型單元測試也算整合測試嗎？</h1><p>曾經我也有這個疑問，以為自己寫的單元測試其實是整合測試吧？！</p>
+<p>會有這種錯覺，也是來自下面這條整合測試的定義：</p>
+<ul>
+<li>對不同模組之間的交互作用進行測試</li>
+</ul>
+<p>但是整合測試往往會涉及外部環境，如時間、Session、Cookie、資料庫，硬體，網路等等不受程式控制的因素。</p>
+<p>簡單來說，你的測試案例若無與外部環境交互，則可以將測試案例視為單元測試：<br><img src="/blog/images/pasted-39.png?400x" alt="單元測試只與系統內部的程式交互"></p>
+<p>如果測試案例中包含了這些外部環境，那麼這個測試案例就是一個整合測試：<br><img src="/blog/images/pasted-41.png?400x" alt="整合測試會與外部環境交互"></p>
+<h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>TDD/BDD 所使用的單元測試定義，與軟體品質測試的單元測試並不相同。TDD 的單元測試是以「最小可觀察到的行為」為一個單元；軟體測試的單元測試則是以「最小不可分割的邏輯」為一個單元。</p>
+<p>之前對單元測試的涵蓋範圍不了解，造成自己在撰寫測試案例的時候常常陷入進退兩難的窘境。釐清後才知道兩種定義相差甚遠，若是帶領一個開發團隊，一定要在動手開發之前讓團隊要有一個統一的語言和定義。否則，做出來的結果可能相當不一樣呢！</p>
+<h1 id="推薦閱讀："><a href="#推薦閱讀：" class="headerlink" title="推薦閱讀："></a>推薦閱讀：</h1><ul>
+<li><a href="https://www.simpleorientedarchitecture.com/defining-test-boundaries/" target="_blank" rel="noopener">Victor：Defining Test Boundaries</a></li>
+<li><a href="https://martinfowler.com/bliki/UnitTest.html" target="_blank" rel="noopener">Martin Fowler：UnitTest</a></li>
+<li><a href="https://www.books.com.tw/products/CN11484154" target="_blank" rel="noopener">修改軟件的藝術</a><div id="footnotes"><hr><div id="footnotelist"><ol style="list-style:none; padding-left: 0;"><li id="fn:1"><span style="display: inline-block; vertical-align: top; padding-right: 10px;">1.</span><span style="display: inline-block; vertical-align: top;">《重構：改善既有程式的設計》作者</span><a href="#fnref:1" rev="footnote"> ↩</a></li></ol></div></div></li>
+</ul>
+
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/blog/design_patterns_interface_and_type_is_important/">
+                <span class="level-item">設計模式起手式：介面（Interface）</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
     </div>
 </div>
 
@@ -237,6 +239,54 @@
 <div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
     
         
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    文章目錄
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#前言">
+        <span class="has-mr-6">1</span>
+        <span>前言</span>
+        </a></li><li>
+        <a class="is-flex" href="#單元測試的涵蓋範圍很模糊？">
+        <span class="has-mr-6">2</span>
+        <span>單元測試的涵蓋範圍很模糊？</span>
+        </a></li><li>
+        <a class="is-flex" href="#原來單元測試涵蓋範圍有兩派？">
+        <span class="has-mr-6">3</span>
+        <span>原來單元測試涵蓋範圍有兩派？</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#孤立型（Solitary）or-社交型（Sociable）">
+        <span class="has-mr-6">3.1</span>
+        <span>孤立型（Solitary）or 社交型（Sociable）</span>
+        </a></li><li>
+        <a class="is-flex" href="#TDD-BDD-是社交型單元測試嗎？">
+        <span class="has-mr-6">3.2</span>
+        <span>TDD/BDD 是社交型單元測試嗎？</span>
+        </a></li><li>
+        <a class="is-flex" href="#TDD-並不能取代品質保證">
+        <span class="has-mr-6">3.3</span>
+        <span>TDD 並不能取代品質保證</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#社交型單元測試也算整合測試嗎？">
+        <span class="has-mr-6">4</span>
+        <span>社交型單元測試也算整合測試嗎？</span>
+        </a></li><li>
+        <a class="is-flex" href="#總結">
+        <span class="has-mr-6">5</span>
+        <span>總結</span>
+        </a></li><li>
+        <a class="is-flex" href="#推薦閱讀：">
+        <span class="has-mr-6">6</span>
+        <span>推薦閱讀：</span>
+        </a></li></ul>
+            </div>
+        </div>
+    </div>
+
     
         <div class="card widget">
     <div class="card-content">
@@ -460,306 +510,11 @@
     
         <div class="column-right-shadow is-hidden-widescreen ">
         
-            
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="/blog/images/avatar.jpg" alt="WadeHuangtw1993">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        WadeHuangtw1993
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        來自南部的菜鳥 RD
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Kaohsiung City, Taiwan</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/blog/archives">
-                        <p class="title has-text-weight-normal">
-                            14
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分類
-                    </p>
-                    <a href="/blog/categories">
-                        <p class="title has-text-weight-normal">
-                            4
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        標籤
-                    </p>
-                    <a href="/blog/tags">
-                        <p class="title has-text-weight-normal">
-                            8
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="mailto:a2335825@gmail.com" target="_blank">
-                聯絡我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/WadeHuang1993">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Mail" href="mailto:a2335825@gmail.com">
-                
-                <i class="far fa-envelope"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-        
-            <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            連結
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://trello.com/b/lsamRb8y/%E6%9B%B8%E5%96%AE" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">我的書單</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">trello.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://wadehuanglearning.blogspot.com/search?updated-max=2019-01-11T21:19:00-08:00&max-results=48" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">舊部落格</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">wadehuanglearning.blogspot.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">hexo-theme-icarus</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
-        
         </div>
     
 </div>
 
                 
-
-
-
-
-<div class="column is-4-tablet is-4-desktop is-3-widescreen is-hidden-touch is-hidden-desktop-only has-order-3 column-right ">
-    
-        
-<div class="card widget">
-    <div class="card-content">
-        <nav class="level">
-            <div class="level-item has-text-centered" style="flex-shrink: 1">
-                <div>
-                    
-                    <figure class="image is-128x128 has-mb-6">
-                        <img class="is-rounded" src="/blog/images/avatar.jpg" alt="WadeHuangtw1993">
-                    </figure>
-                    
-                    <p class="is-size-4 is-block">
-                        WadeHuangtw1993
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-block">
-                        來自南部的菜鳥 RD
-                    </p>
-                    
-                    
-                    <p class="is-size-6 is-flex is-flex-center has-text-grey">
-                        <i class="fas fa-map-marker-alt has-mr-7"></i>
-                        <span>Kaohsiung City, Taiwan</span>
-                    </p>
-                    
-                </div>
-            </div>
-        </nav>
-        <nav class="level is-mobile">
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        文章
-                    </p>
-                    <a href="/blog/archives">
-                        <p class="title has-text-weight-normal">
-                            14
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        分類
-                    </p>
-                    <a href="/blog/categories">
-                        <p class="title has-text-weight-normal">
-                            4
-                        </p>
-                    </a>
-                </div>
-            </div>
-            <div class="level-item has-text-centered is-marginless">
-                <div>
-                    <p class="heading">
-                        標籤
-                    </p>
-                    <a href="/blog/tags">
-                        <p class="title has-text-weight-normal">
-                            8
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </nav>
-        
-        <div class="level">
-            <a class="level-item button is-link is-rounded" href="mailto:a2335825@gmail.com" target="_blank">
-                聯絡我</a>
-        </div>
-        
-        
-        
-        <div class="level is-mobile">
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Github" href="https://github.com/WadeHuang1993">
-                
-                <i class="fab fa-github"></i>
-                
-            </a>
-            
-            <a class="level-item button is-white is-marginless" target="_blank"
-                title="Mail" href="mailto:a2335825@gmail.com">
-                
-                <i class="far fa-envelope"></i>
-                
-            </a>
-            
-        </div>
-        
-    </div>
-</div>
-    
-        <div class="card widget">
-    <div class="card-content">
-        <div class="menu">
-        <h3 class="menu-label">
-            連結
-        </h3>
-        <ul class="menu-list">
-        
-            <li>
-                <a class="level is-mobile" href="https://trello.com/b/lsamRb8y/%E6%9B%B8%E5%96%AE" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">我的書單</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">trello.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://wadehuanglearning.blogspot.com/search?updated-max=2019-01-11T21:19:00-08:00&max-results=48" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">舊部落格</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">wadehuanglearning.blogspot.com</span>
-                    </span>
-                </a>
-            </li>
-        
-            <li>
-                <a class="level is-mobile" href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">
-                    <span class="level-left">
-                        <span class="level-item">hexo-theme-icarus</span>
-                    </span>
-                    <span class="level-right">
-                        <span class="level-item tag">github.com</span>
-                    </span>
-                </a>
-            </li>
-        
-        </ul>
-        </div>
-    </div>
-</div>
-
-    
-    
-</div>
-
             </div>
         </div>
     </section>
@@ -769,7 +524,7 @@
             <div class="level-start has-text-centered-mobile">
                 <a class="footer-logo is-block has-mb-6" href="/blog/">
                 
-                    <img src="/blog/images/mylogo.png" alt="WadeHuang1993&#39;s Blog" height="28">
+                    <img src="/blog/images/mylogo.png" alt="探討單元測試和整合測試的涵蓋範圍" height="28">
                 
                 </a>
                 <p class="is-size-7">
