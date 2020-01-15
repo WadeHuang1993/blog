@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-01-15T07:24:15.482Z">
+<meta property="og:updated_time" content="2020-01-15T07:28:54.551Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分鐘 閱讀文 (大約 2047 個字)
+                    14 分鐘 閱讀文 (大約 2046 個字)
                 </span>
                 
                 
@@ -176,7 +176,7 @@
 </blockquote>
 <p>若按此定義來寫測試案例，一個單元測試只能包含一個類別。且受測類別的依賴都必須透過測試替身或 Mock 技術進行隔離，才能確保測試的目標是最小且不可分割的邏輯。</p>
 <p>但是隨著 Mock 的詬病被發掘（參考：<a href="https://cloud.tencent.com/developer/article/1104714" target="_blank" rel="noopener">Mock 不是測試的銀彈</a>），為了避免 Mock 使測試案例變成開發人員的快樂表（測試通過，正式環境卻出現錯誤），開始有人提倡使用 Spy 來替代 Mock，以及依賴若是自己的開發團隊所寫，而非第三方函式庫，則可直接使用依賴。</p>
-<p>這時，一個單元測試會執行的範圍已經從一個類別，變成一個類別加上該類別的依賴。換句話說，一個單元測試除了受測程式外，也會執行到其他類別的程式碼：</p>
+<p>這時，一個單元測試會執行的範圍已經從 <strong>一個類別</strong> 變成 <strong>一個類別加上該類別的依賴</strong>。換句話說，一個單元測試除了受測程式外，也會執行到其他類別的程式碼：</p>
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="hljs-string">'AddGroupToRange'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'空的統計範圍, 將題組「questionGroups1」新增至空的統計範圍中, 統計範圍包含題組「questionGroups1」'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// @given 空的統計範圍</span></span><br><span class="line">        <span class="hljs-keyword">var</span> range = <span class="hljs-keyword">new</span> StatisticsRange();</span><br><span class="line">        <span class="hljs-keyword">var</span> pipeline = <span class="hljs-keyword">new</span> Pipeline(range);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @when 將題組「questionGroups1」新增至空的統計範圍中</span></span><br><span class="line">        pipeline.setRange(range);</span><br><span class="line">        pipeline.addCommand(<span class="hljs-keyword">new</span> AddGroupToRange(<span class="hljs-string">'questionGroups1'</span>));</span><br><span class="line">        pipeline.run();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @then 統計範圍包含題組「questionGroups1」</span></span><br><span class="line">        expect(range.questionGroups).toEqual([<span class="hljs-string">'questionGroups1'</span>]);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>如上範例所見，一個測試案例已經包含了多個類別的邏輯。但是，按照一開始所學的單元測試定義，我開始懷疑自己寫的測試案例到底算不算單元測試呢？</p>
