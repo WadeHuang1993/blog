@@ -11,16 +11,16 @@
 <title>探討單元測試和整合測試的涵蓋範圍 - WadeHuang1993&#39;s Blog</title>
 
 
-    <meta name="description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
+    <meta name="description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”，與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta name="keywords" content="測試驅動開發">
 <meta property="og:type" content="article">
 <meta property="og:title" content="探討單元測試和整合測試的涵蓋範圍">
 <meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;unit_test_and_integrate_test_definition&#x2F;index.html">
 <meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
-<meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
+<meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”，與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-01-15T07:34:08.207Z">
+<meta property="og:updated_time" content="2020-01-16T00:43:19.715Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分鐘 閱讀文 (大約 2037 個字)
+                    14 分鐘 閱讀文 (大約 2056 個字)
                 </span>
                 
                 
@@ -167,7 +167,7 @@
             
         </h1>
         <div class="content">
-            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇文章紀錄自己導入 <strong>測試驅動開發（Test Driven Design）</strong> 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”？與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。<a id="more"></a>為方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。</p>
+            <h1 id="前言"><a href="#前言" class="headerlink" title="前言"></a>前言</h1><p>本篇文章紀錄自己導入 <strong>測試驅動開發（Test Driven Design）</strong> 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”，與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。<a id="more"></a>為方便與其他人進行交流討論，故將自己理解的資訊整理下來並做個總結。</p>
 <h1 id="單元測試的涵蓋範圍很模糊？"><a href="#單元測試的涵蓋範圍很模糊？" class="headerlink" title="單元測試的涵蓋範圍很模糊？"></a>單元測試的涵蓋範圍很模糊？</h1><p>單元測試（Unit Test）是軟體開發中很重要的環節，替 TDD 提供重構的保護網，也是軟體測試（Software Testing）中測試金字塔（Test Pyramid）的最低測試層級。</p>
 <p>但是，一個「單元測試」所涵蓋的範圍到底有哪些，卻讓國外網友議論紛！</p>
 <p>大家在初學單元測試一定會看到的定義如下：</p>
@@ -180,34 +180,34 @@
 <figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">describe(<span class="hljs-string">'AddGroupToRange'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">    it(<span class="hljs-string">'空的統計範圍, 將題組「questionGroups1」新增至空的統計範圍中, 統計範圍包含題組「questionGroups1」'</span>, <span class="hljs-function"><span class="hljs-keyword">function</span> (<span class="hljs-params"></span>) </span>&#123;</span><br><span class="line">        <span class="hljs-comment">// @given 空的統計範圍</span></span><br><span class="line">        <span class="hljs-keyword">var</span> range = <span class="hljs-keyword">new</span> StatisticsRange();</span><br><span class="line">        <span class="hljs-keyword">var</span> pipeline = <span class="hljs-keyword">new</span> Pipeline(range);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @when 將題組「questionGroups1」新增至空的統計範圍中</span></span><br><span class="line">        pipeline.setRange(range);</span><br><span class="line">        pipeline.addCommand(<span class="hljs-keyword">new</span> AddGroupToRange(<span class="hljs-string">'questionGroups1'</span>));</span><br><span class="line">        pipeline.run();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// @then 統計範圍包含題組「questionGroups1」</span></span><br><span class="line">        expect(range.questionGroups).toEqual([<span class="hljs-string">'questionGroups1'</span>]);</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 
 <p>如上範例所見，此測試案例已包含多個類別的邏輯。  </p>
-<p>但是，按照一開始所學的單元測試定義，我開始懷疑自己寫的測試案例到底算不算單元測試呢？</p>
-<h1 id="原來單元測試涵蓋範圍有兩派？"><a href="#原來單元測試涵蓋範圍有兩派？" class="headerlink" title="原來單元測試涵蓋範圍有兩派？"></a>原來單元測試涵蓋範圍有兩派？</h1><p>為解決疑慮，我到處找人討論、爬文試圖找出單元測試的涵蓋範圍。最後在 Martin Fowler 的文章 <a href="https://martinfowler.com/bliki/UnitTest.html" target="_blank" rel="noopener">UnitTest</a> 找到答案，原來單元測試的涵蓋範圍有兩派！</p>
+<p>但是，按照一開始所學的「單元測試定義」，我開始懷疑自己寫的測試案例到底算不算單元測試呢？</p>
+<h1 id="原來單元測試涵蓋範圍有兩派？"><a href="#原來單元測試涵蓋範圍有兩派？" class="headerlink" title="原來單元測試涵蓋範圍有兩派？"></a>原來單元測試涵蓋範圍有兩派？</h1><p>為解決疑慮，我到開始找人討論、爬文試圖找出單元測試的涵蓋範圍。最後在 Martin Fowler 的文章 <a href="https://martinfowler.com/bliki/UnitTest.html" target="_blank" rel="noopener">UnitTest</a> 找到答案，原來單元測試的涵蓋範圍有兩派！</p>
 <h2 id="孤立型（Solitary）or-社交型（Sociable）"><a href="#孤立型（Solitary）or-社交型（Sociable）" class="headerlink" title="孤立型（Solitary）or 社交型（Sociable）"></a>孤立型（Solitary）or 社交型（Sociable）</h2><p><img src="https://martinfowler.com/bliki/images/unitTest/isolate.png" alt="圖一：Martin Fowler：Unit Test"></p>
 <p>Martin Fowler<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 認為，在撰寫單元測試時，搞清楚自己的測試案例屬於 <strong>孤立型（Solitiary）</strong> 還是 <strong>社交型（Sociable）</strong> 很重要！</p>
-<p>如果你喜歡使用 <strong>孤立型的單元測試</strong>，那麼你的受測物件將不會直接跟真實的依賴類別或客戶端類別交互。因為依賴類別或客戶端發生錯誤，也會造成你的單元測試無法通過！因此 <strong>孤立型的單元測試</strong> 為了保持受測程式不被影響，會利用測試替身（Test Doubles）來模擬並隔離依賴和客戶端程式碼（如圖一右方）。</p>
-<p>如果你喜歡 <strong>社交型的單元測試</strong>，則會讓受測物件直接使用真實的依賴類別，讓測試案例真實地執行一個完整的行為。</p>
+<p>如果你喜歡使用 <strong>孤立型的單元測試</strong>，那麼 <strong>受測物件將不會直接跟真實的依賴類別或客戶端類別交互</strong>。因為依賴類別或客戶端發生錯誤，也會造成你的單元測試無法通過！<strong>孤立型的單元測試</strong> 為了保持受測程式不被影響，會利用測試替身（Test Doubles）模擬並隔離依賴和客戶端程式碼（如圖一右方）。</p>
+<p>如果你喜歡 <strong>社交型的單元測試</strong>，則<strong>受測物件會直接使用真實的依賴類別</strong>，讓測試案例真實地執行一個完整的行為。</p>
 <p>Martin Folwer 也提及，社交型單元測試的作法可能會因「單元測試的定義」而被抨擊。但他覺得這並不是什麼問題，他認為：</p>
 <blockquote>
 <p> because these tests are tests of the behavior of a single unit.<br> 單元測試是對一個行為的測試。</p>
 </blockquote>
-<p>我們在測試某個行為時，也會「假設」受測行為以外的功能都是正常的。這種「假設」本質上與 <strong>孤立型的單元測試</strong> 是一樣的！</p>
+<p>我們在測試一個行為時，也會「假設」受測行為以外的功能都是正常的。這種「假設」本質上與 <strong>孤立型的單元測試</strong> 是一樣的！</p>
 <p>（題外話：Martin Fowler 在文章中表明自己偏好社交型的單元測試）</p>
-<h2 id="TDD-BDD-是社交型單元測試嗎？"><a href="#TDD-BDD-是社交型單元測試嗎？" class="headerlink" title="TDD/BDD 是社交型單元測試嗎？"></a>TDD/BDD 是社交型單元測試嗎？</h2><p>在《<a href="https://www.books.com.tw/products/CN11484154" target="_blank" rel="noopener">修改軟件的藝術</a>》第 10 章測試先行，作者提及 TDD 的單元測試與狹義的單元測試不同。TDD 是以一個行為作為單元：</p>
+<h2 id="TDD-BDD-是社交型單元測試嗎？"><a href="#TDD-BDD-是社交型單元測試嗎？" class="headerlink" title="TDD/BDD 是社交型單元測試嗎？"></a>TDD/BDD 是社交型單元測試嗎？</h2><p>在《<a href="https://www.books.com.tw/products/CN11484154" target="_blank" rel="noopener">修改軟件的藝術</a>》第 10 章測試先行，作者提及 TDD 的單元測試與狹義的單元測試不同。TDD 是以 <strong>一個行為</strong> 作為單元：</p>
 <blockquote>
 <p>一個獨立、可驗證的行為。這個行為會對系統產生可觀察的影響，且不和系統的其他行為耦合。</p>
 </blockquote>
 <p>這個單元測試的定義意味著：<strong>每個可觀察到的行為都應該要有一個相對應的測試。</strong></p>
 <p>另外在《<a href="https://www.books.com.tw/products/F011525012" target="_blank" rel="noopener">Growing Object-Oriented Software, Guided by Tests</a>》第五章節也指出，應該針對行為進行單元測試，而非針對方法。</p>
-<p>這下真相大白了！如果你也是 BDD 或 TDD 的實踐者，那麼你的單元測試就可能會是跨多個類別的 <strong>社交型單元測試</strong>，因為測試的對象是一個行為，而非一個類別。</p>
-<h2 id="TDD-並不能取代品質保證"><a href="#TDD-並不能取代品質保證" class="headerlink" title="TDD 並不能取代品質保證"></a>TDD 並不能取代品質保證</h2><p>TDD 所編寫的測試，目的是為系統重構提供支持。本質上與 QA 團隊做的軟體品質測試並不相同，因此狹義的單元測試仍然有其存在的價值。</p>
+<p>這下真相大白了！如果你是 BDD 或 TDD 的實踐者，那麼你的單元測試就可能是跨多個類別的 <strong>社交型單元測試</strong>，因為測試的對象是 <strong>一個行為</strong>，而非一個類別。</p>
+<h2 id="TDD-並不能取代品質保證"><a href="#TDD-並不能取代品質保證" class="headerlink" title="TDD 並不能取代品質保證"></a>TDD 並不能取代品質保證</h2><p>TDD 所編寫的測試，目的是為 <strong>系統重構（Refactoring）</strong> 提供支持。本質上與 QA 團隊做的軟體品質測試並不相同，因此狹義、細粒度且以品質保證為目標的單元測試仍然有其存在的價值。</p>
 <h1 id="社交型單元測試也算整合測試嗎？"><a href="#社交型單元測試也算整合測試嗎？" class="headerlink" title="社交型單元測試也算整合測試嗎？"></a>社交型單元測試也算整合測試嗎？</h1><p>曾經我也有這個疑問，以為自己寫的單元測試其實是整合測試吧？！</p>
 <p>會有這種錯覺，也是來自下面這條整合測試的定義：</p>
 <ul>
 <li>對不同模組之間的交互作用進行測試</li>
 </ul>
 <p>但是整合測試往往會涉及外部環境，如時間、Session、Cookie、資料庫，硬體，網路等等不受程式控制的因素。</p>
-<p>簡單來說，你的測試案例若無與外部環境交互，則可以將測試案例視為單元測試：<br><img src="/blog/images/pasted-39.png?400x" alt="單元測試只與系統內部的程式交互"></p>
-<p>如果測試案例中包含這些外部環境，那麼這個測試案例就是一個整合測試：<br><img src="/blog/images/pasted-41.png?400x" alt="整合測試會與外部環境交互"></p>
+<p>簡單來說，你的測試案例若無與外部環境交互，則可以將測試案例視為單元測試：<br><img src="https://wadehuang1993.github.io/blog/images/pasted-39.png?400x" alt="單元測試只與系統內部的程式交互"></p>
+<p>如果測試案例中包含這些外部環境，那麼這個測試案例就是一個整合測試：<br><img src="https://wadehuang1993.github.io/blog/images/pasted-41.png?400x" alt="整合測試會與外部環境交互"></p>
 <h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>TDD/BDD 所使用的單元測試定義，與軟體品質測試的單元測試並不相同。TDD 的單元測試是以「最小可觀察到的行為」為一個單元；軟體測試的單元測試則是以「最小不可分割的邏輯」為一個單元。</p>
 <p>之前對單元測試的涵蓋範圍不了解，造成自己在撰寫測試案例的時候常常陷入進退兩難的窘境。釐清後才知道兩種定義相差甚遠，若是帶領一個開發團隊，一定要在動手開發之前讓團隊要有一個統一的語言和定義。否則，做出來的結果可能相當不一樣呢！</p>
 <h1 id="推薦閱讀："><a href="#推薦閱讀：" class="headerlink" title="推薦閱讀："></a>推薦閱讀：</h1><ul>
