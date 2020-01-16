@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”，與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-01-16T00:43:19.715Z">
+<meta property="og:updated_time" content="2020-01-16T01:01:31.592Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分鐘 閱讀文 (大約 2056 個字)
+                    14 分鐘 閱讀文 (大約 2130 個字)
                 </span>
                 
                 
@@ -192,14 +192,33 @@
 </blockquote>
 <p>我們在測試一個行為時，也會「假設」受測行為以外的功能都是正常的。這種「假設」本質上與 <strong>孤立型的單元測試</strong> 是一樣的！</p>
 <p>（題外話：Martin Fowler 在文章中表明自己偏好社交型的單元測試）</p>
-<h2 id="TDD-BDD-是社交型單元測試嗎？"><a href="#TDD-BDD-是社交型單元測試嗎？" class="headerlink" title="TDD/BDD 是社交型單元測試嗎？"></a>TDD/BDD 是社交型單元測試嗎？</h2><p>在《<a href="https://www.books.com.tw/products/CN11484154" target="_blank" rel="noopener">修改軟件的藝術</a>》第 10 章測試先行，作者提及 TDD 的單元測試與狹義的單元測試不同。TDD 是以 <strong>一個行為</strong> 作為單元：</p>
+<h2 id="TDD-BDD-是社交型單元測試嗎？"><a href="#TDD-BDD-是社交型單元測試嗎？" class="headerlink" title="TDD/BDD 是社交型單元測試嗎？"></a>TDD/BDD 是社交型單元測試嗎？</h2><p>在《<a href="https://www.books.com.tw/products/CN11484154" target="_blank" rel="noopener">修改軟件的藝術</a>》第 10 章測試先行，作者提及 TDD 的單元測試與狹義的單元測試不同，TDD 是以 <strong>一個行為</strong> 作為一個單元：</p>
 <blockquote>
 <p>一個獨立、可驗證的行為。這個行為會對系統產生可觀察的影響，且不和系統的其他行為耦合。</p>
 </blockquote>
 <p>這個單元測試的定義意味著：<strong>每個可觀察到的行為都應該要有一個相對應的測試。</strong></p>
-<p>另外在《<a href="https://www.books.com.tw/products/F011525012" target="_blank" rel="noopener">Growing Object-Oriented Software, Guided by Tests</a>》第五章節也指出，應該針對行為進行單元測試，而非針對方法。</p>
+<p>另外在《<a href="https://www.books.com.tw/products/F011525012" target="_blank" rel="noopener">Growing Object-Oriented Software, Guided by Tests</a>》第五章節也指出，<strong>應該針對行為進行單元測試，而非針對方法</strong>。</p>
 <p>這下真相大白了！如果你是 BDD 或 TDD 的實踐者，那麼你的單元測試就可能是跨多個類別的 <strong>社交型單元測試</strong>，因為測試的對象是 <strong>一個行為</strong>，而非一個類別。</p>
-<h2 id="TDD-並不能取代品質保證"><a href="#TDD-並不能取代品質保證" class="headerlink" title="TDD 並不能取代品質保證"></a>TDD 並不能取代品質保證</h2><p>TDD 所編寫的測試，目的是為 <strong>系統重構（Refactoring）</strong> 提供支持。本質上與 QA 團隊做的軟體品質測試並不相同，因此狹義、細粒度且以品質保證為目標的單元測試仍然有其存在的價值。</p>
+<h2 id="TDD-並不能取代品質保證"><a href="#TDD-並不能取代品質保證" class="headerlink" title="TDD 並不能取代品質保證"></a>TDD 並不能取代品質保證</h2><p>TDD 所編寫的測試，目的是為 <strong>系統重構（Refactoring）</strong> 提供支持。本質上與 QA 團隊做的軟體品質測試並不相同，因此狹義、細粒度 <strong>以品質保證為目標的單元測試</strong> 仍然有其存在的價值。</p>
+<table>
+<thead>
+<tr>
+<th>項目</th>
+<th>QA 的單元測試</th>
+<th>TDD/BDD 的單元測試</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>目的</td>
+<td>檢驗軟體基本組成單位的正確性。</td>
+<td>建立回歸測試，讓系統支持重構。</td>
+</tr>
+<tr>
+<td>單元的範圍</td>
+<td>最小且不可分割的邏輯。</td>
+<td>獨立、可驗證的行為。</td>
+</tr>
+</tbody></table>
 <h1 id="社交型單元測試也算整合測試嗎？"><a href="#社交型單元測試也算整合測試嗎？" class="headerlink" title="社交型單元測試也算整合測試嗎？"></a>社交型單元測試也算整合測試嗎？</h1><p>曾經我也有這個疑問，以為自己寫的單元測試其實是整合測試吧？！</p>
 <p>會有這種錯覺，也是來自下面這條整合測試的定義：</p>
 <ul>
