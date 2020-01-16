@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”，與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-01-16T01:38:53.696Z">
+<meta property="og:updated_time" content="2020-01-16T01:40:48.457Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -230,7 +230,7 @@
 <ul>
 <li>對不同模組之間的交互作用進行測試</li>
 </ul>
-<p>但是測試案例成為整合測試的關鍵點是：測試案例是否涵蓋與外部環境交互的邏輯，如時間、Session、Cookie、資料庫，硬體，網路等等不受程式控制的因素。</p>
+<p>但是測試案例成為整合測試的關鍵點是：<strong>測試案例是否包含與外部環境交互的邏輯</strong>，如時間、Session、Cookie、資料庫，硬體，網路等等不受程式控制的因素。</p>
 <p>簡單來說，若測試案例無與外部環境交互的邏輯，則可以將測試案例視為單元測試：<br><img src="https://wadehuang1993.github.iohttps://wadehuang1993.github.io/blog/images/pasted-39.png?400x" alt="單元測試只與系統內部的程式交互"></p>
 <p>反之，若測試案例中包含與外部環境交互的邏輯，那麼這個測試案例就是一個整合測試：<br><img src="https://wadehuang1993.github.iohttps://wadehuang1993.github.io/blog/images/pasted-41.png?400x" alt="整合測試會與外部環境交互"></p>
 <h1 id="總結"><a href="#總結" class="headerlink" title="總結"></a>總結</h1><p>TDD/BDD 與軟體品質（QA）的單元測試目的與涵蓋範圍並不相同。</p>
