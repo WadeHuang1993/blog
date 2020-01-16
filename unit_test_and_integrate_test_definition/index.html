@@ -20,7 +20,7 @@
 <meta property="og:description" content="前言本篇文章紀錄自己導入 測試驅動開發（Test Driven Design） 過程中，曾經沒辦法分辨自己所寫的測試案例到底是“單元測試”還是“整合測試”，與同儕討論後發現其他人也有相同的困擾，於是看了幾本書與文章才釐清自己的問題所在。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-01-16T01:44:18.546Z">
+<meta property="og:updated_time" content="2020-01-16T01:49:51.180Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    14 分鐘 閱讀文 (大約 2155 個字)
+                    14 分鐘 閱讀文 (大約 2147 個字)
                 </span>
                 
                 
@@ -184,8 +184,8 @@
 <h1 id="原來單元測試涵蓋範圍有兩派？"><a href="#原來單元測試涵蓋範圍有兩派？" class="headerlink" title="原來單元測試涵蓋範圍有兩派？"></a>原來單元測試涵蓋範圍有兩派？</h1><p>為解決疑慮，我到開始找人討論、爬文試圖找出單元測試的涵蓋範圍。最後在 Martin Fowler 的文章 <a href="https://martinfowler.com/bliki/UnitTest.html" target="_blank" rel="noopener">UnitTest</a> 找到答案，原來單元測試的涵蓋範圍有兩派！</p>
 <h2 id="孤立型（Solitary）or-社交型（Sociable）"><a href="#孤立型（Solitary）or-社交型（Sociable）" class="headerlink" title="孤立型（Solitary）or 社交型（Sociable）"></a>孤立型（Solitary）or 社交型（Sociable）</h2><p><img src="https://martinfowler.com/bliki/images/unitTest/isolate.png" alt="圖一：Martin Fowler：Unit Test"></p>
 <p>Martin Fowler<sup id="fnref:1"><a href="#fn:1" rel="footnote">1</a></sup> 認為，在撰寫單元測試時，搞清楚自己的測試案例屬於 <strong>孤立型（Solitiary）</strong> 還是 <strong>社交型（Sociable）</strong> 很重要！</p>
-<p>如果你喜歡使用 <strong>孤立型的單元測試</strong>，那麼 <strong>受測物件將不會直接跟真實的依賴類別或客戶端類別交互</strong>。因為依賴類別或客戶端發生錯誤，也會造成你的單元測試無法通過！<strong>孤立型的單元測試</strong> 為了保持受測程式不被影響，會利用測試替身（Test Doubles）模擬並隔離依賴和客戶端程式碼（如圖一右方）。</p>
-<p>如果你喜歡 <strong>社交型的單元測試</strong>，則<strong>受測物件會直接使用真實的依賴類別</strong>，讓測試案例真實地執行一個完整的行為。</p>
+<p>如果你喜歡使用 <strong>孤立型的單元測試</strong>，那麼 <strong>受測物件將不會使用真實的依賴類別或客戶端</strong>。因為依賴類別或客戶端發生錯誤，也會造成單元測試無法通過！為了確保受測程式不被影響，<strong>孤立型單元測試</strong> 會利用測試替身（Test Doubles）模擬並隔離依賴和客戶端程式碼（如圖一右方）。</p>
+<p>如果你喜歡 <strong>社交型的單元測試</strong>，則 <strong>受測物件會直接使用真實的依賴類別</strong>，讓測試案例真實地執行一個完整的行為。</p>
 <p>Martin Folwer 也提及，社交型單元測試的作法可能會因「單元測試的定義」而被抨擊。但他覺得這並不是什麼問題，他認為：</p>
 <blockquote>
 <p> because these tests are tests of the behavior of a single unit.<br> 單元測試是對一個行為的測試。</p>
