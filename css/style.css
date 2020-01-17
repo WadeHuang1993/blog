@@ -607,3 +607,6 @@ figure.highlight .section {
 .gallery-item img {
   border: solid 1px #ddd;
 }
+.has-tags-blue {
+  color: #1f89d0 !important;
+}
