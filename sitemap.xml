@@ -2,6 +2,20 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wadehuang1993.github.io/blog/solid_lsp_definition_and_practices/</loc>
+    
+    <lastmod>2020-01-24T01:58:48.741Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>https://wadehuang1993.github.io/blog/solid_isp_definition_and_practices/</loc>
+    
+    <lastmod>2020-01-23T06:04:55.273Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
     
     <lastmod>2020-01-23T05:50:50.469Z</lastmod>
@@ -47,13 +61,6 @@
     <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
     
     <lastmod>2020-01-07T06:47:37.509Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/solid_lsp_definition_and_practices/</loc>
-    
-    <lastmod>2020-01-03T02:08:40.108Z</lastmod>
     
   </url>
   

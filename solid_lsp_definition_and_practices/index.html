@@ -20,7 +20,7 @@
 <meta property="og:description" content="里氏替換原則（Liskov Substitution Principle） 定義 Subtypes must be substitutable for their base types.-子類別必須能取代父類別  里式替換原則是從 開放封閉原則 延伸出來的原則，若對開放封閉原則還不了解，建議先去瞭解開放封閉原則如何透過引入抽象來擴充程式碼的行為，再來學習里氏替換原則！">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
-<meta property="og:updated_time" content="2020-01-03T02:08:40.108Z">
+<meta property="og:updated_time" content="2020-01-24T01:58:48.741Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;CLEAN_CODE.jpg">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    20 分鐘 閱讀文 (大約 2931 個字)
+                    20 分鐘 閱讀文 (大約 2933 個字)
                 </span>
                 
                 
@@ -232,7 +232,7 @@
 <p>「介面」不只是定義了一個類別的職責，也畫出類別的邊界。如果程式碼不符合「介面」所定義的範圍，就<strong>要將不符合定義的程式碼從介面中搬移到適合的地方</strong>：</p>
 <figure class="highlight php hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// Controller 層</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">StudentLateForClass</span> </span>&#123;</span><br><span class="line">    <span class="hljs-comment">/** ...省略 */</span></span><br><span class="line">    $emailMaker = <span class="hljs-keyword">new</span> LateForClassEmailHTML($student-&gt;id, $classInfo);</span><br><span class="line">    $emailSender = <span class="hljs-keyword">new</span> EmailSender();</span><br><span class="line">    $emailSender-&gt;addEmail($student-&gt;email, $emailMaker);</span><br><span class="line">    $emailSender-&gt;send();</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">// 扣除學生的課程總成績</span></span><br><span class="line">    $studentCourse = StudentCourse::where([<span class="hljs-string">'studentId'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;studentId, <span class="hljs-string">'classId'</span> =&gt; <span class="hljs-keyword">$this</span>-&gt;classInfo[<span class="hljs-string">'classId'</span>]);</span><br><span class="line">    $studentCourse-&gt;totalScore = $studentCourse-&gt;totalScore - <span class="hljs-number">1</span>;</span><br><span class="line">    $studentCourse-&gt;save();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 
-<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>開放封閉原則必須透過 <strong>統一的抽象介面</strong> 來擴充核心業務規則的邏輯，因此在設計模式中作者們提出 “Program to an interface, not an implementation.”，將需求的問題域定義成抽象介面，系統才能安全地的擴展程式碼。搭配里氏替換原則對開發人員的限制，確保程式碼的行為符合「介面」的定義與預期，讓開放封閉原則可以信任實作「介面」的程式碼，最終讓系統可以用「增量式開發」的方式進行迭代釋出。</p>
+<h1 id="結論"><a href="#結論" class="headerlink" title="結論"></a>結論</h1><p>開放封閉原則必須透過 <strong>統一的抽象介面</strong> 來擴充核心業務規則的邏輯，因此《設計模式》作者們提出 “Program to an interface, not an implementation.”，將需求的問題域定義成抽象介面，系統才能安全地的擴展程式碼。搭配里氏替換原則對開發人員的限制，確保程式碼的行為符合「介面」的定義與期望結果，讓開放封閉原則可以信任實作「介面的程式碼」，最終讓系統可以用「增量式開發」的方式進行迭代釋出。</p>
 <h2 id="系列文章："><a href="#系列文章：" class="headerlink" title="系列文章："></a>系列文章：</h2><ol>
 <li><a href="/blog/why_SOLID_principles_matter_to_you/">淺談物件導向 SOLID 原則對工程師的好處與如何影響能力</a></li>
 <li><a href="/blog/why_we_need_SOLID_principles/">再談 SOLID 原則，Why SOLID?</a></li>
