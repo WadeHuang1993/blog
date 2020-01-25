@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wadehuang1993.github.io/blog/design_patterns_interface_and_type_is_important/</loc>
+    
+    <lastmod>2020-01-25T09:46:11.655Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wadehuang1993.github.io/blog/unit_test_and_integrate_test_definition/</loc>
     
     <lastmod>2020-01-25T09:19:57.220Z</lastmod>
@@ -26,13 +33,6 @@
     <loc>https://wadehuang1993.github.io/blog/solid_ocp_definition_and_practices/</loc>
     
     <lastmod>2020-01-23T05:50:50.469Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/design_patterns_interface_and_type_is_important/</loc>
-    
-    <lastmod>2020-01-13T03:17:44.670Z</lastmod>
     
   </url>
   
