@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
+    
+    <lastmod>2020-02-07T04:05:48.176Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>https://wadehuang1993.github.io/blog/unit_test_and_integrate_test_definition/</loc>
     
     <lastmod>2020-01-25T10:59:11.627Z</lastmod>
@@ -47,13 +54,6 @@
     <loc>https://wadehuang1993.github.io/blog/codeigniter_3_hmvc/</loc>
     
     <lastmod>2020-01-07T09:40:18.289Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>https://wadehuang1993.github.io/blog/cluelessness_in_self_learning/</loc>
-    
-    <lastmod>2020-01-07T06:47:37.509Z</lastmod>
     
   </url>
   

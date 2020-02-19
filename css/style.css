@@ -220,7 +220,7 @@ img.thumbnail {
 .article .content p {
   font-family: "Noto Sans TC";
   font-size: 1.3rem;
-  color: #303030;
+  color: #333;
   margin: 1em 0;
 }
 .article .content blockquote {
@@ -609,4 +609,10 @@ figure.highlight .section {
 }
 .has-tags-blue {
   color: #1f89d0 !important;
+}
+.widget .menu-list a {
+  padding: 0.25em !important;
+}
+.has-link-black-ter {
+  font-weight: 900;
 }
