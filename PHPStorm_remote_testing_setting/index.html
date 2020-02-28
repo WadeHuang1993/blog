@@ -20,7 +20,7 @@
 <meta property="og:description" content="我的公司在開發階段中，習慣以 rsync 將本機上的程式碼同步至 測試機 上運行。 因此替功能撰寫測試案例後，必須經過一些設定才能 遠端執行測試案例。 以下將提供 PHPStorm 遠端執行測試案例 配置步驟。">
 <meta property="og:locale" content="zh-TW">
 <meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
-<meta property="og:updated_time" content="2020-02-28T06:41:47.634Z">
+<meta property="og:updated_time" content="2020-02-28T06:59:49.263Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
 
@@ -154,7 +154,7 @@
                 <span class="level-item has-text-grey">
                     
                     
-                    9 分鐘 閱讀文 (大約 1416 個字)
+                    9 分鐘 閱讀文 (大約 1419 個字)
                 </span>
                 
                 
@@ -218,7 +218,7 @@
 <li>設定 PHPStrom 如何連線至遠端伺服器</li>
 <li>配置遠端伺服器的 <strong>PHP 執行檔</strong> 當作 CLI Interpreter。  </li>
 </ul>
-<p>若您已經完成 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/%E5%A6%82%E4%BD%95%E3%80%8C%E9%81%A0%E7%AB%AF%E3%80%8D%E5%9F%B7%E8%A1%8C%E6%B8%AC%E8%A9%A6%E6%A1%88%E4%BE%8B#1-%E6%96%B0%E5%A2%9E%E9%81%A0%E7%AB%AF%E9%83%A8%E7%BD%B2development-%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener">1.新增遠端部署（Development）設定</a>，則可以選擇 <code>Development Configuration</code> 選項來替 PHPStrom 設定連線至遠端伺服器的方式。</p>
+<p>若您已經完成 <a href="https://wadehuang1993.github.io/blog/PHPStorm_remote_testing_setting/#1-%E6%96%B0%E5%A2%9E%E9%81%A0%E7%AB%AF%E9%83%A8%E7%BD%B2%EF%BC%88Development%EF%BC%89-%E8%A8%AD%E5%AE%9A">1.新增遠端部署（Development）設定</a>，則可以選擇 <code>Development Configuration</code> 選項來替 PHPStrom 設定連線至遠端伺服器的方式。</p>
 <p>最後 <code>PHP Interpreter path</code> 則需填入 <code>遠端伺服器的 PHP 執行檔 路徑</code>（實體路徑）。</p>
 <p><img src="https://i.imgur.com/adhbyqP.png" alt></p>
 <p>設定完成後，點擊 OK。  </p>
@@ -227,7 +227,7 @@
 <h2 id="3-新增一個遠端調試器（Debugger）"><a href="#3-新增一個遠端調試器（Debugger）" class="headerlink" title="3. 新增一個遠端調試器（Debugger）"></a>3. 新增一個遠端調試器（Debugger）</h2><p>最後一個步驟，替測試案例新增一個遠端調試器（Debugger）。</p>
 <h3 id="3-1-打開-Debugger-設定畫面"><a href="#3-1-打開-Debugger-設定畫面" class="headerlink" title="3.1 打開 Debugger 設定畫面"></a>3.1 打開 Debugger 設定畫面</h3><p>打開 Debugger 設定畫面，並點擊 <code>Edit Configuration</code>：<br><img src="https://i.imgur.com/CR5MpBx.png" alt></p>
 <h3 id="3-2-打開測試框架的-Interpreter-設定畫面"><a href="#3-2-打開測試框架的-Interpreter-設定畫面" class="headerlink" title="3.2 打開測試框架的 Interpreter 設定畫面"></a>3.2 打開測試框架的 Interpreter 設定畫面</h3><p>請一下圖順序，打開新增 PHPUnit 測試框架的 Remote Interpreter 畫面。<br><img src="https://i.imgur.com/u6WYLWc.png" alt></p>
-<h3 id="3-3-設定-PHPUnit-Remote-Interpreter"><a href="#3-3-設定-PHPUnit-Remote-Interpreter" class="headerlink" title="3.3 設定 PHPUnit Remote Interpreter"></a>3.3 設定 PHPUnit Remote Interpreter</h3><p>若您已經完成 <a href>步驟2. 新增遠端 PHP CLI 執行器(Interpreter)</a>，則可以在 Interpreter 選單中選擇剛剛建立的 <code>Remote PHP xxx</code>。<br><img src="https://i.imgur.com/ttEff7z.png" alt></p>
+<h3 id="3-3-設定-PHPUnit-Remote-Interpreter"><a href="#3-3-設定-PHPUnit-Remote-Interpreter" class="headerlink" title="3.3 設定 PHPUnit Remote Interpreter"></a>3.3 設定 PHPUnit Remote Interpreter</h3><p>若您已經完成 <a href="https://wadehuang1993.github.io/blog/PHPStorm_remote_testing_setting/#2-%E6%96%B0%E5%A2%9E%E9%81%A0%E7%AB%AF-PHP-CLI-%E5%9F%B7%E8%A1%8C%E5%99%A8-Interpreter">步驟2. 新增遠端 PHP CLI 執行器(Interpreter)</a>，則可以在 Interpreter 選單中選擇剛剛建立的 <code>Remote PHP xxx</code>。<br><img src="https://i.imgur.com/ttEff7z.png" alt></p>
 <p>注意：上圖中的 <code>Default configuration file</code> 是遠端伺服器的 phpunit.xml 路徑</p>
 <h3 id="3-4-設定完成"><a href="#3-4-設定完成" class="headerlink" title="3.4 設定完成"></a>3.4 設定完成</h3><p><img src="https://i.imgur.com/n9GpmXC.png" alt></p>
 <p>全部設定完成！<br>執行測試後，即可看見當前是在遠端伺服器中執行測試：<br><img src="https://i.imgur.com/BR0OFTo.png" alt></p>
