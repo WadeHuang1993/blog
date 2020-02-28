@@ -1,0 +1,542 @@
+<!DOCTYPE html>
+<html  lang="zh">
+<head>
+    <meta charset="utf-8" />
+
+<meta name="generator" content="Hexo 4.0.0" />
+
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=1">
+
+<meta name="google-site-verification" content="5JWyXG4mx6i5avE6xJfXIRHu_YCofrhDQRCEgbm_5ak" />
+<title>PHPStorm 如何遠端執行單元測試 - WadeHuang1993&#39;s Blog</title>
+
+
+    <meta name="description" content="我的公司在開發階段中，習慣以 rsync 將本機上的程式碼同步至 測試機 上運行。 因此替功能撰寫測試案例後，必須經過一些設定才能 遠端執行測試案例。 以下將提供 PHPStorm 遠端執行測試案例 配置步驟。">
+<meta name="keywords" content="CodeIgniter3,單元測試,PHPStorm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PHPStorm 如何遠端執行單元測試">
+<meta property="og:url" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;PHPStorm_remote_testing_setting&#x2F;index.html">
+<meta property="og:site_name" content="WadeHuang1993&#39;s Blog">
+<meta property="og:description" content="我的公司在開發階段中，習慣以 rsync 將本機上的程式碼同步至 測試機 上運行。 因此替功能撰寫測試案例後，必須經過一些設定才能 遠端執行測試案例。 以下將提供 PHPStorm 遠端執行測試案例 配置步驟。">
+<meta property="og:locale" content="zh-TW">
+<meta property="og:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
+<meta property="og:updated_time" content="2020-02-28T06:41:47.634Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https:&#x2F;&#x2F;wadehuang1993.github.io&#x2F;blog&#x2F;blog&#x2F;images&#x2F;thumbnail&#x2F;UNIT_TEST.png">
+
+
+
+
+
+
+
+<link rel="icon" href="/blog/images/favicon.svg">
+
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.7.2/css/bulma.css">
+<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Ubuntu:400,600|Source+Code+Pro">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/highlight.js@9.12.0/styles/vs2015.css">
+
+
+    
+    
+<style>body>.footer,body>.navbar,body>.section{opacity:0}</style>
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/css/lightgallery.min.css">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/css/justifiedGallery.min.css">
+
+    
+    
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.css">
+
+    
+    
+    
+    
+<link rel="stylesheet" href="/blog/css/back-to-top.css">
+
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-154595924-1"></script>
+<script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+
+    gtag('config', 'UA-154595924-1');
+</script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<link rel="stylesheet" href="/blog/css/style.css">
+
+</head>
+<!-- <body class="is-2-column"> -->
+<body class="is-3-column">
+    <nav class="navbar navbar-main">
+    <div class="container">
+        <div class="navbar-brand is-flex-center">
+            <a class="navbar-item navbar-logo" href="/blog/">
+            
+                <img src="/blog/images/mylogo.png" alt="PHPStorm 如何遠端執行單元測試" height="28">
+            
+            </a>
+        </div>
+        <div class="navbar-menu">
+            
+            <div class="navbar-start">
+                
+                <a class="navbar-item"
+                href="/blog/">首頁</a>
+                
+                <a class="navbar-item"
+                href="/blog/archives">文章時間軸</a>
+                
+                <a class="navbar-item"
+                href="/blog/categories">分類檢索</a>
+                
+                <a class="navbar-item"
+                href="/blog/tags">標籤</a>
+                
+            </div>
+            
+            <div class="navbar-end">
+                
+                
+                <a class="navbar-item is-hidden-tablet catalogue" title="文章目錄" href="javascript:;">
+                    <i class="fas fa-list-ul"></i>
+                </a>
+                
+                
+                <a class="navbar-item search" title="搜尋" href="javascript:;">
+                    <i class="fas fa-search"></i>
+                </a>
+                
+            </div>
+        </div>
+    </div>
+</nav>
+    
+    <section class="section">
+        <div class="container">
+            <div class="columns">
+                <div class="column is-8-tablet is-8-desktop is-9-widescreen has-order-2 column-main">
+<div class="card">
+    
+    <div class="card-image">
+        <span  class="image is-7by1">
+            <img class="thumbnail" src="/blog/images/thumbnail/UNIT_TEST.png" alt="PHPStorm 如何遠端執行單元測試">
+        </span>
+    </div>
+    
+    <div class="card-content article ">
+        
+        <div class="level article-meta is-size-7 is-uppercase is-mobile is-overflow-x-auto">
+            <div class="level-left">
+                <time class="level-item has-text-grey" datetime="2020-02-28T06:31:00.000Z">2020-02-28</time>
+                
+                <div class="level-item">
+                <a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/">程式設計思維</a>&nbsp;/&nbsp;<a class="has-link-grey -link" href="/blog/categories/%E7%A8%8B%E5%BC%8F%E8%A8%AD%E8%A8%88%E6%80%9D%E7%B6%AD/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6/">單元測試</a>
+                </div>
+                
+                
+                <span class="level-item has-text-grey">
+                    
+                    
+                    9 分鐘 閱讀文 (大約 1416 個字)
+                </span>
+                
+                
+            </div>
+        </div>
+        
+        <h1 class="title is-size-3 is-size-4-mobile">
+            
+                PHPStorm 如何遠端執行單元測試
+            
+        </h1>
+        <div class="content">
+            <p>我的公司在開發階段中，習慣以 rsync 將本機上的程式碼同步至 <strong>測試機</strong> 上運行。</p>
+<p>因此替功能撰寫測試案例後，必須經過一些設定才能 <strong>遠端執行測試案例</strong>。</p>
+<p>以下將提供 PHPStorm <strong>遠端執行測試案例</strong> 配置步驟。<a id="more"></a></p>
+<h2 id="1-新增遠端部署（Development）-設定"><a href="#1-新增遠端部署（Development）-設定" class="headerlink" title="1. 新增遠端部署（Development） 設定"></a>1. 新增遠端部署（Development） 設定</h2><p>第一個步驟是設定遠端部署，主要目的有兩個：</p>
+<ul>
+<li>讓 PHPStorm 可以透過 ssh 連接至遠端伺服器（測試機），執行測試案例。</li>
+<li>設定專案路徑配對，讓 PHPStorm 可以對應「你的本機程式碼位置」與「測試機程式碼位置」。</li>
+</ul>
+<p>只要配對好 Development 設定，PHPStorm 就可以直接在測試機上執行 <strong>你所指定的測試案例</strong>（後面會示範）。</p>
+<h3 id="1-1-打開遠端部署（Development）設定介面"><a href="#1-1-打開遠端部署（Development）設定介面" class="headerlink" title="1.1 打開遠端部署（Development）設定介面"></a>1.1 打開遠端部署（Development）設定介面</h3><p>遠端部署（Development）的打開步驟依序為：<code>Tools</code>&gt;<code>Development</code>&gt;<code>Configuration</code>：</p>
+<p><img src="https://i.imgur.com/1Djo8LK.png" alt></p>
+<h3 id="1-2-設定-ssh-連線資訊"><a href="#1-2-設定-ssh-連線資訊" class="headerlink" title="1.2 設定 ssh 連線資訊"></a>1.2 設定 ssh 連線資訊</h3><p>打開遠端部署（Development）設定介面後，你會看見預設第一個頁籤為 <code>Connection</code>。</p>
+<p><code>Connection</code> 頁籤要設定的是如何讓 PHPStorm 連線登入至遠端伺服器（測試機），<br>以下是必要設定說明：</p>
+<ul>
+<li>Type：選擇 <code>SFTP</code></li>
+<li>Host：要連接的 Domain Name</li>
+<li>User name：登入遠端伺服器的 User</li>
+<li>Authentication：ssh 認證方式（可參考 <a href="https://blog.gtwang.org/linux/linux-ssh-public-key-authentication/" target="_blank" rel="noopener">SSH 公開金鑰認證</a>）</li>
+<li>Private key path：私鑰位置 （可參考 <a href="https://blog.gtwang.org/linux/linux-ssh-public-key-authentication/" target="_blank" rel="noopener">SSH 公開金鑰認證</a>）</li>
+<li><code>Root path</code>：遠端伺服器中，專案的根目錄路徑（此為遠端伺服器上的絕對路徑）。<ul>
+<li>此設定相當重要，用來對映本地與遠端程式碼。若沒做好對映，後續 PHPStorm 會沒辦法辨認你要執行哪個測試案例。</li>
+</ul>
+</li>
+<li>Web server URL：遠端伺服器的對外 URL</li>
+</ul>
+<p><img src="https://i.imgur.com/jGOROVF.png" alt></p>
+<h3 id="1-3-設定專案檔案對映（Mappings）資訊"><a href="#1-3-設定專案檔案對映（Mappings）資訊" class="headerlink" title="1.3 設定專案檔案對映（Mappings）資訊"></a>1.3 設定專案檔案對映（Mappings）資訊</h3><p><code>Connection</code> 頁籤設定完成後，接著進入第二個頁籤 <code>Mappings</code>。</p>
+<p><code>Mappings</code> 頁籤用來設定「本機專案」與「遠端專案」的檔案對映關係。</p>
+<p>必須設定的項目有：</p>
+<ul>
+<li>Local path: 專案根目錄路徑（本機的絕對路徑）</li>
+<li>Development path: 遠端主機的專案根目錄（注意，此為 <code>Connection</code> 頁籤之 <code>Root path</code> 的相對路徑）</li>
+</ul>
+<p>完成檔案對映資訊後，PHPStorm 就能辨認你的本機檔案是對映至遠端伺服器的哪個檔案。</p>
+<p><img src="https://i.imgur.com/D1qrKcf.png" alt></p>
+<h2 id="2-新增遠端-PHP-CLI-執行器-Interpreter"><a href="#2-新增遠端-PHP-CLI-執行器-Interpreter" class="headerlink" title="2. 新增遠端 PHP CLI 執行器(Interpreter)"></a>2. 新增遠端 PHP CLI 執行器(Interpreter)</h2><p>注意：執行此步驟前，必須元成第一個步驟 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/%E5%A6%82%E4%BD%95%E3%80%8C%E9%81%A0%E7%AB%AF%E3%80%8D%E5%9F%B7%E8%A1%8C%E6%B8%AC%E8%A9%A6%E6%A1%88%E4%BE%8B#1-%E6%96%B0%E5%A2%9E%E9%81%A0%E7%AB%AF%E9%83%A8%E7%BD%B2development-%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener">1.新增遠端部署（Development）設定</a>，否則無法進行下去。</p>
+<p>此一步驟的目的是：讓 PHPStorm 調用遠端伺服器的 <code>PHP 執行檔</code> 來啟動 <strong>測試案例</strong>。</p>
+<h3 id="2-1-打開-PHP-設定頁面"><a href="#2-1-打開-PHP-設定頁面" class="headerlink" title="2.1 打開 PHP 設定頁面"></a>2.1 打開 PHP 設定頁面</h3><ul>
+<li>Mac：PHPStorm 左上角，依序點擊 <code>PHPStorm</code>&gt;<code>Preferences</code>&gt;<code>Language &amp; Framework</code>&gt;<code>PHP</code></li>
+<li>Windows：左上角，依序點擊 &gt;<code>Files</code>&gt;<code>Settings</code>&gt;<code>Language &amp; Framework</code>&gt;<code>PHP</code></li>
+</ul>
+<p>接著就能看見 PHP 設定頁面：</p>
+<p><img src="https://i.imgur.com/myBjc2M.png" alt></p>
+<h3 id="2-2-打開新增-PHP-CLI-Interpreter-的介面"><a href="#2-2-打開新增-PHP-CLI-Interpreter-的介面" class="headerlink" title="2.2 打開新增 PHP-CLI Interpreter 的介面"></a>2.2 打開新增 PHP-CLI Interpreter 的介面</h3><p>於 2.1 打開 PHP 設定頁面後，依照下圖順序，打開新增 PHP-CLI Interpreter 的介面：</p>
+<p><img src="https://i.imgur.com/H5pUyUv.png" alt></p>
+<h3 id="2-3-設定-Remote-PHP-Interpreter"><a href="#2-3-設定-Remote-PHP-Interpreter" class="headerlink" title="2.3 設定 Remote PHP Interpreter"></a>2.3 設定 Remote PHP Interpreter</h3><p>若按照步驟 2.2 操作，即可 PHPStorm 跳出新的視窗「Configuration Remote PHP Interpreter」。</p>
+<p>這一步驟即需要完成兩項設定：  </p>
+<ul>
+<li>設定 PHPStrom 如何連線至遠端伺服器</li>
+<li>配置遠端伺服器的 <strong>PHP 執行檔</strong> 當作 CLI Interpreter。  </li>
+</ul>
+<p>若您已經完成 <a href="https://gitlab.dev.clouder.tw:8001/clouder-internal/development-wiki/wikis/%E5%A6%82%E4%BD%95%E3%80%8C%E9%81%A0%E7%AB%AF%E3%80%8D%E5%9F%B7%E8%A1%8C%E6%B8%AC%E8%A9%A6%E6%A1%88%E4%BE%8B#1-%E6%96%B0%E5%A2%9E%E9%81%A0%E7%AB%AF%E9%83%A8%E7%BD%B2development-%E8%A8%AD%E5%AE%9A" target="_blank" rel="noopener">1.新增遠端部署（Development）設定</a>，則可以選擇 <code>Development Configuration</code> 選項來替 PHPStrom 設定連線至遠端伺服器的方式。</p>
+<p>最後 <code>PHP Interpreter path</code> 則需填入 <code>遠端伺服器的 PHP 執行檔 路徑</code>（實體路徑）。</p>
+<p><img src="https://i.imgur.com/adhbyqP.png" alt></p>
+<p>設定完成後，點擊 OK。  </p>
+<p>此時回到原本 PHP 設定頁面，若出現一個 <code>Remote PHP xxx</code> 的 CLI 設定檔，即表設定成功。</p>
+<p><img src="https://i.imgur.com/QxYcWVo.png" alt></p>
+<h2 id="3-新增一個遠端調試器（Debugger）"><a href="#3-新增一個遠端調試器（Debugger）" class="headerlink" title="3. 新增一個遠端調試器（Debugger）"></a>3. 新增一個遠端調試器（Debugger）</h2><p>最後一個步驟，替測試案例新增一個遠端調試器（Debugger）。</p>
+<h3 id="3-1-打開-Debugger-設定畫面"><a href="#3-1-打開-Debugger-設定畫面" class="headerlink" title="3.1 打開 Debugger 設定畫面"></a>3.1 打開 Debugger 設定畫面</h3><p>打開 Debugger 設定畫面，並點擊 <code>Edit Configuration</code>：<br><img src="https://i.imgur.com/CR5MpBx.png" alt></p>
+<h3 id="3-2-打開測試框架的-Interpreter-設定畫面"><a href="#3-2-打開測試框架的-Interpreter-設定畫面" class="headerlink" title="3.2 打開測試框架的 Interpreter 設定畫面"></a>3.2 打開測試框架的 Interpreter 設定畫面</h3><p>請一下圖順序，打開新增 PHPUnit 測試框架的 Remote Interpreter 畫面。<br><img src="https://i.imgur.com/u6WYLWc.png" alt></p>
+<h3 id="3-3-設定-PHPUnit-Remote-Interpreter"><a href="#3-3-設定-PHPUnit-Remote-Interpreter" class="headerlink" title="3.3 設定 PHPUnit Remote Interpreter"></a>3.3 設定 PHPUnit Remote Interpreter</h3><p>若您已經完成 <a href>步驟2. 新增遠端 PHP CLI 執行器(Interpreter)</a>，則可以在 Interpreter 選單中選擇剛剛建立的 <code>Remote PHP xxx</code>。<br><img src="https://i.imgur.com/ttEff7z.png" alt></p>
+<p>注意：上圖中的 <code>Default configuration file</code> 是遠端伺服器的 phpunit.xml 路徑</p>
+<h3 id="3-4-設定完成"><a href="#3-4-設定完成" class="headerlink" title="3.4 設定完成"></a>3.4 設定完成</h3><p><img src="https://i.imgur.com/n9GpmXC.png" alt></p>
+<p>全部設定完成！<br>執行測試後，即可看見當前是在遠端伺服器中執行測試：<br><img src="https://i.imgur.com/BR0OFTo.png" alt></p>
+
+        </div>
+        
+        <div class="level is-size-7 is-uppercase">
+            <div class="level-start">
+                <div class="level-item">
+                    <span class="is-size-6 has-text-grey has-mr-7">#</span>
+                    <a class="has-link-grey -link" href="/blog/tags/CodeIgniter3/" rel="tag">CodeIgniter3</a>, <a class="has-link-grey -link" href="/blog/tags/PHPStorm/" rel="tag">PHPStorm</a>, <a class="has-link-grey -link" href="/blog/tags/%E5%96%AE%E5%85%83%E6%B8%AC%E8%A9%A6/" rel="tag">單元測試</a>
+                </div>
+            </div>
+        </div>
+        
+        
+        
+    </div>
+</div>
+
+
+
+
+
+<div class="card card-transparent">
+    <div class="level post-navigation is-flex-wrap is-mobile">
+        
+        
+        <div class="level-end">
+            <a class="level level-item has-link-grey  article-nav-next" href="/blog/unit_test_and_integrate_test_definition/">
+                <span class="level-item">探討單元測試和整合測試的涵蓋範圍</span>
+                <i class="level-item fas fa-chevron-right"></i>
+            </a>
+        </div>
+        
+    </div>
+</div>
+
+
+
+<div class="card">
+    <div class="card-content">
+        <h3 class="title is-5 has-text-weight-normal">留言</h3>
+        
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https://wadehuang1993.github.io/blog/PHPStorm_remote_testing_setting/';
+        this.page.identifier = 'PHPStorm_remote_testing_setting/';
+    };
+    (function() {
+        var d = document, s = d.createElement('script');  
+        s.src = '//' + 'wadehuang1993s-blog' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+<div id="disqus_thread">
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+    </div>
+</div>
+</div>
+                
+
+
+
+
+<div class="column is-4-tablet is-4-desktop is-3-widescreen  has-order-1 column-left is-sticky">
+    
+        
+
+    <div class="card widget" id="toc">
+        <div class="card-content">
+            <div class="menu">
+                <h3 class="menu-label">
+                    文章目錄
+                </h3>
+                <ul class="menu-list"><li>
+        <a class="is-flex" href="#1-新增遠端部署（Development）-設定">
+<!--         <span class="has-mr-6">1</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>1. 新增遠端部署（Development） 設定</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#1-1-打開遠端部署（Development）設定介面">
+<!--         <span class="has-mr-6">1.1</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>1.1 打開遠端部署（Development）設定介面</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-2-設定-ssh-連線資訊">
+<!--         <span class="has-mr-6">1.2</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>1.2 設定 ssh 連線資訊</span>
+        </a></li><li>
+        <a class="is-flex" href="#1-3-設定專案檔案對映（Mappings）資訊">
+<!--         <span class="has-mr-6">1.3</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>1.3 設定專案檔案對映（Mappings）資訊</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#2-新增遠端-PHP-CLI-執行器-Interpreter">
+<!--         <span class="has-mr-6">2</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>2. 新增遠端 PHP CLI 執行器(Interpreter)</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#2-1-打開-PHP-設定頁面">
+<!--         <span class="has-mr-6">2.1</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>2.1 打開 PHP 設定頁面</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-2-打開新增-PHP-CLI-Interpreter-的介面">
+<!--         <span class="has-mr-6">2.2</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>2.2 打開新增 PHP-CLI Interpreter 的介面</span>
+        </a></li><li>
+        <a class="is-flex" href="#2-3-設定-Remote-PHP-Interpreter">
+<!--         <span class="has-mr-6">2.3</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>2.3 設定 Remote PHP Interpreter</span>
+        </a></li></ul></li><li>
+        <a class="is-flex" href="#3-新增一個遠端調試器（Debugger）">
+<!--         <span class="has-mr-6">3</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>3. 新增一個遠端調試器（Debugger）</span>
+        </a><ul class="menu-list"><li>
+        <a class="is-flex" href="#3-1-打開-Debugger-設定畫面">
+<!--         <span class="has-mr-6">3.1</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>3.1 打開 Debugger 設定畫面</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-2-打開測試框架的-Interpreter-設定畫面">
+<!--         <span class="has-mr-6">3.2</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>3.2 打開測試框架的 Interpreter 設定畫面</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-3-設定-PHPUnit-Remote-Interpreter">
+<!--         <span class="has-mr-6">3.3</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>3.3 設定 PHPUnit Remote Interpreter</span>
+        </a></li><li>
+        <a class="is-flex" href="#3-4-設定完成">
+<!--         <span class="has-mr-6">3.4</span> -->
+        <span class="has-mr-6"><i class="fas fa-chevron-right"></i> </span>
+        <span>3.4 設定完成</span>
+        </a></li></ul></li></ul>
+            </div>
+        </div>
+    </div>
+
+    
+    
+        <div class="column-right-shadow is-hidden-widescreen ">
+        
+        </div>
+    
+</div>
+
+                
+            </div>
+        </div>
+    </section>
+    <footer class="footer">
+    <div class="container">
+        <div class="level">
+            <div class="level-start has-text-centered-mobile">
+                <a class="footer-logo is-block has-mb-6" href="/blog/">
+                
+                    <img src="/blog/images/mylogo.png" alt="PHPStorm 如何遠端執行單元測試" height="28">
+                
+                </a>
+                <p class="is-size-7">
+                &copy; 2020 WadeHuangTW1993&nbsp;
+                Powered by <a href="https://hexo.io/" target="_blank">Hexo</a> & <a
+                        href="https://github.com/ppoffice/hexo-theme-icarus" target="_blank">Icarus</a>
+                
+                </p>
+            </div>
+            <div class="level-end">
+            
+            </div>
+        </div>
+    </div>
+</footer>
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.3.1/dist/jquery.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/moment@2.22.2/min/moment-with-locales.min.js"></script>
+<script>moment.locale("zh-TW");</script>
+
+<script>
+var IcarusThemeSettings = {
+    article: {
+        highlight: {
+            clipboard: true,
+            fold: 'unfolded'
+        }
+    }
+};
+</script>
+
+
+    <script src="https://cdn.jsdelivr.net/npm/clipboard@2.0.4/dist/clipboard.min.js" defer></script>
+
+
+
+    
+    
+<script src="/blog/js/animation.js"></script>
+
+    
+    
+<script src="https://cdn.jsdelivr.net/npm/lightgallery@1.6.8/dist/js/lightgallery.min.js" defer></script>
+<script src="https://cdn.jsdelivr.net/npm/justifiedGallery@3.7.0/dist/js/jquery.justifiedGallery.min.js" defer></script>
+<script src="/blog/js/gallery.js" defer></script>
+
+    
+    
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/" target="_blank" rel="noopener">Update
+            my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="https://cdn.jsdelivr.net/npm/outdatedbrowser@1.1.5/outdatedbrowser/outdatedbrowser.min.js" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        });
+    });
+</script>
+
+    
+    <script src="https://cdn.jsdelivr.net/npm/mathjax@2.7.5/unpacked/MathJax.js?config=TeX-MML-AM_CHTML" defer></script>
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+    MathJax.Hub.Config({
+        'HTML-CSS': {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+});
+</script>
+    
+    
+<a id="back-to-top" title="回到頁首" href="javascript:;">
+    <i class="fas fa-chevron-up"></i>
+</a>
+<script src="/blog/js/back-to-top.js" defer></script>
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+
+<script src="/blog/js/main.js" defer></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="請輸入關鍵字..." />
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '頁面',
+                CATEGORIES: '分類',
+                TAGS: '標籤',
+                UNTITLED: '(無標題)',
+            },
+            CONTENT_URL: '/blog/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/blog/js/insight.js" defer></script>
+<link rel="stylesheet" href="/blog/css/search.css">
+<link rel="stylesheet" href="/blog/css/insight.css">
+    
+
+    <script src="/blog/js/hexo_resize_image.js"></script>
+</body>
+</html>
